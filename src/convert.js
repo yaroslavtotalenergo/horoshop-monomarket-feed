@@ -33,6 +33,9 @@ const CONFIG = {
   // Назва магазину для XML-фіду
   shopName: process.env.SHOP_NAME || 'Магазин',
 
+  // Ліміт товарів (для тестування). 0 = без ліміту
+  maxProducts: parseInt(process.env.MAX_PRODUCTS || '0', 10),
+
   // Назва поля `param` де зберігається штрихкод у Хорошопі
   // Зміните, якщо у вас інша назва (перевірте у своєму XML)
   barcodeParamNames: ['Штрихкод', 'Баркод', 'Barcode', 'EAN', 'GTIN', 'UPC'],
@@ -297,7 +300,12 @@ async function main() {
     const rawOffers = parseHoroshopXml(xmlText);
 
     // 3. Трансформація
-    const offers = rawOffers.map(transformOffer);
+    let rawOffersSlice = rawOffers;
+    if (CONFIG.maxProducts > 0) {
+      rawOffersSlice = rawOffers.slice(0, CONFIG.maxProducts);
+      console.log(`   ⚠️  Ліміт тесту: перші ${CONFIG.maxProducts} товарів з ${rawOffers.length}`);
+    }
+    const offers = rawOffersSlice.map(transformOffer);
     const availableCount = offers.filter((o) => o.available).length;
     console.log(`   В наявності: ${availableCount} / ${offers.length}`);
 
