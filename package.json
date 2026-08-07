@@ -1,0 +1,17 @@
+{
+  "name": "horoshop-monomarket-feed",
+  "version": "1.0.0",
+  "description": "Конвертер XML-фіду Хорошоп у формати Мономаркет (products.xml + prices.json)",
+  "main": "src/convert.js",
+  "scripts": {
+    "convert": "node src/convert.js",
+    "test": "node src/convert.js --test"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "fast-xml-parser": "^4.4.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
