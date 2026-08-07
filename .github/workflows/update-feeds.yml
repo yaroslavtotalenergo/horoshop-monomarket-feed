@@ -1,0 +1,45 @@
+name: Update Monomarket Feeds
+
+on:
+  schedule:
+    - cron: '0,30 * * * *'
+  workflow_dispatch:
+
+jobs:
+  update-feeds:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run converter
+        env:
+          HOROSHOP_FEED_URL: ${{ secrets.HOROSHOP_FEED_URL }}
+          DEFAULT_STOCK: ${{ vars.DEFAULT_STOCK || '10' }}
+          WAREHOUSE_ID: ${{ vars.WAREHOUSE_ID || 'main' }}
+          WARRANTY_TYPE: ${{ vars.WARRANTY_TYPE || 'no' }}
+          WARRANTY_PERIOD: ${{ vars.WARRANTY_PERIOD || '0' }}
+          MAX_PAY_IN_PARTS: ${{ vars.MAX_PAY_IN_PARTS || '6' }}
+          DAYS_TO_DISPATCH: ${{ vars.DAYS_TO_DISPATCH || '1' }}
+          SHOP_NAME: ${{ vars.SHOP_NAME || 'Store' }}
+        run: node src/convert.js
+
+      - name: Push updated feeds
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add feeds/
+          git diff --staged --quiet || git commit -m "Update feeds"
+          git push
