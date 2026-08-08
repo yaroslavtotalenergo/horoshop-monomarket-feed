@@ -32,6 +32,9 @@ try { customDescriptions = JSON.parse(fs.readFileSync('src/descriptions.json', '
 let categoryMap = {};
 try { categoryMap = JSON.parse(fs.readFileSync('src/categories.json', 'utf8')); } catch(e) {}
 
+let availabilityOverrides = {};
+try { availabilityOverrides = JSON.parse(fs.readFileSync('src/availability.json', 'utf8')); } catch(e) {}
+
 // ── Налаштування ────────────────────────────────────────────────
 const CONFIG = {
   horoshopFeedUrl: config.horoshopFeedUrl || process.env.HOROSHOP_FEED_URL || '',
@@ -199,9 +202,13 @@ function cleanDescription(desc) {
 // ── Трансформація одного оферу ──────────────────────────────────
 function transformOffer(offer) {
   const id = String(offer._id || '');
-  const available = offer._available === true || offer._available === 'true';
   const params = getParams(offer);
   const vendorCode = extractText(offer.vendorCode) || '';
+  
+  let available = offer._available === true || offer._available === 'true';
+  if (availabilityOverrides[vendorCode] !== undefined) {
+    available = availabilityOverrides[vendorCode];
+  }
 
   const barcode =
     barcodesConfig[vendorCode] || 
