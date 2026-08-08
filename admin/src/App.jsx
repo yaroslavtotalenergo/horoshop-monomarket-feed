@@ -93,6 +93,13 @@ export default function App() {
 
   const toggleCategory = (cat) => setCollapsedCategories(prev => ({ ...prev, [cat]: !prev[cat] }));
 
+  // Автоматично розгортати всі категорії при пошуку
+  useEffect(() => {
+    if (searchQuery.trim()) {
+      setCollapsedCategories({});
+    }
+  }, [searchQuery]);
+
   // Group catalog by category, filtered by search
   const filteredCatalog = useMemo(() => {
     if (!searchQuery.trim()) return catalog;
