@@ -381,7 +381,8 @@ async function main() {
         name: o.name,
         price: o.price,
         picture: o.pictures.length > 0 ? o.pictures[0] : null,
-        category: o.category
+        category: o.category,
+        description: o.description
       });
 
       // Фільтрація по whitelist (якщо він не порожній)
