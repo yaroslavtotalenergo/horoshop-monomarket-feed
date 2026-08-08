@@ -4112,6 +4112,38 @@
     "category": "Моніторинг та керування"
   },
   {
+    "id": "3703",
+    "vendorCode": "SCIFP1250",
+    "name": "Акумулятор LiFePO4 Sacred Sun SCIFP1250 12В 50Аг з BMS (SCIFP1250)",
+    "price": 8471,
+    "picture": "https://total-energo.com.ua/content/images/4/akumuliator-lifepo4-sacred-sun-scifp1250-12v-50ah-z-bms-sacsun1250te-77114435502992_+20737df3e5.png",
+    "category": "1229"
+  },
+  {
+    "id": "3707",
+    "vendorCode": "SLSIFP48100A",
+    "name": "Акумулятор LiFePO4 Sacred Sun SLSIFP48100A(3U) 48В 100Аг з вбудованим BMS та підтримкою CAN-шини (SLSIFP48100A)",
+    "price": 47530,
+    "picture": "https://total-energo.com.ua/content/images/8/akumuliator-lifepo4-sacred-sun-slsifp48100a3u-48v-100ah-z-vbudovanym-bms-ta-pidtrymkoiu-can-shyny-slsifp48100a-20367663172537_+d032ef4224.png",
+    "category": "1229"
+  },
+  {
+    "id": "3709",
+    "vendorCode": "SLSIFP51100A",
+    "name": "Акумулятор LiFePO4 Sacred Sun SLSIFP51100A 51.2В 100Аг з вбудованим BMS",
+    "price": 49820,
+    "picture": "https://total-energo.com.ua/content/images/10/akumuliator-lifepo4-sacred-sun-slsifp51100a-51.2v-100ah-z-vbudovanym-bms-35349081973349_+21ed317936.jpg",
+    "category": "1229"
+  },
+  {
+    "id": "3710",
+    "vendorCode": "SCIFP48100",
+    "name": "Акумулятор LiFePO₄ Sacred Sun SCIFP48100 48В 100Аг з BMS",
+    "price": 42951,
+    "picture": "https://total-energo.com.ua/content/images/11/akumuliator-lifepo-sacred-sun-scifp48100-48v-100ah-z-bms-40785206939795_+0fce8acf55.jpg",
+    "category": "1229"
+  },
+  {
     "id": "4601",
     "vendorCode": "BPP920140100",
     "name": "Блок моніторингу баків GX Tank 140 (BPP920140100)",
@@ -5264,6 +5296,30 @@
     "category": "Моніторинг та керування"
   },
   {
+    "id": "7797",
+    "vendorCode": "SUNPOW51100",
+    "name": "Акумулятор Sunlight Power ESS 51.2V 100Ah LiFePO4",
+    "price": 63948,
+    "picture": "https://total-energo.com.ua/content/images/48/akumuliator-sunlight-power-ess-51.2v-100ah-lifepo4-57694683635831_+f27f6912ba.png",
+    "category": "1229"
+  },
+  {
+    "id": "7798",
+    "vendorCode": "SUNCONINV",
+    "name": "З'єднувальна пара штекерів конектори Sunlight для підключення до інвертора",
+    "price": 1460,
+    "picture": "https://total-energo.com.ua/content/images/49/ziednuvalna-para-shtekeriv-konektory-sunlight-dlia-pidkliuchennia-do-invertora-37046219275138_+9033d69a2b.png",
+    "category": "1229"
+  },
+  {
+    "id": "7799",
+    "vendorCode": "SUNCOMPAR",
+    "name": "Комплект для монтажу в стійку Sunlight перемички для паралельного з'єднання, кабель заземлення, комунікаційний кабель",
+    "price": 2869,
+    "picture": "https://total-energo.com.ua/content/images/50/komplekt-dlia-montazhu-v-stiiku-sunlight-peremychky-dlia-paralelnoho-ziednannia-kabel-zazemlennia-komunikatsiinyi-kabel-70942234420623_+bb51d37d36.png",
+    "category": "1229"
+  },
+  {
     "id": "7804",
     "vendorCode": "SPM040303603",
     "name": "Сонячна панель BlueSolar 30W Mono Victron Energy (SPM040303603)",
@@ -5408,6 +5464,62 @@
     "category": "Сонячні панелі (батареї)"
   },
   {
+    "id": "7854",
+    "vendorCode": "SCIFP12100",
+    "name": "Акумулятор LiFePO4 Sacred Sun SCIFP12100 12В 100Аг з BMS та Bluetooth моніторингом (SCIFP12100)",
+    "price": 12592,
+    "picture": "https://total-energo.com.ua/content/images/5/54582199228852_+89e8415765.png",
+    "category": "1229"
+  },
+  {
+    "id": "7855",
+    "vendorCode": "SCIFP12150",
+    "name": "Акумулятор LiFePO4 Sacred Sun SCIFP12150 12В 150Аг з BMS та Bluetooth моніторингом (SCIFP12150)",
+    "price": 20056,
+    "picture": "https://total-energo.com.ua/content/images/6/akumuliator-lifepo4-sacred-sun-scifp12150-12v-150ah-z-bms-ta-bluetooth-monitorynhom-sacsun12150tebl-19249326768431_+8515fdeaf7.png",
+    "category": "1229"
+  },
+  {
+    "id": "7856",
+    "vendorCode": "SCIFP12200",
+    "name": "Акумулятор LiFePO4 Sacred Sun SCIFP12200 12В 200Аг з BMS та Bluetooth моніторингом (SCIFP12200)",
+    "price": 25780,
+    "picture": "https://total-energo.com.ua/content/images/7/38923143630081_+1466f756e6.png",
+    "category": "1229"
+  },
+  {
+    "id": "7857",
+    "vendorCode": "SCIFP24100",
+    "name": "Акумулятор LiFePO4 Sacred Sun SCIFP24100 25.6В 100Аг з BMS та Bluetooth моніторингом (SCIFP24100)",
+    "price": 25185,
+    "picture": "https://total-energo.com.ua/content/images/8/akumuliator-lifepo4-sacred-sun-scifp24100-25.6v-100ah-z-bms-ta-bluetooth-monitorynhom-scifp24100-31508518030905_+7079fed55d.png",
+    "category": "1229"
+  },
+  {
+    "id": "7858",
+    "vendorCode": "SCIFP24200",
+    "name": "Акумулятор LiFePO4 Sacred Sun SCIFP24200 25.6В 200Аг з BMS та Bluetooth моніторингом (SCIFP24200)",
+    "price": 44645,
+    "picture": "https://total-energo.com.ua/content/images/9/akumuliator-lifepo4-sacred-sun-scifp24200-25.6v-200ah-z-bms-ta-bluetooth-monitorynhom-sacsun24200tebl-55580067485628_+c427f0e7e2.png",
+    "category": "1229"
+  },
+  {
+    "id": "7859",
+    "vendorCode": "SCIFP1225",
+    "name": "Акумулятор LiFePO4 Sacred Sun SCIFP1225 12В 25Аг з BMS (SCIFP1225)",
+    "price": 5678,
+    "picture": "https://total-energo.com.ua/content/images/10/akumuliator-lifepo4-sacred-sun-scifp1225-12v-25ah-sacsun1225te-90292546783411_+2de3926680.png",
+    "category": "1229"
+  },
+  {
+    "id": "7868",
+    "vendorCode": "SLSIFP51100W",
+    "name": "Літій-залізо-фосфатний акумулятор (LiFePO4) FNS POWER SLSIFP51100W 51.2В 100Аг (5.12 кВт·год)",
+    "price": 50094,
+    "picture": "https://total-energo.com.ua/content/images/19/litii-zalizo-fosfatnyi-akumuliator-lifepo4-fns-power-slsifp51100w-51.2v-100ah-5.12-kvthod-59213794179966_+2c955d8b17.png",
+    "category": "1229"
+  },
+  {
     "id": "7917",
     "vendorCode": "ITR000802002",
     "name": "Ізоляційний трансформатор 8000W 230V Victron Energy (ITR000802002)",
@@ -5438,6 +5550,14 @@
     "price": 77927,
     "picture": "https://total-energo.com.ua/content/images/21/blok-antyostrivnoho-zakhystu-anti-islanding-box-63a-1f-3f-rcd000300200-40678891665601_+8c758db79d.png",
     "category": "Інвертори DC-AC"
+  },
+  {
+    "id": "7921",
+    "vendorCode": "SLSIFP51314A",
+    "name": "Портативни літій-залізо-фосфатний акумулятор (LiFePO4) SucredSun SLSIFP51314А 51.2В 314Аг (16 кВт·год)",
+    "price": 111636,
+    "picture": "https://total-energo.com.ua/content/images/22/portatyvny-litii-zalizo-fosfatnyi-akumuliator-lifepo4-sucredsun-slsifp51314a-51.2v-314ah-16-kvthod-44533096862197_+72298e85eb.png",
+    "category": "1229"
   },
   {
     "id": "7922",
