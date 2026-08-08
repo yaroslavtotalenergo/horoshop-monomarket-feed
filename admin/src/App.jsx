@@ -21,6 +21,7 @@ export default function App() {
   
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [syncing, setSyncing] = useState(false);
   const [toast, setToast] = useState('');
   const [showSettings, setShowSettings] = useState(!token);
   const [showLinks, setShowLinks] = useState(false);
@@ -87,6 +88,23 @@ export default function App() {
   const allSelected = catalog.length > 0 && catalog.every(p => whitelist.includes(p.vendorCode));
   const handleToggleAll = () => setWhitelist(allSelected ? [] : catalog.map(p => p.vendorCode));
 
+  const handleSync = async () => {
+    setSyncing(true);
+    showToast('⏳ Запущено оновлення з Хорошопу. Це займе ~30-40 секунд...');
+    try {
+      await api.triggerWorkflow();
+      // Wait for 35 seconds to allow GitHub Actions to finish
+      await new Promise(r => setTimeout(r, 35000));
+      await loadData();
+      showToast('✅ Дані успішно оновлено!');
+    } catch (e) {
+      console.error(e);
+      showToast('❌ Помилка оновлення. Спробуйте пізніше.');
+    } finally {
+      setSyncing(false);
+    }
+  };
+
   const updateBarcode = (vendorCode, value) => setBarcodes(prev => ({ ...prev, [vendorCode]: value }));
   const updateDescription = (vendorCode, value) => setDescriptions(prev => ({ ...prev, [vendorCode]: value }));
   const copyToClipboard = (text) => { navigator.clipboard.writeText(text); showToast('📋 Посилання скопійовано!'); };
@@ -141,7 +159,10 @@ export default function App() {
             🔗 Посилання
           </button>
           <button className="btn" onClick={() => setShowSettings(true)}>⚙️ Налаштування</button>
-          <button className="btn success" onClick={handleSaveAll} disabled={saving || loading || !token}>
+          <button className="btn" style={{ background: '#0ea5e9' }} onClick={handleSync} disabled={syncing || loading || saving || !token}>
+            {syncing ? <span className="loader"></span> : '🔄 Оновити з Хорошопу'}
+          </button>
+          <button className="btn success" onClick={handleSaveAll} disabled={saving || syncing || loading || !token}>
             {saving ? <span className="loader"></span> : '💾 Зберегти зміни'}
           </button>
         </div>
