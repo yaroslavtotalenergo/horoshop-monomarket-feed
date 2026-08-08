@@ -1,11 +1,11 @@
 :root {
-  --bg-color: #0f172a;
-  --surface-color: rgba(30, 41, 59, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
+  --bg-color: #f1f5f9;
+  --surface-color: rgba(255, 255, 255, 0.85);
+  --border-color: rgba(0, 0, 0, 0.1);
   --primary: #3b82f6;
   --primary-hover: #2563eb;
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
   --success: #10b981;
   --danger: #ef4444;
 }
@@ -88,7 +88,7 @@ h1, h2, h3 {
 
 .input-field {
   width: 100%;
-  background: rgba(15, 23, 42, 0.5);
+  background: rgba(255, 255, 255, 0.5);
   border: 1px solid var(--border-color);
   color: var(--text-main);
   padding: 0.75rem 1rem;
@@ -140,7 +140,7 @@ tr:last-child td {
 }
 
 tr:hover td {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(0, 0, 0, 0.02);
 }
 
 .product-img {
@@ -162,9 +162,9 @@ tr:hover td {
   display: inline-block;
   width: 20px;
   height: 20px;
-  border: 2px solid rgba(255,255,255,0.3);
+  border: 2px solid rgba(0,0,0,0.1);
   border-radius: 50%;
-  border-top-color: white;
+  border-top-color: var(--primary);
   animation: spin 1s ease-in-out infinite;
 }
 
@@ -192,7 +192,7 @@ tr:hover td {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(255,255,255,0.1);
+  background-color: rgba(0,0,0,0.1);
   transition: .3s;
   border-radius: 24px;
   border: 1px solid var(--border-color);
@@ -205,7 +205,7 @@ tr:hover td {
   width: 18px;
   left: 2px;
   bottom: 2px;
-  background-color: var(--text-muted);
+  background-color: var(--bg-color);
   transition: .3s;
   border-radius: 50%;
 }
@@ -268,7 +268,7 @@ input:checked + .slider:before {
 }
 
 .stat-card {
-  background: rgba(255,255,255,0.03);
+  background: rgba(255,255,255,0.5);
   border: 1px solid var(--border-color);
   border-radius: 0.75rem;
   padding: 1.5rem;
