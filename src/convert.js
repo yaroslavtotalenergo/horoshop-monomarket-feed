@@ -387,6 +387,7 @@ async function main() {
         vendorCode: o.vendorCode,
         name: o.name,
         price: o.price,
+        oldPrice: o.oldPrice,
         picture: o.pictures.length > 0 ? o.pictures[0] : null,
         category: o.category,
         description: o.description
