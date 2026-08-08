@@ -32,9 +32,6 @@ try { customDescriptions = JSON.parse(fs.readFileSync('src/descriptions.json', '
 let categoryMap = {};
 try { categoryMap = JSON.parse(fs.readFileSync('src/categories.json', 'utf8')); } catch(e) {}
 
-let stocks = {};
-try { stocks = JSON.parse(fs.readFileSync('src/stocks.json', 'utf8')); } catch(e) {}
-
 // ── Налаштування ────────────────────────────────────────────────
 const CONFIG = {
   horoshopFeedUrl: config.horoshopFeedUrl || process.env.HOROSHOP_FEED_URL || '',
@@ -325,9 +322,9 @@ function generatePricesJson(offers) {
     price: o.price,
     old_price: o.oldPrice,
     availability: o.available,
-    stock: stocks[o.vendorCode] !== undefined ? parseInt(stocks[o.vendorCode], 10) : (o.available ? d.stock : 0),
+    stock: o.available ? d.stock : 0,
     warehouses: o.available
-      ? [{ id: d.warehouseId, stock: stocks[o.vendorCode] !== undefined ? parseInt(stocks[o.vendorCode], 10) : d.stock }]
+      ? [{ id: d.warehouseId, stock: d.stock }]
       : null,
     warranty_type: d.warrantyType,
     warranty_period: d.warrantyPeriod,
