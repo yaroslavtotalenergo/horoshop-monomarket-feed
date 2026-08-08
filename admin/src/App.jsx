@@ -74,25 +74,16 @@ export default function App() {
   const handleSaveAll = async () => {
     setSaving(true);
     try {
-      const [wlRes, bcRes, descRes, stRes] = await Promise.all([
-        api.saveFile('src/whitelist.json', JSON.stringify(whitelist, null, 2), shas.whitelist, 'Update whitelist via UI'),
-        api.saveFile('src/barcodes.json', JSON.stringify(barcodes, null, 2), shas.barcodes, 'Update barcodes via UI'),
-        api.saveFile('src/descriptions.json', JSON.stringify(descriptions, null, 2), shas.descriptions, 'Update descriptions via UI'),
-        api.saveFile('src/stocks.json', JSON.stringify(stocks, null, 2), shas.stocks, 'Update stocks via UI')
-      ]);
-      // GitHub API returns new SHA at: response.content.sha
-      setShas(prev => ({
-        ...prev,
-        whitelist: wlRes?.content?.sha || prev.whitelist,
-        barcodes: bcRes?.content?.sha || prev.barcodes,
-        descriptions: descRes?.content?.sha || prev.descriptions,
-        stocks: stRes?.content?.sha || prev.stocks,
-      }));
+      // Save files sequentially to avoid concurrent SHA conflicts
+      await api.saveFile('src/whitelist.json', JSON.stringify(whitelist, null, 2), null, 'Update whitelist via UI');
+      await api.saveFile('src/barcodes.json', JSON.stringify(barcodes, null, 2), null, 'Update barcodes via UI');
+      await api.saveFile('src/descriptions.json', JSON.stringify(descriptions, null, 2), null, 'Update descriptions via UI');
+      await api.saveFile('src/stocks.json', JSON.stringify(stocks, null, 2), null, 'Update stocks via UI');
       await api.triggerWorkflow();
-      showToast('✅ Дані збережено! Фід оновлюється...');
+      showToast('\u2705 \u0414\u0430\u043d\u0456 \u0437\u0431\u0435\u0440\u0435\u0436\u0435\u043d\u043e! \u0424\u0456\u0434 \u043e\u043d\u043e\u0432\u043b\u044e\u0454\u0442\u044c\u0441\u044f...');
     } catch (e) {
       console.error('Save error:', e);
-      showToast('❌ Помилка: ' + (e?.message || 'невідома помилка'));
+      showToast('\u274c \u041f\u043e\u043c\u0438\u043b\u043a\u0430: ' + (e?.message || '\u043d\u0435\u0432\u0456\u0434\u043e\u043c\u0430 \u043f\u043e\u043c\u0438\u043b\u043a\u0430'));
     }
     setSaving(false);
   };
