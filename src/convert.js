@@ -212,7 +212,10 @@ function transformOffer(offer) {
   }
 
   const categoryId = String(offer._categoryId || offer.categoryId || '');
-  const categoryName = categoryMap[vendorCode] || extractText(offer.category) || categoryId;
+  let categoryName = categoryMap[vendorCode] || extractText(offer.category) || categoryId;
+  if (categoryName === '1229' || categoryId === '1229') {
+    categoryName = 'Акумулятори';
+  }
   const description = offer.description?.__cdata || extractText(offer.description) || '';
 
   return {
