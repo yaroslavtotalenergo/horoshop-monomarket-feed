@@ -46,7 +46,10 @@ export default function App() {
         api.getFile('src/stocks.json')
       ]);
 
-      if (catalogRes.content) setCatalog(JSON.parse(catalogRes.content).data || []);
+      if (catalogRes.content) {
+        const parsed = JSON.parse(catalogRes.content);
+        setCatalog(Array.isArray(parsed) ? parsed : (parsed.data || []));
+      }
       if (whitelistRes.content) setWhitelist(JSON.parse(whitelistRes.content) || []);
       if (barcodesRes.content) setBarcodes(JSON.parse(barcodesRes.content) || {});
       if (descRes.content) setDescriptions(JSON.parse(descRes.content) || {});
