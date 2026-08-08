@@ -4,6 +4,7 @@
 // Генерує:
 //   feeds/products.xml  — товарний фід (Мономаркет <Market>)
 //   feeds/prices.json   — прайс-лист (Мономаркет JSON)
+//   feeds/catalog.json  — каталог товарів
 // ==========================================
 
 const { XMLParser } = require('fast-xml-parser');
@@ -11,17 +12,29 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
-// ── Конфігурація ────────────────────────────────────────────────
-const CONFIG = {
-  // URL до вашого XML-фіду в Хорошопі (встановлюється через env або тут)
-  horoshopFeedUrl: process.env.HOROSHOP_FEED_URL || '',
+// ── Зчитування конфігураційних файлів ──────────────────────────
+let barcodesConfig = {};
+try {
+  barcodesConfig = JSON.parse(fs.readFileSync('src/barcodes.json', 'utf8'));
+} catch (e) {
+  console.log('Файл barcodes.json не знайдено або пустий.');
+}
 
-  // Якщо запускаємо локально з файлу замість URL
+let config = {};
+try { config = JSON.parse(fs.readFileSync('src/config.json', 'utf8')); } catch(e) {}
+
+let whitelist = [];
+try { whitelist = JSON.parse(fs.readFileSync('src/whitelist.json', 'utf8')); } catch(e) {}
+
+let customDescriptions = {};
+try { customDescriptions = JSON.parse(fs.readFileSync('src/descriptions.json', 'utf8')); } catch(e) {}
+
+// ── Налаштування ────────────────────────────────────────────────
+const CONFIG = {
+  horoshopFeedUrl: config.horoshopFeedUrl || process.env.HOROSHOP_FEED_URL || '',
   localFeedPath: process.env.LOCAL_FEED_PATH || '',
 
-  // Дефолтні значення для прайс-листа
   defaults: {
-    // Залишок для всіх товарів (фіксоване значення, як ви і хочете)
     stock: parseInt(process.env.DEFAULT_STOCK || '10', 10),
     warehouseId: process.env.WAREHOUSE_ID || 'main',
     warrantyType: process.env.WARRANTY_TYPE || 'no',
@@ -30,28 +43,10 @@ const CONFIG = {
     daysToDispatch: parseInt(process.env.DAYS_TO_DISPATCH || '1', 10),
   },
 
-  // Назва магазину для XML-фіду
   shopName: process.env.SHOP_NAME || 'Магазин',
-
-  // Ліміт товарів (для тестування). 0 = без ліміту
   maxProducts: parseInt(process.env.MAX_PRODUCTS || '0', 10),
-
-  // Назва поля `param` де зберігається штрихкод у Хорошопі
-  // Зміните, якщо у вас інша назва (перевірте у своєму XML)
   barcodeParamNames: ['Штрихкод', 'Баркод', 'Barcode', 'EAN', 'GTIN', 'UPC'],
 };
-
-// ── Завантаження локальної бази штрихкодів ──────────────────────
-let localBarcodes = {};
-try {
-  const barcodesPath = path.join(__dirname, 'barcodes.json');
-  if (fs.existsSync(barcodesPath)) {
-    localBarcodes = JSON.parse(fs.readFileSync(barcodesPath, 'utf-8'));
-    console.log(`📦 Завантажено локальну базу штрихкодів: ${Object.keys(localBarcodes).length} записів`);
-  }
-} catch (e) {
-  console.warn('⚠️ Помилка завантаження barcodes.json:', e.message);
-}
 
 // ── Вихідна директорія ──────────────────────────────────────────
 const FEEDS_DIR = path.join(__dirname, '..', 'feeds');
@@ -87,7 +82,6 @@ function parseHoroshopXml(xmlText) {
 
   const result = parser.parse(xmlText);
 
-  // Підтримка різних кореневих структур Хорошопу (yml_catalog або direct)
   const catalog = result.yml_catalog || result.catalog || result;
   const shop = catalog.shop || catalog;
   const offers = shop.offers?.offer || shop.offer || [];
@@ -110,7 +104,7 @@ function findParam(params, names) {
   if (!params || !Array.isArray(params)) return null;
   const nameList = Array.isArray(names) ? names : [names];
   for (const p of params) {
-    const pName = p.name || '';  // params вже трансформовані getParams() → {name, value}
+    const pName = p.name || '';
     if (nameList.some((n) => pName.toLowerCase() === n.toLowerCase())) {
       return p.value || '';
     }
@@ -124,7 +118,6 @@ function getParams(offer) {
   if (!raw) return [];
   const list = Array.isArray(raw) ? raw : [raw];
 
-  // Список параметрів, які потрібно вирізати з фіда
   const excludedParams = ['Гарантия', 'Гарантія', 'Цвет', 'Колір'];
 
   return list
@@ -150,7 +143,6 @@ function escapeXml(str) {
 function formatProductName(originalName, vendorCode) {
   let name = String(originalName || '').replace(/\s+/g, ' ').trim();
 
-  // 1. Видалення заборонених рекламних слів та посилань
   const forbidden = [
     /акція/ig, /знижка/ig, /розпродаж/ig, /уцінка/ig, 
     /\bcopy\b/ig, /\boriginal\b/ig, 
@@ -160,19 +152,13 @@ function formatProductName(originalName, vendorCode) {
     name = name.replace(reg, '');
   }
 
-  // 2. Видалення специфічних жаргонізмів та спецсимволів
   name = name.replace(/[§≠≥]/g, '');
 
-  // 3. Форматування вендор-коду в кінці назви
-  // У Хорошопі назви часто закінчуються на " - АРТИКУЛ". Мономаркет просить "(АРТИКУЛ)"
   if (vendorCode && name.endsWith(`- ${vendorCode}`)) {
     name = name.slice(0, name.lastIndexOf(`- ${vendorCode}`)).trim();
     name = `${name} (${vendorCode})`;
-  } else if (vendorCode && !name.includes(`(${vendorCode})`) && !name.endsWith(vendorCode)) {
-    // Якщо артикулу взагалі немає в назві, можна додати його в дужках (опціонально, але краще залишити як є, якщо його там не було)
   }
 
-  // Очищення можливих подвійних пробілів після замін
   return name.replace(/\s+/g, ' ').trim();
 }
 
@@ -181,16 +167,11 @@ function cleanDescription(desc) {
   if (!desc) return '';
   let d = desc;
 
-  // 1. Вирізаємо таблиці (зазвичай це порівняння моделей)
   d = d.replace(/<table[^>]*>[\s\S]*?<\/table>/ig, '');
-
-  // 2. Вирізаємо блоки про комплектацію (Мономаркет це забороняє)
-  // Шукаємо заголовок зі словом "комплект" і наступний за ним список
   d = d.replace(/<h[2-5][^>]*>[^<]*комплект[^<]*<\/h[2-5]>[\s\S]*?<\/[ou]l>/ig, '');
-  d = d.replace(/<h[2-5][^>]*>[^<]*(Відмінності|Порівняння)[^<]*<\/h[2-5]>/ig, ''); // Заголовок перед таблицею
+  d = d.replace(/<h[2-5][^>]*>[^<]*(Відмінності|Порівняння)[^<]*<\/h[2-5]>/ig, '');
   d = d.replace(/<p[^>]*>[^<]*модельний ряд[^<]*<\/p>/ig, '');
 
-  // 3. Вирізаємо згадки про компанію та сервіс
   const badPhrases = [
     /Total-?Energo/ig,
     /Тотал-?Енерго/ig,
@@ -203,9 +184,7 @@ function cleanDescription(desc) {
     d = d.replace(reg, '');
   }
 
-  // Очистка порожніх параграфів, що могли лишитись
   d = d.replace(/<p[^>]*>\s*(?:&nbsp;)?\s*<\/p>/ig, '');
-  
   return d.trim();
 }
 
@@ -214,16 +193,13 @@ function transformOffer(offer) {
   const id = String(offer._id || '');
   const available = offer._available === true || offer._available === 'true';
   const params = getParams(offer);
-
   const vendorCode = extractText(offer.vendorCode) || '';
 
-  // Знаходимо штрихкод у нашій базі або у params
   const barcode =
-    localBarcodes[vendorCode] || // Пріоритет: шукаємо у завантаженому файлі штрихкодів по артикулу
+    barcodesConfig[vendorCode] || 
     (offer.barcode ? extractText(offer.barcode) : findParam(params, CONFIG.barcodeParamNames)) || 
     '';
 
-  // Картинки
   const pictures = [];
   const rawPictures = offer.picture || [];
   const picList = Array.isArray(rawPictures) ? rawPictures : [rawPictures];
@@ -232,11 +208,8 @@ function transformOffer(offer) {
     if (url) pictures.push(url);
   }
 
-  // Категорія
   const categoryId = String(offer._categoryId || offer.categoryId || '');
   const categoryName = extractText(offer.category) || categoryId;
-
-  // Витягаємо опис
   const description = offer.description?.__cdata || extractText(offer.description) || '';
 
   return {
@@ -250,7 +223,7 @@ function transformOffer(offer) {
     name: formatProductName(extractText(offer.name), vendorCode),
     brand: extractText(offer.vendor) || '',
     category: categoryName,
-    description: cleanDescription(description),
+    description: customDescriptions[vendorCode] || cleanDescription(description),
     pictures,
     params,
 
