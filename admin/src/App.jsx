@@ -92,6 +92,7 @@ export default function App() {
   const [whitelist, setWhitelist] = useState([]);
   const [barcodes, setBarcodes] = useState({});
   const [descriptions, setDescriptions] = useState({});
+  const [availabilityOverrides, setAvailabilityOverrides] = useState({});
 
   const [collapsedCategories, setCollapsedCategories] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
@@ -129,12 +130,13 @@ export default function App() {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [catalogRes, whitelistRes, barcodesRes, descRes, configRes] = await Promise.all([
+      const [catalogRes, whitelistRes, barcodesRes, descRes, configRes, availRes] = await Promise.all([
         api.getFile('feeds/catalog.json'),
         api.getFile('src/whitelist.json'),
         api.getFile('src/barcodes.json'),
         api.getFile('src/descriptions.json'),
-        api.getFile('src/config.json')
+        api.getFile('src/config.json'),
+        api.getFile('src/availability.json')
       ]);
 
       if (catalogRes.content) {
@@ -144,6 +146,7 @@ export default function App() {
       if (whitelistRes.content) setWhitelist(JSON.parse(whitelistRes.content) || []);
       if (barcodesRes.content) setBarcodes(JSON.parse(barcodesRes.content) || {});
       if (descRes.content) setDescriptions(JSON.parse(descRes.content) || {});
+      if (availRes.content) setAvailabilityOverrides(JSON.parse(availRes.content) || {});
       if (configRes.content) setFeedUrl(JSON.parse(configRes.content).horoshopFeedUrl || '');
       
       setShas({
@@ -167,6 +170,7 @@ export default function App() {
       await api.saveFile('src/whitelist.json', JSON.stringify(whitelist, null, 2), null, 'Update whitelist via UI');
       await api.saveFile('src/barcodes.json', JSON.stringify(barcodes, null, 2), null, 'Update barcodes via UI');
       await api.saveFile('src/descriptions.json', JSON.stringify(descriptions, null, 2), null, 'Update descriptions via UI');
+      await api.saveFile('src/availability.json', JSON.stringify(availabilityOverrides, null, 2), null, 'Update availability via UI');
       await api.triggerWorkflow();
       showToast('\u2705 \u0414\u0430\u043d\u0456 \u0437\u0431\u0435\u0440\u0435\u0436\u0435\u043d\u043e! \u0424\u0456\u0434 \u043e\u043d\u043e\u0432\u043b\u044e\u0454\u0442\u044c\u0441\u044f...');
     } catch (e) {
@@ -190,6 +194,20 @@ export default function App() {
 
   const toggleWhitelist = (vendorCode) => {
     setWhitelist(prev => prev.includes(vendorCode) ? prev.filter(v => v !== vendorCode) : [...prev, vendorCode]);
+  };
+
+  const toggleAvailability = (vendorCode) => {
+    setAvailabilityOverrides(prev => {
+      const next = { ...prev };
+      if (next[vendorCode] === false) {
+        // Якщо було false, робимо true (або видаляємо, щоб бралося з Хорошопу)
+        // Для надійності поставимо true
+        next[vendorCode] = true;
+      } else {
+        next[vendorCode] = false;
+      }
+      return next;
+    });
   };
 
   const allSelected = catalog.length > 0 && catalog.every(p => whitelist.includes(p.vendorCode));
@@ -394,6 +412,7 @@ export default function App() {
                 <thead>
                   <tr>
                     <th style={{ width: '60px' }}>Увімк</th>
+                    <th style={{ width: '90px' }}>Наявність</th>
                     <th>Товар</th>
                     <th style={{ width: '200px' }}>Штрихкод</th>
                     <th>Кастомний опис (HTML)</th>
@@ -402,12 +421,19 @@ export default function App() {
                 <tbody>
                   {filteredCatalog.map(product => {
                     const isSelected = whitelist.includes(product.vendorCode);
+                    const isAvailable = availabilityOverrides[product.vendorCode] !== false;
                     return (
                       <tr key={product.vendorCode} style={{ opacity: isSelected ? 1 : 0.5 }}>
                         <td>
                           <label className="toggle-switch">
                             <input type="checkbox" checked={isSelected} onChange={() => toggleWhitelist(product.vendorCode)} />
                             <span className="slider"></span>
+                          </label>
+                        </td>
+                        <td>
+                          <label className="toggle-switch" style={{ opacity: isSelected ? 1 : 0.4 }}>
+                            <input type="checkbox" checked={isAvailable} disabled={!isSelected} onChange={() => toggleAvailability(product.vendorCode)} />
+                            <span className="slider" style={{ background: isAvailable ? '#10b981' : '#f87171' }}></span>
                           </label>
                         </td>
                         <td>
@@ -515,6 +541,7 @@ export default function App() {
                     <thead>
                       <tr>
                         <th style={{ width: '60px' }}>Увімк</th>
+                        <th style={{ width: '90px' }}>Наявність</th>
                         <th>Товар</th>
                         <th style={{ width: '200px' }}>Штрихкод</th>
                         <th>Кастомний опис (HTML)</th>
@@ -523,12 +550,19 @@ export default function App() {
                     <tbody>
                       {products.map(product => {
                         const isSelected = whitelist.includes(product.vendorCode);
+                        const isAvailable = availabilityOverrides[product.vendorCode] !== false;
                         return (
                           <tr key={product.vendorCode} style={{ opacity: isSelected ? 1 : 0.5 }}>
                             <td>
                               <label className="toggle-switch">
                                 <input type="checkbox" checked={isSelected} onChange={() => toggleWhitelist(product.vendorCode)} />
                                 <span className="slider"></span>
+                              </label>
+                            </td>
+                            <td>
+                              <label className="toggle-switch" style={{ opacity: isSelected ? 1 : 0.4 }}>
+                                <input type="checkbox" checked={isAvailable} disabled={!isSelected} onChange={() => toggleAvailability(product.vendorCode)} />
+                                <span className="slider" style={{ background: isAvailable ? '#10b981' : '#f87171' }}></span>
                               </label>
                             </td>
                             <td>
