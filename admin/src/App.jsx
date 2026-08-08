@@ -377,9 +377,8 @@ export default function App() {
               </div>
 
               {/* Products table */}
-              {!isCollapsed && (
-                <div style={{ overflowX: 'auto' }}>
-                  <table>
+              <div style={{ display: isCollapsed ? 'none' : 'block', overflowX: 'auto' }}>
+                <table>
                     <thead>
                       <tr>
                         <th style={{ width: '60px' }}>Увімк</th>
@@ -428,7 +427,6 @@ export default function App() {
                     </tbody>
                   </table>
                 </div>
-              )}
             </div>
           );
         })
