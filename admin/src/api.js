@@ -46,11 +46,25 @@ export class GitHubApi {
       body.sha = sha;
     }
 
-    const response = await fetch(`${this.baseUrl}/contents/${path}`, {
+    let response = await fetch(`${this.baseUrl}/contents/${path}`, {
       method: 'PUT',
       headers: this.getHeaders(),
       body: JSON.stringify(body)
     });
+
+    // If there's a conflict (file exists but we didn't provide SHA, or SHA is outdated), 
+    // fetch the latest SHA and retry once.
+    if (response.status === 409 || response.status === 422) {
+      const fileRes = await this.getFile(path);
+      if (fileRes.sha) {
+        body.sha = fileRes.sha;
+        response = await fetch(`${this.baseUrl}/contents/${path}`, {
+          method: 'PUT',
+          headers: this.getHeaders(),
+          body: JSON.stringify(body)
+        });
+      }
+    }
 
     if (!response.ok) {
       throw new Error(`Failed to save ${path}: ${response.statusText}`);
