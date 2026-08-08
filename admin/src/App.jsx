@@ -156,7 +156,7 @@ export default function App() {
       map[cat].push(product);
     }
     return Object.entries(map).sort(([a], [b]) => a.localeCompare(b, 'uk'));
-  }, [catalog]);
+  }, [catalog, filterMode, whitelist]);
 
   const getCategoryStats = (products) => {
     const selected = products.filter(p => whitelist.includes(p.vendorCode)).length;
@@ -284,7 +284,6 @@ export default function App() {
                         </td>
                         <td>
                           <div className="flex-center">
-                            {product.picture && <img src={product.picture} className="product-img" alt="" />}
                             <div>
                               <div style={{ fontWeight: '500' }}>{product.name}</div>
                               <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
@@ -394,7 +393,6 @@ export default function App() {
                             </td>
                             <td>
                               <div className="flex-center">
-                                {product.picture && <img src={product.picture} className="product-img" alt="" />}
                                 <div>
                                   <div style={{ fontWeight: '500' }}>{product.name}</div>
                                   <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
