@@ -159,7 +159,7 @@ function transformOffer(offer) {
   return {
     // Ідентифікатори
     id,
-    code: offer.article || offer.sku || id, // code для прайс-листа (збігається з <code> у XML)
+    code: extractText(offer.vendorCode) || id, // Головний ідентифікатор - артикул. Якщо його немає (що рідкість) - беремо ID
     vendorCode: extractText(offer.vendorCode) || '',
     barcode,
 
