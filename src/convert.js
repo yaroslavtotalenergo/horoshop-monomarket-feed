@@ -374,7 +374,8 @@ async function main() {
         vendorCode: o.vendorCode,
         name: o.name,
         price: o.price,
-        picture: o.pictures.length > 0 ? o.pictures[0] : null
+        picture: o.pictures.length > 0 ? o.pictures[0] : null,
+        category: o.category
       });
 
       // Фільтрація по whitelist (якщо він не порожній)
