@@ -40,8 +40,8 @@ const CONFIG = {
   defaults: {
     stock: parseInt(process.env.DEFAULT_STOCK || '10', 10),
     warehouseId: process.env.WAREHOUSE_ID || 'main',
-    warrantyType: process.env.WARRANTY_TYPE || 'no',
-    warrantyPeriod: parseInt(process.env.WARRANTY_PERIOD || '0', 10),
+    warrantyType: process.env.WARRANTY_TYPE || 'manufacturer',
+    warrantyPeriod: parseInt(process.env.WARRANTY_PERIOD || '60', 10),
     maxPayInParts: parseInt(process.env.MAX_PAY_IN_PARTS || '6', 10),
     daysToDispatch: parseInt(process.env.DAYS_TO_DISPATCH || '1', 10),
   },
