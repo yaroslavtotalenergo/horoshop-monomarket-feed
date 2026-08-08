@@ -16,6 +16,7 @@ export default function App() {
   const [whitelist, setWhitelist] = useState([]);
   const [barcodes, setBarcodes] = useState({});
   const [descriptions, setDescriptions] = useState({});
+  const [stocks, setStocks] = useState({});
   const [collapsedCategories, setCollapsedCategories] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
   const [filterMode, setFilterMode] = useState('all');
@@ -27,7 +28,7 @@ export default function App() {
   const [showSettings, setShowSettings] = useState(!token);
   const [showLinks, setShowLinks] = useState(false);
 
-  const [shas, setShas] = useState({ whitelist: null, barcodes: null, descriptions: null, config: null });
+  const [shas, setShas] = useState({ whitelist: null, barcodes: null, descriptions: null, config: null, stocks: null });
 
   const api = useMemo(() => new GitHubApi(token, REPO_OWNER, REPO_NAME), [token]);
 
@@ -36,17 +37,29 @@ export default function App() {
   const loadData = async () => {
     setLoading(true);
     try {
-      const catRes = await api.getFile('feeds/catalog.json');
-      if (catRes.content) setCatalog(JSON.parse(catRes.content));
-      const wlRes = await api.getFile('src/whitelist.json');
-      if (wlRes.content) setWhitelist(JSON.parse(wlRes.content));
-      const bcRes = await api.getFile('src/barcodes.json');
-      if (bcRes.content) setBarcodes(JSON.parse(bcRes.content));
-      const descRes = await api.getFile('src/descriptions.json');
-      if (descRes.content) setDescriptions(JSON.parse(descRes.content));
-      const confRes = await api.getFile('src/config.json');
-      if (confRes.content) setFeedUrl(JSON.parse(confRes.content).horoshopFeedUrl || '');
-      setShas({ whitelist: wlRes.sha, barcodes: bcRes.sha, descriptions: descRes.sha, config: confRes.sha });
+      const [catalogRes, whitelistRes, barcodesRes, descRes, configRes, stocksRes] = await Promise.all([
+        api.getFile('feeds/catalog.json'),
+        api.getFile('src/whitelist.json'),
+        api.getFile('src/barcodes.json'),
+        api.getFile('src/descriptions.json'),
+        api.getFile('src/config.json'),
+        api.getFile('src/stocks.json')
+      ]);
+
+      if (catalogRes.content) setCatalog(JSON.parse(catalogRes.content).data || []);
+      if (whitelistRes.content) setWhitelist(JSON.parse(whitelistRes.content) || []);
+      if (barcodesRes.content) setBarcodes(JSON.parse(barcodesRes.content) || {});
+      if (descRes.content) setDescriptions(JSON.parse(descRes.content) || {});
+      if (stocksRes.content) setStocks(JSON.parse(stocksRes.content) || {});
+      if (configRes.content) setFeedUrl(JSON.parse(configRes.content).horoshopFeedUrl || '');
+      
+      setShas({
+        whitelist: whitelistRes.sha,
+        barcodes: barcodesRes.sha,
+        descriptions: descRes.sha,
+        config: configRes.sha,
+        stocks: stocksRes.sha
+      });
     } catch (e) {
       showToast('Помилка завантаження! Перевірте токен.');
     }
@@ -58,10 +71,13 @@ export default function App() {
   const handleSaveAll = async () => {
     setSaving(true);
     try {
-      const wlRes = await api.saveFile('src/whitelist.json', JSON.stringify(whitelist, null, 2), shas.whitelist, 'Update whitelist via Admin Panel');
-      const bcRes = await api.saveFile('src/barcodes.json', JSON.stringify(barcodes, null, 2), shas.barcodes, 'Update barcodes via Admin Panel');
-      const descRes = await api.saveFile('src/descriptions.json', JSON.stringify(descriptions, null, 2), shas.descriptions, 'Update descriptions via Admin Panel');
-      setShas({ ...shas, whitelist: wlRes.content.sha, barcodes: bcRes.content.sha, descriptions: descRes.content.sha });
+      const [wlRes, bcRes, descRes, stRes] = await Promise.all([
+        api.saveFile('src/whitelist.json', JSON.stringify(whitelist, null, 2), shas.whitelist, 'Update whitelist via UI'),
+        api.saveFile('src/barcodes.json', JSON.stringify(barcodes, null, 2), shas.barcodes, 'Update barcodes via UI'),
+        api.saveFile('src/descriptions.json', JSON.stringify(descriptions, null, 2), shas.descriptions, 'Update descriptions via UI'),
+        api.saveFile('src/stocks.json', JSON.stringify(stocks, null, 2), shas.stocks, 'Update stocks via UI')
+      ]);
+      setShas({ ...shas, whitelist: wlRes.content.sha, barcodes: bcRes.content.sha, descriptions: descRes.content.sha, stocks: stRes.content.sha });
       await api.triggerWorkflow();
       showToast('✅ Дані збережено! Фід оновлюється...');
     } catch (e) {
@@ -108,6 +124,29 @@ export default function App() {
 
   const updateBarcode = (vendorCode, value) => setBarcodes(prev => ({ ...prev, [vendorCode]: value }));
   const updateDescription = (vendorCode, value) => setDescriptions(prev => ({ ...prev, [vendorCode]: value }));
+  const updateStock = (vendorCode, value) => {
+    setStocks(prev => {
+      const next = { ...prev };
+      if (value === '') { delete next[vendorCode]; } else { next[vendorCode] = value; }
+      return next;
+    });
+  };
+
+  const [bulkStockValue, setBulkStockValue] = useState('');
+  const handleBulkStock = () => {
+    if (bulkStockValue === '') return;
+    const codes = filteredCatalog.map(p => p.vendorCode);
+    setStocks(prev => {
+      const next = { ...prev };
+      for (const code of codes) {
+        next[code] = bulkStockValue;
+      }
+      return next;
+    });
+    setBulkStockValue('');
+    showToast(`✅ Залишок ${bulkStockValue} встановлено для ${codes.length} товарів!`);
+  };
+
   const copyToClipboard = (text) => { navigator.clipboard.writeText(text); showToast('📋 Посилання скопійовано!'); };
 
   const toggleCategory = (cat) => setCollapsedCategories(prev => ({ ...prev, [cat]: !prev[cat] }));
@@ -256,7 +295,11 @@ export default function App() {
             <span className="badge">{filteredCatalog.length} товарів</span>
             
             {filteredCatalog.length > 0 && (
-              <div style={{ marginLeft: 'auto', display: 'flex', gap: '0.5rem' }}>
+              <div style={{ marginLeft: 'auto', display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', gap: '0.25rem', marginRight: '1rem' }}>
+                  <input type="number" className="input-field" placeholder="Залишок всім..." style={{ width: '130px', padding: '0.25rem 0.5rem', fontSize: '0.85rem' }} value={bulkStockValue} onChange={e => setBulkStockValue(e.target.value)} />
+                  <button className="btn" style={{ padding: '0.25rem 0.5rem', fontSize: '0.85rem', background: '#3b82f6', color: '#fff' }} onClick={handleBulkStock}>Застосувати</button>
+                </div>
                 <button className="btn" style={{ padding: '0.35rem 0.75rem', fontSize: '0.85rem' }} onClick={() => handleBulkAction(true)}>
                   ✅ Увімкнути всі {filteredCatalog.length}
                 </button>
@@ -275,6 +318,7 @@ export default function App() {
                   <tr>
                     <th style={{ width: '60px' }}>Увімк</th>
                     <th>Товар</th>
+                    <th style={{ width: '80px' }}>Залишок</th>
                     <th style={{ width: '200px' }}>Штрихкод</th>
                     <th>Кастомний опис (HTML)</th>
                   </tr>
@@ -299,6 +343,13 @@ export default function App() {
                               </div>
                             </div>
                           </div>
+                        </td>
+                        <td>
+                          <input type="number" className="input-field" placeholder="Авто (10)"
+                            style={{ textAlign: 'center' }}
+                            value={stocks[product.vendorCode] ?? ''}
+                            onChange={(e) => updateStock(product.vendorCode, e.target.value)}
+                          />
                         </td>
                         <td>
                           <input type="text" className="input-field" placeholder="Ввести..."
@@ -383,6 +434,7 @@ export default function App() {
                       <tr>
                         <th style={{ width: '60px' }}>Увімк</th>
                         <th>Товар</th>
+                        <th style={{ width: '80px' }}>Залишок</th>
                         <th style={{ width: '200px' }}>Штрихкод</th>
                         <th>Кастомний опис (HTML)</th>
                       </tr>
@@ -407,6 +459,13 @@ export default function App() {
                                   </div>
                                 </div>
                               </div>
+                            </td>
+                            <td>
+                              <input type="number" className="input-field" placeholder="Авто (10)"
+                                style={{ textAlign: 'center' }}
+                                value={stocks[product.vendorCode] ?? ''}
+                                onChange={(e) => updateStock(product.vendorCode, e.target.value)}
+                              />
                             </td>
                             <td>
                               <input type="text" className="input-field" placeholder="Ввести..."
