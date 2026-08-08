@@ -128,6 +128,8 @@ export default function App() {
     
     if (filterMode === 'enabled') {
       result = result.filter(p => whitelist.includes(p.vendorCode));
+    } else if (filterMode === 'no_barcode') {
+      result = result.filter(p => !barcodes[p.vendorCode] && !p.barcode);
     }
     
     if (!searchQuery.trim()) return result;
@@ -145,18 +147,23 @@ export default function App() {
       );
     }
     return result;
-  }, [catalog, searchQuery, filterMode, whitelist]);
+  }, [catalog, searchQuery, filterMode, whitelist, barcodes]);
 
   const grouped = useMemo(() => {
     const map = {};
-    const baseCatalog = filterMode === 'enabled' ? catalog.filter(p => whitelist.includes(p.vendorCode)) : catalog;
+    let baseCatalog = catalog;
+    if (filterMode === 'enabled') {
+      baseCatalog = catalog.filter(p => whitelist.includes(p.vendorCode));
+    } else if (filterMode === 'no_barcode') {
+      baseCatalog = catalog.filter(p => !barcodes[p.vendorCode] && !p.barcode);
+    }
     for (const product of baseCatalog) {
       const cat = product.category || 'Без категорії';
       if (!map[cat]) map[cat] = [];
       map[cat].push(product);
     }
     return Object.entries(map).sort(([a], [b]) => a.localeCompare(b, 'uk'));
-  }, [catalog, filterMode, whitelist]);
+  }, [catalog, filterMode, whitelist, barcodes]);
 
   const getCategoryStats = (products) => {
     const selected = products.filter(p => whitelist.includes(p.vendorCode)).length;
@@ -236,6 +243,7 @@ export default function App() {
           <select className="input-field" style={{ width: '220px', fontSize: '0.95rem', cursor: 'pointer' }} value={filterMode} onChange={e => setFilterMode(e.target.value)}>
             <option value="all">👁️ Усі товари</option>
             <option value="enabled">🟢 Тільки увімкнені в фід</option>
+            <option value="no_barcode">⚠️ Без штрихкоду</option>
           </select>
         </div>
       )}
