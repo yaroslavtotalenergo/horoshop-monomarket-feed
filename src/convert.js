@@ -123,10 +123,16 @@ function getParams(offer) {
   const raw = offer.param;
   if (!raw) return [];
   const list = Array.isArray(raw) ? raw : [raw];
-  return list.map((p) => ({
-    name: p._name || '',
-    value: extractText(p['#text'] ?? p.__cdata ?? p),
-  }));
+
+  // Список параметрів, які потрібно вирізати з фіда
+  const excludedParams = ['Гарантия', 'Гарантія', 'Цвет', 'Колір'];
+
+  return list
+    .map((p) => ({
+      name: p._name || '',
+      value: extractText(p['#text'] ?? p.__cdata ?? p),
+    }))
+    .filter((p) => !excludedParams.includes(p.name));
 }
 
 // ── Екранування XML ─────────────────────────────────────────────
