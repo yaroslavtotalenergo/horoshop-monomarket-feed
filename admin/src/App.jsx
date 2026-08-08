@@ -80,11 +80,19 @@ export default function App() {
         api.saveFile('src/descriptions.json', JSON.stringify(descriptions, null, 2), shas.descriptions, 'Update descriptions via UI'),
         api.saveFile('src/stocks.json', JSON.stringify(stocks, null, 2), shas.stocks, 'Update stocks via UI')
       ]);
-      setShas({ ...shas, whitelist: wlRes.content.sha, barcodes: bcRes.content.sha, descriptions: descRes.content.sha, stocks: stRes.content.sha });
+      // GitHub API returns new SHA at: response.content.sha
+      setShas(prev => ({
+        ...prev,
+        whitelist: wlRes?.content?.sha || prev.whitelist,
+        barcodes: bcRes?.content?.sha || prev.barcodes,
+        descriptions: descRes?.content?.sha || prev.descriptions,
+        stocks: stRes?.content?.sha || prev.stocks,
+      }));
       await api.triggerWorkflow();
       showToast('✅ Дані збережено! Фід оновлюється...');
     } catch (e) {
-      showToast('❌ Помилка при збереженні!');
+      console.error('Save error:', e);
+      showToast('❌ Помилка: ' + (e?.message || 'невідома помилка'));
     }
     setSaving(false);
   };
