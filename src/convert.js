@@ -361,7 +361,31 @@ async function main() {
       rawOffersSlice = rawOffers.slice(0, CONFIG.maxProducts);
       console.log(`   ⚠️  Ліміт тесту: перші ${CONFIG.maxProducts} товарів з ${rawOffers.length}`);
     }
-    const offers = rawOffersSlice.map(transformOffer);
+    
+    const catalog = [];
+    const validOffers = [];
+    
+    for (const raw of rawOffersSlice) {
+      const o = transformOffer(raw);
+      
+      // Зберігаємо товар в загальний каталог для адмін-панелі
+      catalog.push({
+        id: o.id,
+        vendorCode: o.vendorCode,
+        name: o.name,
+        price: o.price,
+        picture: o.pictures.length > 0 ? o.pictures[0] : null
+      });
+
+      // Фільтрація по whitelist (якщо він не порожній)
+      if (whitelist && whitelist.length > 0 && !whitelist.includes(o.vendorCode)) {
+        continue;
+      }
+
+      validOffers.push(o);
+    }
+    
+    const offers = validOffers;
     const availableCount = offers.filter((o) => o.available).length;
     console.log(`   В наявності: ${availableCount} / ${offers.length}`);
 
@@ -372,9 +396,11 @@ async function main() {
     // 5. Збереження
     const productsPath = path.join(FEEDS_DIR, 'products.xml');
     const pricesPath = path.join(FEEDS_DIR, 'prices.json');
+    const catalogPath = path.join(FEEDS_DIR, 'catalog.json');
 
     fs.writeFileSync(productsPath, productsXml, 'utf-8');
     fs.writeFileSync(pricesPath, pricesJson, 'utf-8');
+    fs.writeFileSync(catalogPath, JSON.stringify(catalog, null, 2), 'utf-8');
 
     console.log('');
     console.log(`✅ feeds/products.xml — ${availableCount} товарів`);
