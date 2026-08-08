@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-08T19:49:35.597Z",
+  "updatedAt": "2026-08-08T21:04:15.938Z",
   "total": 89,
   "data": [
     {
@@ -14,8 +14,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -32,8 +32,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -50,8 +50,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -68,8 +68,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -86,8 +86,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -104,8 +104,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -122,8 +122,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -140,8 +140,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -158,8 +158,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -176,8 +176,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -194,8 +194,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -212,8 +212,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -230,8 +230,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -248,8 +248,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -266,8 +266,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -284,8 +284,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -302,8 +302,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -320,8 +320,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -338,8 +338,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -356,8 +356,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -374,8 +374,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -392,8 +392,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -410,8 +410,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -428,8 +428,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -446,8 +446,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -464,8 +464,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -482,8 +482,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -500,8 +500,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -518,8 +518,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -536,8 +536,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -554,8 +554,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -572,8 +572,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -590,8 +590,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -608,8 +608,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -626,8 +626,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -644,8 +644,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -662,8 +662,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -680,8 +680,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -698,8 +698,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -716,8 +716,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -734,8 +734,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -752,8 +752,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -770,8 +770,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -788,8 +788,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -806,8 +806,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -824,8 +824,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -842,8 +842,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -860,8 +860,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -878,8 +878,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -896,8 +896,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -914,8 +914,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -932,8 +932,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -950,8 +950,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -968,8 +968,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -986,8 +986,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1004,8 +1004,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1022,8 +1022,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1040,8 +1040,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1058,8 +1058,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1076,8 +1076,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1094,8 +1094,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1112,8 +1112,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1130,8 +1130,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1148,8 +1148,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1166,8 +1166,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1184,8 +1184,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1202,8 +1202,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1220,8 +1220,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1238,8 +1238,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1256,8 +1256,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1274,8 +1274,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1292,8 +1292,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1310,8 +1310,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1328,8 +1328,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1346,8 +1346,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1364,8 +1364,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1382,8 +1382,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1400,8 +1400,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1418,8 +1418,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1436,8 +1436,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1454,8 +1454,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1472,8 +1472,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1490,8 +1490,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1508,8 +1508,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1526,8 +1526,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1544,8 +1544,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1562,8 +1562,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1580,8 +1580,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
@@ -1598,8 +1598,8 @@
           "stock": 10
         }
       ],
-      "warranty_type": "no",
-      "warranty_period": 0,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
       "max_pay_in_parts": 6,
       "days_to_dispatch": 1,
       "manufacture": null
