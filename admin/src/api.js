@@ -27,8 +27,18 @@ export class GitHubApi {
         throw new Error(`Failed to fetch ${path}: ${response.statusText}`);
       }
       const data = await response.json();
-      // Decode Base64
-      const content = decodeURIComponent(escape(atob(data.content)));
+      
+      let content = '';
+      if (data.encoding === 'none' && data.git_url) {
+        // File is too large (>1MB) for inline content, fetch via Git Database API
+        const blobRes = await fetch(data.git_url, { headers: this.getHeaders() });
+        const blobData = await blobRes.json();
+        content = decodeURIComponent(escape(atob(blobData.content)));
+      } else if (data.content) {
+        // Decode Base64
+        content = decodeURIComponent(escape(atob(data.content)));
+      }
+      
       return { content, sha: data.sha };
     } catch (e) {
       console.error(e);
