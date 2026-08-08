@@ -40,7 +40,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main || echo "Nothing to pull"
+          git pull --rebase origin main || (git rebase --abort && git reset --hard origin/main)
           git add feeds/
           git diff --staged --quiet || git commit -m "Update feeds"
-          git push
+          git push || git push --force-with-lease
