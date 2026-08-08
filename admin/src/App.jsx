@@ -214,7 +214,17 @@ export default function App() {
   };
 
   const updateBarcode = (vendorCode, value) => setBarcodes(prev => ({ ...prev, [vendorCode]: value }));
-  const updateDescription = (vendorCode, value) => setDescriptions(prev => ({ ...prev, [vendorCode]: value }));
+  const updateDescription = (vendorCode, value) => {
+    setDescriptions(prev => {
+      const next = { ...prev };
+      if (value === undefined || value === null) {
+        delete next[vendorCode];
+      } else {
+        next[vendorCode] = value;
+      }
+      return next;
+    });
+  };
   const copyToClipboard = (text) => { navigator.clipboard.writeText(text); showToast('📋 Посилання скопійовано!'); };
 
   const toggleCategory = (cat) => setCollapsedCategories(prev => ({ ...prev, [cat]: !prev[cat] }));
@@ -678,7 +688,9 @@ export default function App() {
             
             <div style={{ marginTop: '1rem', background: '#fff', color: '#000', borderRadius: '0.5rem', overflow: 'hidden' }}>
               <DefaultEditor 
-                value={descriptions[editingDescriptionProduct.vendorCode] || ''} 
+                value={descriptions[editingDescriptionProduct.vendorCode] !== undefined 
+                  ? descriptions[editingDescriptionProduct.vendorCode] 
+                  : (editingDescriptionProduct.description || '')} 
                 onChange={(e) => updateDescription(editingDescriptionProduct.vendorCode, e.target.value)} 
                 placeholder="Введіть ваш унікальний опис для маркетплейсу..."
                 style={{ height: '350px' }}
@@ -686,12 +698,12 @@ export default function App() {
             </div>
             
             <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1.5rem', gap: '1rem' }}>
-              {descriptions[editingDescriptionProduct.vendorCode] && (
+              {descriptions[editingDescriptionProduct.vendorCode] !== undefined && (
                 <button 
                   className="btn" 
                   style={{ background: 'transparent', color: '#f87171', border: '1px solid #f87171' }} 
                   onClick={() => {
-                    updateDescription(editingDescriptionProduct.vendorCode, '');
+                    updateDescription(editingDescriptionProduct.vendorCode, undefined);
                     setEditingDescriptionProduct(null);
                   }}
                 >
