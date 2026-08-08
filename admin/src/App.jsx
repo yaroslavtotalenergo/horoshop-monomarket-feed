@@ -9,6 +9,81 @@ const FEED_URLS = {
   json: `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/feeds/prices.json`,
 };
 
+// Simple hash function for password storage
+async function hashPassword(password) {
+  const msgBuffer = new TextEncoder().encode(password);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// Stored hash of: admin / totalenergo2024
+const STORED_LOGIN = 'admin';
+const STORED_PASS_HASH = 'fd3b9c76f5f8aa44c81e96a84e42bff73e5e843e498b3e3a44f6ef3bcdf33d90'; // totalenergo2024
+
+export function LoginGate({ children }) {
+  const [authed, setAuthed] = useState(() => localStorage.getItem('panel_auth') === 'ok');
+  const [login, setLogin] = useState('');
+  const [pass, setPass] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    const passHash = await hashPassword(pass);
+    if (login.trim() === STORED_LOGIN && passHash === STORED_PASS_HASH) {
+      localStorage.setItem('panel_auth', 'ok');
+      setAuthed(true);
+    } else {
+      setError('Невірний логін або пароль');
+    }
+    setLoading(false);
+  };
+
+  if (authed) return children;
+
+  return (
+    <div style={{
+      minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
+      background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)'
+    }}>
+      <div className="glass-panel" style={{ width: '100%', maxWidth: '380px', padding: '2.5rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>⚡</div>
+          <h1 style={{ margin: 0, fontSize: '1.5rem' }}>Total Energo</h1>
+          <p style={{ color: 'var(--text-muted)', margin: '0.25rem 0 0' }}>Monomarket Feed Admin</p>
+        </div>
+        <form onSubmit={handleLogin}>
+          <div className="form-group">
+            <label>Логін</label>
+            <input
+              type="text" className="input-field" autoComplete="username"
+              value={login} onChange={e => setLogin(e.target.value)}
+              placeholder="Введіть логін"
+              style={{ fontSize: '1rem' }}
+            />
+          </div>
+          <div className="form-group">
+            <label>Пароль</label>
+            <input
+              type="password" className="input-field" autoComplete="current-password"
+              value={pass} onChange={e => setPass(e.target.value)}
+              placeholder="••••••••"
+              style={{ fontSize: '1rem' }}
+            />
+          </div>
+          {error && <p style={{ color: '#f87171', margin: '0 0 1rem', fontSize: '0.9rem' }}>{error}</p>}
+          <button type="submit" className="btn success" style={{ width: '100%', padding: '0.85rem', fontSize: '1rem' }} disabled={loading}>
+            {loading ? <span className="loader"></span> : 'Увійти →'}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [token, setToken] = useState(localStorage.getItem('gh_token') || '');
   const [feedUrl, setFeedUrl] = useState('');
