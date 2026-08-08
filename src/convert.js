@@ -140,6 +140,36 @@ function escapeXml(str) {
     .replace(/'/g, '&apos;');
 }
 
+// ── Форматування назви під вимоги Мономаркету ───────────────────
+function formatProductName(originalName, vendorCode) {
+  let name = String(originalName || '').replace(/\s+/g, ' ').trim();
+
+  // 1. Видалення заборонених рекламних слів та посилань
+  const forbidden = [
+    /акція/ig, /знижка/ig, /розпродаж/ig, /уцінка/ig, 
+    /\bcopy\b/ig, /\boriginal\b/ig, 
+    /https?:\/\/\S+/ig, /www\.\S+/ig
+  ];
+  for (const reg of forbidden) {
+    name = name.replace(reg, '');
+  }
+
+  // 2. Видалення специфічних жаргонізмів та спецсимволів
+  name = name.replace(/[§≠≥]/g, '');
+
+  // 3. Форматування вендор-коду в кінці назви
+  // У Хорошопі назви часто закінчуються на " - АРТИКУЛ". Мономаркет просить "(АРТИКУЛ)"
+  if (vendorCode && name.endsWith(`- ${vendorCode}`)) {
+    name = name.slice(0, name.lastIndexOf(`- ${vendorCode}`)).trim();
+    name = `${name} (${vendorCode})`;
+  } else if (vendorCode && !name.includes(`(${vendorCode})`) && !name.endsWith(vendorCode)) {
+    // Якщо артикулу взагалі немає в назві, можна додати його в дужках (опціонально, але краще залишити як є, якщо його там не було)
+  }
+
+  // Очищення можливих подвійних пробілів після замін
+  return name.replace(/\s+/g, ' ').trim();
+}
+
 // ── Трансформація одного оферу ──────────────────────────────────
 function transformOffer(offer) {
   const id = String(offer._id || '');
@@ -178,7 +208,7 @@ function transformOffer(offer) {
     barcode,
 
     // Контент
-    name: extractText(offer.name).replace(/\s+/g, ' '),
+    name: formatProductName(extractText(offer.name), vendorCode),
     brand: extractText(offer.vendor) || '',
     category: categoryName,
     description,
