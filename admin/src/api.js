@@ -36,38 +36,24 @@ export class GitHubApi {
     }
   }
 
-  async saveFile(path, contentStr, sha, message) {
-    const encoded = btoa(unescape(encodeURIComponent(contentStr)));
-    const body = {
-      message: message,
-      content: encoded,
-    };
-    if (sha) {
-      body.sha = sha;
-    }
+  async saveFile(path, contentStr, _sha, message) {
+    // Always fetch the latest SHA from GitHub before saving to avoid stale SHA conflicts.
+    const current = await this.getFile(path);
+    const latestSha = current.sha;
 
-    let response = await fetch(`${this.baseUrl}/contents/${path}`, {
+    const encoded = btoa(unescape(encodeURIComponent(contentStr)));
+    const body = { message, content: encoded };
+    if (latestSha) body.sha = latestSha;
+
+    const response = await fetch(`${this.baseUrl}/contents/${path}`, {
       method: 'PUT',
       headers: this.getHeaders(),
       body: JSON.stringify(body)
     });
 
-    // If there's a conflict (file exists but we didn't provide SHA, or SHA is outdated), 
-    // fetch the latest SHA and retry once.
-    if (response.status === 409 || response.status === 422) {
-      const fileRes = await this.getFile(path);
-      if (fileRes.sha) {
-        body.sha = fileRes.sha;
-        response = await fetch(`${this.baseUrl}/contents/${path}`, {
-          method: 'PUT',
-          headers: this.getHeaders(),
-          body: JSON.stringify(body)
-        });
-      }
-    }
-
     if (!response.ok) {
-      throw new Error(`Failed to save ${path}: ${response.statusText}`);
+      const errBody = await response.text();
+      throw new Error(`Failed to save ${path}: ${response.status} ${response.statusText} — ${errBody}`);
     }
 
     return await response.json();
