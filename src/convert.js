@@ -209,7 +209,7 @@ function generateProductsXml(offers) {
     if (!o.available) continue;
 
     lines.push('    <offer>');
-    lines.push(`      <id>${escapeXml(o.id)}</id>`);
+    lines.push(`      <id>${escapeXml(o.code)}</id>`);
     lines.push(`      <code>${escapeXml(o.code)}</code>`);
     lines.push(`      <vendor_code>${escapeXml(o.vendorCode)}</vendor_code>`);
     lines.push(`      <title><![CDATA[${o.name}]]></title>`);
