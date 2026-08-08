@@ -70,4 +70,18 @@ export class GitHubApi {
       throw new Error(`Failed to trigger workflow: ${response.statusText}`);
     }
   }
+
+  async getWorkflowRuns(limit = 10) {
+    try {
+      const response = await fetch(`${this.baseUrl}/actions/runs?per_page=${limit}`, {
+        headers: this.getHeaders()
+      });
+      if (!response.ok) return [];
+      const data = await response.json();
+      return data.workflow_runs || [];
+    } catch (e) {
+      console.error(e);
+      return [];
+    }
+  }
 }
