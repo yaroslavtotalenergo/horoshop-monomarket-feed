@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { GitHubApi } from './api';
+import Editor, { DefaultEditor } from 'react-simple-wysiwyg';
 import './index.css';
 
 const REPO_OWNER = 'yaroslavtotalenergo';
@@ -106,6 +107,7 @@ export default function App() {
   const [workflowRuns, setWorkflowRuns] = useState([]);
   const [showLogs, setShowLogs] = useState(false);
   const [previewProduct, setPreviewProduct] = useState(null);
+  const [editingDescriptionProduct, setEditingDescriptionProduct] = useState(null);
 
   const [shas, setShas] = useState({ whitelist: null, barcodes: null, descriptions: null, config: null });
 
@@ -423,10 +425,15 @@ export default function App() {
                           />
                         </td>
                         <td>
-                          <textarea className="input-field" placeholder="Залишити пустим..." rows="2" style={{ resize: 'vertical' }}
-                            value={descriptions[product.vendorCode] || ''}
-                            onChange={(e) => updateDescription(product.vendorCode, e.target.value)}
-                          ></textarea>
+                          {descriptions[product.vendorCode] ? (
+                            <button className="btn" style={{ padding: '0.4rem 0.75rem', fontSize: '0.9rem', width: '100%', background: 'rgba(16, 185, 129, 0.1)', color: 'var(--success)', border: '1px solid rgba(16, 185, 129, 0.2)' }} onClick={() => setEditingDescriptionProduct(product)}>
+                              Опис додано ✏️
+                            </button>
+                          ) : (
+                            <button className="btn" style={{ padding: '0.4rem 0.75rem', fontSize: '0.9rem', width: '100%', background: 'transparent', color: 'var(--text-main)', border: '1px solid var(--border-color)' }} onClick={() => setEditingDescriptionProduct(product)}>
+                              ✏️ Редагувати опис
+                            </button>
+                          )}
                         </td>
                       </tr>
                     );
@@ -539,11 +546,15 @@ export default function App() {
                               />
                             </td>
                             <td>
-                              <textarea className="input-field" placeholder="Залишити пустим для стандартного..." rows="2"
-                                style={{ resize: 'vertical' }}
-                                value={descriptions[product.vendorCode] || ''}
-                                onChange={(e) => updateDescription(product.vendorCode, e.target.value)}
-                              ></textarea>
+                              {descriptions[product.vendorCode] ? (
+                                <button className="btn" style={{ padding: '0.4rem 0.75rem', fontSize: '0.9rem', width: '100%', background: 'rgba(16, 185, 129, 0.1)', color: 'var(--success)', border: '1px solid rgba(16, 185, 129, 0.2)' }} onClick={() => setEditingDescriptionProduct(product)}>
+                                  Опис додано ✏️
+                                </button>
+                              ) : (
+                                <button className="btn" style={{ padding: '0.4rem 0.75rem', fontSize: '0.9rem', width: '100%', background: 'transparent', color: 'var(--text-main)', border: '1px solid var(--border-color)' }} onClick={() => setEditingDescriptionProduct(product)}>
+                                  ✏️ Редагувати опис
+                                </button>
+                              )}
                             </td>
                           </tr>
                         );
@@ -655,6 +666,43 @@ export default function App() {
           </div>
         );
       })()}
+
+      {/* Description Editor Modal */}
+      {editingDescriptionProduct && (
+        <div className="modal-overlay" onClick={() => setEditingDescriptionProduct(null)}>
+          <div className="glass-panel modal" onClick={e => e.stopPropagation()} style={{ maxWidth: '800px', width: '90%' }}>
+            <h2>✏️ Редагування опису</h2>
+            <p style={{ color: 'var(--text-muted)' }}>
+              Товар: <strong>{editingDescriptionProduct.name}</strong> ({editingDescriptionProduct.vendorCode})
+            </p>
+            
+            <div style={{ marginTop: '1rem', background: '#fff', color: '#000', borderRadius: '0.5rem', overflow: 'hidden' }}>
+              <DefaultEditor 
+                value={descriptions[editingDescriptionProduct.vendorCode] || ''} 
+                onChange={(e) => updateDescription(editingDescriptionProduct.vendorCode, e.target.value)} 
+                placeholder="Введіть ваш унікальний опис для маркетплейсу..."
+                style={{ height: '350px' }}
+              />
+            </div>
+            
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1.5rem', gap: '1rem' }}>
+              {descriptions[editingDescriptionProduct.vendorCode] && (
+                <button 
+                  className="btn" 
+                  style={{ background: 'transparent', color: '#f87171', border: '1px solid #f87171' }} 
+                  onClick={() => {
+                    updateDescription(editingDescriptionProduct.vendorCode, '');
+                    setEditingDescriptionProduct(null);
+                  }}
+                >
+                  Видалити опис (Скинути до стандартного)
+                </button>
+              )}
+              <button className="btn success" onClick={() => setEditingDescriptionProduct(null)}>Готово</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Links modal */}
       {showLinks && (
