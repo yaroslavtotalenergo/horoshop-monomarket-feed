@@ -29,6 +29,9 @@ try { whitelist = JSON.parse(fs.readFileSync('src/whitelist.json', 'utf8')); } c
 let customDescriptions = {};
 try { customDescriptions = JSON.parse(fs.readFileSync('src/descriptions.json', 'utf8')); } catch(e) {}
 
+let categoryMap = {};
+try { categoryMap = JSON.parse(fs.readFileSync('src/categories.json', 'utf8')); } catch(e) {}
+
 // ── Налаштування ────────────────────────────────────────────────
 const CONFIG = {
   horoshopFeedUrl: config.horoshopFeedUrl || process.env.HOROSHOP_FEED_URL || '',
@@ -209,7 +212,7 @@ function transformOffer(offer) {
   }
 
   const categoryId = String(offer._categoryId || offer.categoryId || '');
-  const categoryName = extractText(offer.category) || categoryId;
+  const categoryName = categoryMap[vendorCode] || extractText(offer.category) || categoryId;
   const description = offer.description?.__cdata || extractText(offer.description) || '';
 
   return {
