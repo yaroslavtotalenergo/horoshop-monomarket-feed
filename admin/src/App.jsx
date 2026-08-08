@@ -17,9 +17,9 @@ async function hashPassword(password) {
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
-// Stored hash of: admin / totalenergo2024
+// Stored hash of: admin / totalenergoadmin
 const STORED_LOGIN = 'admin';
-const STORED_PASS_HASH = 'fd3b9c76f5f8aa44c81e96a84e42bff73e5e843e498b3e3a44f6ef3bcdf33d90'; // totalenergo2024
+const STORED_PASS_HASH = '316bceef33e561601a426930c141ce7dfc6b0f6df2a091d40135b0795cd1d4a9'; // totalenergoadmin
 
 export function LoginGate({ children }) {
   const [authed, setAuthed] = useState(() => localStorage.getItem('panel_auth') === 'ok');
