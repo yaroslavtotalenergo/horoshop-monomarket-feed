@@ -93,16 +93,9 @@ export default function App() {
 
   const toggleCategory = (cat) => setCollapsedCategories(prev => ({ ...prev, [cat]: !prev[cat] }));
 
-  // Автоматично розгортати всі категорії при пошуку
-  useEffect(() => {
-    if (searchQuery.trim()) {
-      setCollapsedCategories({});
-    }
-  }, [searchQuery]);
-
-  // Group catalog by category, filtered by search
+  // Фільтрація для пошуку (плоский список)
   const filteredCatalog = useMemo(() => {
-    if (!searchQuery.trim()) return catalog;
+    if (!searchQuery.trim()) return [];
     const q = searchQuery.trim().toLowerCase();
     return catalog.filter(p =>
       p.name?.toLowerCase().includes(q) ||
@@ -113,7 +106,7 @@ export default function App() {
 
   const grouped = useMemo(() => {
     const map = {};
-    for (const product of filteredCatalog) {
+    for (const product of catalog) {
       const cat = product.category || 'Без категорії';
       if (!map[cat]) map[cat] = [];
       map[cat].push(product);
@@ -194,15 +187,72 @@ export default function App() {
         </div>
       )}
 
-      {/* Search result info */}
-      {searchQuery && (
-        <div style={{ marginBottom: '1rem', color: 'var(--text-muted)', fontSize: '0.875rem' }}>
-          Знайдено: <strong style={{ color: 'var(--text-main)' }}>{filteredCatalog.length}</strong> товарів за запитом «{searchQuery}»
+      {/* Плоскі результати пошуку */}
+      {searchQuery.trim() && (
+        <div className="glass-panel" style={{ marginBottom: '1rem', padding: 0, overflow: 'hidden' }}>
+          <div style={{ padding: '0.75rem 1.5rem', borderBottom: '1px solid var(--border-color)', background: 'rgba(59,130,246,0.05)', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <span style={{ fontWeight: 700 }}>🔍 Результати пошуку</span>
+            <span className="badge">{filteredCatalog.length} товарів</span>
+          </div>
+          {filteredCatalog.length === 0 ? (
+            <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>Нічого не знайдено</div>
+          ) : (
+            <div style={{ overflowX: 'auto' }}>
+              <table>
+                <thead>
+                  <tr>
+                    <th style={{ width: '60px' }}>Увімк</th>
+                    <th>Товар</th>
+                    <th style={{ width: '200px' }}>Штрихкод</th>
+                    <th>Кастомний опис (HTML)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredCatalog.map(product => {
+                    const isSelected = whitelist.includes(product.vendorCode);
+                    return (
+                      <tr key={product.vendorCode} style={{ opacity: isSelected ? 1 : 0.5 }}>
+                        <td>
+                          <label className="toggle-switch">
+                            <input type="checkbox" checked={isSelected} onChange={() => toggleWhitelist(product.vendorCode)} />
+                            <span className="slider"></span>
+                          </label>
+                        </td>
+                        <td>
+                          <div className="flex-center">
+                            {product.picture && <img src={product.picture} className="product-img" alt="" />}
+                            <div>
+                              <div style={{ fontWeight: '500' }}>{product.name}</div>
+                              <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                                {product.vendorCode} | {product.price} ₴ | {product.category}
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <input type="text" className="input-field" placeholder="Ввести..."
+                            value={barcodes[product.vendorCode] || ''}
+                            onChange={(e) => updateBarcode(product.vendorCode, e.target.value)}
+                          />
+                        </td>
+                        <td>
+                          <textarea className="input-field" placeholder="Залишити пустим..." rows="2" style={{ resize: 'vertical' }}
+                            value={descriptions[product.vendorCode] || ''}
+                            onChange={(e) => updateDescription(product.vendorCode, e.target.value)}
+                          ></textarea>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       )}
 
-      {/* Global select all */}
-      {!loading && catalog.length > 0 && (
+      {/* Категорії - зховані по замовчуванню, приховуються коли пошук не активний */}
+      {!searchQuery.trim() && (
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem', padding: '0.75rem 1rem', background: 'var(--surface-color)', border: '1px solid var(--border-color)', borderRadius: '0.75rem' }}>
           <label className="toggle-switch">
             <input type="checkbox" checked={allSelected} onChange={handleToggleAll} />
@@ -215,19 +265,19 @@ export default function App() {
         </div>
       )}
 
-      {loading ? (
+      {!searchQuery.trim() && loading ? (
         <div className="glass-panel" style={{ textAlign: 'center', padding: '3rem' }}>
           <span className="loader" style={{ width: '40px', height: '40px', borderWidth: '3px' }}></span>
           <p>Завантаження даних з GitHub...</p>
         </div>
-      ) : catalog.length === 0 ? (
+      ) : !searchQuery.trim() && catalog.length === 0 ? (
         <div className="glass-panel" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>
           Немає товарів. Переконайтеся, що ви вказали правильне посилання на фід Хорошопу в налаштуваннях.
         </div>
-      ) : (
+      ) : !searchQuery.trim() ? (
         grouped.map(([categoryName, products]) => {
           const { selected, total } = getCategoryStats(products);
-          const isCollapsed = collapsedCategories[categoryName];
+          const isCollapsed = collapsedCategories[categoryName] !== false; // collapsed by default
           const allCatSelected = products.every(p => whitelist.includes(p.vendorCode));
 
           return (
