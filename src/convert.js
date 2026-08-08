@@ -41,6 +41,18 @@ const CONFIG = {
   barcodeParamNames: ['Штрихкод', 'Баркод', 'Barcode', 'EAN', 'GTIN', 'UPC'],
 };
 
+// ── Завантаження локальної бази штрихкодів ──────────────────────
+let localBarcodes = {};
+try {
+  const barcodesPath = path.join(__dirname, 'barcodes.json');
+  if (fs.existsSync(barcodesPath)) {
+    localBarcodes = JSON.parse(fs.readFileSync(barcodesPath, 'utf-8'));
+    console.log(`📦 Завантажено локальну базу штрихкодів: ${Object.keys(localBarcodes).length} записів`);
+  }
+} catch (e) {
+  console.warn('⚠️ Помилка завантаження barcodes.json:', e.message);
+}
+
 // ── Вихідна директорія ──────────────────────────────────────────
 const FEEDS_DIR = path.join(__dirname, '..', 'feeds');
 if (!fs.existsSync(FEEDS_DIR)) fs.mkdirSync(FEEDS_DIR, { recursive: true });
@@ -134,11 +146,13 @@ function transformOffer(offer) {
   const available = offer._available === true || offer._available === 'true';
   const params = getParams(offer);
 
-  // Знаходимо штрихкод у params (назви можна розширити)
+  const vendorCode = extractText(offer.vendorCode) || '';
+
+  // Знаходимо штрихкод у нашій базі або у params
   const barcode =
-    offer.barcode
-      ? extractText(offer.barcode)
-      : findParam(params, CONFIG.barcodeParamNames) || '';
+    localBarcodes[vendorCode] || // Пріоритет: шукаємо у завантаженому файлі штрихкодів по артикулу
+    (offer.barcode ? extractText(offer.barcode) : findParam(params, CONFIG.barcodeParamNames)) || 
+    '';
 
   // Картинки
   const pictures = [];
@@ -159,8 +173,8 @@ function transformOffer(offer) {
   return {
     // Ідентифікатори
     id,
-    code: extractText(offer.vendorCode) || id, // Головний ідентифікатор - артикул. Якщо його немає (що рідкість) - беремо ID
-    vendorCode: extractText(offer.vendorCode) || '',
+    code: vendorCode || id, // Головний ідентифікатор - артикул. Якщо його немає (що рідкість) - беремо ID
+    vendorCode,
     barcode,
 
     // Контент
