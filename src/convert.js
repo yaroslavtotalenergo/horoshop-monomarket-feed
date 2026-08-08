@@ -124,10 +124,15 @@ function getParams(offer) {
   const excludedParams = ['Гарантия', 'Гарантія', 'Цвет', 'Колір'];
 
   return list
-    .map((p) => ({
-      name: p._name || '',
-      value: extractText(p['#text'] ?? p.__cdata ?? p),
-    }))
+    .map((p) => {
+      let pName = p._name || '';
+      // Remove trailing colon and spaces (e.g. "Напруга заряду:" -> "Напруга заряду")
+      pName = pName.replace(/:\s*$/, '').trim();
+      return {
+        name: pName,
+        value: extractText(p['#text'] ?? p.__cdata ?? p),
+      };
+    })
     .filter((p) => !excludedParams.includes(p.name));
 }
 
