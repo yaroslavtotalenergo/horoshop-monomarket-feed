@@ -241,7 +241,9 @@ function transformOffer(offer) {
     // Ціна та наявність
     available,
     price: Math.round(parseFloat(offer.price) || 0),
-    oldPrice: offer.old_price ? Math.round(parseFloat(offer.old_price)) : null,
+    oldPrice: (offer.oldprice || offer.old_price || offer.price_old) 
+      ? Math.round(parseFloat(offer.oldprice || offer.old_price || offer.price_old)) 
+      : null,
 
     // Фізичні параметри (якщо є в XML)
     weight: offer.weight ? parseFloat(offer.weight) : null,
