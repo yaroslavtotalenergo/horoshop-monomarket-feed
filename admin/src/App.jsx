@@ -18,6 +18,7 @@ export default function App() {
   const [descriptions, setDescriptions] = useState({});
   const [collapsedCategories, setCollapsedCategories] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
+  const [filterMode, setFilterMode] = useState('all');
   
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -111,20 +112,45 @@ export default function App() {
 
   const toggleCategory = (cat) => setCollapsedCategories(prev => ({ ...prev, [cat]: !prev[cat] }));
 
-  // Фільтрація для пошуку (плоский список)
+  // handle bulk select/deselect of searched items
+  const handleBulkAction = (turnOn) => {
+    const codes = filteredCatalog.map(p => p.vendorCode);
+    if (turnOn) {
+      setWhitelist(prev => [...new Set([...prev, ...codes])]);
+    } else {
+      setWhitelist(prev => prev.filter(c => !codes.includes(c)));
+    }
+  };
+
+  // Фільтрація для пошуку (плоский список) та статусу
   const filteredCatalog = useMemo(() => {
-    if (!searchQuery.trim()) return [];
-    const q = searchQuery.trim().toLowerCase();
-    return catalog.filter(p =>
-      p.name?.toLowerCase().includes(q) ||
-      p.vendorCode?.toLowerCase().includes(q) ||
-      String(p.price).includes(q)
-    );
-  }, [catalog, searchQuery]);
+    let result = catalog;
+    
+    if (filterMode === 'enabled') {
+      result = result.filter(p => whitelist.includes(p.vendorCode));
+    }
+    
+    if (!searchQuery.trim()) return result;
+    
+    const terms = searchQuery.trim().split(/\s+/).filter(Boolean);
+    if (terms.length > 1) {
+      const termsLower = terms.map(t => t.toLowerCase());
+      result = result.filter(p => termsLower.includes(p.vendorCode?.toLowerCase()));
+    } else {
+      const q = terms[0].toLowerCase();
+      result = result.filter(p =>
+        p.name?.toLowerCase().includes(q) ||
+        p.vendorCode?.toLowerCase().includes(q) ||
+        String(p.price).includes(q)
+      );
+    }
+    return result;
+  }, [catalog, searchQuery, filterMode, whitelist]);
 
   const grouped = useMemo(() => {
     const map = {};
-    for (const product of catalog) {
+    const baseCatalog = filterMode === 'enabled' ? catalog.filter(p => whitelist.includes(p.vendorCode)) : catalog;
+    for (const product of baseCatalog) {
       const cat = product.category || 'Без категорії';
       if (!map[cat]) map[cat] = [];
       map[cat].push(product);
@@ -187,33 +213,50 @@ export default function App() {
         </div>
       </div>
 
-      {/* Search */}
+      {/* Search and Filters */}
       {!loading && catalog.length > 0 && (
-        <div style={{ marginBottom: '1rem', position: 'relative' }}>
-          <span style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', fontSize: '1.1rem', pointerEvents: 'none' }}>🔍</span>
-          <input
-            type="text"
-            className="input-field"
-            placeholder="Пошук за назвою, артикулом або ціною..."
-            value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
-            style={{ paddingLeft: '2.5rem', fontSize: '1rem' }}
-          />
-          {searchQuery && (
-            <button
-              onClick={() => setSearchQuery('')}
-              style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.1rem', color: 'var(--text-muted)' }}
-            >✕</button>
-          )}
+        <div style={{ marginBottom: '1rem', display: 'flex', gap: '1rem', alignItems: 'center' }}>
+          <div style={{ position: 'relative', flex: 1 }}>
+            <span style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', fontSize: '1.1rem', pointerEvents: 'none' }}>🔍</span>
+            <input
+              type="text"
+              className="input-field"
+              placeholder="Пошук за назвою або артикулом (можна вставити список артикулів)..."
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              style={{ paddingLeft: '2.5rem', fontSize: '1rem' }}
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.1rem', color: 'var(--text-muted)' }}
+              >✕</button>
+            )}
+          </div>
+          <select className="input-field" style={{ width: '220px', fontSize: '0.95rem', cursor: 'pointer' }} value={filterMode} onChange={e => setFilterMode(e.target.value)}>
+            <option value="all">👁️ Усі товари</option>
+            <option value="enabled">🟢 Тільки увімкнені в фід</option>
+          </select>
         </div>
       )}
 
       {/* Плоскі результати пошуку */}
       {searchQuery.trim() && (
         <div className="glass-panel" style={{ marginBottom: '1rem', padding: 0, overflow: 'hidden' }}>
-          <div style={{ padding: '0.75rem 1.5rem', borderBottom: '1px solid var(--border-color)', background: 'rgba(59,130,246,0.05)', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div style={{ padding: '0.75rem 1.5rem', borderBottom: '1px solid var(--border-color)', background: 'rgba(59,130,246,0.05)', display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
             <span style={{ fontWeight: 700 }}>🔍 Результати пошуку</span>
             <span className="badge">{filteredCatalog.length} товарів</span>
+            
+            {filteredCatalog.length > 0 && (
+              <div style={{ marginLeft: 'auto', display: 'flex', gap: '0.5rem' }}>
+                <button className="btn" style={{ padding: '0.35rem 0.75rem', fontSize: '0.85rem' }} onClick={() => handleBulkAction(true)}>
+                  ✅ Увімкнути всі {filteredCatalog.length}
+                </button>
+                <button className="btn" style={{ padding: '0.35rem 0.75rem', fontSize: '0.85rem', background: 'var(--surface-color)', color: 'var(--text-main)', border: '1px solid var(--border-color)' }} onClick={() => handleBulkAction(false)}>
+                  ❌ Вимкнути всі
+                </button>
+              </div>
+            )}
           </div>
           {filteredCatalog.length === 0 ? (
             <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>Нічого не знайдено</div>
