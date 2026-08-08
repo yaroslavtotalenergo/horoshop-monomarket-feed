@@ -1,14 +1,19 @@
 {
-  "updatedAt": "2026-08-08T22:58:39.251Z",
+  "updatedAt": "2026-08-08T22:59:57.490Z",
   "total": 89,
   "data": [
     {
       "code": "BPC123047002",
       "price": 10465,
       "old_price": 11016,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
+      "availability": true,
+      "stock": 10,
+      "warehouses": [
+        {
+          "id": "main",
+          "stock": 10
+        }
+      ],
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
