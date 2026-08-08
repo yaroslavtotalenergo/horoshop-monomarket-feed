@@ -2,6 +2,13 @@ import { useState, useEffect, useMemo } from 'react';
 import { GitHubApi } from './api';
 import './index.css';
 
+const REPO_OWNER = 'yaroslavtotalenergo';
+const REPO_NAME = 'horoshop-monomarket-feed';
+const FEED_URLS = {
+  xml: `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/feeds/products.xml`,
+  json: `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/feeds/prices.json`,
+};
+
 export default function App() {
   const [token, setToken] = useState(localStorage.getItem('gh_token') || '');
   const [feedUrl, setFeedUrl] = useState('');
@@ -14,6 +21,7 @@ export default function App() {
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState('');
   const [showSettings, setShowSettings] = useState(!token);
+  const [showLinks, setShowLinks] = useState(false);
 
   // File SHAs for updating
   const [shas, setShas] = useState({
@@ -23,7 +31,7 @@ export default function App() {
     config: null
   });
 
-  const api = useMemo(() => new GitHubApi(token, 'yaroslavtotalenergo', 'horoshop-monomarket-feed'), [token]);
+  const api = useMemo(() => new GitHubApi(token, REPO_OWNER, REPO_NAME), [token]);
 
   useEffect(() => {
     if (token) {
@@ -34,25 +42,18 @@ export default function App() {
   const loadData = async () => {
     setLoading(true);
     try {
-      // Load Catalog
       const catRes = await api.getFile('feeds/catalog.json');
-      if (catRes.content) {
-        setCatalog(JSON.parse(catRes.content));
-      }
+      if (catRes.content) setCatalog(JSON.parse(catRes.content));
 
-      // Load Whitelist
       const wlRes = await api.getFile('src/whitelist.json');
       if (wlRes.content) setWhitelist(JSON.parse(wlRes.content));
 
-      // Load Barcodes
       const bcRes = await api.getFile('src/barcodes.json');
       if (bcRes.content) setBarcodes(JSON.parse(bcRes.content));
 
-      // Load Descriptions
       const descRes = await api.getFile('src/descriptions.json');
       if (descRes.content) setDescriptions(JSON.parse(descRes.content));
 
-      // Load Config
       const confRes = await api.getFile('src/config.json');
       if (confRes.content) {
         const conf = JSON.parse(confRes.content);
@@ -66,29 +67,23 @@ export default function App() {
         config: confRes.sha
       });
     } catch (e) {
-      showToast('Error loading data! Check token.');
+      showToast('Помилка завантаження! Перевірте токен.');
     }
     setLoading(false);
   };
 
   const showToast = (msg) => {
     setToast(msg);
-    setTimeout(() => setToast(''), 3000);
+    setTimeout(() => setToast(''), 3500);
   };
 
   const handleSaveAll = async () => {
     setSaving(true);
     try {
-      // Save Whitelist
       const wlRes = await api.saveFile('src/whitelist.json', JSON.stringify(whitelist, null, 2), shas.whitelist, 'Update whitelist via Admin Panel');
-      
-      // Save Barcodes
       const bcRes = await api.saveFile('src/barcodes.json', JSON.stringify(barcodes, null, 2), shas.barcodes, 'Update barcodes via Admin Panel');
-      
-      // Save Descriptions
       const descRes = await api.saveFile('src/descriptions.json', JSON.stringify(descriptions, null, 2), shas.descriptions, 'Update descriptions via Admin Panel');
 
-      // Update SHAs
       setShas({
         ...shas,
         whitelist: wlRes.content.sha,
@@ -96,13 +91,11 @@ export default function App() {
         descriptions: descRes.content.sha
       });
 
-      // Trigger Workflow to regenerate feeds immediately
       await api.triggerWorkflow();
-
-      showToast('Дані успішно збережено! Фід оновлюється...');
+      showToast('✅ Дані збережено! Фід оновлюється...');
     } catch (e) {
       console.error(e);
-      showToast('Помилка при збереженні!');
+      showToast('❌ Помилка при збереженні!');
     }
     setSaving(false);
   };
@@ -110,7 +103,6 @@ export default function App() {
   const handleSaveSettings = async () => {
     localStorage.setItem('gh_token', token);
     setShowSettings(false);
-    
     setSaving(true);
     try {
       const configObj = { horoshopFeedUrl: feedUrl };
@@ -131,12 +123,27 @@ export default function App() {
     }
   };
 
+  // Select All / Deselect All
+  const allSelected = catalog.length > 0 && catalog.every(p => whitelist.includes(p.vendorCode));
+  const handleToggleAll = () => {
+    if (allSelected) {
+      setWhitelist([]);
+    } else {
+      setWhitelist(catalog.map(p => p.vendorCode));
+    }
+  };
+
   const updateBarcode = (vendorCode, value) => {
     setBarcodes({ ...barcodes, [vendorCode]: value });
   };
 
   const updateDescription = (vendorCode, value) => {
     setDescriptions({ ...descriptions, [vendorCode]: value });
+  };
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text);
+    showToast('📋 Посилання скопійовано!');
   };
 
   return (
@@ -146,7 +153,10 @@ export default function App() {
           <h1>Monomarket Feed Admin</h1>
           <p style={{ color: 'var(--text-muted)', margin: 0 }}>Керування товарами для маркетплейсу</p>
         </div>
-        <div style={{ display: 'flex', gap: '1rem' }}>
+        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+          <button className="btn" style={{ background: '#7c3aed' }} onClick={() => setShowLinks(true)}>
+            🔗 Посилання для Мономаркету
+          </button>
           <button className="btn" onClick={() => setShowSettings(true)}>
             ⚙️ Налаштування
           </button>
@@ -185,7 +195,21 @@ export default function App() {
           <table>
             <thead>
               <tr>
-                <th style={{ width: '60px' }}>Увімк</th>
+                <th style={{ width: '60px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+                    <label className="toggle-switch" title={allSelected ? 'Зняти всі галочки' : 'Відмітити всі'}>
+                      <input 
+                        type="checkbox" 
+                        checked={allSelected}
+                        onChange={handleToggleAll}
+                      />
+                      <span className="slider"></span>
+                    </label>
+                    <span style={{ fontSize: '0.6rem', color: 'var(--text-muted)', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>
+                      {allSelected ? 'Зняти всі' : 'Усі'}
+                    </span>
+                  </div>
+                </th>
                 <th>Товар</th>
                 <th style={{ width: '200px' }}>Штрихкод</th>
                 <th>Кастомний опис (HTML)</th>
@@ -211,7 +235,9 @@ export default function App() {
                         {product.picture && <img src={product.picture} className="product-img" alt="" />}
                         <div>
                           <div style={{ fontWeight: '500' }}>{product.name}</div>
-                          <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Артикул: {product.vendorCode} | {product.price} ₴</div>
+                          <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                            Артикул: {product.vendorCode} | {product.price} ₴
+                          </div>
                         </div>
                       </div>
                     </td>
@@ -249,10 +275,59 @@ export default function App() {
         )}
       </div>
 
+      {/* Посилання для Мономаркету */}
+      {showLinks && (
+        <div className="modal-overlay" onClick={() => setShowLinks(false)}>
+          <div className="glass-panel modal" onClick={e => e.stopPropagation()}>
+            <h2>🔗 Посилання для Мономаркету</h2>
+            <p style={{ color: 'var(--text-muted)' }}>
+              Вставте ці посилання у ваш кабінет Мономаркету. Вони постійні — дані в них оновлюються автоматично кожні 30 хвилин.
+            </p>
+
+            <div className="form-group">
+              <label>📦 Товарний фід (XML) — назви, описи, фото, характеристики</label>
+              <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <input 
+                  type="text" 
+                  className="input-field" 
+                  value={FEED_URLS.xml} 
+                  readOnly 
+                  style={{ fontFamily: 'monospace', fontSize: '0.8rem', cursor: 'text' }}
+                />
+                <button className="btn" style={{ flexShrink: 0 }} onClick={() => copyToClipboard(FEED_URLS.xml)}>
+                  📋 Копіювати
+                </button>
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label>💰 Прайс-лист (JSON) — ціни, наявність, залишки</label>
+              <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <input 
+                  type="text" 
+                  className="input-field" 
+                  value={FEED_URLS.json} 
+                  readOnly 
+                  style={{ fontFamily: 'monospace', fontSize: '0.8rem', cursor: 'text' }}
+                />
+                <button className="btn" style={{ flexShrink: 0 }} onClick={() => copyToClipboard(FEED_URLS.json)}>
+                  📋 Копіювати
+                </button>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1.5rem' }}>
+              <button className="btn success" onClick={() => setShowLinks(false)}>Закрити</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Налаштування */}
       {showSettings && (
-        <div className="modal-overlay">
-          <div className="glass-panel modal">
-            <h2>Налаштування підключення</h2>
+        <div className="modal-overlay" onClick={() => setShowSettings(false)}>
+          <div className="glass-panel modal" onClick={e => e.stopPropagation()}>
+            <h2>⚙️ Налаштування підключення</h2>
             <div className="form-group">
               <label>GitHub Personal Access Token</label>
               <input 
@@ -262,7 +337,9 @@ export default function App() {
                 onChange={e => setToken(e.target.value)} 
                 placeholder="ghp_..."
               />
-              <small style={{ color: 'var(--text-muted)' }}>Потрібен для збереження змін на GitHub. Зберігається лише у вашому браузері.</small>
+              <small style={{ color: 'var(--text-muted)' }}>
+                Потрібен для збереження змін на GitHub. Зберігається лише у вашому браузері.
+              </small>
             </div>
             <div className="form-group">
               <label>URL XML-фіду Хорошопу</label>
@@ -273,12 +350,20 @@ export default function App() {
                 onChange={e => setFeedUrl(e.target.value)} 
                 placeholder="https://..."
               />
-              <small style={{ color: 'var(--text-muted)' }}>Посилання на ваш фід. Усі товари з нього будуть доступні в таблиці.</small>
+              <small style={{ color: 'var(--text-muted)' }}>
+                Посилання на ваш фід. Усі товари з нього будуть доступні в таблиці.
+              </small>
             </div>
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '2rem' }}>
-              <button className="btn" style={{ background: 'transparent', border: '1px solid var(--border-color)' }} onClick={() => setShowSettings(false)}>Скасувати</button>
+              <button 
+                className="btn" 
+                style={{ background: 'transparent', border: '1px solid var(--border-color)' }} 
+                onClick={() => setShowSettings(false)}
+              >
+                Скасувати
+              </button>
               <button className="btn success" onClick={handleSaveSettings} disabled={saving}>
-                {saving ? 'Збереження...' : 'Зберегти'}
+                {saving ? 'Збереження...' : '✅ Зберегти'}
               </button>
             </div>
           </div>
