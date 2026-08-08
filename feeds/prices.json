@@ -1,19 +1,18 @@
 {
+<<<<<<< Updated upstream
   "updatedAt": "2026-08-08T22:46:09.744Z",
+=======
+  "updatedAt": "2026-08-08T22:46:19.298Z",
+>>>>>>> Stashed changes
   "total": 89,
   "data": [
     {
       "code": "BPC123047002",
       "price": 10465,
       "old_price": 11016,
-      "availability": true,
-      "stock": 10,
-      "warehouses": [
-        {
-          "id": "main",
-          "stock": 10
-        }
-      ],
+      "availability": false,
+      "stock": 0,
+      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
