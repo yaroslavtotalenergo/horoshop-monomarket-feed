@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-08-08T22:25:01.598Z",
+  "updatedAt": "2026-08-08T22:28:53.386Z",
   "total": 89,
   "data": [
     {
       "code": "BPC123047002",
-      "price": 11021,
-      "old_price": 13103,
+      "price": 10465,
+      "old_price": 11016,
       "availability": true,
       "stock": 10,
       "warehouses": [
