@@ -37,10 +37,9 @@ jobs:
         run: node src/convert.js
 
       - name: Push updated feeds
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main || (git rebase --abort && git reset --hard origin/main)
-          git add feeds/
-          git diff --staged --quiet || git commit -m "Update feeds"
-          git push || git push --force-with-lease
+       git stash || true
+git pull --rebase origin main || true
+git stash pop || true
+git add feeds/
+git diff --staged --quiet || git commit -m "Update feeds"
+git push
