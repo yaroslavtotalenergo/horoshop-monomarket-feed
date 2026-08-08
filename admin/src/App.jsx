@@ -416,7 +416,7 @@ export default function App() {
                               <div>
                                 <div style={{ fontWeight: '500' }}>{product.name}</div>
                                 <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                                  {product.vendorCode} | {product.price} ₴ | {product.category}
+                                  {product.vendorCode} | {product.oldPrice ? <><span style={{ textDecoration: 'line-through', color: '#f87171' }}>{product.oldPrice}</span> <span style={{ color: '#10b981', fontWeight: 600 }}>{product.price} ₴</span></> : `${product.price} ₴`} | {product.category}
                                 </div>
                               </div>
                               <button 
@@ -537,7 +537,7 @@ export default function App() {
                                   <div>
                                     <div style={{ fontWeight: '500' }}>{product.name}</div>
                                     <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                                      {product.vendorCode} | {product.price} ₴
+                                      {product.vendorCode} | {product.oldPrice ? <><span style={{ textDecoration: 'line-through', color: '#f87171' }}>{product.oldPrice}</span> <span style={{ color: '#10b981', fontWeight: 600 }}>{product.price} ₴</span></> : `${product.price} ₴`}
                                     </div>
                                   </div>
                                   <button 
