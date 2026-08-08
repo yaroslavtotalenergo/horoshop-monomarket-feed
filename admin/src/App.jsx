@@ -362,7 +362,7 @@ export default function App() {
             </div>
           );
         })
-      )}
+      ) : null}
 
       {/* Links modal */}
       {showLinks && (
