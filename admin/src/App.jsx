@@ -102,12 +102,27 @@ export default function App() {
   const [toast, setToast] = useState('');
   const [showSettings, setShowSettings] = useState(!token);
   const [showLinks, setShowLinks] = useState(false);
+  
+  const [workflowRuns, setWorkflowRuns] = useState([]);
+  const [showLogs, setShowLogs] = useState(false);
+  const [previewProduct, setPreviewProduct] = useState(null);
 
   const [shas, setShas] = useState({ whitelist: null, barcodes: null, descriptions: null, config: null });
 
   const api = useMemo(() => new GitHubApi(token, REPO_OWNER, REPO_NAME), [token]);
 
-  useEffect(() => { if (token) loadData(); }, [token]);
+  useEffect(() => { 
+    if (token) {
+      loadData(); 
+      loadLogs();
+    }
+  }, [token]);
+
+  const loadLogs = async () => {
+    if (!api) return;
+    const runs = await api.getWorkflowRuns(10);
+    setWorkflowRuns(runs);
+  };
 
   const loadData = async () => {
     setLoading(true);
@@ -192,6 +207,7 @@ export default function App() {
       showToast('❌ Помилка оновлення. Спробуйте пізніше.');
     } finally {
       setSyncing(false);
+      loadLogs(); // Refresh logs after sync attempt
     }
   };
 
@@ -279,6 +295,9 @@ export default function App() {
         <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
           <button className="btn" style={{ background: '#7c3aed' }} onClick={() => setShowLinks(true)}>
             🔗 Посилання
+          </button>
+          <button className="btn" style={{ background: '#f59e0b', color: '#fff' }} onClick={() => { setShowLogs(true); loadLogs(); }}>
+            📝 Історія
           </button>
           <button className="btn" onClick={() => setShowSettings(true)}>⚙️ Налаштування</button>
           <button className="btn" style={{ background: '#0ea5e9' }} onClick={handleSync} disabled={syncing || loading || saving || !token}>
@@ -381,11 +400,19 @@ export default function App() {
                         </td>
                         <td>
                           <div className="flex-center">
-                            <div>
-                              <div style={{ fontWeight: '500' }}>{product.name}</div>
-                              <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                                {product.vendorCode} | {product.price} ₴ | {product.category}
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                              <div>
+                                <div style={{ fontWeight: '500' }}>{product.name}</div>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                                  {product.vendorCode} | {product.price} ₴ | {product.category}
+                                </div>
                               </div>
+                              <button 
+                                className="btn" 
+                                style={{ padding: '0.2rem 0.4rem', fontSize: '1rem', background: 'transparent', border: 'none', color: 'var(--text-muted)' }}
+                                onClick={() => setPreviewProduct(product)}
+                                title="Попередній перегляд"
+                              >🔍</button>
                             </div>
                           </div>
                         </td>
@@ -489,11 +516,19 @@ export default function App() {
                             </td>
                             <td>
                               <div className="flex-center">
-                                <div>
-                                  <div style={{ fontWeight: '500' }}>{product.name}</div>
-                                  <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                                    {product.vendorCode} | {product.price} ₴
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                  <div>
+                                    <div style={{ fontWeight: '500' }}>{product.name}</div>
+                                    <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                                      {product.vendorCode} | {product.price} ₴
+                                    </div>
                                   </div>
+                                  <button 
+                                    className="btn" 
+                                    style={{ padding: '0.2rem 0.4rem', fontSize: '1rem', background: 'transparent', border: 'none', color: 'var(--text-muted)' }}
+                                    onClick={() => setPreviewProduct(product)}
+                                    title="Попередній перегляд"
+                                  >🔍</button>
                                 </div>
                               </div>
                             </td>
@@ -520,6 +555,106 @@ export default function App() {
           );
         })
       ) : null}
+
+      {/* Logs modal */}
+      {showLogs && (
+        <div className="modal-overlay" onClick={() => setShowLogs(false)}>
+          <div className="glass-panel modal" onClick={e => e.stopPropagation()} style={{ maxWidth: '600px' }}>
+            <h2>📝 Історія оновлень</h2>
+            <p style={{ color: 'var(--text-muted)' }}>Останні запуски відправки фідів на GitHub.</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxHeight: '400px', overflowY: 'auto' }}>
+              {workflowRuns.length === 0 && <div style={{ textAlign: 'center', color: 'var(--text-muted)' }}>Немає даних...</div>}
+              {workflowRuns.map(run => {
+                const isSuccess = run.conclusion === 'success';
+                const isFailure = run.conclusion === 'failure';
+                const isRunning = run.status === 'in_progress' || run.status === 'queued';
+                
+                let icon = '⚪';
+                if (isSuccess) icon = '✅';
+                if (isFailure) icon = '❌';
+                if (isRunning) icon = '⏳';
+
+                const date = new Date(run.created_at).toLocaleString('uk-UA');
+                
+                return (
+                  <div key={run.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.75rem', background: 'var(--surface-color)', borderRadius: '0.5rem', border: '1px solid var(--border-color)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                      <span style={{ fontSize: '1.2rem' }}>{icon}</span>
+                      <div>
+                        <div style={{ fontWeight: 600 }}>Оновлення фідів</div>
+                        <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{date}</div>
+                      </div>
+                    </div>
+                    <div>
+                      <a href={run.html_url} target="_blank" rel="noreferrer" style={{ color: '#3b82f6', textDecoration: 'none', fontSize: '0.875rem' }}>Деталі ↗</a>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1.5rem' }}>
+              <button className="btn success" onClick={() => setShowLogs(false)}>Закрити</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Product Preview modal */}
+      {previewProduct && (() => {
+        const p = previewProduct;
+        const isEnabled = whitelist.includes(p.vendorCode);
+        const bcode = barcodes[p.vendorCode] || p.barcode || 'ВІДСУТНІЙ';
+        const desc = descriptions[p.vendorCode] || p.description || '';
+        
+        const jsonPreview = {
+          code: p.vendorCode,
+          price: p.price,
+          availability: isEnabled && p.available !== false,
+          stock: isEnabled && p.available !== false ? 10 : 0,
+          warranty_type: "manufacturer",
+          warranty_period: 60
+        };
+
+        return (
+          <div className="modal-overlay" onClick={() => setPreviewProduct(null)}>
+            <div className="glass-panel modal" onClick={e => e.stopPropagation()} style={{ maxWidth: '700px' }}>
+              <h2>🔍 Попередній перегляд</h2>
+              <p style={{ color: 'var(--text-muted)' }}>Як цей товар виглядає для Мономаркету (спрощено).</p>
+              
+              <div style={{ marginBottom: '1rem' }}>
+                <strong>Товар:</strong> {p.name} <br/>
+                <strong>Артикул:</strong> {p.vendorCode} <br/>
+                <strong>Статус у фіді:</strong> {isEnabled ? <span style={{color: 'var(--success)'}}>Увімкнено ✅</span> : <span style={{color: '#f87171'}}>Вимкнено ❌</span>}
+              </div>
+
+              <div style={{ display: 'flex', gap: '1rem', flexDirection: 'column' }}>
+                <div style={{ background: '#1e293b', padding: '1rem', borderRadius: '0.5rem', border: '1px solid #334155', overflowX: 'auto' }}>
+                  <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>prices.json (Ціни та наявність)</div>
+                  <pre style={{ margin: 0, color: '#e2e8f0', fontSize: '0.9rem', fontFamily: 'monospace' }}>
+                    {JSON.stringify(jsonPreview, null, 2)}
+                  </pre>
+                </div>
+                
+                <div style={{ background: '#1e293b', padding: '1rem', borderRadius: '0.5rem', border: '1px solid #334155', overflowX: 'auto' }}>
+                  <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>products.xml (Характеристики)</div>
+                  <pre style={{ margin: 0, color: '#e2e8f0', fontSize: '0.9rem', fontFamily: 'monospace', whiteSpace: 'pre-wrap' }}>
+{`<offer id="${p.vendorCode}" available="${isEnabled ? 'true' : 'false'}">
+  <name>${p.name}</name>
+  <vendorCode>${p.vendorCode}</vendorCode>
+  <barcode>${bcode}</barcode>
+  <description><![CDATA[${desc.substring(0, 100)}${desc.length > 100 ? '...' : ''}]]></description>
+</offer>`}
+                  </pre>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1.5rem' }}>
+                <button className="btn success" onClick={() => setPreviewProduct(null)}>Закрити</button>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* Links modal */}
       {showLinks && (
