@@ -17,6 +17,7 @@ export default function App() {
   const [barcodes, setBarcodes] = useState({});
   const [descriptions, setDescriptions] = useState({});
   const [collapsedCategories, setCollapsedCategories] = useState({});
+  const [searchQuery, setSearchQuery] = useState('');
   
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -92,10 +93,20 @@ export default function App() {
 
   const toggleCategory = (cat) => setCollapsedCategories(prev => ({ ...prev, [cat]: !prev[cat] }));
 
-  // Group catalog by category
+  // Group catalog by category, filtered by search
+  const filteredCatalog = useMemo(() => {
+    if (!searchQuery.trim()) return catalog;
+    const q = searchQuery.trim().toLowerCase();
+    return catalog.filter(p =>
+      p.name?.toLowerCase().includes(q) ||
+      p.vendorCode?.toLowerCase().includes(q) ||
+      String(p.price).includes(q)
+    );
+  }, [catalog, searchQuery]);
+
   const grouped = useMemo(() => {
     const map = {};
-    for (const product of catalog) {
+    for (const product of filteredCatalog) {
       const cat = product.category || 'Без категорії';
       if (!map[cat]) map[cat] = [];
       map[cat].push(product);
@@ -154,6 +165,34 @@ export default function App() {
           <div className="stat-value">{Object.keys(barcodes).length}</div>
         </div>
       </div>
+
+      {/* Search */}
+      {!loading && catalog.length > 0 && (
+        <div style={{ marginBottom: '1rem', position: 'relative' }}>
+          <span style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', fontSize: '1.1rem', pointerEvents: 'none' }}>🔍</span>
+          <input
+            type="text"
+            className="input-field"
+            placeholder="Пошук за назвою, артикулом або ціною..."
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            style={{ paddingLeft: '2.5rem', fontSize: '1rem' }}
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.1rem', color: 'var(--text-muted)' }}
+            >✕</button>
+          )}
+        </div>
+      )}
+
+      {/* Search result info */}
+      {searchQuery && (
+        <div style={{ marginBottom: '1rem', color: 'var(--text-muted)', fontSize: '0.875rem' }}>
+          Знайдено: <strong style={{ color: 'var(--text-main)' }}>{filteredCatalog.length}</strong> товарів за запитом «{searchQuery}»
+        </div>
+      )}
 
       {/* Global select all */}
       {!loading && catalog.length > 0 && (
