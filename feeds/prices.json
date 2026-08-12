@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-08-12T13:13:15.030Z",
-  "total": 83,
+  "updatedAt": "2026-08-12T14:58:34.845Z",
+  "total": 95,
   "data": [
     {
       "code": "BPC123047002",
@@ -1245,6 +1245,78 @@
       "manufacture": null
     },
     {
+      "code": "SCIFP1250",
+      "price": 8471,
+      "old_price": null,
+      "availability": true,
+      "stock": 10,
+      "warehouses": [
+        {
+          "id": "main",
+          "stock": 10
+        }
+      ],
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "SLSIFP48100A",
+      "price": 47530,
+      "old_price": null,
+      "availability": true,
+      "stock": 10,
+      "warehouses": [
+        {
+          "id": "main",
+          "stock": 10
+        }
+      ],
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "SLSIFP51100A",
+      "price": 49820,
+      "old_price": null,
+      "availability": true,
+      "stock": 10,
+      "warehouses": [
+        {
+          "id": "main",
+          "stock": 10
+        }
+      ],
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "SCIFP48100",
+      "price": 42951,
+      "old_price": null,
+      "availability": true,
+      "stock": 10,
+      "warehouses": [
+        {
+          "id": "main",
+          "stock": 10
+        }
+      ],
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
       "code": "PMP482405012",
       "price": 40913,
       "old_price": 48133,
@@ -1374,6 +1446,150 @@
       "code": "PMP482505012",
       "price": 44904,
       "old_price": 52828,
+      "availability": true,
+      "stock": 10,
+      "warehouses": [
+        {
+          "id": "main",
+          "stock": 10
+        }
+      ],
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "SCIFP12100",
+      "price": 12592,
+      "old_price": null,
+      "availability": true,
+      "stock": 10,
+      "warehouses": [
+        {
+          "id": "main",
+          "stock": 10
+        }
+      ],
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "SCIFP12150",
+      "price": 20056,
+      "old_price": null,
+      "availability": true,
+      "stock": 10,
+      "warehouses": [
+        {
+          "id": "main",
+          "stock": 10
+        }
+      ],
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "SCIFP12200",
+      "price": 25780,
+      "old_price": null,
+      "availability": true,
+      "stock": 10,
+      "warehouses": [
+        {
+          "id": "main",
+          "stock": 10
+        }
+      ],
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "SCIFP24100",
+      "price": 25185,
+      "old_price": null,
+      "availability": true,
+      "stock": 10,
+      "warehouses": [
+        {
+          "id": "main",
+          "stock": 10
+        }
+      ],
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "SCIFP24200",
+      "price": 44645,
+      "old_price": null,
+      "availability": true,
+      "stock": 10,
+      "warehouses": [
+        {
+          "id": "main",
+          "stock": 10
+        }
+      ],
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "SCIFP1225",
+      "price": 5678,
+      "old_price": null,
+      "availability": true,
+      "stock": 10,
+      "warehouses": [
+        {
+          "id": "main",
+          "stock": 10
+        }
+      ],
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "SLSIFP51100W",
+      "price": 50094,
+      "old_price": null,
+      "availability": true,
+      "stock": 10,
+      "warehouses": [
+        {
+          "id": "main",
+          "stock": 10
+        }
+      ],
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "SLSIFP51314A",
+      "price": 111636,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
