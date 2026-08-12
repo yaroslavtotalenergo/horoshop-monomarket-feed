@@ -1,6 +1,25 @@
 import { useState, useEffect, useMemo } from 'react';
 import { GitHubApi } from './api';
-import Editor, { DefaultEditor } from 'react-simple-wysiwyg';
+import Editor, { 
+  EditorProvider,
+  Toolbar,
+  BtnUndo,
+  BtnRedo,
+  BtnBold,
+  BtnItalic,
+  BtnUnderline,
+  BtnStrikeThrough,
+  BtnNumberedList,
+  BtnBulletList,
+  BtnLink,
+  BtnClearFormatting,
+  BtnStyles,
+  HtmlButton,
+  Separator,
+  createButton
+} from 'react-simple-wysiwyg';
+
+const BtnH3 = createButton('Заголовок H3', <b style={{fontSize: '12px'}}>H3</b>, () => document.execCommand('formatBlock', false, 'H3'));
 import './index.css';
 
 const REPO_OWNER = 'yaroslavtotalenergo';
@@ -721,14 +740,35 @@ export default function App() {
             </p>
             
             <div style={{ marginTop: '1rem', background: '#fff', color: '#000', borderRadius: '0.5rem', overflow: 'hidden' }}>
-              <DefaultEditor 
-                value={descriptions[editingDescriptionProduct.vendorCode] !== undefined 
-                  ? descriptions[editingDescriptionProduct.vendorCode] 
-                  : (editingDescriptionProduct.description || '')} 
-                onChange={(e) => updateDescription(editingDescriptionProduct.vendorCode, e.target.value)} 
-                placeholder="Введіть ваш унікальний опис для маркетплейсу..."
-                style={{ height: '350px' }}
-              />
+              <EditorProvider>
+                <Editor 
+                  value={descriptions[editingDescriptionProduct.vendorCode] !== undefined 
+                    ? descriptions[editingDescriptionProduct.vendorCode] 
+                    : (editingDescriptionProduct.description || '')} 
+                  onChange={(e) => updateDescription(editingDescriptionProduct.vendorCode, e.target.value)} 
+                  style={{ height: '350px' }}
+                >
+                  <Toolbar>
+                    <BtnUndo />
+                    <BtnRedo />
+                    <Separator />
+                    <BtnBold />
+                    <BtnItalic />
+                    <BtnUnderline />
+                    <BtnStrikeThrough />
+                    <Separator />
+                    <BtnNumberedList />
+                    <BtnBulletList />
+                    <Separator />
+                    <BtnLink />
+                    <BtnClearFormatting />
+                    <HtmlButton />
+                    <Separator />
+                    <BtnStyles />
+                    <BtnH3 />
+                  </Toolbar>
+                </Editor>
+              </EditorProvider>
             </div>
             
             <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1.5rem', gap: '1rem' }}>
