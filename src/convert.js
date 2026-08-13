@@ -309,7 +309,10 @@ function generateProductsXml(offers) {
       lines.push('      <tags>');
       for (const p of o.params) {
         if (p.name && p.value) {
-          lines.push(`        <param name="${escapeXml(p.name)}">${escapeXml(p.value)}</param>`);
+          const values = String(p.value).split('|').map(v => v.trim()).filter(Boolean);
+          for (const val of values) {
+            lines.push(`        <param name="${escapeXml(p.name)}">${escapeXml(val)}</param>`);
+          }
         }
       }
       lines.push('      </tags>');
