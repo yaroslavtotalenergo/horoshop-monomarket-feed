@@ -1,55 +1,1464 @@
-ч{
-  "updatedAt": "2026-08-07T21:59:51.168Z",
-  "total": 3,
-  "data": [
-    {
-      "code": "3005",
-      "price": 11016,
-      "old_price": null,
-      "availability": true,
-      "stock": 10,
-      "warehouses": [
-        {
-          "id": "main",
-          "stock": 10
-        }
-      ],
-      "warranty_type": "no",
-      "warranty_period": 0,
-      "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
-      "manufacture": null
-    },
-    {
-      "code": "3006",
-      "price": 9138,
-      "old_price": null,
-      "availability": true,
-      "stock": 10,
-      "warehouses": [
-        {
-          "id": "main",
-          "stock": 10
-        }
-      ],
-      "warranty_type": "no",
-      "warranty_period": 0,
-      "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
-      "manufacture": null
-    },
-    {
-      "code": "3007",
-      "price": 8450,
-      "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
-      "warranty_type": "no",
-      "warranty_period": 0,
-      "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
-      "manufacture": null
-    }
-  ]
+﻿{
+    "updatedAt":  "2026-08-14T22:54:36.792Z",
+    "total":  81,
+    "data":  [
+                 {
+                     "code":  "BPC123047002",
+                     "price":  9915,
+                     "old_price":  11016,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "BPC123048002",
+                     "price":  10591,
+                     "old_price":  11767,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "BPC241242002",
+                     "price":  8506,
+                     "old_price":  9451,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "BPC241647002",
+                     "price":  9633,
+                     "old_price":  10703,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "BPC241648002",
+                     "price":  10929,
+                     "old_price":  12143,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "BPC121031064R",
+                     "price":  7154,
+                     "old_price":  7949,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "BPC120433064R",
+                     "price":  4563,
+                     "old_price":  5070,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "BPC120533064R",
+                     "price":  5070,
+                     "old_price":  5633,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "BPC120731064R",
+                     "price":  6028,
+                     "old_price":  6697,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "BPC121531064R",
+                     "price":  7436,
+                     "old_price":  8262,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "BPC122531064",
+                     "price":  10422,
+                     "old_price":  11580,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "BPC240831064R",
+                     "price":  7436,
+                     "old_price":  8262,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "BPC241331064",
+                     "price":  10422,
+                     "old_price":  11580,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "BPC122547006",
+                     "price":  9633,
+                     "old_price":  10703,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "BPC121313006",
+                     "price":  7492,
+                     "old_price":  8325,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "BPC120713006",
+                     "price":  5633,
+                     "old_price":  6259,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "BPC121713006",
+                     "price":  8281,
+                     "old_price":  9201,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "BPC241247006",
+                     "price":  9633,
+                     "old_price":  10703,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "PMP121500000",
+                     "price":  17557,
+                     "old_price":  20655,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "PMP121800000",
+                     "price":  22611,
+                     "old_price":  26602,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "PMP122120000",
+                     "price":  27666,
+                     "old_price":  32548,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "PMP485021010",
+                     "price":  65919,
+                     "old_price":  77551,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "QUA483150000",
+                     "price":  166686,
+                     "old_price":  196101,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "QUA481030010",
+                     "price":  126890,
+                     "old_price":  149282,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "QUA488024000",
+                     "price":  106194,
+                     "old_price":  124934,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "QUA485021010",
+                     "price":  93850,
+                     "old_price":  110412,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "PMP482305010",
+                     "price":  33199,
+                     "old_price":  39057,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "PMP482306000",
+                     "price":  37827,
+                     "old_price":  44503,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "PMP482805000",
+                     "price":  82518,
+                     "old_price":  97080,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "PMP483105000",
+                     "price":  98586,
+                     "old_price":  115983,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "PMP483150000",
+                     "price":  137530,
+                     "old_price":  161800,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "PMP482506000",
+                     "price":  55385,
+                     "old_price":  65158,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "PMR482602020",
+                     "price":  86987,
+                     "old_price":  102338,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "QUA482504010",
+                     "price":  63365,
+                     "old_price":  74547,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "PMP482307010",
+                     "price":  67994,
+                     "old_price":  79993,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "PMP482507010",
+                     "price":  95925,
+                     "old_price":  112853,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "EVC300400300",
+                     "price":  33925,
+                     "old_price":  null,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "EVC200300200",
+                     "price":  33925,
+                     "old_price":  null,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "ORI121222120",
+                     "price":  10703,
+                     "old_price":  null,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "ORI122424120",
+                     "price":  10703,
+                     "old_price":  null,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "ORI241224120",
+                     "price":  10703,
+                     "old_price":  null,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "ORI242428120",
+                     "price":  10703,
+                     "old_price":  null,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "ORI121236120",
+                     "price":  16337,
+                     "old_price":  null,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "ORI122436120",
+                     "price":  16337,
+                     "old_price":  null,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "ORI241236120",
+                     "price":  16337,
+                     "old_price":  null,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "ORI242440120",
+                     "price":  16337,
+                     "old_price":  null,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "ORI124838120",
+                     "price":  16337,
+                     "old_price":  null,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "ORI244840120",
+                     "price":  16337,
+                     "old_price":  null,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "ORI121236140",
+                     "price":  14396,
+                     "old_price":  null,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "ORI122436140",
+                     "price":  14396,
+                     "old_price":  null,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "ORI241236140",
+                     "price":  14396,
+                     "old_price":  null,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "ORI242440140",
+                     "price":  14396,
+                     "old_price":  null,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "LYN020102010",
+                     "price":  9389,
+                     "old_price":  null,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "LYN060102010",
+                     "price":  13457,
+                     "old_price":  null,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "BPP900480100",
+                     "price":  37680,
+                     "old_price":  null,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "BPP900451100",
+                     "price":  16587,
+                     "old_price":  null,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "SCC075010060R",
+                     "price":  3352,
+                     "old_price":  3943,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "SCC075015060R",
+                     "price":  3618,
+                     "old_price":  4256,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "SCC110015060R",
+                     "price":  4469,
+                     "old_price":  5258,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "SCC110020160R",
+                     "price":  5108,
+                     "old_price":  6009,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "SCC110030210",
+                     "price":  7289,
+                     "old_price":  8575,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "SCC110050210",
+                     "price":  10481,
+                     "old_price":  12331,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "SCC115035210",
+                     "price":  10481,
+                     "old_price":  12331,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "SCC115045212",
+                     "price":  12396,
+                     "old_price":  14584,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "SCC125060221",
+                     "price":  23569,
+                     "old_price":  27728,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "SCC115060211",
+                     "price":  19951,
+                     "old_price":  23472,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "SCC125110412",
+                     "price":  34795,
+                     "old_price":  40935,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "SCC125085411",
+                     "price":  31177,
+                     "old_price":  36679,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "SCC125070421",
+                     "price":  28996,
+                     "old_price":  34113,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "PMP482405012",
+                     "price":  40913,
+                     "old_price":  48133,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "PMP482605012",
+                     "price":  51980,
+                     "old_price":  61152,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "ORI121217050",
+                     "price":  20781,
+                     "old_price":  null,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "ORI242417040",
+                     "price":  23785,
+                     "old_price":  null,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "PMP482406000",
+                     "price":  48149,
+                     "old_price":  56646,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "PMP482606000",
+                     "price":  61822,
+                     "old_price":  72732,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "SCC145110512",
+                     "price":  62886,
+                     "old_price":  73984,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "PMP482505012",
+                     "price":  44904,
+                     "old_price":  52828,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "ORI121221040",
+                     "price":  25037,
+                     "old_price":  null,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "SCC145120512",
+                     "price":  110077,
+                     "old_price":  129503,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "PMR482604000",
+                     "price":  78528,
+                     "old_price":  92386,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 },
+                 {
+                     "code":  "PMP482457010",
+                     "price":  70920,
+                     "old_price":  83435,
+                     "availability":  true,
+                     "stock":  10,
+                     "warehouses":  [
+                                        {
+                                            "id":  "stock01te",
+                                            "stock":  10
+                                        }
+                                    ],
+                     "warranty_type":  "manufacturer",
+                     "warranty_period":  60,
+                     "max_pay_in_parts":  6,
+                     "days_to_dispatch":  1,
+                     "manufacture":  null
+                 }
+             ]
 }

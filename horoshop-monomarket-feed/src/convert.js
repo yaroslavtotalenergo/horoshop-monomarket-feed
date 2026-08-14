@@ -21,19 +21,19 @@ try {
 }
 
 let config = {};
-try { config = JSON.parse(fs.readFileSync('src/config.json', 'utf8')); } catch(e) {}
+try { config = JSON.parse(fs.readFileSync('src/config.json', 'utf8')); } catch (e) { }
 
 let whitelist = [];
-try { whitelist = JSON.parse(fs.readFileSync('src/whitelist.json', 'utf8')); } catch(e) {}
+try { whitelist = JSON.parse(fs.readFileSync('src/whitelist.json', 'utf8')); } catch (e) { }
 
 let customDescriptions = {};
-try { customDescriptions = JSON.parse(fs.readFileSync('src/descriptions.json', 'utf8')); } catch(e) {}
+try { customDescriptions = JSON.parse(fs.readFileSync('src/descriptions.json', 'utf8')); } catch (e) { }
 
 let categoryMap = {};
-try { categoryMap = JSON.parse(fs.readFileSync('src/categories.json', 'utf8')); } catch(e) {}
+try { categoryMap = JSON.parse(fs.readFileSync('src/categories.json', 'utf8')); } catch (e) { }
 
 let availabilityOverrides = {};
-try { availabilityOverrides = JSON.parse(fs.readFileSync('src/availability.json', 'utf8')); } catch(e) {}
+try { availabilityOverrides = JSON.parse(fs.readFileSync('src/availability.json', 'utf8')); } catch (e) { }
 
 // ── Налаштування ────────────────────────────────────────────────
 const CONFIG = {
@@ -155,8 +155,8 @@ function formatProductName(originalName, vendorCode) {
   let name = String(originalName || '').replace(/\s+/g, ' ').trim();
 
   const forbidden = [
-    /акція/ig, /знижка/ig, /розпродаж/ig, /уцінка/ig, 
-    /\bcopy\b/ig, /\boriginal\b/ig, 
+    /акція/ig, /знижка/ig, /розпродаж/ig, /уцінка/ig,
+    /\bcopy\b/ig, /\boriginal\b/ig,
     /https?:\/\/\S+/ig, /www\.\S+/ig
   ];
   for (const reg of forbidden) {
@@ -204,15 +204,15 @@ function transformOffer(offer) {
   const id = String(offer._id || '');
   const params = getParams(offer);
   const vendorCode = extractText(offer.vendorCode) || '';
-  
+
   let available = offer._available === true || offer._available === 'true';
   if (availabilityOverrides[vendorCode] !== undefined) {
     available = availabilityOverrides[vendorCode];
   }
 
   const barcode =
-    barcodesConfig[vendorCode] || 
-    (offer.barcode ? extractText(offer.barcode) : findParam(params, CONFIG.barcodeParamNames)) || 
+    barcodesConfig[vendorCode] ||
+    (offer.barcode ? extractText(offer.barcode) : findParam(params, CONFIG.barcodeParamNames)) ||
     '';
 
   const pictures = [];
@@ -248,8 +248,8 @@ function transformOffer(offer) {
     // Ціна та наявність
     available,
     price: Math.round(parseFloat(offer.price) || 0),
-    oldPrice: (offer.oldprice || offer.old_price || offer.price_old) 
-      ? Math.round(parseFloat(offer.oldprice || offer.old_price || offer.price_old)) 
+    oldPrice: (offer.oldprice || offer.old_price || offer.price_old)
+      ? Math.round(parseFloat(offer.oldprice || offer.old_price || offer.price_old))
       : null,
 
     // Фізичні параметри (якщо є в XML)
@@ -384,13 +384,13 @@ async function main() {
       rawOffersSlice = rawOffers.slice(0, CONFIG.maxProducts);
       console.log(`   ⚠️  Ліміт тесту: перші ${CONFIG.maxProducts} товарів з ${rawOffers.length}`);
     }
-    
+
     const catalog = [];
     const validOffers = [];
-    
+
     for (const raw of rawOffersSlice) {
       const o = transformOffer(raw);
-      
+
       // Зберігаємо товар в загальний каталог для адмін-панелі
       catalog.push({
         id: o.id,
@@ -410,7 +410,7 @@ async function main() {
 
       validOffers.push(o);
     }
-    
+
     const offers = validOffers;
     const availableCount = offers.filter((o) => o.available).length;
     console.log(`   В наявності: ${availableCount} / ${offers.length}`);
