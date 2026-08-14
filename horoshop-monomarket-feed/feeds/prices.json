@@ -1,0 +1,55 @@
+ч{
+  "updatedAt": "2026-08-07T21:59:51.168Z",
+  "total": 3,
+  "data": [
+    {
+      "code": "3005",
+      "price": 11016,
+      "old_price": null,
+      "availability": true,
+      "stock": 10,
+      "warehouses": [
+        {
+          "id": "main",
+          "stock": 10
+        }
+      ],
+      "warranty_type": "no",
+      "warranty_period": 0,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "3006",
+      "price": 9138,
+      "old_price": null,
+      "availability": true,
+      "stock": 10,
+      "warehouses": [
+        {
+          "id": "main",
+          "stock": 10
+        }
+      ],
+      "warranty_type": "no",
+      "warranty_period": 0,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "3007",
+      "price": 8450,
+      "old_price": null,
+      "availability": false,
+      "stock": 0,
+      "warehouses": null,
+      "warranty_type": "no",
+      "warranty_period": 0,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    }
+  ]
+}

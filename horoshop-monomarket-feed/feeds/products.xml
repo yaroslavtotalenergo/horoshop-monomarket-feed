@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Market>
+  <offers>
+    <offer>
+      <id>3005</id>
+      <code>3005</code>
+      <vendor_code>BPC123047002</vendor_code>
+      <title><![CDATA[Зарядний пристрій Victron Energy Blue Smart IP22 Charger 12/30 (1) - BPC123047002]]></title>
+      <barcode>4250294921628</barcode>
+      <category>Зарядні пристрої</category>
+      <brand>Victron Energy</brand>
+      <availability>Є в наявності</availability>
+      <description><![CDATA[ <h5>Blue Smart IP22 Charger 12/30</h5><br><p>Інтелектуальний зарядний пристрій для 12В акумуляторів струмом до 30А.</p> ]]></description>
+      <image_link>
+        <picture>https://total-energo.com.ua/content/images/6/zariadnyi-prystrii-blue-smart-ip22-charger-12-30-1-bpc123047002-20105455033872_+7d8e9c067c.png</picture>
+        <picture>https://total-energo.com.ua/content/images/6/zariadnyi-prystrii-blue-smart-ip22-charger-12-30-1-bpc123047002-49770718646924_+55c2902fa9.png</picture>
+        <picture>https://total-energo.com.ua/content/images/6/zariadnyi-prystrii-blue-smart-ip22-charger-12-30-1-bpc123047002-54051766758330_+64c924dedd.png</picture>
+        <picture>https://total-energo.com.ua/content/images/6/zariadnyi-prystrii-blue-smart-ip22-charger-12-30-1-bpc123047002-35131606661100_+0dceb23262.png</picture>
+      </image_link>
+      <tags>
+        <param name="Гарантия">60 мес.</param>
+        <param name="Цвет">Блакитний</param>
+        <param name="Штрихкод">4250294921628</param>
+        <param name="Зарядний струм, A">30</param>
+        <param name="Вихідна напруга, В">12</param>
+        <param name="Кількість виходів">1</param>
+      </tags>
+    </offer>
+    <offer>
+      <id>3006</id>
+      <code>3006</code>
+      <vendor_code>BPC122042002</vendor_code>
+      <title><![CDATA[Зарядний пристрій Victron Energy Blue Smart IP22 Charger 12/20 (1) - BPC122042002]]></title>
+      <barcode>4250294921635</barcode>
+      <category>Зарядні пристрої</category>
+      <brand>Victron Energy</brand>
+      <availability>Є в наявності</availability>
+      <description><![CDATA[ <h5>Blue Smart IP22 Charger 12/20</h5><br><p>Інтелектуальний зарядний пристрій для 12В акумуляторів струмом до 20А.</p> ]]></description>
+      <image_link>
+        <picture>https://total-energo.com.ua/content/images/7/33565441646642_+72ff311526.png</picture>
+        <picture>https://total-energo.com.ua/content/images/7/44978380739386_+b7c52bda22.png</picture>
+      </image_link>
+      <tags>
+        <param name="Гарантия">60 мес.</param>
+        <param name="Штрихкод">4250294921635</param>
+        <param name="Зарядний струм, A">20</param>
+        <param name="Вихідна напруга, В">12</param>
+      </tags>
+    </offer>
+  </offers>
+</Market>
