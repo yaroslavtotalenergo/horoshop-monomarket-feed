@@ -1,5 +1,0 @@
-Battery Pytes ESS V5 LiFePO4 51.2V 100Ah 5.12 kWh
-Battery Pytes ESS V5 Plus LiFePO4 51.2V 100Ah 5.12 kWh
-Battery Pytes ESS E-Box 48100R LiFePO4 51.2V 100Ah 5.12 kWh
-Battery Pytes ESS V16 LiFePO4 51.2V 314Ah 16.07 kWh
-Battery Pytes ESS V12 LiFePO4 51.2V 230Ah 11.78 kWh

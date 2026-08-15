@@ -1,3 +1,22 @@
+﻿# Ignore everything in the root by default
+/*
+
+# But do not ignore these specific project files and folders
+!/admin/
+!/src/
+!/feeds/
+!/.github/
+!/horoshop-monomarket-feed/
+!/test/
+!/package.json
+!/package-lock.json
+!/README.md
+!/.gitignore
+!/.env.example
+
+# Inside the allowed folders, we might still want to ignore standard things:
+/admin/node_modules/
+/admin/dist/
 node_modules/
 .env
 *.log
