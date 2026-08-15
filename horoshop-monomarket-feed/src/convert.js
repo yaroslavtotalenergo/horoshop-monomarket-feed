@@ -29,6 +29,9 @@ try { whitelist = JSON.parse(fs.readFileSync('src/whitelist.json', 'utf8')); } c
 let customDescriptions = {};
 try { customDescriptions = JSON.parse(fs.readFileSync('src/descriptions.json', 'utf8')); } catch (e) { }
 
+let customNames = {};
+try { customNames = JSON.parse(fs.readFileSync('src/names.json', 'utf8')); } catch (e) { }
+
 let categoryMap = {};
 try { categoryMap = JSON.parse(fs.readFileSync('src/categories.json', 'utf8')); } catch (e) { }
 
@@ -152,25 +155,37 @@ function escapeXml(str) {
 
 // ── Форматування назви під вимоги Мономаркету ───────────────────
 function formatProductName(originalName, vendorCode) {
-  let name = String(originalName || '').replace(/\s+/g, ' ').trim();
+  // Якщо є кастомна назва, використовуємо її, інакше оригінальну
+  let finalName = customNames[vendorCode];
+  if (!finalName) {
+    let name = String(originalName || '').replace(/\s+/g, ' ').trim();
 
-  const forbidden = [
-    /акція/ig, /знижка/ig, /розпродаж/ig, /уцінка/ig,
-    /\bcopy\b/ig, /\boriginal\b/ig,
-    /https?:\/\/\S+/ig, /www\.\S+/ig
-  ];
-  for (const reg of forbidden) {
-    name = name.replace(reg, '');
+    const forbidden = [
+      /акція/ig, /знижка/ig, /розпродаж/ig, /уцінка/ig,
+      /\bcopy\b/ig, /\boriginal\b/ig,
+      /https?:\/\/\S+/ig, /www\.\S+/ig
+    ];
+    for (const reg of forbidden) {
+      name = name.replace(reg, '');
+    }
+
+    if (!name.includes(vendorCode)) {
+      name = `${name} (${vendorCode})`;
+    }
+    
+    // Додаткове очищення від подвійних пробілів
+    name = name.replace(/\s+/g, ' ').trim();
+    
+    // Якщо після очищення назва занадто коротка, використовуємо артикул
+    if (name.length < 3) {
+      name = `Товар ${vendorCode}`;
+    }
+    finalName = name;
   }
 
-  name = name.replace(/[§≠≥]/g, '');
-
-  if (vendorCode && name.endsWith(`- ${vendorCode}`)) {
-    name = name.slice(0, name.lastIndexOf(`- ${vendorCode}`)).trim();
-    name = `${name} (${vendorCode})`;
-  }
-
-  return name.replace(/\s+/g, ' ').trim();
+  // Escape special XML characters
+  return finalName
+    .replace(/&/g, '&amp;').trim();
 }
 
 // ── Очистка оригінального опису від заборонених даних ────────────────
