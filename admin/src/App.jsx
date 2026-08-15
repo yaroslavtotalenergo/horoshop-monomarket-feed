@@ -112,6 +112,7 @@ export default function App() {
   const [barcodes, setBarcodes] = useState({});
   const [descriptions, setDescriptions] = useState({});
   const [availabilityOverrides, setAvailabilityOverrides] = useState({});
+  const [names, setNames] = useState({});
 
   const [collapsedCategories, setCollapsedCategories] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
@@ -155,7 +156,8 @@ export default function App() {
         api.getFile('src/barcodes.json'),
         api.getFile('src/descriptions.json'),
         api.getFile('src/config.json'),
-        api.getFile('src/availability.json')
+        api.getFile('src/availability.json'),
+        api.getFile('src/names.json')
       ]);
 
       if (catalogRes.content) {
@@ -166,6 +168,7 @@ export default function App() {
       if (barcodesRes.content) setBarcodes(JSON.parse(barcodesRes.content) || {});
       if (descRes.content) setDescriptions(JSON.parse(descRes.content) || {});
       if (availRes.content) setAvailabilityOverrides(JSON.parse(availRes.content) || {});
+      if (namesRes.content) setNames(JSON.parse(namesRes.content) || {});
       if (configRes.content) setFeedUrl(JSON.parse(configRes.content).horoshopFeedUrl || '');
       
       setShas({
@@ -190,6 +193,7 @@ export default function App() {
       await api.saveFile('src/barcodes.json', JSON.stringify(barcodes, null, 2), null, 'Update barcodes via UI');
       await api.saveFile('src/descriptions.json', JSON.stringify(descriptions, null, 2), null, 'Update descriptions via UI');
       await api.saveFile('src/availability.json', JSON.stringify(availabilityOverrides, null, 2), null, 'Update availability via UI');
+      await api.saveFile('src/names.json', JSON.stringify(names, null, 2), null, 'Update custom names via UI');
       await api.triggerWorkflow();
       showToast('\u2705 \u0414\u0430\u043d\u0456 \u0437\u0431\u0435\u0440\u0435\u0436\u0435\u043d\u043e! \u0424\u0456\u0434 \u043e\u043d\u043e\u0432\u043b\u044e\u0454\u0442\u044c\u0441\u044f...');
     } catch (e) {
@@ -224,6 +228,18 @@ export default function App() {
         next[vendorCode] = true;
       } else {
         next[vendorCode] = false;
+      }
+      return next;
+    });
+  };
+
+  const updateName = (vendorCode, originalName, newName) => {
+    setNames(prev => {
+      const next = { ...prev };
+      if (newName === originalName || newName.trim() === '') {
+        delete next[vendorCode];
+      } else {
+        next[vendorCode] = newName;
       }
       return next;
     });
@@ -458,9 +474,28 @@ export default function App() {
                         <td>
                           <div className="flex-center">
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                              <div>
-                                <div style={{ fontWeight: '500' }}>{product.name}</div>
-                                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                              <div style={{ flex: 1, minWidth: '250px' }}>
+                                {(() => {
+                                  const currentName = names[product.vendorCode] !== undefined ? names[product.vendorCode] : product.name;
+                                  const charCount = currentName.length;
+                                  const isOverLimit = charCount > 50;
+                                  return (
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', width: '100%' }}>
+                                      <input 
+                                        type="text" 
+                                        className="input-field" 
+                                        value={currentName} 
+                                        onChange={(e) => updateName(product.vendorCode, product.name, e.target.value)}
+                                        style={{ borderColor: isOverLimit ? '#f87171' : 'var(--border-color)', width: '100%', padding: '0.4rem' }}
+                                        title={product.name}
+                                      />
+                                      <div style={{ fontSize: '0.75rem', color: isOverLimit ? '#f87171' : 'var(--text-muted)', textAlign: 'right' }}>
+                                        {charCount}/50 {isOverLimit && '⚠️'}
+                                      </div>
+                                    </div>
+                                  );
+                                })()}
+                                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
                                   {product.vendorCode} | {product.oldPrice ? <><span style={{ textDecoration: 'line-through', color: '#f87171' }}>{product.oldPrice}</span> <span style={{ color: '#10b981', fontWeight: 600 }}>{product.price} ₴</span></> : `${product.price} ₴`} | {product.category}
                                 </div>
                               </div>
@@ -587,9 +622,28 @@ export default function App() {
                             <td>
                               <div className="flex-center">
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                  <div>
-                                    <div style={{ fontWeight: '500' }}>{product.name}</div>
-                                    <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                                  <div style={{ flex: 1, minWidth: '250px' }}>
+                                    {(() => {
+                                      const currentName = names[product.vendorCode] !== undefined ? names[product.vendorCode] : product.name;
+                                      const charCount = currentName.length;
+                                      const isOverLimit = charCount > 50;
+                                      return (
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', width: '100%' }}>
+                                          <input 
+                                            type="text" 
+                                            className="input-field" 
+                                            value={currentName} 
+                                            onChange={(e) => updateName(product.vendorCode, product.name, e.target.value)}
+                                            style={{ borderColor: isOverLimit ? '#f87171' : 'var(--border-color)', width: '100%', padding: '0.4rem' }}
+                                            title={product.name}
+                                          />
+                                          <div style={{ fontSize: '0.75rem', color: isOverLimit ? '#f87171' : 'var(--text-muted)', textAlign: 'right' }}>
+                                            {charCount}/50 {isOverLimit && '⚠️'}
+                                          </div>
+                                        </div>
+                                      );
+                                    })()}
+                                    <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
                                       {product.vendorCode} | {product.oldPrice ? <><span style={{ textDecoration: 'line-through', color: '#f87171' }}>{product.oldPrice}</span> <span style={{ color: '#10b981', fontWeight: 600 }}>{product.price} ₴</span></> : `${product.price} ₴`}
                                     </div>
                                   </div>
