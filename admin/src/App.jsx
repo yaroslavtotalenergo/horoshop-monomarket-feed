@@ -448,9 +448,9 @@ export default function App() {
                   <tr>
                     <th style={{ width: '60px' }}>Увімк</th>
                     <th style={{ width: '90px' }}>Наявність</th>
-                    <th>Товар</th>
-                    <th style={{ width: '200px' }}>Штрихкод</th>
-                    <th>Кастомний опис (HTML)</th>
+                    <th style={{ width: '100%', minWidth: '400px' }}>Товар</th>
+                    <th style={{ width: '160px' }}>Штрихкод</th>
+                    <th style={{ width: '170px' }}>Кастомний опис (HTML)</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -473,8 +473,8 @@ export default function App() {
                         </td>
                         <td>
                           <div className="flex-center">
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                              <div style={{ flex: 1, minWidth: '250px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%' }}>
+                              <div style={{ flex: 1, width: '100%' }}>
                                 {(() => {
                                   const currentName = names[product.vendorCode] !== undefined ? names[product.vendorCode] : product.name;
                                   const charCount = currentName.length;
@@ -596,9 +596,9 @@ export default function App() {
                       <tr>
                         <th style={{ width: '60px' }}>Увімк</th>
                         <th style={{ width: '90px' }}>Наявність</th>
-                        <th>Товар</th>
-                        <th style={{ width: '200px' }}>Штрихкод</th>
-                        <th>Кастомний опис (HTML)</th>
+                        <th style={{ width: '100%', minWidth: '400px' }}>Товар</th>
+                        <th style={{ width: '160px' }}>Штрихкод</th>
+                        <th style={{ width: '170px' }}>Кастомний опис (HTML)</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -621,8 +621,8 @@ export default function App() {
                             </td>
                             <td>
                               <div className="flex-center">
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                  <div style={{ flex: 1, minWidth: '250px' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%' }}>
+                                  <div style={{ flex: 1, width: '100%' }}>
                                     {(() => {
                                       const currentName = names[product.vendorCode] !== undefined ? names[product.vendorCode] : product.name;
                                       const charCount = currentName.length;
