@@ -2569,6 +2569,29 @@
         <picture>https://total-energo.com.ua/content/images/7/zariadnyi-prystrii-dlia-elektromobilia-ev-charging-station-evc300400300-victron-energy-66680171305343_+e8b4bb70df.jpg</picture>
         <picture>https://total-energo.com.ua/content/images/7/zariadnyi-prystrii-dlia-elektromobilia-ev-charging-station-evc300400300-victron-energy-22208160392872_+a31c98b74d.jpg</picture>
       </image_link>
+      <tags>
+        <param name="Діапазон вхідної напруги (VAC)">170 – 265</param>
+        <param name="Номінальна вхідна напруга, В">220/230</param>
+        <param name="Номінальна вхідна напруга, В">380/400</param>
+        <param name="Мінімальний зарядний струм, А">6</param>
+        <param name="Максимальний зарядний струм, А">32</param>
+        <param name="Номінальна зарядна потужність, кВт">22</param>
+        <param name="Інтерфейси та індикація">Дисплей</param>
+        <param name="Інтерфейси та індикація">Світлодіоди (LED)</param>
+        <param name="Інтерфейси та індикація">Bluetooth</param>
+        <param name="Інтерфейси та індикація">CAN</param>
+        <param name="Інтерфейси та індикація">Ethernet</param>
+        <param name="Інтерфейси та індикація">Modbus TCP</param>
+        <param name="Інтерфейси та індикація">Wi-Fi</param>
+        <param name="Тип роз&apos;єму">IEC 62196 Type 2</param>
+        <param name="Максимальна вологість (без конденсату)">95%</param>
+        <param name="Максимальна робоча температура, + °С">50</param>
+        <param name="Мінімальна робоча температура, - °С">25</param>
+        <param name="Розміри ВхШxД, мм">377 x 307 x 148</param>
+        <param name="Вага, кг">3</param>
+        <param name="Клас захисту">IP43</param>
+        <param name="Термін гарантії, міс">60</param>
+      </tags>
     </offer>
     <offer>
       <id>EVC200300200</id>
@@ -2590,6 +2613,28 @@
         <picture>https://total-energo.com.ua/content/images/12/zariadna-stantsiia-dlia-elektromobiliv-victron-ev-charging-station-ns-evc200300200-95602840675890_+52145b63f0.jpg</picture>
         <picture>https://total-energo.com.ua/content/images/12/zariadna-stantsiia-dlia-elektromobiliv-victron-ev-charging-station-ns-evc200300200-62530629265552_+ab6911fda2.jpg</picture>
       </image_link>
+      <tags>
+        <param name="Діапазон вхідної напруги (VAC)">170 – 265</param>
+        <param name="Номінальна вхідна напруга, В">220/230</param>
+        <param name="Номінальна вхідна напруга, В">380/400</param>
+        <param name="Мінімальний зарядний струм, А">6</param>
+        <param name="Максимальний зарядний струм, А">32</param>
+        <param name="Номінальна зарядна потужність, кВт">22</param>
+        <param name="Інтерфейси та індикація">Світлодіоди (LED)</param>
+        <param name="Інтерфейси та індикація">Bluetooth</param>
+        <param name="Інтерфейси та індикація">CAN</param>
+        <param name="Інтерфейси та індикація">Ethernet</param>
+        <param name="Інтерфейси та індикація">Modbus TCP</param>
+        <param name="Інтерфейси та індикація">Wi-Fi</param>
+        <param name="Тип роз&apos;єму">IEC 62196 Type 2</param>
+        <param name="Максимальна вологість (без конденсату)">95%</param>
+        <param name="Максимальна робоча температура, + °С">50</param>
+        <param name="Мінімальна робоча температура, - °С">25</param>
+        <param name="Розміри ВхШxД, мм">372 x 292 x 122</param>
+        <param name="Вага, кг">3</param>
+        <param name="Клас захисту">IP43</param>
+        <param name="Термін гарантії, міс">60</param>
+      </tags>
     </offer>
     <offer>
       <id>ORI121222120</id>
