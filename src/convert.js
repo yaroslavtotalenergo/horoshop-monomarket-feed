@@ -49,7 +49,15 @@ const CONFIG = {
     warrantyType: process.env.WARRANTY_TYPE || 'manufacturer',
     warrantyPeriod: parseInt(process.env.WARRANTY_PERIOD || '60', 10),
     maxPayInParts: parseInt(process.env.MAX_PAY_IN_PARTS || '6', 10),
-    daysToDispatch: parseInt(process.env.DAYS_TO_DISPATCH || '1', 10),
+    daysToDispatch: (() => {
+      // Determine dispatch days based on day of week (Kyiv time, UTC+3)
+      // Friday → 3, Saturday → 2, Sunday..Thursday → 1
+      const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Kyiv' }));
+      const day = now.getDay(); // 0=Sun, 1=Mon, ..., 5=Fri, 6=Sat
+      if (day === 5) return 3; // Friday
+      if (day === 6) return 2; // Saturday
+      return 1;                // All other days
+    })(),
   },
 
   shopName: process.env.SHOP_NAME || 'Магазин',
