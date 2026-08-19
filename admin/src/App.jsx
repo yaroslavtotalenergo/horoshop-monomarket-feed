@@ -340,6 +340,17 @@ export default function App() {
     return { selected, total: products.length };
   };
 
+  // Calculate days_to_dispatch dynamically (same logic as convert.js)
+  const getDaysToDispatch = () => {
+    const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Kyiv' }));
+    const day = now.getDay();
+    if (day === 5) return 3; // Friday
+    if (day === 6) return 2; // Saturday
+    return 1;               // All other days
+  };
+  const daysToDispatch = getDaysToDispatch();
+  const daysColor = daysToDispatch === 3 ? '#f59e0b' : daysToDispatch === 2 ? '#0ea5e9' : '#10b981';
+
   const toggleCategoryWhitelist = (products) => {
     const codes = products.map(p => p.vendorCode);
     const allOn = codes.every(c => whitelist.includes(c));
@@ -449,6 +460,7 @@ export default function App() {
                     <th style={{ width: '60px' }}>Увімк</th>
                     <th style={{ width: '90px' }}>Наявність</th>
                     <th style={{ width: '100%', minWidth: '400px' }}>Товар</th>
+                    <th style={{ width: '60px', textAlign: 'center' }}>Дні</th>
                     <th style={{ width: '160px' }}>Штрихкод</th>
                     <th style={{ width: '170px' }}>Кастомний опис (HTML)</th>
                   </tr>
@@ -499,14 +511,11 @@ export default function App() {
                                   {product.vendorCode} | {product.oldPrice ? <><span style={{ textDecoration: 'line-through', color: '#f87171' }}>{product.oldPrice}</span> <span style={{ color: '#10b981', fontWeight: 600 }}>{product.price} ₴</span></> : `${product.price} ₴`} | {product.category}
                                 </div>
                               </div>
-                              <button 
-                                className="btn" 
-                                style={{ padding: '0.2rem 0.4rem', fontSize: '1rem', background: 'transparent', border: 'none', color: 'var(--text-muted)' }}
-                                onClick={() => setPreviewProduct(product)}
-                                title="Попередній перегляд"
-                              >🔍</button>
                             </div>
                           </div>
+                        </td>
+                        <td style={{ textAlign: 'center' }}>
+                          <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '28px', height: '28px', borderRadius: '6px', background: daysColor + '20', border: '1px solid ' + daysColor + '60', color: daysColor, fontWeight: 700, fontSize: '0.9rem' }}>{daysToDispatch}</span>
                         </td>
                         <td>
                           <input type="text" className="input-field" placeholder="Ввести..."
@@ -597,6 +606,7 @@ export default function App() {
                         <th style={{ width: '60px' }}>Увімк</th>
                         <th style={{ width: '90px' }}>Наявність</th>
                         <th style={{ width: '100%', minWidth: '400px' }}>Товар</th>
+                        <th style={{ width: '60px', textAlign: 'center' }}>Дні</th>
                         <th style={{ width: '160px' }}>Штрихкод</th>
                         <th style={{ width: '170px' }}>Кастомний опис (HTML)</th>
                       </tr>
@@ -647,14 +657,11 @@ export default function App() {
                                       {product.vendorCode} | {product.oldPrice ? <><span style={{ textDecoration: 'line-through', color: '#f87171' }}>{product.oldPrice}</span> <span style={{ color: '#10b981', fontWeight: 600 }}>{product.price} ₴</span></> : `${product.price} ₴`}
                                     </div>
                                   </div>
-                                  <button 
-                                    className="btn" 
-                                    style={{ padding: '0.2rem 0.4rem', fontSize: '1rem', background: 'transparent', border: 'none', color: 'var(--text-muted)' }}
-                                    onClick={() => setPreviewProduct(product)}
-                                    title="Попередній перегляд"
-                                  >🔍</button>
                                 </div>
                               </div>
+                            </td>
+                            <td style={{ textAlign: 'center' }}>
+                              <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '28px', height: '28px', borderRadius: '6px', background: daysColor + '20', border: '1px solid ' + daysColor + '60', color: daysColor, fontWeight: 700, fontSize: '0.9rem' }}>{daysToDispatch}</span>
                             </td>
                             <td>
                               <input type="text" className="input-field" placeholder="Ввести..."
@@ -727,62 +734,7 @@ export default function App() {
         </div>
       )}
 
-      {/* Product Preview modal */}
-      {previewProduct && (() => {
-        const p = previewProduct;
-        const isEnabled = whitelist.includes(p.vendorCode);
-        const bcode = barcodes[p.vendorCode] || p.barcode || 'ВІДСУТНІЙ';
-        const desc = descriptions[p.vendorCode] || p.description || '';
-        
-        const jsonPreview = {
-          code: p.vendorCode,
-          price: p.price,
-          availability: isEnabled && p.available !== false,
-          stock: isEnabled && p.available !== false ? 10 : 0,
-          warranty_type: "manufacturer",
-          warranty_period: 60
-        };
-
-        return (
-          <div className="modal-overlay" onClick={() => setPreviewProduct(null)}>
-            <div className="glass-panel modal" onClick={e => e.stopPropagation()} style={{ maxWidth: '700px' }}>
-              <h2>🔍 Попередній перегляд</h2>
-              <p style={{ color: 'var(--text-muted)' }}>Як цей товар виглядає для Мономаркету (спрощено).</p>
-              
-              <div style={{ marginBottom: '1rem' }}>
-                <strong>Товар:</strong> {p.name} <br/>
-                <strong>Артикул:</strong> {p.vendorCode} <br/>
-                <strong>Статус у фіді:</strong> {isEnabled ? <span style={{color: 'var(--success)'}}>Увімкнено ✅</span> : <span style={{color: '#f87171'}}>Вимкнено ❌</span>}
-              </div>
-
-              <div style={{ display: 'flex', gap: '1rem', flexDirection: 'column' }}>
-                <div style={{ background: '#1e293b', padding: '1rem', borderRadius: '0.5rem', border: '1px solid #334155', overflowX: 'auto' }}>
-                  <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>prices.json (Ціни та наявність)</div>
-                  <pre style={{ margin: 0, color: '#e2e8f0', fontSize: '0.9rem', fontFamily: 'monospace' }}>
-                    {JSON.stringify(jsonPreview, null, 2)}
-                  </pre>
-                </div>
-                
-                <div style={{ background: '#1e293b', padding: '1rem', borderRadius: '0.5rem', border: '1px solid #334155', overflowX: 'auto' }}>
-                  <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: '0.5rem', textTransform: 'uppercase' }}>products.xml (Характеристики)</div>
-                  <pre style={{ margin: 0, color: '#e2e8f0', fontSize: '0.9rem', fontFamily: 'monospace', whiteSpace: 'pre-wrap' }}>
-{`<offer id="${p.vendorCode}" available="${isEnabled ? 'true' : 'false'}">
-  <name>${p.name}</name>
-  <vendorCode>${p.vendorCode}</vendorCode>
-  <barcode>${bcode}</barcode>
-  <description><![CDATA[${desc.substring(0, 100)}${desc.length > 100 ? '...' : ''}]]></description>
-</offer>`}
-                  </pre>
-                </div>
-              </div>
-
-              <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1.5rem' }}>
-                <button className="btn success" onClick={() => setPreviewProduct(null)}>Закрити</button>
-              </div>
-            </div>
-          </div>
-        );
-      })()}
+      {/* Product Preview modal removed */
 
       {/* Description Editor Modal */}
       {editingDescriptionProduct && (
