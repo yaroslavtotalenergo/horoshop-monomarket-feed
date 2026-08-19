@@ -454,15 +454,15 @@ export default function App() {
             <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>Нічого не знайдено</div>
           ) : (
             <div style={{ overflowX: 'auto' }}>
-              <table>
+              <table style={{ tableLayout: 'fixed', width: '100%' }}>
                 <thead>
                   <tr>
                     <th style={{ width: '60px' }}>Увімк</th>
                     <th style={{ width: '90px' }}>Наявність</th>
-                    <th style={{ width: '100%', minWidth: '400px' }}>Товар</th>
-                    <th style={{ width: '60px', textAlign: 'center' }}>Дні</th>
-                    <th style={{ width: '160px' }}>Штрихкод</th>
-                    <th style={{ width: '170px' }}>Кастомний опис (HTML)</th>
+                    <th>Товар</th>
+                    <th style={{ width: '55px', textAlign: 'center' }}>Дні</th>
+                    <th style={{ width: '145px' }}>Штрихкод</th>
+                    <th style={{ width: '155px' }}>Кастомний опис</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -600,15 +600,15 @@ export default function App() {
 
               {/* Products table */}
               <div style={{ display: isCollapsed ? 'none' : 'block', overflowX: 'auto' }}>
-                <table>
+                <table style={{ tableLayout: 'fixed', width: '100%' }}>
                     <thead>
                       <tr>
                         <th style={{ width: '60px' }}>Увімк</th>
                         <th style={{ width: '90px' }}>Наявність</th>
-                        <th style={{ width: '100%', minWidth: '400px' }}>Товар</th>
-                        <th style={{ width: '60px', textAlign: 'center' }}>Дні</th>
-                        <th style={{ width: '160px' }}>Штрихкод</th>
-                        <th style={{ width: '170px' }}>Кастомний опис (HTML)</th>
+                        <th>Товар</th>
+                        <th style={{ width: '55px', textAlign: 'center' }}>Дні</th>
+                        <th style={{ width: '145px' }}>Штрихкод</th>
+                        <th style={{ width: '155px' }}>Кастомний опис</th>
                       </tr>
                     </thead>
                     <tbody>
