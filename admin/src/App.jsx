@@ -734,7 +734,7 @@ export default function App() {
         </div>
       )}
 
-      {/* Product Preview modal removed */
+      {/* Product Preview modal removed */}
 
       {/* Description Editor Modal */}
       {editingDescriptionProduct && (
