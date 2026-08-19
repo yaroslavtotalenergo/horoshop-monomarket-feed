@@ -3,9 +3,9 @@ name: Update Monomarket Feeds
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 3 * * 5'  # П'ятниця  06:00 Київ (UTC+3) → days_to_dispatch: 3
-    - cron: '0 3 * * 6'  # Субота    06:00 Київ (UTC+3) → days_to_dispatch: 2
-    - cron: '0 3 * * 0'  # Неділя    06:00 Київ (UTC+3) → days_to_dispatch: 1
+    - cron: '40 2 * * 5'  # П'ятниця  05:40 Київ (UTC+3) → days_to_dispatch: 3
+    - cron: '40 2 * * 6'  # Субота    05:40 Київ (UTC+3) → days_to_dispatch: 2
+    - cron: '40 2 * * 0'  # Неділя    05:40 Київ (UTC+3) → days_to_dispatch: 1
 
 jobs:
   update-feeds:
