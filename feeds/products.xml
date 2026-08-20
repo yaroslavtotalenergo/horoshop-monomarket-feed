@@ -18,6 +18,7 @@
         <picture>https://total-energo.com.ua/content/images/6/zariadnyi-prystrii-blue-smart-ip22-charger-12-30-1-bpc123047002-35131606661100_+0dceb23262.png</picture>
       </image_link>
       <tags>
+        <param name="Вага">1</param>
         <param name="Максимальна вхідна напруга AC, В~">265</param>
         <param name="Мінімальна вхідна напруга AC, В~">180</param>
         <param name="Зарядний струм, A">30</param>
@@ -52,7 +53,6 @@
         <param name="Стандарти автомобільної директиви">E4-10R</param>
         <param name="Клас захисту">IP22</param>
         <param name="Термін гарантії, міс">60</param>
-        <param name="Вага">1</param>
       </tags>
     </offer>
     <offer>
@@ -70,6 +70,7 @@
         <picture>https://total-energo.com.ua/content/images/15/copy_zariadnyi-prystrii-blue-smart-ip22-charger-24-8-1-bpc240842002-11138148775259_+8f41ec184c.png</picture>
       </image_link>
       <tags>
+        <param name="Вага">1</param>
         <param name="Максимальна вхідна напруга AC, В~">265</param>
         <param name="Мінімальна вхідна напруга AC, В~">180</param>
         <param name="Зарядний струм, A">12</param>
@@ -104,7 +105,6 @@
         <param name="Стандарти автомобільної директиви">E4-10R</param>
         <param name="Клас захисту">IP22</param>
         <param name="Термін гарантії, міс">60</param>
-        <param name="Вага">1</param>
       </tags>
     </offer>
     <offer>
@@ -122,6 +122,7 @@
         <picture>https://total-energo.com.ua/content/images/16/90269491689397_+79ab55616d.png</picture>
       </image_link>
       <tags>
+        <param name="Вага">1</param>
         <param name="Максимальна вхідна напруга AC, В~">265</param>
         <param name="Мінімальна вхідна напруга AC, В~">180</param>
         <param name="Зарядний струм, A">16</param>
@@ -156,7 +157,6 @@
         <param name="Стандарти автомобільної директиви">E4-10R</param>
         <param name="Клас захисту">IP22</param>
         <param name="Термін гарантії, міс">60</param>
-        <param name="Вага">1</param>
       </tags>
     </offer>
     <offer>
@@ -173,6 +173,7 @@
         <picture>https://total-energo.com.ua/content/images/17/82645896035742_+1bcb4d05f6.jpg</picture>
       </image_link>
       <tags>
+        <param name="Вага">1</param>
         <param name="Максимальна вхідна напруга AC, В~">265</param>
         <param name="Мінімальна вхідна напруга AC, В~">180</param>
         <param name="Зарядний струм, A">16</param>
@@ -207,7 +208,6 @@
         <param name="Стандарти автомобільної директиви">E4-10R</param>
         <param name="Клас захисту">IP22</param>
         <param name="Термін гарантії, міс">60</param>
-        <param name="Вага">1</param>
       </tags>
     </offer>
     <offer>
@@ -229,6 +229,7 @@
         <picture>https://total-energo.com.ua/content/images/35/86106689670767_+58272ab550.jpg</picture>
       </image_link>
       <tags>
+        <param name="Вага">1</param>
         <param name="Максимальна вхідна напруга AC, В~">265</param>
         <param name="Мінімальна вхідна напруга AC, В~">180</param>
         <param name="Зарядний струм, A">10</param>
@@ -262,7 +263,6 @@
         <param name="Температурна компенсація (лише для свинцево-кислотних акумуляторів)">16 мВ/°C при 12В</param>
         <param name="Клас захисту">IP65</param>
         <param name="Термін гарантії, міс">60</param>
-        <param name="Вага">1</param>
       </tags>
     </offer>
     <offer>
@@ -284,6 +284,7 @@
         <picture>https://total-energo.com.ua/content/images/43/zariadnyi-prystrii-blue-smart-ip65s-charger-12-4-dc-connector-victron-energy-bpc120433064r-58666474616844_+ca266726cc.jpg</picture>
       </image_link>
       <tags>
+        <param name="Вага">1</param>
         <param name="Максимальна вхідна напруга AC, В~">265</param>
         <param name="Мінімальна вхідна напруга AC, В~">180</param>
         <param name="Зарядний струм, A">4</param>
@@ -318,7 +319,6 @@
         <param name="Температурна компенсація (лише для свинцево-кислотних акумуляторів)">16 мВ/°C</param>
         <param name="Клас захисту">IP65</param>
         <param name="Термін гарантії, міс">60</param>
-        <param name="Вага">1</param>
       </tags>
     </offer>
     <offer>
@@ -340,6 +340,7 @@
         <picture>https://total-energo.com.ua/content/images/44/zariadnyi-prystrii-blue-smart-ip65s-charger-12-5-dc-connector-victron-energy-bpc120533064r-19991238804582_+c1e6338565.jpg</picture>
       </image_link>
       <tags>
+        <param name="Вага">1</param>
         <param name="Максимальна вхідна напруга AC, В~">265</param>
         <param name="Мінімальна вхідна напруга AC, В~">180</param>
         <param name="Зарядний струм, A">5</param>
@@ -372,7 +373,6 @@
         <param name="Температурна компенсація (лише для свинцево-кислотних акумуляторів)">16 мВ/°C</param>
         <param name="Клас захисту">IP65</param>
         <param name="Термін гарантії, міс">60</param>
-        <param name="Вага">1</param>
       </tags>
     </offer>
     <offer>
@@ -394,6 +394,7 @@
         <picture>https://total-energo.com.ua/content/images/45/zariadnyi-prystrii-blue-smart-ip65-charger-12-7-dc-connector-victron-energy-bpc120731064r-49879970634497_+647d8a2cc6.jpg</picture>
       </image_link>
       <tags>
+        <param name="Вага">1</param>
         <param name="Максимальна вхідна напруга AC, В~">265</param>
         <param name="Мінімальна вхідна напруга AC, В~">180</param>
         <param name="Зарядний струм, A">7</param>
@@ -426,7 +427,6 @@
         <param name="Температурна компенсація (лише для свинцево-кислотних акумуляторів)">16 мВ/°C</param>
         <param name="Клас захисту">IP65</param>
         <param name="Термін гарантії, міс">60</param>
-        <param name="Вага">1</param>
       </tags>
     </offer>
     <offer>
@@ -448,6 +448,7 @@
         <picture>https://total-energo.com.ua/content/images/46/zariadnyi-prystrii-blue-smart-ip65-charger-12-15-dc-connector-victron-energy-bpc121531064r-51685667119612_+ec9315ba40.jpg</picture>
       </image_link>
       <tags>
+        <param name="Вага">1</param>
         <param name="Максимальна вхідна напруга AC, В~">265</param>
         <param name="Мінімальна вхідна напруга AC, В~">180</param>
         <param name="Зарядний струм, A">15</param>
@@ -480,7 +481,6 @@
         <param name="Температурна компенсація (лише для свинцево-кислотних акумуляторів)">16 мВ/°C</param>
         <param name="Клас захисту">IP65</param>
         <param name="Термін гарантії, міс">60</param>
-        <param name="Вага">1</param>
       </tags>
     </offer>
     <offer>
@@ -500,6 +500,7 @@
         <picture>https://total-energo.com.ua/content/images/47/zariadnyi-prystrii-blue-smart-ip65-charger-12-25-dc-connector-bpc122531064-84645931100628_+2aa2c3df3d.jpg</picture>
       </image_link>
       <tags>
+        <param name="Вага">2</param>
         <param name="Максимальна вхідна напруга AC, В~">265</param>
         <param name="Мінімальна вхідна напруга AC, В~">180</param>
         <param name="Зарядний струм, A">25</param>
@@ -532,7 +533,6 @@
         <param name="Температурна компенсація (лише для свинцево-кислотних акумуляторів)">16 мВ/°C</param>
         <param name="Клас захисту">IP65</param>
         <param name="Термін гарантії, міс">60</param>
-        <param name="Вага">2</param>
       </tags>
     </offer>
     <offer>
@@ -553,6 +553,7 @@
         <picture>https://total-energo.com.ua/content/images/49/zariadnyi-prystrii-blue-smart-ip65-charger-24-8-dc-connector-bpc240831064r-64980104870980_+58d12eb856.jpg</picture>
       </image_link>
       <tags>
+        <param name="Вага">1</param>
         <param name="Максимальна вхідна напруга AC, В~">265</param>
         <param name="Мінімальна вхідна напруга AC, В~">180</param>
         <param name="Зарядний струм, A">8</param>
@@ -585,7 +586,6 @@
         <param name="Температурна компенсація (лише для свинцево-кислотних акумуляторів)">32 мВ/°C</param>
         <param name="Клас захисту">IP65</param>
         <param name="Термін гарантії, міс">60</param>
-        <param name="Вага">1</param>
       </tags>
     </offer>
     <offer>
@@ -605,6 +605,7 @@
         <picture>https://total-energo.com.ua/content/images/50/zariadnyi-prystrii-blue-smart-ip65-charger-24-13-dc-connector-bpc241331064-91238620412519_+615a31663c.jpg</picture>
       </image_link>
       <tags>
+        <param name="Вага">2</param>
         <param name="Максимальна вхідна напруга AC, В~">265</param>
         <param name="Мінімальна вхідна напруга AC, В~">180</param>
         <param name="Зарядний струм, A">13</param>
@@ -637,7 +638,6 @@
         <param name="Температурна компенсація (лише для свинцево-кислотних акумуляторів)">32 мВ/°C</param>
         <param name="Клас захисту">IP65</param>
         <param name="Термін гарантії, міс">60</param>
-        <param name="Вага">2</param>
       </tags>
     </offer>
     <offer>
@@ -655,6 +655,7 @@
         <picture>https://total-energo.com.ua/content/images/10/zariadnyi-prystrii-blue-smart-ip67-charger-12-25-1-bpc121713006-71099100101680_+173d47e3cf.jpg</picture>
       </image_link>
       <tags>
+        <param name="Вага">2</param>
         <param name="Максимальна вхідна напруга AC, В~">265</param>
         <param name="Мінімальна вхідна напруга AC, В~">180</param>
         <param name="Зарядний струм, A">25</param>
@@ -690,7 +691,6 @@
         <param name="Температурна компенсація (лише для свинцево-кислотних акумуляторів)">16 мВ/°C</param>
         <param name="Клас захисту">IP67</param>
         <param name="Термін гарантії, міс">60</param>
-        <param name="Вага">2</param>
       </tags>
     </offer>
     <offer>
@@ -707,6 +707,7 @@
         <picture>https://total-energo.com.ua/content/images/11/zariadnyi-prystrii-blue-smart-ip67-charger-12-13-1-bpc121313006-64873827707104_+4bd977d31d.jpg</picture>
       </image_link>
       <tags>
+        <param name="Вага">2</param>
         <param name="Максимальна вхідна напруга AC, В~">265</param>
         <param name="Мінімальна вхідна напруга AC, В~">180</param>
         <param name="Зарядний струм, A">13</param>
@@ -742,7 +743,6 @@
         <param name="Температурна компенсація (лише для свинцево-кислотних акумуляторів)">16 мВ/°C</param>
         <param name="Клас захисту">IP67</param>
         <param name="Термін гарантії, міс">60</param>
-        <param name="Вага">2</param>
       </tags>
     </offer>
     <offer>
@@ -759,6 +759,7 @@
         <picture>https://total-energo.com.ua/content/images/12/zariadnyi-prystrii-blue-smart-ip67-charger-12-7-1-bpc120713006-81499154336755_+6ecb4c62f1.jpg</picture>
       </image_link>
       <tags>
+        <param name="Вага">2</param>
         <param name="Максимальна вхідна напруга AC, В~">265</param>
         <param name="Мінімальна вхідна напруга AC, В~">180</param>
         <param name="Зарядний струм, A">7</param>
@@ -794,7 +795,6 @@
         <param name="Температурна компенсація (лише для свинцево-кислотних акумуляторів)">16 мВ/°C</param>
         <param name="Клас захисту">IP67</param>
         <param name="Термін гарантії, міс">60</param>
-        <param name="Вага">2</param>
       </tags>
     </offer>
     <offer>
@@ -811,6 +811,7 @@
         <picture>https://total-energo.com.ua/content/images/13/zariadnyi-prystrii-blue-smart-ip67-charger-12-17-1-bpc121713006-61268227800617_+aaeaead2b1.jpg</picture>
       </image_link>
       <tags>
+        <param name="Вага">2</param>
         <param name="Максимальна вхідна напруга AC, В~">265</param>
         <param name="Мінімальна вхідна напруга AC, В~">180</param>
         <param name="Зарядний струм, A">17</param>
@@ -846,7 +847,6 @@
         <param name="Температурна компенсація (лише для свинцево-кислотних акумуляторів)">16 мВ/°C</param>
         <param name="Клас захисту">IP67</param>
         <param name="Термін гарантії, міс">60</param>
-        <param name="Вага">2</param>
       </tags>
     </offer>
     <offer>
@@ -863,6 +863,7 @@
         <picture>https://total-energo.com.ua/content/images/17/zariadnyi-prystrii-blue-smart-ip67-charger-24-12-1-bpc241247006-45043022312060_+10129e7554.jpg</picture>
       </image_link>
       <tags>
+        <param name="Вага">2</param>
         <param name="Максимальна вхідна напруга AC, В~">265</param>
         <param name="Мінімальна вхідна напруга AC, В~">180</param>
         <param name="Зарядний струм, A">12</param>
@@ -898,7 +899,6 @@
         <param name="Температурна компенсація (лише для свинцево-кислотних акумуляторів)">32 мВ/°C</param>
         <param name="Клас захисту">IP67</param>
         <param name="Термін гарантії, міс">60</param>
-        <param name="Вага">2</param>
       </tags>
     </offer>
     <offer>
