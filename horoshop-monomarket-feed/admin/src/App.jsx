@@ -185,6 +185,17 @@ export default function App() {
 
   const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(''), 3500); };
 
+  const handleTriggerFeed = async () => {
+    setSyncing(true);
+    try {
+      await api.triggerWorkflow();
+      showToast('\u2705 \u0424\u0456\u0434 \u0437\u0430\u043f\u0443\u0449\u0435\u043d\u043e! \u041e\u043d\u043e\u0432\u043b\u044e\u0454\u0442\u044c\u0441\u044f (~1 \u0445\u0432');
+    } catch (e) {
+      showToast('\u274c \u041f\u043e\u043c\u0438\u043b\u043a\u0430 \u0437\u0430\u043f\u0443\u0441\u043a\u0443: ' + (e?.message || ''));
+    }
+    setSyncing(false);
+  };
+
   const handleSaveAll = async () => {
     setSaving(true);
     try {
@@ -378,6 +389,9 @@ export default function App() {
           <button className="btn" onClick={() => setShowSettings(true)}>⚙️ Налаштування</button>
           <button className="btn" style={{ background: '#0ea5e9' }} onClick={handleSync} disabled={syncing || loading || saving || !token}>
             {syncing ? <span className="loader"></span> : '🔄 Оновити з Хорошопу'}
+          </button>
+          <button className="btn" style={{ background: '#10b981' }} onClick={handleTriggerFeed} disabled={syncing || loading || saving || !token} title="Запустити генерацію фіду без збереження">
+            {syncing ? <span className="loader"></span> : `⚡ Запустити фід (${daysToDispatch}д)`}
           </button>
           <button className="btn success" onClick={handleSaveAll} disabled={saving || syncing || loading || !token}>
             {saving ? <span className="loader"></span> : '💾 Зберегти зміни'}
