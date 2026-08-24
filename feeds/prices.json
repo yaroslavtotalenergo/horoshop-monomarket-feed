@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-23T18:09:49.771Z",
+  "updatedAt": "2026-08-24T07:02:10.455Z",
   "total": 81,
   "data": [
     {
@@ -356,14 +356,9 @@
       "code": "PMP122120000",
       "price": 33047,
       "old_price": null,
-      "availability": true,
-      "stock": 10,
-      "warehouses": [
-        {
-          "id": "stock01te",
-          "stock": 10
-        }
-      ],
+      "availability": false,
+      "stock": 0,
+      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
