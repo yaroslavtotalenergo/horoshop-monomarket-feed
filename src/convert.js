@@ -288,11 +288,7 @@ function transformOffer(offer) {
 // ════════════════════════════════════════════════════════════════
 function generateProductsXml(offers) {
   const lines = ['<?xml version="1.0" encoding="UTF-8"?>', '<Market>', '  <offers>'];
-
   for (const o of offers) {
-    // Мономаркет вимагає лише товари в наявності у товарному фіді
-    if (!o.available) continue;
-
     lines.push('    <offer>');
     lines.push(`      <id>${escapeXml(o.code)}</id>`);
     lines.push(`      <code>${escapeXml(o.code)}</code>`);
@@ -305,7 +301,7 @@ function generateProductsXml(offers) {
 
     lines.push(`      <category>${escapeXml(o.category)}</category>`);
     lines.push(`      <brand>${escapeXml(o.brand)}</brand>`);
-    lines.push(`      <availability>Є в наявності</availability>`);
+    lines.push(`      <availability>${o.available ? 'Є в наявності' : 'Немає в наявності'}</availability>`);
 
     // Фізичні характеристики (якщо є)
     if (o.weight !== null) lines.push(`      <weight>${o.weight}</weight>`);
