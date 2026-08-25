@@ -81,10 +81,13 @@
   "BPC120533064R": "Зарядний пристрій Blue Smart IP65s Charger 12/5 + DC connector",
   "BPC120433064R": "Зарядний пристрій Blue Smart IP65s Charger 12/4 + DC connector",
   "SLSIFP51100W": "Акумулятор (LiFePO4) FNS POWER SLSIFP51100W 51.2В 100Аг (5.12 кВт·год)",
-  "SLSIFP51314A": "Акумулятор (LiFePO4) SucredSun SLSIFP51314А 51.2В 314Аг (16 кВт·год) (SLSIFP51314A)",
+  "SLSIFP51314A": "Акумулятор (LiFePO4) SucredSun SLSIFP51314А 51.2В 314Аг (16 кВт·год)",
   "SCIFP1250": "Акумулятор LiFePO4 Sacred Sun SCIFP1250 12В 50Аг з BMS",
   "SCIFP12150": "Акумулятор LiFePO4 Sacred Sun SCIFP12150 12В 150Аг з BMS та Bluetooth моніторингом ",
   "SCIFP12200": "Акумулятор LiFePO4 Sacred Sun SCIFP12200 12В 200Аг з BMS та Bluetooth моніторингом",
   "SCIFP24100": "Акумулятор LiFePO4 Sacred Sun SCIFP24100 25.6В 100Аг з BMS та Bluetooth моніторингом",
-  "SCIFP24200": "Акумулятор LiFePO4 Sacred Sun SCIFP24200 25.6В 200Аг з BMS та Bluetooth моніторингом"
+  "SCIFP24200": "Акумулятор LiFePO4 Sacred Sun SCIFP24200 25.6В 200Аг з BMS та Bluetooth моніторингом",
+  "SCIFP1225": "Акумулятор LiFePO4 Sacred Sun SCIFP1225 12В 25Аг з BMS",
+  "SCIFP12100": "Акумулятор LiFePO4 Sacred Sun SCIFP12100 12В 100Аг з BMS та Bluetooth моніторингом",
+  "SLSIFP51100A": "Акумулятор LiFePO4 Sacred Sun SLSIFP51100A 51.2В 100Аг з BMS"
 }
