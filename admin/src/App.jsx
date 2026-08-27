@@ -206,8 +206,14 @@ export default function App() {
       await api.saveFile('src/whitelist.json', JSON.stringify(whitelist, null, 2), null, 'Update whitelist via UI');
       await api.saveFile('src/barcodes.json', JSON.stringify(barcodes, null, 2), null, 'Update barcodes via UI');
       await api.saveFile('src/descriptions.json', JSON.stringify(descriptions, null, 2), null, 'Update descriptions via UI');
+      // Clean up empty strings from stockOverrides before saving
+      const cleanStock = { ...stockOverrides };
+      for (const k in cleanStock) {
+        if (cleanStock[k] === '') cleanStock[k] = 10;
+      }
+      
       await api.saveFile('src/availability.json', JSON.stringify(availabilityOverrides, null, 2), null, 'Update availability via UI');
-      await api.saveFile('src/stock.json', JSON.stringify(stockOverrides, null, 2), null, 'Update stock via UI');
+      await api.saveFile('src/stock.json', JSON.stringify(cleanStock, null, 2), null, 'Update stock via UI');
       await api.saveFile('src/names.json', JSON.stringify(names, null, 2), null, 'Update custom names via UI');
       await api.triggerWorkflow();
       showToast('\u2705 \u0414\u0430\u043d\u0456 \u0437\u0431\u0435\u0440\u0435\u0436\u0435\u043d\u043e! \u0424\u0456\u0434 \u043e\u043d\u043e\u0432\u043b\u044e\u0454\u0442\u044c\u0441\u044f...');
@@ -249,7 +255,9 @@ export default function App() {
   };
 
   const updateStock = (vendorCode, amount) => {
-    setStockOverrides(prev => ({ ...prev, [vendorCode]: amount }));
+    // If empty string (during typing), just save it in UI state. 
+    // It will be forced to 10 on blur, but let's also ensure Save handles it.
+    setStockOverrides(prev => ({ ...prev, [vendorCode]: amount === '' ? '' : parseInt(amount) || 0 }));
   };
 
   const updateName = (vendorCode, originalName, newName) => {
@@ -509,8 +517,9 @@ export default function App() {
                         <td>
                           <input type="number" min="0" className="input-field" 
                             style={{ width: '100%', padding: '0.4rem', textAlign: 'center' }}
-                            value={stockOverrides[product.vendorCode] !== undefined ? stockOverrides[product.vendorCode] : product.stock}
-                            onChange={(e) => updateStock(product.vendorCode, parseInt(e.target.value) || 0)}
+                            value={stockOverrides[product.vendorCode] !== undefined ? stockOverrides[product.vendorCode] : (product.stock ?? 10)}
+                            onChange={(e) => updateStock(product.vendorCode, e.target.value === '' ? '' : parseInt(e.target.value))}
+                            onBlur={(e) => { if (e.target.value === '') updateStock(product.vendorCode, 10); }}
                           />
                         </td>
                         <td>
@@ -663,8 +672,9 @@ export default function App() {
                             <td>
                               <input type="number" min="0" className="input-field" 
                                 style={{ width: '100%', padding: '0.4rem', textAlign: 'center' }}
-                                value={stockOverrides[product.vendorCode] !== undefined ? stockOverrides[product.vendorCode] : product.stock}
-                                onChange={(e) => updateStock(product.vendorCode, parseInt(e.target.value) || 0)}
+                                value={stockOverrides[product.vendorCode] !== undefined ? stockOverrides[product.vendorCode] : (product.stock ?? 10)}
+                                onChange={(e) => updateStock(product.vendorCode, e.target.value === '' ? '' : parseInt(e.target.value))}
+                                onBlur={(e) => { if (e.target.value === '') updateStock(product.vendorCode, 10); }}
                               />
                             </td>
                             <td>
