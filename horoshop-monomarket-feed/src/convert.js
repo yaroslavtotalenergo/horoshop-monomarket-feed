@@ -38,6 +38,9 @@ try { categoryMap = JSON.parse(fs.readFileSync('src/categories.json', 'utf8')); 
 let availabilityOverrides = {};
 try { availabilityOverrides = JSON.parse(fs.readFileSync('src/availability.json', 'utf8')); } catch (e) { }
 
+let stockOverrides = {};
+try { stockOverrides = JSON.parse(fs.readFileSync('src/stock.json', 'utf8')); } catch (e) { }
+
 // ── Налаштування ────────────────────────────────────────────────
 const CONFIG = {
   horoshopFeedUrl: config.horoshopFeedUrl || process.env.HOROSHOP_FEED_URL || '',
@@ -233,6 +236,11 @@ function transformOffer(offer) {
     available = availabilityOverrides[vendorCode];
   }
 
+  let stock = available ? CONFIG.defaults.stock : 0;
+  if (stockOverrides[vendorCode] !== undefined) {
+    stock = stockOverrides[vendorCode];
+  }
+
   const barcode =
     barcodesConfig[vendorCode] ||
     (offer.barcode ? extractText(offer.barcode) : findParam(params, CONFIG.barcodeParamNames)) ||
@@ -270,6 +278,7 @@ function transformOffer(offer) {
 
     // Ціна та наявність
     available,
+    stock,
     price: Math.round(parseFloat(offer.price) || 0),
     oldPrice: (offer.oldprice || offer.old_price || offer.price_old)
       ? Math.round(parseFloat(offer.oldprice || offer.old_price || offer.price_old))
@@ -358,9 +367,9 @@ function generatePricesJson(offers) {
     price: o.price,
     old_price: o.oldPrice,
     availability: o.available,
-    stock: o.available ? d.stock : 0,
-    warehouses: o.available
-      ? [{ id: d.warehouseId, stock: d.stock }]
+    stock: o.stock,
+    warehouses: o.available || o.stock > 0
+      ? [{ id: d.warehouseId, stock: o.stock }]
       : null,
     warranty_type: d.warrantyType,
     warranty_period: d.warrantyPeriod,
@@ -419,7 +428,8 @@ async function main() {
         oldPrice: o.oldPrice,
         picture: o.pictures.length > 0 ? o.pictures[0] : null,
         category: o.category,
-        description: o.description
+        description: o.description,
+        stock: o.stock
       });
 
       // Фільтрація по whitelist (якщо він не порожній)

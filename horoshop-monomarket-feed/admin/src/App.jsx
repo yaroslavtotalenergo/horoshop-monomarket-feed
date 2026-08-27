@@ -112,6 +112,7 @@ export default function App() {
   const [barcodes, setBarcodes] = useState({});
   const [descriptions, setDescriptions] = useState({});
   const [availabilityOverrides, setAvailabilityOverrides] = useState({});
+  const [stockOverrides, setStockOverrides] = useState({});
   const [names, setNames] = useState({});
 
   const [collapsedCategories, setCollapsedCategories] = useState({});
@@ -150,13 +151,14 @@ export default function App() {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [catalogRes, whitelistRes, barcodesRes, descRes, configRes, availRes, namesRes] = await Promise.all([
+      const [catalogRes, whitelistRes, barcodesRes, descRes, configRes, availRes, stockRes, namesRes] = await Promise.all([
         api.getFile('feeds/catalog.json'),
         api.getFile('src/whitelist.json'),
         api.getFile('src/barcodes.json'),
         api.getFile('src/descriptions.json'),
         api.getFile('src/config.json'),
         api.getFile('src/availability.json'),
+        api.getFile('src/stock.json'),
         api.getFile('src/names.json')
       ]);
 
@@ -168,6 +170,7 @@ export default function App() {
       if (barcodesRes.content) setBarcodes(JSON.parse(barcodesRes.content) || {});
       if (descRes.content) setDescriptions(JSON.parse(descRes.content) || {});
       if (availRes.content) setAvailabilityOverrides(JSON.parse(availRes.content) || {});
+      if (stockRes.content) setStockOverrides(JSON.parse(stockRes.content) || {});
       if (namesRes.content) setNames(JSON.parse(namesRes.content) || {});
       if (configRes.content) setFeedUrl(JSON.parse(configRes.content).horoshopFeedUrl || '');
       
@@ -204,6 +207,7 @@ export default function App() {
       await api.saveFile('src/barcodes.json', JSON.stringify(barcodes, null, 2), null, 'Update barcodes via UI');
       await api.saveFile('src/descriptions.json', JSON.stringify(descriptions, null, 2), null, 'Update descriptions via UI');
       await api.saveFile('src/availability.json', JSON.stringify(availabilityOverrides, null, 2), null, 'Update availability via UI');
+      await api.saveFile('src/stock.json', JSON.stringify(stockOverrides, null, 2), null, 'Update stock via UI');
       await api.saveFile('src/names.json', JSON.stringify(names, null, 2), null, 'Update custom names via UI');
       await api.triggerWorkflow();
       showToast('\u2705 \u0414\u0430\u043d\u0456 \u0437\u0431\u0435\u0440\u0435\u0436\u0435\u043d\u043e! \u0424\u0456\u0434 \u043e\u043d\u043e\u0432\u043b\u044e\u0454\u0442\u044c\u0441\u044f...');
@@ -242,6 +246,10 @@ export default function App() {
       }
       return next;
     });
+  };
+
+  const updateStock = (vendorCode, amount) => {
+    setStockOverrides(prev => ({ ...prev, [vendorCode]: amount }));
   };
 
   const updateName = (vendorCode, originalName, newName) => {
@@ -473,6 +481,7 @@ export default function App() {
                   <tr>
                     <th style={{ width: '60px' }}>Увімк</th>
                     <th style={{ width: '90px' }}>Наявність</th>
+                    <th style={{ width: '80px' }}>Залишок</th>
                     <th>Товар</th>
                     <th style={{ width: '55px', textAlign: 'center' }}>Дні</th>
                     <th style={{ width: '145px' }}>Штрихкод</th>
@@ -496,6 +505,13 @@ export default function App() {
                             <input type="checkbox" checked={isAvailable} disabled={!isSelected} onChange={() => toggleAvailability(product.vendorCode)} />
                             <span className="slider" style={{ background: isAvailable ? '#10b981' : '#f87171' }}></span>
                           </label>
+                        </td>
+                        <td>
+                          <input type="number" min="0" className="input-field" 
+                            style={{ width: '100%', padding: '0.4rem', textAlign: 'center' }}
+                            value={stockOverrides[product.vendorCode] !== undefined ? stockOverrides[product.vendorCode] : product.stock}
+                            onChange={(e) => updateStock(product.vendorCode, parseInt(e.target.value) || 0)}
+                          />
                         </td>
                         <td>
                           <div className="flex-center">
@@ -619,6 +635,7 @@ export default function App() {
                       <tr>
                         <th style={{ width: '60px' }}>Увімк</th>
                         <th style={{ width: '90px' }}>Наявність</th>
+                        <th style={{ width: '80px' }}>Залишок</th>
                         <th>Товар</th>
                         <th style={{ width: '55px', textAlign: 'center' }}>Дні</th>
                         <th style={{ width: '145px' }}>Штрихкод</th>
@@ -642,6 +659,13 @@ export default function App() {
                                 <input type="checkbox" checked={isAvailable} disabled={!isSelected} onChange={() => toggleAvailability(product.vendorCode)} />
                                 <span className="slider" style={{ background: isAvailable ? '#10b981' : '#f87171' }}></span>
                               </label>
+                            </td>
+                            <td>
+                              <input type="number" min="0" className="input-field" 
+                                style={{ width: '100%', padding: '0.4rem', textAlign: 'center' }}
+                                value={stockOverrides[product.vendorCode] !== undefined ? stockOverrides[product.vendorCode] : product.stock}
+                                onChange={(e) => updateStock(product.vendorCode, parseInt(e.target.value) || 0)}
+                              />
                             </td>
                             <td>
                               <div className="flex-center">
