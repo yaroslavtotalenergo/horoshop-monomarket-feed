@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-01T10:02:41.282Z",
+  "updatedAt": "2026-09-01T10:03:51.793Z",
   "total": 92,
   "data": [
     {
@@ -1239,7 +1239,7 @@
     },
     {
       "code": "SLSIFP51100A",
-      "price": 49820,
+      "price": 48766,
       "old_price": null,
       "availability": true,
       "stock": 10,
