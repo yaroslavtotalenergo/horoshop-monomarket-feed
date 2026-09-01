@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-01T10:05:36.526Z",
+  "updatedAt": "2026-09-01T11:03:57.976Z",
   "total": 92,
   "data": [
     {
@@ -1468,7 +1468,7 @@
     },
     {
       "code": "SCIFP24100",
-      "price": 25185,
+      "price": 27703,
       "old_price": null,
       "availability": true,
       "stock": 7,
