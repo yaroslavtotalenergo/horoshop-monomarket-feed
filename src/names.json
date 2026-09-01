@@ -90,5 +90,9 @@
   "SCIFP1225": "Акумулятор LiFePO4 Sacred Sun SCIFP1225 12В 25Аг (300 Вт·г) з BMS",
   "SCIFP12100": "Акумулятор LiFePO4 Sacred Sun SCIFP12100 12В 100Аг (1.28 кВт·г) з BMS та Bluetooth моніторингом",
   "SLSIFP51100A": "Акумулятор LiFePO4 Sacred Sun SLSIFP51100A 51.2В 100Аг (5.12 кВт·г) з вбудованим BMS",
-  "SCIFP48100": "Акумулятор LiFePO₄ Sacred Sun SCIFP48100 48В 100Аг (4.8 кВт·г) з BMS"
+  "SCIFP48100": "Акумулятор LiFePO₄ Sacred Sun SCIFP48100 48В 100Аг (4.8 кВт·г) з BMS",
+  "SCC115070211": "Сонячний контролер SmartSolar (Bluetooth) MPPT 150V/70A-Tr",
+  "SCC115085411": "Сонячний контролер SmartSolar (Bluetooth) MPPT 150V/85A-Tr VE.Can",
+  "SCC115110411": "Сонячний контролер SmartSolar (Bluetooth) MPPT 150V/100A-Tr VE.Can",
+  "SCC125070221": "Сонячний контролер SmartSolar (Bluetooth) MPPT 250V/70A-Tr"
 }
