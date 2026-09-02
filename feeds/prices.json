@@ -1,5 +1,9 @@
 {
+<<<<<<< Updated upstream
   "updatedAt": "2026-09-02T13:12:37.264Z",
+=======
+  "updatedAt": "2026-09-02T13:12:54.849Z",
+>>>>>>> Stashed changes
   "total": 96,
   "data": [
     {
@@ -1543,11 +1547,11 @@
       "price": 27703,
       "old_price": null,
       "availability": true,
-      "stock": 6,
+      "stock": 12,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 6
+          "stock": 12
         }
       ],
       "warranty_type": "manufacturer",
