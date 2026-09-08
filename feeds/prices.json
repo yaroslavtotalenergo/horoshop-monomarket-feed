@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-07T08:47:25.077Z",
+  "updatedAt": "2026-09-08T06:25:22.075Z",
   "total": 97,
   "data": [
     {
@@ -1321,7 +1321,7 @@
     },
     {
       "code": "SCIFP1250",
-      "price": 8471,
+      "price": 9413,
       "old_price": null,
       "availability": true,
       "stock": 9,
@@ -1514,7 +1514,7 @@
     },
     {
       "code": "SCIFP12100",
-      "price": 12592,
+      "price": 14704,
       "old_price": null,
       "availability": true,
       "stock": 8,
@@ -1532,7 +1532,7 @@
     },
     {
       "code": "SCIFP12150",
-      "price": 20056,
+      "price": 22285,
       "old_price": null,
       "availability": true,
       "stock": 10,
@@ -1550,7 +1550,7 @@
     },
     {
       "code": "SCIFP12200",
-      "price": 25780,
+      "price": 28644,
       "old_price": null,
       "availability": true,
       "stock": 10,
@@ -1568,7 +1568,7 @@
     },
     {
       "code": "SCIFP24100",
-      "price": 27703,
+      "price": 29509,
       "old_price": null,
       "availability": true,
       "stock": 12,
@@ -1586,7 +1586,7 @@
     },
     {
       "code": "SCIFP24200",
-      "price": 44645,
+      "price": 49606,
       "old_price": null,
       "availability": true,
       "stock": 10,
@@ -1604,7 +1604,7 @@
     },
     {
       "code": "SCIFP1225",
-      "price": 5678,
+      "price": 6309,
       "old_price": null,
       "availability": true,
       "stock": 10,
@@ -1640,7 +1640,7 @@
     },
     {
       "code": "SLSIFP51314A",
-      "price": 111636,
+      "price": 119603,
       "old_price": null,
       "availability": true,
       "stock": 10,
