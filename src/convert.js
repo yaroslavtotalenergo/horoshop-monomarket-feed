@@ -260,7 +260,7 @@ function transformOffer(offer) {
   if (vendorCode === '1270' || id === '1270') {
     categoryName = 'Трансформатори';
   } else if (/^\d+$/.test(categoryName) || categoryId === '1229') {
-    categoryName = 'АКБ';
+    categoryName = 'Акумулятори';
   }
   const description = offer.description?.__cdata || extractText(offer.description) || '';
 
