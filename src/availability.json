@@ -7,6 +7,7 @@
   "PMP482306000": true,
   "PMP482307010": false,
   "PMP485021010": false,
-  "PMP122120000": true,
-  "SCIFP48100": false
+  "PMP122120000": false,
+  "SCIFP48100": false,
+  "PMP122160000": false
 }
