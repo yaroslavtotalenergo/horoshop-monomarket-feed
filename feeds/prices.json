@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-24T09:48:21.233Z",
+  "updatedAt": "2026-09-24T11:15:56.514Z",
   "total": 97,
   "data": [
     {
@@ -1344,9 +1344,14 @@
       "code": "SCIFP48100",
       "price": 42801,
       "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
+      "availability": true,
+      "stock": 10,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 10
+        }
+      ],
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
