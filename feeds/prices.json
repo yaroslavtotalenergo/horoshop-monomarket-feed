@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-09-25T14:11:36.520Z",
+  "updatedAt": "2026-09-25T14:58:34.351Z",
   "total": 97,
   "data": [
     {
       "code": "BPC123047002",
-      "price": 9945,
-      "old_price": 11050,
+      "price": 11050,
+      "old_price": null,
       "availability": true,
       "stock": 9,
       "warehouses": [
@@ -22,8 +22,8 @@
     },
     {
       "code": "BPC123048002",
-      "price": 10623,
-      "old_price": 11803,
+      "price": 11803,
+      "old_price": null,
       "availability": false,
       "stock": 0,
       "warehouses": null,
@@ -35,8 +35,8 @@
     },
     {
       "code": "BPC241242002",
-      "price": 8532,
-      "old_price": 9480,
+      "price": 9480,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -53,8 +53,8 @@
     },
     {
       "code": "BPC241647002",
-      "price": 9662,
-      "old_price": 10736,
+      "price": 10736,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -71,8 +71,8 @@
     },
     {
       "code": "BPC241648002",
-      "price": 10962,
-      "old_price": 12180,
+      "price": 12180,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -89,8 +89,8 @@
     },
     {
       "code": "BPC121031064R",
-      "price": 7176,
-      "old_price": 7974,
+      "price": 7974,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -107,8 +107,8 @@
     },
     {
       "code": "BPC120433064R",
-      "price": 4577,
-      "old_price": 5086,
+      "price": 5086,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -125,8 +125,8 @@
     },
     {
       "code": "BPC120533064R",
-      "price": 5086,
-      "old_price": 5651,
+      "price": 5651,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -143,8 +143,8 @@
     },
     {
       "code": "BPC120731064R",
-      "price": 6046,
-      "old_price": 6718,
+      "price": 6718,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -161,8 +161,8 @@
     },
     {
       "code": "BPC121531064R",
-      "price": 7459,
-      "old_price": 8287,
+      "price": 8287,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -179,8 +179,8 @@
     },
     {
       "code": "BPC122531064",
-      "price": 10454,
-      "old_price": 11615,
+      "price": 11615,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -197,8 +197,8 @@
     },
     {
       "code": "BPC240831064R",
-      "price": 7459,
-      "old_price": 8287,
+      "price": 8287,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -215,8 +215,8 @@
     },
     {
       "code": "BPC241331064",
-      "price": 10454,
-      "old_price": 11615,
+      "price": 11615,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -233,8 +233,8 @@
     },
     {
       "code": "BPC122547006",
-      "price": 9662,
-      "old_price": 10736,
+      "price": 10736,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -251,8 +251,8 @@
     },
     {
       "code": "BPC121313006",
-      "price": 7515,
-      "old_price": 8350,
+      "price": 8350,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -269,8 +269,8 @@
     },
     {
       "code": "BPC120713006",
-      "price": 5651,
-      "old_price": 6278,
+      "price": 6278,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -287,8 +287,8 @@
     },
     {
       "code": "BPC121713006",
-      "price": 8306,
-      "old_price": 9229,
+      "price": 9229,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -305,8 +305,8 @@
     },
     {
       "code": "BPC241247006",
-      "price": 9662,
-      "old_price": 10736,
+      "price": 10736,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -385,8 +385,8 @@
     },
     {
       "code": "PMP485021010",
-      "price": 62232,
-      "old_price": 77789,
+      "price": 77789,
+      "old_price": null,
       "availability": false,
       "stock": 0,
       "warehouses": null,
@@ -398,8 +398,8 @@
     },
     {
       "code": "QUA483150000",
-      "price": 157362,
-      "old_price": 196702,
+      "price": 196702,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -416,8 +416,8 @@
     },
     {
       "code": "QUA481030010",
-      "price": 119792,
-      "old_price": 149740,
+      "price": 149740,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -434,8 +434,8 @@
     },
     {
       "code": "QUA488024000",
-      "price": 100253,
-      "old_price": 125317,
+      "price": 125317,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -452,8 +452,8 @@
     },
     {
       "code": "QUA485021010",
-      "price": 88601,
-      "old_price": 110751,
+      "price": 110751,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -470,8 +470,8 @@
     },
     {
       "code": "PMP482305010",
-      "price": 31342,
-      "old_price": 39177,
+      "price": 39177,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -488,8 +488,8 @@
     },
     {
       "code": "PMP482306000",
-      "price": 33480,
-      "old_price": 44639,
+      "price": 44639,
+      "old_price": null,
       "availability": true,
       "stock": 11,
       "warehouses": [
@@ -506,8 +506,8 @@
     },
     {
       "code": "PMP482805000",
-      "price": 77902,
-      "old_price": 97378,
+      "price": 97378,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -524,8 +524,8 @@
     },
     {
       "code": "PMP483105000",
-      "price": 93071,
-      "old_price": 116339,
+      "price": 116339,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -542,8 +542,8 @@
     },
     {
       "code": "PMP483150000",
-      "price": 129837,
-      "old_price": 162297,
+      "price": 162297,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -560,8 +560,8 @@
     },
     {
       "code": "PMP482506000",
-      "price": 52287,
-      "old_price": 65358,
+      "price": 65358,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -578,8 +578,8 @@
     },
     {
       "code": "PMR482602020",
-      "price": 82121,
-      "old_price": 102652,
+      "price": 102652,
+      "old_price": null,
       "availability": false,
       "stock": 0,
       "warehouses": null,
@@ -591,8 +591,8 @@
     },
     {
       "code": "QUA482504010",
-      "price": 59821,
-      "old_price": 74776,
+      "price": 74776,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -609,8 +609,8 @@
     },
     {
       "code": "PMP482307010",
-      "price": 64190,
-      "old_price": 80238,
+      "price": 80238,
+      "old_price": null,
       "availability": false,
       "stock": 0,
       "warehouses": null,
@@ -622,8 +622,8 @@
     },
     {
       "code": "PMP482507010",
-      "price": 90560,
-      "old_price": 113200,
+      "price": 113200,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -1360,8 +1360,8 @@
     },
     {
       "code": "PMP482405012",
-      "price": 38625,
-      "old_price": 48281,
+      "price": 48281,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -1378,8 +1378,8 @@
     },
     {
       "code": "PMP482605012",
-      "price": 49072,
-      "old_price": 61340,
+      "price": 61340,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -1432,8 +1432,8 @@
     },
     {
       "code": "PMP482406000",
-      "price": 45456,
-      "old_price": 56820,
+      "price": 56820,
+      "old_price": null,
       "availability": true,
       "stock": 11,
       "warehouses": [
@@ -1450,8 +1450,8 @@
     },
     {
       "code": "PMP482606000",
-      "price": 58364,
-      "old_price": 72955,
+      "price": 72955,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -1486,8 +1486,8 @@
     },
     {
       "code": "PMP482505012",
-      "price": 39742,
-      "old_price": 52990,
+      "price": 52990,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -1684,8 +1684,8 @@
     },
     {
       "code": "PMR482604000",
-      "price": 74135,
-      "old_price": 92669,
+      "price": 92669,
+      "old_price": null,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -1702,8 +1702,8 @@
     },
     {
       "code": "PMP482457010",
-      "price": 66953,
-      "old_price": 83691,
+      "price": 83691,
+      "old_price": null,
       "availability": false,
       "stock": 0,
       "warehouses": null,
