@@ -32,6 +32,9 @@ try { customDescriptions = JSON.parse(fs.readFileSync('src/descriptions.json', '
 let customNames = {};
 try { customNames = JSON.parse(fs.readFileSync('src/names.json', 'utf8')); } catch (e) { }
 
+let customVideos = {};
+try { customVideos = JSON.parse(fs.readFileSync('src/videos.json', 'utf8')); } catch (e) { }
+
 let categoryMap = {};
 try { categoryMap = JSON.parse(fs.readFileSync('src/categories.json', 'utf8')); } catch (e) { }
 
@@ -276,6 +279,7 @@ function transformOffer(offer) {
     brand: extractText(offer.vendor) || '',
     category: categoryName,
     description: customDescriptions[vendorCode] || cleanDescription(description),
+    video: customVideos[vendorCode] || null,
     pictures,
     params,
 
@@ -333,6 +337,11 @@ function generateProductsXml(offers) {
         lines.push(`        <picture>${escapeXml(pic)}</picture>`);
       }
       lines.push('      </image_link>');
+    }
+
+    // Відео
+    if (o.video) {
+      lines.push(`      <video_link>${escapeXml(o.video)}</video_link>`);
     }
 
     // Характеристики

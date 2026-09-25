@@ -114,6 +114,7 @@ export default function App() {
   const [availabilityOverrides, setAvailabilityOverrides] = useState({});
   const [stockOverrides, setStockOverrides] = useState({});
   const [names, setNames] = useState({});
+  const [videos, setVideos] = useState({});
 
   const [collapsedCategories, setCollapsedCategories] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
@@ -151,7 +152,7 @@ export default function App() {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [catalogRes, whitelistRes, barcodesRes, descRes, configRes, availRes, stockRes, namesRes] = await Promise.all([
+      const [catalogRes, whitelistRes, barcodesRes, descRes, configRes, availRes, stockRes, namesRes, videosRes] = await Promise.all([
         api.getFile('feeds/catalog.json'),
         api.getFile('src/whitelist.json'),
         api.getFile('src/barcodes.json'),
@@ -159,7 +160,8 @@ export default function App() {
         api.getFile('src/config.json'),
         api.getFile('src/availability.json'),
         api.getFile('src/stock.json'),
-        api.getFile('src/names.json')
+        api.getFile('src/names.json'),
+        api.getFile('src/videos.json')
       ]);
 
       if (catalogRes.content) {
@@ -172,6 +174,7 @@ export default function App() {
       if (availRes.content) setAvailabilityOverrides(JSON.parse(availRes.content) || {});
       if (stockRes.content) setStockOverrides(JSON.parse(stockRes.content) || {});
       if (namesRes.content) setNames(JSON.parse(namesRes.content) || {});
+      if (videosRes && videosRes.content) setVideos(JSON.parse(videosRes.content) || {});
       if (configRes.content) setFeedUrl(JSON.parse(configRes.content).horoshopFeedUrl || '');
       
       setShas({
@@ -215,6 +218,7 @@ export default function App() {
       await api.saveFile('src/availability.json', JSON.stringify(availabilityOverrides, null, 2), null, 'Update availability via UI');
       await api.saveFile('src/stock.json', JSON.stringify(cleanStock, null, 2), null, 'Update stock via UI');
       await api.saveFile('src/names.json', JSON.stringify(names, null, 2), null, 'Update custom names via UI');
+      await api.saveFile('src/videos.json', JSON.stringify(videos, null, 2), null, 'Update custom videos via UI');
       await api.triggerWorkflow();
       showToast('\u2705 \u0414\u0430\u043d\u0456 \u0437\u0431\u0435\u0440\u0435\u0436\u0435\u043d\u043e! \u0424\u0456\u0434 \u043e\u043d\u043e\u0432\u043b\u044e\u0454\u0442\u044c\u0441\u044f...');
     } catch (e) {
@@ -302,6 +306,14 @@ export default function App() {
       } else {
         next[vendorCode] = value;
       }
+      return next;
+    });
+  };
+  const updateVideo = (vendorCode, value) => {
+    setVideos(prev => {
+      const next = { ...prev };
+      if (!value) delete next[vendorCode];
+      else next[vendorCode] = value;
       return next;
     });
   };
@@ -792,6 +804,18 @@ export default function App() {
             <p style={{ color: 'var(--text-muted)' }}>
               Товар: <strong>{editingDescriptionProduct.name}</strong> ({editingDescriptionProduct.vendorCode})
             </p>
+
+            <div style={{ marginTop: '1rem' }}>
+              <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600 }}>Відео (посилання на mp4/webm)</label>
+              <input 
+                type="text" 
+                placeholder="https://example.com/video.mp4"
+                value={videos[editingDescriptionProduct.vendorCode] || ''} 
+                onChange={e => updateVideo(editingDescriptionProduct.vendorCode, e.target.value)} 
+                className="input-field" 
+                style={{ width: '100%', padding: '0.75rem' }} 
+              />
+            </div>
             
             <div style={{ marginTop: '1rem', background: '#fff', color: '#000', borderRadius: '0.5rem', overflow: 'hidden' }}>
               <EditorProvider>
