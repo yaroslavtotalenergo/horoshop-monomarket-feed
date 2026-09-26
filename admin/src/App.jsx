@@ -21,6 +21,7 @@ import Editor, {
 
 const BtnH3 = createButton('Заголовок H3', <b style={{fontSize: '12px'}}>H3</b>, () => document.execCommand('formatBlock', false, 'H3'));
 import './index.css';
+import * as XLSX from 'xlsx';
 
 const REPO_OWNER = 'yaroslavtotalenergo';
 const REPO_NAME = 'horoshop-monomarket-feed';
@@ -119,6 +120,7 @@ export default function App() {
   const [collapsedCategories, setCollapsedCategories] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
   const [filterMode, setFilterMode] = useState('all');
+  const [activeTab, setActiveTab] = useState('catalog');
   
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -400,6 +402,104 @@ export default function App() {
     }
   };
 
+  const handleExportExcel = () => {
+    const data = catalog.map(p => {
+      return {
+        'Артикул': p.vendorCode,
+        'Назва': names[p.vendorCode] !== undefined ? names[p.vendorCode] : p.name,
+        'Увімкнено для Мономаркету (так/ні)': whitelist.includes(p.vendorCode) ? 'так' : 'ні',
+        'Наявність на Мономаркеті (так/ні)': availabilityOverrides[p.vendorCode] !== false ? 'так' : 'ні',
+        'Штрихкод': barcodes[p.vendorCode] || ''
+      };
+    });
+
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Товари");
+    XLSX.writeFile(workbook, "monomarket_products.xlsx");
+  };
+
+  const handleImportExcel = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      try {
+        const bstr = evt.target.result;
+        const wb = XLSX.read(bstr, { type: 'binary' });
+        const wsname = wb.SheetNames[0];
+        const ws = wb.Sheets[wsname];
+        const data = XLSX.utils.sheet_to_json(ws);
+        
+        let newWhitelist = [...whitelist];
+        let newNames = { ...names };
+        let newAvailability = { ...availabilityOverrides };
+        let newBarcodes = { ...barcodes };
+        
+        let updatedCount = 0;
+
+        data.forEach(row => {
+          const vendorCode = row['Артикул'] ? String(row['Артикул']) : null;
+          if (!vendorCode) return;
+          
+          updatedCount++;
+          
+          if (row['Назва'] !== undefined) {
+             const originalProduct = catalog.find(p => p.vendorCode === vendorCode);
+             if (originalProduct && originalProduct.name !== row['Назва']) {
+                newNames[vendorCode] = row['Назва'];
+             } else if (originalProduct && originalProduct.name === row['Назва']) {
+                delete newNames[vendorCode];
+             } else if (!originalProduct) {
+                newNames[vendorCode] = row['Назва'];
+             }
+          }
+          
+          const includeVal = row['Увімкнено для Мономаркету (так/ні)'];
+          if (includeVal) {
+             const isIncluded = String(includeVal).toLowerCase() === 'так' || String(includeVal).toLowerCase() === 'yes' || String(includeVal) === '1' || String(includeVal).toLowerCase() === 'true';
+             if (isIncluded && !newWhitelist.includes(vendorCode)) {
+                 newWhitelist.push(vendorCode);
+             } else if (!isIncluded && newWhitelist.includes(vendorCode)) {
+                 newWhitelist = newWhitelist.filter(v => v !== vendorCode);
+             }
+          }
+          
+          const availableVal = row['Наявність на Мономаркеті (так/ні)'];
+          if (availableVal) {
+             const isAvailable = String(availableVal).toLowerCase() === 'так' || String(availableVal).toLowerCase() === 'yes' || String(availableVal) === '1' || String(availableVal).toLowerCase() === 'true';
+             if (!isAvailable) {
+                 newAvailability[vendorCode] = false;
+             } else {
+                 newAvailability[vendorCode] = true; 
+             }
+          }
+
+          if (row['Штрихкод'] !== undefined) {
+             if (row['Штрихкод']) {
+                 newBarcodes[vendorCode] = String(row['Штрихкод']);
+             } else {
+                 delete newBarcodes[vendorCode];
+             }
+          }
+        });
+
+        setWhitelist(newWhitelist);
+        setNames(newNames);
+        setAvailabilityOverrides(newAvailability);
+        setBarcodes(newBarcodes);
+
+        showToast(`✅ Успішно оновлено ${updatedCount} товарів з Excel. Не забудьте натиснути "Зберегти зміни".`);
+      } catch (err) {
+        console.error(err);
+        showToast('❌ Помилка імпорту файлу Excel.');
+      }
+      e.target.value = '';
+    };
+    reader.readAsBinaryString(file);
+  };
+
   return (
     <div className="container">
       <div className="header">
@@ -446,6 +546,64 @@ export default function App() {
         </div>
       </div>
 
+      {/* Tabs */}
+      <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-color)' }}>
+        <button 
+          onClick={() => setActiveTab('catalog')}
+          style={{ padding: '0.75rem 1.5rem', background: 'none', border: 'none', borderBottom: activeTab === 'catalog' ? '2px solid #3b82f6' : '2px solid transparent', color: activeTab === 'catalog' ? '#3b82f6' : 'var(--text-main)', cursor: 'pointer', fontWeight: 600, fontSize: '1rem', transition: 'all 0.2s' }}
+        >
+          📦 Каталог товарів
+        </button>
+        <button 
+          onClick={() => setActiveTab('import')}
+          style={{ padding: '0.75rem 1.5rem', background: 'none', border: 'none', borderBottom: activeTab === 'import' ? '2px solid #10b981' : '2px solid transparent', color: activeTab === 'import' ? '#10b981' : 'var(--text-main)', cursor: 'pointer', fontWeight: 600, fontSize: '1rem', transition: 'all 0.2s' }}
+        >
+          📥 Імпорт / Експорт (Excel)
+        </button>
+      </div>
+
+      {activeTab === 'import' && (
+        <div className="glass-panel" style={{ padding: '2rem' }}>
+          <div style={{ maxWidth: '600px' }}>
+            <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+              <span style={{ fontSize: '1.5rem' }}>📊</span> Експорт та імпорт даних
+            </h2>
+            <p style={{ color: 'var(--text-muted)', marginBottom: '2rem', lineHeight: '1.5' }}>
+              Ви можете експортувати поточні налаштування товарів (штрихкоди, назви, наявність та статус увімкнення) в Excel файл, масово відредагувати їх та імпортувати назад.
+            </p>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+              <div style={{ padding: '1.5rem', background: 'rgba(59, 130, 246, 0.05)', border: '1px solid rgba(59, 130, 246, 0.2)', borderRadius: '0.75rem' }}>
+                <h3 style={{ marginTop: 0, marginBottom: '0.75rem', color: '#3b82f6' }}>1. Експорт даних</h3>
+                <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>Завантажити всі товари з поточними змінами у форматі XLSX.</p>
+                <button className="btn" style={{ background: '#3b82f6', color: '#fff' }} onClick={handleExportExcel}>
+                  📥 Завантажити Excel
+                </button>
+              </div>
+
+              <div style={{ padding: '1.5rem', background: 'rgba(16, 185, 129, 0.05)', border: '1px solid rgba(16, 185, 129, 0.2)', borderRadius: '0.75rem' }}>
+                <h3 style={{ marginTop: 0, marginBottom: '0.75rem', color: '#10b981' }}>2. Імпорт даних</h3>
+                <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>Виберіть відредагований Excel файл, щоб застосувати нові налаштування.</p>
+                <input 
+                  type="file" 
+                  accept=".xlsx, .xls" 
+                  onChange={handleImportExcel}
+                  id="excel-upload"
+                  style={{ display: 'none' }}
+                />
+                <label htmlFor="excel-upload" className="btn success" style={{ display: 'inline-block', cursor: 'pointer', textAlign: 'center' }}>
+                  📤 Вибрати файл Excel
+                </label>
+                <p style={{ marginTop: '1rem', fontSize: '0.85rem', color: '#f59e0b', margin: '1rem 0 0' }}>
+                  ⚠️ Увага: Після успішного імпорту натисніть кнопку "Зберегти зміни" вгорі сторінки, щоб застосувати їх.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div style={{ display: activeTab === 'catalog' ? 'block' : 'none' }}>
       {/* Search and Filters */}
       {!loading && catalog.length > 0 && (
         <div style={{ marginBottom: '1rem', display: 'flex', gap: '1rem', alignItems: 'center' }}>
@@ -750,6 +908,8 @@ export default function App() {
           );
         })
       ) : null}
+
+      </div>
 
       {/* Logs modal */}
       {showLogs && (
