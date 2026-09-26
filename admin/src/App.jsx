@@ -407,6 +407,7 @@ export default function App() {
       return {
         'Артикул': p.vendorCode,
         'Назва': names[p.vendorCode] !== undefined ? names[p.vendorCode] : p.name,
+        'Категорія': p.category || 'Без категорії',
         'Увімкнено для Мономаркету (так/ні)': whitelist.includes(p.vendorCode) ? 'так' : 'ні',
         'Наявність на Мономаркеті (так/ні)': availabilityOverrides[p.vendorCode] !== false ? 'так' : 'ні',
         'Штрихкод': barcodes[p.vendorCode] || ''
