@@ -3432,6 +3432,17 @@
     "stock": 10
   },
   {
+    "id": "3377",
+    "vendorCode": "ASS030710118",
+    "name": "Кабель Victron Energy VE.Can to CAN-bus BMS type A, 1.8 м – ASS030710118",
+    "price": 942,
+    "oldPrice": null,
+    "picture": "https://total-energo.com.ua/content/images/28/kabel-ve.can-to-can-bus-bms-type-a-1.8-m-ass030710018-47046894430437_+806a55aa35.jpg",
+    "category": "Моніторинг та керування",
+    "description": "<p><strong>Victron VE.Can to CAN-bus BMS type A Cable &ndash; це спеціалізований кабель</strong>, який дозволяє<strong> інтегрувати акумулятори сторонніх виробників (наприклад, BYD, Pylontech, LG Chem тощо) з CAN-шиною у системи Victron Energy</strong>. Використовується для обміну даними між акумулятором та пристроями Victron через інтерфейс VE.Can. Це забезпечує точну синхронізацію заряду/розряду, підвищену безпеку, автоматичне налаштування параметрів та оптимізацію роботи всієї системи.</p>        <h2>Ключові переваги кабелю VE.Can to CAN-bus BMS type A Cable</h2>    <ol>   <li>Сумісність з популярними літієвими АКБ (BYD, Pylontech, LG Chem)</li>   <li>Дозволяє обмін даними між АКБ та інвертором/зарядним Victron</li>   <li>Автоматичне налаштування параметрів системи (напруга, струм, температури)</li>   <li>Підвищує безпеку роботи LiFePO₄ АКБ завдяки повноцінній інтеграції</li>   <li>Кабель Plug &amp; Play &ndash; не потребує пайки або переналаштування</li>   <li>Вбудований CAN-термінатор, якщо потрібно, знімний</li>  </ol>    <h3><br />  Технічні характеристики</h3>    <ul>   <li><strong>Артикул</strong>: ASS030710018</li>   <li><strong>Тип</strong>: Type A (для сумісних акумуляторів &ndash; див. нижче)</li>   <li><strong>Довжина</strong>: 1,8 метра</li>   <li><strong>Інтерфейс A</strong>: RJ45 (VE.Can)</li>   <li><strong>Інтерфейс B</strong>: DB9 (CAN-BMS порт АКБ)</li>   <li><strong>Вбудований резистор термінатора</strong>: Так (можна зняти, якщо не потрібен)</li>   <li><strong>Сумісні продукти</strong>:   <ul>    <li>Victron MultiPlus, Quattro, EasySolar, Cerbo GX, Venus GX</li>    <li>Акумулятори BYD B-Box, LG Chem Resu, Pylontech, та інші (Type A)</li>   </ul>   </li>  </ul>    <h3><br />  Сценарії використання</h3>    <ol>   <li>Інтеграція BYD Battery-Box з Victron Cerbo GX та MultiPlus</li>   <li>Об&rsquo;єднання систем на Pylontech з інверторами MultiPlus II</li>   <li>Побудова ESS з літієвими АКБ з обміном BMS-даними</li>   <li>Гібридні домашні системи з повною підтримкою LiFePO₄ без налаштувань вручну</li>   <li>Промислові або офісні резервні системи на базі GX + CAN-акумуляторів</li>  </ol>        <h3>Сумісні акумулятори (Type A)</h3>    <ul>   <li>BYD B-Box LV</li>   <li>Pylontech US2000 / US3000 / UP5000</li>   <li>LG Chem RESU (деякі моделі)</li>   <li>BMZ ESS 7.0, 9.0, 12.0</li>   <li>Інші, згідно з <a href=\"https://www.victronenergy.com/live/battery_compatibility:start\" target=\"_blank\"><span style=\"color:#2980b9;\">офіційним списком сумісності Victron</span></a></li>  </ul>",
+    "stock": 10
+  },
+  {
     "id": "3378",
     "vendorCode": "ASS030140030",
     "name": "Інтерфейсний адаптер Victron Energy MK3-USB С (VE.Bus to USB С) – ASS030140030",
