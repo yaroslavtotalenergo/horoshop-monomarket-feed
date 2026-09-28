@@ -4,7 +4,8 @@
   "description": "Конвертер XML-фіду Хорошоп у формати Мономаркет (products.xml + prices.json)",
   "main": "src/convert.js",
   "scripts": {
-    "convert": "node src/convert.js",
+    "sync-stock": "node src/sync-stock.js",
+    "convert": "node src/sync-stock.js && node src/convert.js",
     "test": "node src/convert.js --test"
   },
   "dependencies": {
