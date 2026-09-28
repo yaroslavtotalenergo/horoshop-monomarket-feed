@@ -9,7 +9,7 @@
   "PMP482307010": false,
   "PMP485021010": true,
   "PMP122120000": false,
-  "SCIFP48100": true,
+  "SCIFP48100": false,
   "PMP122160000": false,
   "PMP121800000": false,
   "PMR482602020": false,
@@ -732,5 +732,15 @@
   "ASS032300010": false,
   "ASS032300030": false,
   "HTML": false,
-  "PDF": false
+  "PDF": false,
+  "SCIFP1225": true,
+  "SCIFP1250": true,
+  "SCIFP12100": true,
+  "SCIFP12150": false,
+  "SCIFP12200": false,
+  "SCIFP24100": false,
+  "SCIFP24200": true,
+  "SLSIFP51100A": true,
+  "SLSIFP51100AH": true,
+  "SLSIFP51314A": true
 }
