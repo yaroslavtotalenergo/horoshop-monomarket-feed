@@ -481,7 +481,7 @@ async function main() {
     monoXml += `    <offers>\n`;
 
     for (const c of catalog) {
-      let paramValue = 'вимк';
+      let paramValue = 'Выкл';
       const isEnabled = whitelist.includes(c.vendorCode);
       if (isEnabled && c.available) {
         paramValue = '6';
