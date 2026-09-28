@@ -2,7 +2,8 @@ name: Update Monomarket Feeds
 
 on:
   workflow_dispatch:
-
+  schedule:
+    - cron: '14,44 * * * *'
 jobs:
   update-feeds:
     runs-on: ubuntu-latest
