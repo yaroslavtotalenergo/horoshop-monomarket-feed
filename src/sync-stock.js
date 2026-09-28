@@ -91,6 +91,14 @@ async function main() {
   fs.writeFileSync('src/stock.json', JSON.stringify(stockOverrides, null, 2), 'utf8');
   fs.writeFileSync('src/availability.json', JSON.stringify(availabilityOverrides, null, 2), 'utf8');
   
+  try {
+    const { execSync } = require('child_process');
+    execSync('git add src/stock.json src/availability.json');
+    console.log('✅ Файли залишків додані до git commit.');
+  } catch (err) {
+    console.error('⚠️ Не вдалося додати файли до git:', err.message);
+  }
+  
   console.log(`✅ Синхронізацію завершено! Оновлено/перевірено ${updatedCount} товарів.`);
 }
 
