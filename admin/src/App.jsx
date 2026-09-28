@@ -505,6 +505,8 @@ export default function App() {
       e.target.value = '';
     };
     reader.readAsBinaryString(file);
+  };
+
   const handleSyncGoogleSheets = async () => {
     if (!googleSheets || googleSheets.length === 0) {
       showToast('⚠️ Немає налаштованих Google Таблиць у src/google-sheets.json');
