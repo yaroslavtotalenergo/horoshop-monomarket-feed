@@ -1,2878 +1,3596 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<yml_catalog date="2026-09-28 17:53">
+<yml_catalog date="2026-09-28 18:01">
   <shop>
     <offers>
       <offer>
         <vendorCode>BPC123047002</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>BPC122042002</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC121542002</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC123048002</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>BPC121544002</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC122044002</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC240842002</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC241242002</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>BPC241647002</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>BPC241648002</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>BPC120134034R</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC900100014</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC900110014</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC900500014</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC900520014</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC900200014</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC900300014</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC900400014</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC900110114</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC900120114</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC920100100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC920100110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC920100200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC920100210</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC940100100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC940100200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC121031064R</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>PCH024016001</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PCH024025001</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CCH012020000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CCH012030000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CCH012040000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC120433064R</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC120533064R</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>BPC120731064R</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>BPC121531064R</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>BPC122531064</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>BPC240531064R</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC240831064R</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC241331064</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>CCH012050000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CCH012060000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CCH012080000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CCH012100000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CCH024016000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CCH024030000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CCH024040000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CCH024060000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC122547006</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>BPC121313006</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>BPC120713006</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>BPC121713006</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>BPC122514006</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC240513006</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC240813006</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC241247006</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>BPC241214006</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PSC123051095</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PSC123053095</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PSC125051095</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PSC125053095</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PSC241651095</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PSC242551095</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PSC242553095</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SKY012070000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SKY012070100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SKY024035000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SKY024035100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SDTG2400301</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SDTG2400501</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SDTG2400801</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SDTG2401001</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>STG024050300</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>STG024100300</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SDTG4800251</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SDTG4800501</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SDTG2400302</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SDTG2400504</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SDTG2400303</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SDTG2400503</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SDTG2401003</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SKI024080000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SKI024080002</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SKI024100000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SKI024100002</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN483020000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN245020000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN485020000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIN122160000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIN122200000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIN242160000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIN242200000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN121251200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN121371200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN121501200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN121801200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN122121210</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN241251200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN241371200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN241501200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN241801200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN242121200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN481251200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN481371200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN481501200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN482121200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN122161000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN242161000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN122201000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN242201000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN482201000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN122300000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN242300000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN482300000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN242501000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN482500000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP121500000</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>PIN482600000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP241500000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP481500000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP121800000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP241800000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP481800000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP122120000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP242120000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP482120000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP122160000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP242160000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP482160000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP122200000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP242200000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP482200000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SIN121251100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SIN241251100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP485021010</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>QUA483150000</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>QUA481030010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>QUA488024000</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>QUA485021010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>QUA248020010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>QUA245021010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>QUA243020010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>QUA125020000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP245021010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>QUA123020010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CMP122120000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CMP122160000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CMP242160000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CMP122200000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CMP242200000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP122300001</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP123021010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP242300001</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP242301011</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP483020001</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP483021010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP482305010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP122305010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP482306000</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>PMP242305010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP242505010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP482805000</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>PMP483105000</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>PMP483150000</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>PMP242306000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP482506000</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>PIN482601000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMR482602020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP242307010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>QUA482504010</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>QUA242505010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP482307010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP482507010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>EVC300400300</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI241205200(R)</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI241210200(R)</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI241215200(R)</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI241220200(R)</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>EVC200300200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>EVC200300310</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>EVC200300410</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI241225020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI241205260</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI241210260</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI241220260</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI241221226</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI122421226</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI241270030</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI122408020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI122410020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI122420020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI121222120</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI122424120</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>ORI241224120</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>ORI242428120</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI121236120</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>ORI122436120</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>ORI241236120</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>ORI242440120</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>ORI124838120</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI244840120</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI481238120</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI482438120</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI484838120</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI121236140</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>ORI122436140</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI121210110(R)</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI121222110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI121240110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI122410110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI122424110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI241236140</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>ORI122441110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI124838110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI241210110(R)</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI241224110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI241240110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI242410110(R)</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI242428110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI242441110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI244810110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI242440140</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI244828110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI244841110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI481210110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI481224110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI481240110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI482410110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI482428110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI482441110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI484810110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI484828110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI484841110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP000100001</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP136100010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP136175010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP136225010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP136250010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP136300010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP136400010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP136500010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP138040020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP138060020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP138080020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP138100020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP138125020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP138150020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP138300020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>LYN020102010</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>CIP132100010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP132125010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP132200010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP133050010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP133060010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP133080010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP133100010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP000050001</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP106100000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP143300020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP143400020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>LYN060102010</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>LYN060404010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>LYN034160200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>LYN034160210</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>LYN034170210</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>LYN034160310</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>LYN034170310</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>LYN040102110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>VBS127010010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>VBB115021020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>VBB115022020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>VBB115040020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>VBB115060020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>VBB125020620</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>VBB125021220</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>VBB125040010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>VBB125060020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>VBB160040010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>VBB160080010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPP900480100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPP900451100</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>BPP900455050</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPP900455150</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPP900460050</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPP900465050</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPP900455070</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPP900455170</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPP900465070</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPP900400100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>REC000300010R</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SDRPCSV</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPA000100010R</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SDRPSKC</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030530203</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030530209</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030530218</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030530230</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030530250</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030530310</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030531203</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030531209</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030531218</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030531230</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030531250</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030531320</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030560100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030560200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030560300</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030560500</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030530010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030530030</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030140000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030710118</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030140030</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030532010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030520200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030200000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030520500</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030700000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030550120</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030690000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030550220</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030550320</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030510120</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030550410</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030065510</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CTR110000500</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CTR110000550</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CTR110002050</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CTR120000500</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CTR120000550</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CTR120002050</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CTR140050100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS000001000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS000020000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS000100000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>REL200200100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>REL300100000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>REL200100100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>REL300300000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>REL200300100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030572018</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030572050</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAM010700000 (R)</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAM010702000 (R)</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAM010702200 (R)</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAM010700100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAM030710100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAM030712000 (R)</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAM030712200 (R)</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ADA500100100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ADA500140100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ADA500180100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS000200100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CSE000100000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030536011</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030537010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHU050130050</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHU050150050</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHU050210050</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHU050220050</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHU065130050</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHU065150050</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHU065210050</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHU065220050</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHU500050100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHU102050200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHU202050200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHU602050200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC110020170R</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC010010050R</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC010015050R</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC010015200R</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC020050200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC020030200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC115045222</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BCD000402000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BCD000802000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ARG100201020 (R)</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ARG100301020 (R)</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ARG200201020 (R)</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ARG200301020 (R)</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ARG180301020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ARG160201020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ARG140301020R</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ARG120201020R</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ARG100301000R</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ARG080201000 (R)</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ARG080202000 (R)</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC020035000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC010060200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC010060300</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC010070200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC010070300</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC125110441</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC125070441</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC115110420</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC075010060R</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>SCC075015060R</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC110015060R</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC110020160R</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC110030210</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>SCC110050210</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC115035210</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>SCC115045212</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC125070221</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC125060221</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>SCC125060321</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC115060211</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC115060311</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC115070211</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CYR010120011 (R)</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CYR010230010 (R)</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CYR010400000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CYR020400000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CYR010120110R</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC125110412</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>SCC125110512</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC125085511</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC125085411</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>SCC125070421</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC125070521</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC115070411</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC115070511</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC115085411</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC115085511</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC115110411</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC115110511</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BBA000100100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPR065022000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412101084</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPR110022000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPR122022000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT406225084</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPR110048000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT212070084</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT212120086</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPR000065400</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPR000100400</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPR000220400</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPR048100400</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT212200084</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412350084</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412550084</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412800084</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412121084</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412151084</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412201084</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412800085</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412101085</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412151085</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412201085</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412124081</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412117081</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412015081</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412025081</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412038081</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412060082</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412110081</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412112081</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412123081</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412105164</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412151164</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412181164</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412101104</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412550104</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412800104</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412121104</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412151104</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412201104</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT412126101</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT612116081</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT612110081</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SPM042152402</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SPM040401200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SPM040551200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SPP040301200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SPP040451200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SPM041851200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SPM041501200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SPM041301200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SPP041751200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SPP043302402</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT512110610</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT512118610</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT512120610</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT524110610</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT524120610</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT512110620</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT512115620</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT512120620</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT512130620</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT524110620</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT524120620</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT524130620</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT548110620</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT512110712</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT512020705</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT512060705</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT512120705</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT524050705</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PPP012020000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BMS300200200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PPP012030000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PPP012040000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BMS400100300</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BMS400100000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BMS110022000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BMS210055000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SBS050150200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC900500000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC900650010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>DMC000200010R</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>REC020005010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCIFP1250</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>SLSIFP51100A</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>SCIFP48100</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>BPP920140100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>VPN000200000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN122161200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN123020000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN243020000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CMP121800000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP122505012</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP482405012</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP482605012</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>BPC900250014</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHP302501500</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHP302502500</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHP304001500</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHP306002500</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHP301603000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHP301602000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHP303202000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHP301604000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHP303204000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHP307700220</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHP307700260</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHP307700240</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHP307700280</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SHP307700300</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ITR040202041</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ITR040252043</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ITR040362041</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ITR040362042</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ITR000702001</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ITR000100001</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ITR000100101</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>GDI000016000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>GDI000032000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>GDI000064000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI303025000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI303050000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI303100000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI121217050</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>ORI481224120</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS070300100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>VBB413020010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP134030020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP134040020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP134060020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP134080020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP134100020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP136060010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP136080010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP138175020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP138200020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP138225020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP138250020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP138400020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP138500020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP050060000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP143500020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPP900600100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>REC030001210</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>REC010001110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>REC040010210R</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030066004</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030066009</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030066018</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030066030</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030066050</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030066101</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030066151</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030066301</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030064900</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030064921</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030064951</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030064980</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030065001</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030065011</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030065021</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030065031</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030065050</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC010005000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC010010000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC010020020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC010030020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC010005050</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC010010050</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC010020050</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC010030050</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC040020050</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC040030050</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC010005010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC010010010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC010020110</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC010030010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC900300000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC940100100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC940100200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS030550500</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC950100000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC950120000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC950140000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC950200000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC950300210</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC950300310</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC950400210</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC950400310</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BMS300200000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BMS300200300</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CYR010120450</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CYR020120450</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CYR010120430</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CYR020120430</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CYR010120412</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CYR010230450</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CYR020230450</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CYR020230430</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CYR010230430</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CYR010230412</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS070200100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SPP041301200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCA000100000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCA000300000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCA000500000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCA000100100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCA000300100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCA000500100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCA001000100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCA002000100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCA500100000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCA500200000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCA520500000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCA520300000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SDFI0000000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI242417040</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPP900800150</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP140325000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CEP122160000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CEP122161000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CEP242161010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN481801200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP100200100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP100400060</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIP100400070</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPP900495100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP482406000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP482606000</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>ASS070400100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SUNPOW51100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SUNCONINV</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SUNCOMPAR</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SPM040303603</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SPM040553603</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SPM040953003</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMC483200400</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI241230022</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI241260020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI241280020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI241280030</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP122405010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC145110512</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP482505012</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>ASS030130010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT512110740</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT512120740</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BAT524110740</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SLS300175100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SPM043456803</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SPM043657203</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCIFP12100</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>SCIFP12150</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>SCIFP12200</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>SCIFP24100</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>SCIFP24200</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>SCIFP1225</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>SLSIFP51100W</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>ITR000802002</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>COS230502100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>COS230103100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>RCD000300200</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SLSIFP51314A</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>PSC361550095</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PSC481350095</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI121221040</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>CIN122120000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC145120512</vendorCode>
         <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>PMR482604000</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP482457010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMP482657010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMR803150300</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SPM040203603</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SPM041303603</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SPM041903903</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SPM042357203</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SPM042855603</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS032300010</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ASS032300030</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPP900453100</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ITR050452042</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ITR000100052</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCC010020060</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PMR482602030</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SPM042357204</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ORI481260020</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>ITR040452042</vendorCode>
         <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
     </offers>
   </shop>
