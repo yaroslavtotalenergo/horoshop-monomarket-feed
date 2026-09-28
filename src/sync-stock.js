@@ -94,4 +94,8 @@ async function main() {
   console.log(`✅ Синхронізацію завершено! Оновлено/перевірено ${updatedCount} товарів.`);
 }
 
-main();
+module.exports = main;
+
+if (require.main === module) {
+  main();
+}

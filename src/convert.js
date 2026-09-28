@@ -412,6 +412,19 @@ async function main() {
   console.log('');
 
   try {
+    // 0. Синхронізувати залишки з Google Sheets
+    if (!isTest) {
+      try {
+        const syncStock = require('./sync-stock');
+        await syncStock();
+        // Перезавантажити оновлені дані
+        availabilityOverrides = JSON.parse(fs.readFileSync('src/availability.json', 'utf8'));
+        stockOverrides = JSON.parse(fs.readFileSync('src/stock.json', 'utf8'));
+      } catch (e) {
+        console.error('⚠️ Не вдалося синхронізувати залишки:', e.message);
+      }
+    }
+
     // 1. Завантажити XML
     const xmlText = await fetchHoroshopXml();
 
