@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-27T05:40:57.387Z",
+  "updatedAt": "2026-09-28T10:47:38.535Z",
   "total": 97,
   "data": [
     {
@@ -1362,14 +1362,9 @@
       "code": "PMP482405012",
       "price": 38625,
       "old_price": 48281,
-      "availability": true,
-      "stock": 10,
-      "warehouses": [
-        {
-          "id": "stock01te",
-          "stock": 10
-        }
-      ],
+      "availability": false,
+      "stock": 0,
+      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
