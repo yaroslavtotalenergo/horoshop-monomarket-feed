@@ -481,15 +481,18 @@ async function main() {
     monoXml += `    <offers>\n`;
 
     for (const c of catalog) {
-      let paramValue = 'Выкл';
+      let paramValueRu = 'Выкл';
+      let paramValueUa = '';
       const isEnabled = whitelist.includes(c.vendorCode);
       if (isEnabled && c.available) {
-        paramValue = '6';
+        paramValueRu = '6';
+        paramValueUa = 'Так';
       }
       
       monoXml += `      <offer>\n`;
       monoXml += `        <vendorCode>${escapeXml(c.vendorCode || '')}</vendorCode>\n`;
-      monoXml += `        <param name="«Покупка частями» от monobank">${paramValue}</param>\n`;
+      monoXml += `        <param name="«Покупка частями» от monobank">${paramValueRu}</param>\n`;
+      monoXml += `        <param name="«Покупка частинами» від monobank">${paramValueUa}</param>\n`;
       monoXml += `      </offer>\n`;
     }
 
