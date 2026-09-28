@@ -21,7 +21,7 @@ async function main() {
 
   const keywords = {
     article: ['артикул', 'артікул', 'vendor code', 'vendor_code'],
-    warehouses: ['ридомиль', 'в.олександівка 1', 'в.олександівка 2', 'с.борщагівка']
+    warehouses: ['ридомиль', 'в.олександівка 1', 'в.олександівка 2', 'с.борщагівка', 'київ1', 'київ2', 'київ 1', 'київ 2']
   };
 
   let updatedCount = 0;
@@ -30,8 +30,14 @@ async function main() {
     if (!sheetUrl) continue;
     
     let exportUrl = sheetUrl;
+    let gid = '';
+    const gidMatch = exportUrl.match(/gid=([0-9]+)/);
+    if (gidMatch) gid = `&gid=${gidMatch[1]}`;
+    
     if (exportUrl.includes('/edit')) {
-      exportUrl = exportUrl.replace(/\/edit.*/, '/export?format=csv');
+      exportUrl = exportUrl.replace(/\/edit.*/, `/export?format=csv${gid}`);
+    } else if (exportUrl.includes('/export') && !exportUrl.includes('gid=') && gid) {
+      exportUrl += gid;
     }
     
     console.log(`📥 Завантаження: ${exportUrl}`);

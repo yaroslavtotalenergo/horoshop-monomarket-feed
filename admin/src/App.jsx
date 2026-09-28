@@ -517,7 +517,7 @@ export default function App() {
     try {
       const keywords = {
         article: ['артикул', 'артікул', 'vendor code', 'vendor_code'],
-        warehouses: ['ридомиль', 'в.олександівка 1', 'в.олександівка 2', 'с.борщагівка']
+        warehouses: ['ридомиль', 'в.олександівка 1', 'в.олександівка 2', 'с.борщагівка', 'київ1', 'київ2', 'київ 1', 'київ 2']
       };
 
       const newStock = { ...stockOverrides };
@@ -527,7 +527,15 @@ export default function App() {
       for (const sheet of googleSheets) {
         if (!sheet) continue;
         let url = sheet;
-        if (url.includes('/edit')) url = url.replace(/\/edit.*/, '/export?format=csv');
+        let gid = '';
+        const gidMatch = url.match(/gid=([0-9]+)/);
+        if (gidMatch) gid = `&gid=${gidMatch[1]}`;
+        
+        if (url.includes('/edit')) {
+          url = url.replace(/\/edit.*/, `/export?format=csv${gid}`);
+        } else if (url.includes('/export') && !url.includes('gid=') && gid) {
+          url += gid;
+        }
         
         const res = await fetch(url);
         if (!res.ok) throw new Error(`Не вдалося завантажити таблицю`);
