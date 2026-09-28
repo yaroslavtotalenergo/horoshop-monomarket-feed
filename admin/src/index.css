@@ -249,7 +249,7 @@ input:checked + .slider:before {
   border-radius: 0.5rem;
   background: var(--surface-color);
   border: 1px solid var(--border-color);
-  color: white;
+  color: var(--text-main);
   box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
   animation: slideUp 0.3s ease-out forwards;
   z-index: 2000;
