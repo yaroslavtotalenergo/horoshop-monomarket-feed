@@ -28,6 +28,7 @@ const REPO_NAME = 'horoshop-monomarket-feed';
 const FEED_URLS = {
   xml: `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/feeds/products.xml`,
   json: `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/feeds/prices.json`,
+  horoshop: `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/main/feeds/horoshop-monobank.xml`,
 };
 
 // Simple hash function for password storage
@@ -1140,6 +1141,13 @@ export default function App() {
               <div style={{ display: 'flex', gap: '0.5rem' }}>
                 <input type="text" className="input-field" value={FEED_URLS.json} readOnly style={{ fontFamily: 'monospace', fontSize: '0.8rem' }} />
                 <button className="btn" style={{ flexShrink: 0 }} onClick={() => copyToClipboard(FEED_URLS.json)}>📋 Копіювати</button>
+              </div>
+            </div>
+            <div className="form-group">
+              <label>🛍️ Файл для імпорту в Хорошоп (Покупка частинами)</label>
+              <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <input type="text" className="input-field" value={FEED_URLS.horoshop} readOnly style={{ fontFamily: 'monospace', fontSize: '0.8rem' }} />
+                <button className="btn" style={{ flexShrink: 0 }} onClick={() => copyToClipboard(FEED_URLS.horoshop)}>📋 Копіювати</button>
               </div>
             </div>
             <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1.5rem' }}>
