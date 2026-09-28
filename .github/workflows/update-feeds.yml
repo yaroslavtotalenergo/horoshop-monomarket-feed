@@ -22,6 +22,8 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+      - name: Sync Stock from Google Sheets
+        run: node src/sync-stock.js
 
       - name: Run converter
         env:
@@ -39,8 +41,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add feeds/
-          git diff --staged --quiet || git commit -m "Update feeds"
+          git add feeds/ src/stock.json src/availability.json
+          git diff --staged --quiet || git commit -m "Update feeds and stock"
           git pull --rebase origin main -X theirs || true
           git push
 
