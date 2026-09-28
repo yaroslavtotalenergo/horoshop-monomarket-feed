@@ -454,7 +454,8 @@ async function main() {
         picture: o.pictures.length > 0 ? o.pictures[0] : null,
         category: o.category,
         description: o.description,
-        stock: o.stock
+        stock: o.stock,
+        available: o.available
       });
 
       // Фільтрація по whitelist (якщо він не порожній)
@@ -473,18 +474,44 @@ async function main() {
     const productsXml = generateProductsXml(offers);
     const pricesJson = generatePricesJson(offers);
 
+    // Генерація horoshop-monobank.xml
+    let monoXml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+    monoXml += `<yml_catalog date="${new Date().toISOString().replace('T', ' ').substring(0, 16)}">\n`;
+    monoXml += `  <shop>\n`;
+    monoXml += `    <offers>\n`;
+
+    for (const c of catalog) {
+      let paramValue = 'вимк';
+      const isEnabled = whitelist.includes(c.vendorCode);
+      if (isEnabled && c.available) {
+        paramValue = '6';
+      }
+      
+      monoXml += `      <offer>\n`;
+      monoXml += `        <vendorCode>${escapeXml(c.vendorCode || '')}</vendorCode>\n`;
+      monoXml += `        <param name="«Покупка частями» от monobank">${paramValue}</param>\n`;
+      monoXml += `      </offer>\n`;
+    }
+
+    monoXml += `    </offers>\n`;
+    monoXml += `  </shop>\n`;
+    monoXml += `</yml_catalog>\n`;
+
     // 5. Збереження
     const productsPath = path.join(FEEDS_DIR, 'products.xml');
     const pricesPath = path.join(FEEDS_DIR, 'prices.json');
     const catalogPath = path.join(FEEDS_DIR, 'catalog.json');
+    const monoPath = path.join(FEEDS_DIR, 'horoshop-monobank.xml');
 
     fs.writeFileSync(productsPath, productsXml, 'utf-8');
     fs.writeFileSync(pricesPath, pricesJson, 'utf-8');
     fs.writeFileSync(catalogPath, JSON.stringify(catalog, null, 2), 'utf-8');
+    fs.writeFileSync(monoPath, monoXml, 'utf-8');
 
     console.log('');
     console.log(`✅ feeds/products.xml — ${availableCount} товарів`);
     console.log(`✅ feeds/prices.json  — ${offers.length} пропозицій`);
+    console.log(`✅ feeds/horoshop-monobank.xml — ${catalog.length} товарів`);
     console.log('');
 
     // Статистика
