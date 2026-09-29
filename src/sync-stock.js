@@ -185,10 +185,8 @@ async function main() {
 
   console.log(`✅ Синхронізацію завершено! Оновлено/перевірено ${updatedCount} товарів.`);
 
-  // ── 5. Telegram-сповіщення про результат ─────────────────────
-  if (!hasAnyFatalError) {
-    await notifySuccess(updatedCount, warnings);
-  }
+  // ── 5. Telegram-сповіщення тільки при помилках ───────────────
+  // Успішне оновлення — без сповіщення
 }
 
 module.exports = main;
