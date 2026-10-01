@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-01T09:33:32.383Z",
+  "updatedAt": "2026-10-01T10:04:39.646Z",
   "total": 97,
   "data": [
     {
@@ -1134,9 +1134,14 @@
       "code": "SCIFP48100",
       "price": 43129,
       "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
+      "availability": true,
+      "stock": 50,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 50
+        }
+      ],
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -1272,11 +1277,11 @@
       "price": 14765,
       "old_price": null,
       "availability": true,
-      "stock": 1,
+      "stock": 6,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 1
+          "stock": 6
         }
       ],
       "warranty_type": "manufacturer",
@@ -1289,9 +1294,14 @@
       "code": "SCIFP12150",
       "price": 22377,
       "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
+      "availability": true,
+      "stock": 10,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 10
+        }
+      ],
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -1302,9 +1312,14 @@
       "code": "SCIFP12200",
       "price": 28763,
       "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
+      "availability": true,
+      "stock": 10,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 10
+        }
+      ],
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -1315,9 +1330,14 @@
       "code": "SCIFP24100",
       "price": 29631,
       "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
+      "availability": true,
+      "stock": 4,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 4
+        }
+      ],
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
