@@ -95,6 +95,25 @@ async function updateHoroshop() {
     });
   }
 
+  // --- DIAGNOSTIC START ---
+  try {
+    console.log('--- DIAGNOSTIC: Отримуємо 1 товар з Хорошопу для перевірки полів ---');
+    const exportUrl = `https://${DOMAIN}/api/catalog/export/?token=${token}&limit=1`;
+    const expRes = await axios.get(exportUrl);
+    const items = expRes.data?.response?.data || [];
+    if (items.length > 0) {
+      const item = items[0];
+      const monoKeys = Object.keys(item).filter(k => k.toLowerCase().includes('mono') || k.toLowerCase().includes('pay') || k.toLowerCase().includes('installment'));
+      console.log('Знайдені поля для Монобанку/Оплат:', monoKeys);
+      for (const k of monoKeys) {
+        console.log(`Поле ${k} =`, JSON.stringify(item[k]));
+      }
+    }
+  } catch(err) {
+    console.log('Diagnostic error:', err.message);
+  }
+  // --- DIAGNOSTIC END ---
+
   console.log(`📦 Підготовлено ${products.length} товарів для відправки в Хорошоп...`);
 
   // 4. Відправляємо в Хорошоп
