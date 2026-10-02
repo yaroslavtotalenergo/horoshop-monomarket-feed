@@ -618,9 +618,7 @@ export default function App() {
           <button className="btn" style={{ background: '#0ea5e9' }} onClick={handleSync} disabled={syncing || loading || saving || !token}>
             {syncing ? <span className="loader"></span> : '🔄 Оновити з Хорошопу'}
           </button>
-          <button className="btn" style={{ background: '#2563eb' }} onClick={handleSyncGoogleSheets} disabled={syncing || loading || saving || !token} title="Оновити залишки з Google Таблиць">
-            {syncing ? <span className="loader"></span> : '📊 Оновити залишки'}
-          </button>
+          
           <button className="btn" style={{ background: '#10b981' }} onClick={handleTriggerFeed} disabled={syncing || loading || saving || !token} title="Запустити генерацію фіду без збереження">
             {syncing ? <span className="loader"></span> : `⚡ Запустити фід (${daysToDispatch}д)`}
           </button>
