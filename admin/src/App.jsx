@@ -758,7 +758,8 @@ export default function App() {
               <table style={{ tableLayout: 'fixed', width: '100%' }}>
                 <thead>
                   <tr>
-                    <th style={{ width: '60px' }}>Увімк</th>
+                    <th style={{ width: '60px' }} title="Завжди в наявності (10 шт)">Завжди<br/>Є</th>
+                      <th style={{ width: '60px' }}>Моно</th>
                     <th style={{ width: '90px' }}>Наявність</th>
                     <th style={{ width: '80px' }}>Залишок</th>
                     <th>Товар</th>
@@ -775,11 +776,17 @@ export default function App() {
                     return (
                       <tr key={product.vendorCode} style={{ opacity: isSelected ? 1 : 0.5 }}>
                         <td>
-                          <label className="toggle-switch">
-                            <input type="checkbox" checked={isSelected} onChange={() => toggleWhitelist(product.vendorCode)} />
-                            <span className="slider"></span>
-                          </label>
-                        </td>
+                            <label className="toggle-switch" title="Завжди 10 шт і доступно">
+                              <input type="checkbox" checked={alwaysAvailable.includes(product.vendorCode)} onChange={() => toggleAlwaysAvailable(product.vendorCode)} />
+                              <span className="slider" style={{ background: alwaysAvailable.includes(product.vendorCode) ? '#8b5cf6' : '' }}></span>
+                            </label>
+                          </td>
+                          <td>
+                            <label className="toggle-switch">
+                              <input type="checkbox" checked={isSelected} onChange={() => toggleWhitelist(product.vendorCode)} />
+                              <span className="slider"></span>
+                            </label>
+                          </td>
                         <td>
                           <label className="toggle-switch" style={{ opacity: isSelected ? 1 : 0.4 }}>
                             <input type="checkbox" checked={isAvailable} disabled={!isSelected} onChange={() => toggleAvailability(product.vendorCode)} />
@@ -914,7 +921,8 @@ export default function App() {
                 <table style={{ tableLayout: 'fixed', width: '100%' }}>
                     <thead>
                       <tr>
-                        <th style={{ width: '60px' }}>Увімк</th>
+                        <th style={{ width: '60px' }} title="Завжди в наявності (10 шт)">Завжди<br/>Є</th>
+                      <th style={{ width: '60px' }}>Моно</th>
                         <th style={{ width: '90px' }}>Наявність</th>
                         <th style={{ width: '80px' }}>Залишок</th>
                         <th>Товар</th>
@@ -931,11 +939,17 @@ export default function App() {
                         return (
                           <tr key={product.vendorCode} style={{ opacity: isSelected ? 1 : 0.5 }}>
                             <td>
-                              <label className="toggle-switch">
-                                <input type="checkbox" checked={isSelected} onChange={() => toggleWhitelist(product.vendorCode)} />
-                                <span className="slider"></span>
-                              </label>
-                            </td>
+                            <label className="toggle-switch" title="Завжди 10 шт і доступно">
+                              <input type="checkbox" checked={alwaysAvailable.includes(product.vendorCode)} onChange={() => toggleAlwaysAvailable(product.vendorCode)} />
+                              <span className="slider" style={{ background: alwaysAvailable.includes(product.vendorCode) ? '#8b5cf6' : '' }}></span>
+                            </label>
+                          </td>
+                          <td>
+                            <label className="toggle-switch">
+                              <input type="checkbox" checked={isSelected} onChange={() => toggleWhitelist(product.vendorCode)} />
+                              <span className="slider"></span>
+                            </label>
+                          </td>
                             <td>
                               <label className="toggle-switch" style={{ opacity: isSelected ? 1 : 0.4 }}>
                                 <input type="checkbox" checked={isAvailable} disabled={!isSelected} onChange={() => toggleAvailability(product.vendorCode)} />
