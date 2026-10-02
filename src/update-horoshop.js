@@ -70,16 +70,13 @@ async function updateHoroshop() {
     const isAvailable = availabilityOverrides[article] || false;
     const isWhitelisted = whitelist.includes(article);
 
-    // Згідно документації Хорошопу
-    const presenceStatus = isAvailable ? "В наявності" : "Немає в наявності";
-    
     // Якщо товар увімкнено для Мономаркету і він є в наявності - ставимо оплату частинами
     // 1 - вимкнено. Для тесту пробуємо ID = 6
     const monoInstallmentsId = (isWhitelisted && isAvailable) ? 6 : 1;
 
+    // Відправляємо ТІЛЬКИ налаштування Оплати частинами. Більше НІЧОГО не чіпаємо.
     products.push({
       article: article,
-      presence: presenceStatus,
       monobank_installments_payment: {
         id: monoInstallmentsId
       }
