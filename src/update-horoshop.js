@@ -2,7 +2,8 @@ const axios = require('axios');
 const fs = require('fs');
 
 async function updateHoroshop() {
-  const DOMAIN = process.env.HOROSHOP_DOMAIN;
+  let DOMAIN = process.env.HOROSHOP_DOMAIN || '';
+  DOMAIN = DOMAIN.replace(/^https?:\/\//, '').replace(/\/$/, '');
   const LOGIN = process.env.HOROSHOP_API_LOGIN;
   const PASSWORD = process.env.HOROSHOP_API_PASSWORD;
 
