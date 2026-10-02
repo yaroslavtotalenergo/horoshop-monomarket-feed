@@ -40,6 +40,12 @@ jobs:
           DAYS_TO_DISPATCH: ${{ vars.DAYS_TO_DISPATCH || '1' }}
           SHOP_NAME: ${{ vars.SHOP_NAME || 'Store' }}
         run: node src/convert.js
+      - name: Push to Horoshop API
+        env:
+          HOROSHOP_DOMAIN: ${{ secrets.HOROSHOP_DOMAIN }}
+          HOROSHOP_API_LOGIN: ${{ secrets.HOROSHOP_API_LOGIN }}
+          HOROSHOP_API_PASSWORD: ${{ secrets.HOROSHOP_API_PASSWORD }}
+        run: node src/update-horoshop.js
 
       - name: Push updated feeds
         run: |
