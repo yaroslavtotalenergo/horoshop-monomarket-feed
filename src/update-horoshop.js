@@ -78,10 +78,12 @@ async function updateHoroshop() {
   for (const article of articles) {
     const isAvailable = availabilityOverrides[article] || false;
     const isWhitelisted = whitelist.includes(article);
+    const isAlwaysAvailable = alwaysAvailable.includes(article);
 
-    // Якщо товар увімкнено для Мономаркету і він є в наявності - ставимо оплату частинами
-    // 1 - вимкнено. Для тесту пробуємо ID = 6
-    const monoInstallmentsId = (isWhitelisted && isAvailable) ? 6 : 1;
+    // Якщо товар у списку "Завжди 10", ми примусово вмикаємо йому 6 платежів на Хорошопі, 
+    // навіть якщо для самого Мономаркету він вимкнений (isWhitelisted = false).
+    // Якщо ж він не в списку "Завжди 10", тоді діє стандартне правило: (Увімкнено + Є в наявності).
+    const monoInstallmentsId = (isAlwaysAvailable || (isWhitelisted && isAvailable)) ? 6 : 1;
 
     // Відправляємо ТІЛЬКИ налаштування Оплати частинами. Більше НІЧОГО не чіпаємо.
     products.push({
