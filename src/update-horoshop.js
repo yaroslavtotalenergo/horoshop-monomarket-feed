@@ -17,6 +17,7 @@ async function updateHoroshop() {
   let stockOverrides = {};
   let availabilityOverrides = {};
   let whitelist = [];
+  let alwaysAvailable = [];
 
   try {
     if (fs.existsSync('src/stock.json')) {
@@ -28,7 +29,7 @@ async function updateHoroshop() {
     if (fs.existsSync('src/whitelist.json')) {
       whitelist = JSON.parse(fs.readFileSync('src/whitelist.json', 'utf8'));
     }
-    let alwaysAvailable = [];
+    
     if (fs.existsSync('src/always-available.json')) {
       alwaysAvailable = JSON.parse(fs.readFileSync('src/always-available.json', 'utf8'));
     }
