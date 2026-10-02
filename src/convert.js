@@ -44,6 +44,15 @@ try { availabilityOverrides = JSON.parse(fs.readFileSync('src/availability.json'
 let stockOverrides = {};
 try { stockOverrides = JSON.parse(fs.readFileSync('src/stock.json', 'utf8')); } catch (e) { }
 
+let alwaysAvailable = [];
+try { alwaysAvailable = JSON.parse(fs.readFileSync('src/always-available.json', 'utf8')); } catch (e) { }
+
+// Apply always available logic to overrides immediately so convert logic picks it up
+for (const article of alwaysAvailable) {
+  availabilityOverrides[article] = true;
+  stockOverrides[article] = 10;
+}
+
 // ── Налаштування ────────────────────────────────────────────────
 const CONFIG = {
   horoshopFeedUrl: config.horoshopFeedUrl || process.env.HOROSHOP_FEED_URL || '',

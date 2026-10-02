@@ -28,6 +28,15 @@ async function updateHoroshop() {
     if (fs.existsSync('src/whitelist.json')) {
       whitelist = JSON.parse(fs.readFileSync('src/whitelist.json', 'utf8'));
     }
+    let alwaysAvailable = [];
+    if (fs.existsSync('src/always-available.json')) {
+      alwaysAvailable = JSON.parse(fs.readFileSync('src/always-available.json', 'utf8'));
+    }
+    for (const article of alwaysAvailable) {
+      availabilityOverrides[article] = true;
+      // We also track stock overrides for iteration
+      stockOverrides[article] = 10;
+    }
   } catch (e) {
     console.error('❌ Помилка читання файлів:', e.message);
     return;

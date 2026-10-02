@@ -111,6 +111,7 @@ export default function App() {
   const [feedUrl, setFeedUrl] = useState('');
   const [catalog, setCatalog] = useState([]);
   const [whitelist, setWhitelist] = useState([]);
+  const [alwaysAvailable, setAlwaysAvailable] = useState([]);
   const [barcodes, setBarcodes] = useState({});
   const [descriptions, setDescriptions] = useState({});
   const [availabilityOverrides, setAvailabilityOverrides] = useState({});
@@ -156,7 +157,7 @@ export default function App() {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [catalogRes, whitelistRes, barcodesRes, descRes, configRes, availRes, stockRes, namesRes, videosRes, sheetsRes] = await Promise.all([
+      const [catalogRes, whitelistRes, barcodesRes, descRes, configRes, availRes, stockRes, namesRes, videosRes, sheetsRes, alwaysAvailRes] = await Promise.all([
         api.getFile('feeds/catalog.json'),
         api.getFile('src/whitelist.json'),
         api.getFile('src/barcodes.json'),
@@ -166,7 +167,8 @@ export default function App() {
         api.getFile('src/stock.json'),
         api.getFile('src/names.json'),
         api.getFile('src/videos.json'),
-        api.getFile('src/google-sheets.json')
+        api.getFile('src/google-sheets.json'),
+        api.getFile('src/always-available.json')
       ]);
 
       if (catalogRes.content) {
@@ -174,6 +176,7 @@ export default function App() {
         setCatalog(Array.isArray(parsed) ? parsed : (parsed.data || []));
       }
       if (whitelistRes.content) setWhitelist(JSON.parse(whitelistRes.content) || []);
+      if (alwaysAvailRes && alwaysAvailRes.content) setAlwaysAvailable(JSON.parse(alwaysAvailRes.content) || []);
       if (barcodesRes.content) setBarcodes(JSON.parse(barcodesRes.content) || {});
       if (descRes.content) setDescriptions(JSON.parse(descRes.content) || {});
       if (availRes.content) setAvailabilityOverrides(JSON.parse(availRes.content) || {});
@@ -216,6 +219,7 @@ export default function App() {
     try {
       // Save files sequentially to avoid concurrent SHA conflicts
       await api.saveFile('src/whitelist.json', JSON.stringify(whitelist, null, 2), null, 'Update whitelist via UI');
+      await api.saveFile('src/always-available.json', JSON.stringify(alwaysAvailable, null, 2), null, 'Update always available via UI');
       await api.saveFile('src/barcodes.json', JSON.stringify(barcodes, null, 2), null, 'Update barcodes via UI');
       await api.saveFile('src/descriptions.json', JSON.stringify(descriptions, null, 2), null, 'Update descriptions via UI');
       // Clean up empty strings from stockOverrides before saving
@@ -247,6 +251,10 @@ export default function App() {
       loadData();
     } catch (e) { console.error(e); }
     setSaving(false);
+  };
+
+  const toggleAlwaysAvailable = (vendorCode) => {
+    setAlwaysAvailable(prev => prev.includes(vendorCode) ? prev.filter(v => v !== vendorCode) : [...prev, vendorCode]);
   };
 
   const toggleWhitelist = (vendorCode) => {
@@ -764,6 +772,7 @@ export default function App() {
                 <tbody>
                   {filteredCatalog.map(product => {
                     const isSelected = whitelist.includes(product.vendorCode);
+                        const isAlwaysAvail = alwaysAvailable.includes(product.vendorCode);
                     const isAvailable = availabilityOverrides[product.vendorCode] !== false;
                     return (
                       <tr key={product.vendorCode} style={{ opacity: isSelected ? 1 : 0.5 }}>
@@ -919,6 +928,7 @@ export default function App() {
                     <tbody>
                       {products.map(product => {
                         const isSelected = whitelist.includes(product.vendorCode);
+                        const isAlwaysAvail = alwaysAvailable.includes(product.vendorCode);
                         const isAvailable = availabilityOverrides[product.vendorCode] !== false;
                         return (
                           <tr key={product.vendorCode} style={{ opacity: isSelected ? 1 : 0.5 }}>
