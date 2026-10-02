@@ -74,9 +74,12 @@ async function updateHoroshop() {
     // 1 - вимкнено. Для тесту пробуємо ID = 6
     const monoInstallmentsId = (isWhitelisted && isAvailable) ? 6 : 1;
 
-    // Відправляємо ТІЛЬКИ налаштування Оплати частинами. Більше НІЧОГО не чіпаємо.
+    // Згідно документації Хорошопу
+    const presenceStatus = isAvailable ? "В наявності" : "Немає в наявності";
+
     products.push({
       article: article,
+      presence: presenceStatus,
       monobank_installments_payment: {
         id: monoInstallmentsId
       }
@@ -88,6 +91,12 @@ async function updateHoroshop() {
   // 4. Відправляємо в Хорошоп
   try {
     const importUrl = `https://${DOMAIN}/api/catalog/import/`;
+    console.log('Відправляємо запит до:', importUrl);
+    // DEBUG: Виводимо перший товар, щоб побачити структуру
+    if (products.length > 0) {
+      console.log('Приклад товару:', JSON.stringify(products[0], null, 2));
+    }
+
     const importRes = await axios.post(importUrl, {
       token: token,
       products: products
@@ -96,6 +105,8 @@ async function updateHoroshop() {
     });
 
     const data = importRes.data;
+    console.log('Відповідь сервера:', JSON.stringify(data, null, 2).substring(0, 500));
+    
     if (data.status === 'OK') {
       console.log('✅ Всі товари успішно оновлено через API!');
     } else if (data.status === 'WARNING') {
