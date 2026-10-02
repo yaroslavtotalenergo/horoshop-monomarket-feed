@@ -254,6 +254,15 @@ export default function App() {
   };
 
   const toggleAlwaysAvailable = (vendorCode) => {
+    const isCurrentlyChecked = alwaysAvailable.includes(vendorCode);
+    const isWhitelisted = whitelist.includes(vendorCode);
+    const isAvailable = availabilityOverrides[vendorCode] !== false;
+    
+    if (!isCurrentlyChecked && isWhitelisted && isAvailable) {
+      showToast('⚠️ Дублювання функцій: товар і так увімкнений та є на складі.');
+      return;
+    }
+    
     setAlwaysAvailable(prev => prev.includes(vendorCode) ? prev.filter(v => v !== vendorCode) : [...prev, vendorCode]);
   };
 
