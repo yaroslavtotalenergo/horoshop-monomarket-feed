@@ -429,6 +429,12 @@ async function main() {
         // Перезавантажити оновлені дані
         availabilityOverrides = JSON.parse(fs.readFileSync('src/availability.json', 'utf8'));
         stockOverrides = JSON.parse(fs.readFileSync('src/stock.json', 'utf8'));
+        
+        // Знову застосувати "Завжди 10", бо дані перезаписалися
+        for (const article of alwaysAvailable) {
+          availabilityOverrides[article] = true;
+          stockOverrides[article] = 10;
+        }
       } catch (e) {
         console.error('⚠️ Не вдалося синхронізувати залишки:', e.message);
       }
