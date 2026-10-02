@@ -3414,8 +3414,8 @@
       </offer>
       <offer>
         <vendorCode>SCIFP12100</vendorCode>
-        <param name="«Покупка частями» от monobank">6</param>
-        <param name="«Покупка частинами» від monobank">Так</param>
+        <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>SCIFP12150</vendorCode>
