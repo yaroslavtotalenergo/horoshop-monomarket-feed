@@ -354,6 +354,8 @@ export default function App() {
     
     if (filterMode === 'enabled') {
       result = result.filter(p => whitelist.includes(p.vendorCode));
+    } else if (filterMode === 'always_10') {
+      result = result.filter(p => alwaysAvailable.includes(p.vendorCode));
     } else if (filterMode === 'no_barcode') {
       result = result.filter(p => !barcodes[p.vendorCode] && !p.barcode);
     }
@@ -373,13 +375,15 @@ export default function App() {
       );
     }
     return result;
-  }, [catalog, searchQuery, filterMode, whitelist, barcodes]);
+  }, [catalog, searchQuery, filterMode, whitelist, barcodes, alwaysAvailable]);
 
   const grouped = useMemo(() => {
     const map = {};
     let baseCatalog = catalog;
     if (filterMode === 'enabled') {
       baseCatalog = catalog.filter(p => whitelist.includes(p.vendorCode));
+    } else if (filterMode === 'always_10') {
+      baseCatalog = catalog.filter(p => alwaysAvailable.includes(p.vendorCode));
     } else if (filterMode === 'no_barcode') {
       baseCatalog = catalog.filter(p => !barcodes[p.vendorCode] && !p.barcode);
     }
@@ -389,7 +393,7 @@ export default function App() {
       map[cat].push(product);
     }
     return Object.entries(map).sort(([a], [b]) => a.localeCompare(b, 'uk'));
-  }, [catalog, filterMode, whitelist, barcodes]);
+  }, [catalog, filterMode, whitelist, barcodes, alwaysAvailable]);
 
   const getCategoryStats = (products) => {
     const selected = products.filter(p => whitelist.includes(p.vendorCode)).length;
@@ -728,6 +732,7 @@ export default function App() {
           <select className="input-field" style={{ width: '220px', fontSize: '0.95rem', cursor: 'pointer' }} value={filterMode} onChange={e => setFilterMode(e.target.value)}>
             <option value="all">👁️ Усі товари</option>
             <option value="enabled">🟢 Тільки увімкнені в фід</option>
+            <option value="always_10">💜 Тільки "Завжди 10"</option>
             <option value="no_barcode">⚠️ Без штрихкоду</option>
           </select>
         </div>
