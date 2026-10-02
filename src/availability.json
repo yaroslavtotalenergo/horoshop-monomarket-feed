@@ -735,7 +735,7 @@
   "PDF": false,
   "SCIFP1225": true,
   "SCIFP1250": true,
-  "SCIFP12100": false,
+  "SCIFP12100": true,
   "SCIFP12150": true,
   "SCIFP12200": true,
   "SCIFP24100": true,
