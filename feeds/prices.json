@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04T17:33:33.602Z",
+  "updatedAt": "2026-10-04T18:04:35.074Z",
   "total": 97,
   "data": [
     {
@@ -7,11 +7,11 @@
       "price": 11050,
       "old_price": null,
       "availability": true,
-      "stock": 5,
+      "stock": 4,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 5
+          "stock": 4
         }
       ],
       "warranty_type": "manufacturer",
@@ -97,11 +97,11 @@
       "price": 7974,
       "old_price": null,
       "availability": true,
-      "stock": 8,
+      "stock": 6,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 8
+          "stock": 6
         }
       ],
       "warranty_type": "manufacturer",
@@ -164,11 +164,11 @@
       "price": 8287,
       "old_price": null,
       "availability": true,
-      "stock": 5,
+      "stock": 4,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 5
+          "stock": 4
         }
       ],
       "warranty_type": "manufacturer",
@@ -354,14 +354,9 @@
       "code": "PMP122160000",
       "price": 30187,
       "old_price": 37733,
-      "availability": true,
-      "stock": 1,
-      "warehouses": [
-        {
-          "id": "stock01te",
-          "stock": 1
-        }
-      ],
+      "availability": false,
+      "stock": 0,
+      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
