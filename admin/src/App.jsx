@@ -614,24 +614,38 @@ export default function App() {
   };
 
   return (
-    <div className="container">
+    <div className="layout-wrapper">
+      <div className="sidebar">
+        <div className="sidebar-logo">
+          <div style={{ background: 'var(--primary)', color: 'white', borderRadius: '8px', padding: '4px', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>⚡</div> 
+          Syncdash
+        </div>
+        <div className="sidebar-menu">
+          <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)', margin: '1rem 0 0.5rem 1rem', textTransform: 'uppercase' }}>Система</div>
+          <a className={`sidebar-item ${activeTab === 'catalog' ? 'active' : ''}`} onClick={() => setActiveTab('catalog')}>
+            📦 Товари
+          </a>
+          <a className="sidebar-item" onClick={() => { setShowLogs(true); loadLogs(); }}>
+            ⏱️ Журнал логів
+          </a>
+          <a className="sidebar-item" onClick={() => setShowLinks(true)}>
+            🔗 XML фіди
+          </a>
+          <a className="sidebar-item" onClick={() => setShowSettings(true)}>
+            ⚙️ Налаштування
+          </a>
+        </div>
+      </div>
+      <div className="container">
       <div className="header">
         <div>
-          <h1>Monomarket Feed Admin</h1>
-          <p style={{ color: 'var(--text-muted)', margin: 0 }}>Керування товарами для маркетплейсу</p>
+          <h1>Огляд синхронізації</h1>
+          <p style={{ color: 'var(--text-muted)', margin: 0 }}>Моніторинг складських залишків у реальному часі</p>
         </div>
         <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-          <button className="btn" style={{ background: '#7c3aed' }} onClick={() => setShowLinks(true)}>
-            🔗 Посилання
-          </button>
-          <button className="btn" style={{ background: '#f59e0b', color: '#fff' }} onClick={() => { setShowLogs(true); loadLogs(); }}>
-            📝 Історія
-          </button>
-          <button className="btn" onClick={() => setShowSettings(true)}>⚙️ Налаштування</button>
           <button className="btn" style={{ background: '#0ea5e9' }} onClick={handleSync} disabled={syncing || loading || saving || !token}>
             {syncing ? <span className="loader"></span> : '🔄 Оновити з Хорошопу'}
           </button>
-          
           <button className="btn" style={{ background: '#10b981' }} onClick={handleTriggerFeed} disabled={syncing || loading || saving || !token} title="Запустити генерацію фіду без збереження">
             {syncing ? <span className="loader"></span> : `⚡ Запустити фід (${daysToDispatch}д)`}
           </button>
@@ -1215,6 +1229,7 @@ export default function App() {
       )}
 
       {toast && <div className="toast">{toast}</div>}
+      </div>
     </div>
   );
 }
