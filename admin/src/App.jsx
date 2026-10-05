@@ -618,7 +618,7 @@ export default function App() {
       <div className="sidebar">
         <div className="sidebar-logo">
           <div style={{ background: 'var(--primary)', color: 'white', borderRadius: '8px', padding: '4px', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>⚡</div> 
-          Syncdash
+          TOTAL ENERGO
         </div>
         <div className="sidebar-menu">
           <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)', margin: '1rem 0 0.5rem 1rem', textTransform: 'uppercase' }}>Система</div>
