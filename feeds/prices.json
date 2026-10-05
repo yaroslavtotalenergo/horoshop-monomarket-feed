@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-05T18:33:30.625Z",
+  "updatedAt": "2026-10-05T19:04:41.324Z",
   "total": 97,
   "data": [
     {
@@ -115,11 +115,11 @@
       "price": 5086,
       "old_price": null,
       "availability": true,
-      "stock": 1,
+      "stock": 2,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 1
+          "stock": 2
         }
       ],
       "warranty_type": "manufacturer",
@@ -254,11 +254,11 @@
       "price": 8350,
       "old_price": null,
       "availability": true,
-      "stock": 10,
+      "stock": 20,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 10
+          "stock": 20
         }
       ],
       "warranty_type": "manufacturer",
@@ -339,11 +339,11 @@
       "price": 21347,
       "old_price": 26683,
       "availability": true,
-      "stock": 2,
+      "stock": 4,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 2
+          "stock": 4
         }
       ],
       "warranty_type": "manufacturer",
@@ -357,11 +357,11 @@
       "price": 26118,
       "old_price": 32648,
       "availability": true,
-      "stock": 2,
+      "stock": 4,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 2
+          "stock": 4
         }
       ],
       "warranty_type": "manufacturer",
@@ -375,11 +375,11 @@
       "price": 30187,
       "old_price": 37733,
       "availability": true,
-      "stock": 1,
+      "stock": 2,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 1
+          "stock": 2
         }
       ],
       "warranty_type": "manufacturer",
@@ -431,9 +431,14 @@
       "code": "QUA488024000",
       "price": 100253,
       "old_price": 125317,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
+      "availability": true,
+      "stock": 1,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 1
+        }
+      ],
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -471,11 +476,11 @@
       "price": 35712,
       "old_price": 44639,
       "availability": true,
-      "stock": 1,
+      "stock": 2,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 1
+          "stock": 2
         }
       ],
       "warranty_type": "manufacturer",
@@ -527,9 +532,14 @@
       "code": "PMP482506000",
       "price": 52287,
       "old_price": 65358,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
+      "availability": true,
+      "stock": 1,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 1
+        }
+      ],
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -668,11 +678,11 @@
       "price": 10736,
       "old_price": null,
       "availability": true,
-      "stock": 1,
+      "stock": 2,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 1
+          "stock": 2
         }
       ],
       "warranty_type": "manufacturer",
@@ -884,9 +894,14 @@
       "code": "BPP900451100",
       "price": 16638,
       "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
+      "availability": true,
+      "stock": 1,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 1
+        }
+      ],
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -916,11 +931,11 @@
       "price": 4269,
       "old_price": null,
       "availability": true,
-      "stock": 3,
+      "stock": 6,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 3
+          "stock": 6
         }
       ],
       "warranty_type": "manufacturer",
@@ -947,11 +962,11 @@
       "price": 6027,
       "old_price": null,
       "availability": true,
-      "stock": 4,
+      "stock": 8,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 4
+          "stock": 8
         }
       ],
       "warranty_type": "manufacturer",
@@ -983,11 +998,11 @@
       "price": 12368,
       "old_price": null,
       "availability": true,
-      "stock": 1,
+      "stock": 2,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 1
+          "stock": 2
         }
       ],
       "warranty_type": "manufacturer",
@@ -1210,9 +1225,14 @@
       "code": "PMP482605012",
       "price": 49072,
       "old_price": 61340,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
+      "availability": true,
+      "stock": 1,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 1
+        }
+      ],
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -1242,11 +1262,11 @@
       "price": 23858,
       "old_price": null,
       "availability": true,
-      "stock": 1,
+      "stock": 2,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 1
+          "stock": 2
         }
       ],
       "warranty_type": "manufacturer",
