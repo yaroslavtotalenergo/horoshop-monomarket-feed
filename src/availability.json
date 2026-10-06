@@ -742,6 +742,6 @@
   "SCIFP24200": true,
   "SLSIFP51100A": true,
   "SLSIFP51100AH": true,
-  "SLSIFP51314A": true,
+  "SLSIFP51314A": false,
   "BPC240813006": true
 }
