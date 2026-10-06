@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-06T14:11:25.107Z",
-  "total": 96,
+  "updatedAt": "2026-10-06T14:13:15.912Z",
+  "total": 97,
   "data": [
     {
       "code": "BPC123047002",
@@ -1437,6 +1437,24 @@
         {
           "id": "stock01te",
           "stock": 1
+        }
+      ],
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "SLSIFP51100AH",
+      "price": 52762,
+      "old_price": null,
+      "availability": true,
+      "stock": 47,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 47
         }
       ],
       "warranty_type": "manufacturer",
