@@ -501,7 +501,7 @@
   "BAM010700000 (R)": true,
   "BAM010702000 (R)": true,
   "BAM010702200 (R)": false,
-  "BAM030712000 (R)": true,
+  "BAM030712000 (R)": false,
   "BAM030712200 (R)": false,
   "BAM010700100": false,
   "BAM030710100": false,
