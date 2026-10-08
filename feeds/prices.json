@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-08T15:04:35.518Z",
+  "updatedAt": "2026-10-08T15:33:34.760Z",
   "total": 97,
   "data": [
     {
@@ -169,11 +169,11 @@
       "price": 8180,
       "old_price": null,
       "availability": true,
-      "stock": 4,
+      "stock": 3,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 4
+          "stock": 3
         }
       ],
       "warranty_type": "manufacturer",
@@ -374,14 +374,9 @@
       "code": "PMP122160000",
       "price": 29794,
       "old_price": 37243,
-      "availability": true,
-      "stock": 1,
-      "warehouses": [
-        {
-          "id": "stock01te",
-          "stock": 1
-        }
-      ],
+      "availability": false,
+      "stock": 0,
+      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -1342,11 +1337,11 @@
       "price": 15473,
       "old_price": null,
       "availability": true,
-      "stock": 4,
+      "stock": 2,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 4
+          "stock": 2
         }
       ],
       "warranty_type": "manufacturer",
