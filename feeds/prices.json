@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-08T11:33:35.185Z",
+  "updatedAt": "2026-10-08T12:04:40.322Z",
   "total": 97,
   "data": [
     {
@@ -115,11 +115,11 @@
       "price": 5019,
       "old_price": null,
       "availability": true,
-      "stock": 2,
+      "stock": 1,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 2
+          "stock": 1
         }
       ],
       "warranty_type": "manufacturer",
@@ -254,11 +254,11 @@
       "price": 8242,
       "old_price": null,
       "availability": true,
-      "stock": 20,
+      "stock": 9,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 20
+          "stock": 9
         }
       ],
       "warranty_type": "manufacturer",
@@ -339,11 +339,11 @@
       "price": 21069,
       "old_price": 26336,
       "availability": true,
-      "stock": 4,
+      "stock": 2,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 4
+          "stock": 2
         }
       ],
       "warranty_type": "manufacturer",
@@ -357,11 +357,11 @@
       "price": 25779,
       "old_price": 32223,
       "availability": true,
-      "stock": 4,
+      "stock": 2,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 4
+          "stock": 2
         }
       ],
       "warranty_type": "manufacturer",
@@ -375,11 +375,11 @@
       "price": 29794,
       "old_price": 37243,
       "availability": true,
-      "stock": 2,
+      "stock": 1,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 2
+          "stock": 1
         }
       ],
       "warranty_type": "manufacturer",
@@ -678,11 +678,11 @@
       "price": 10597,
       "old_price": null,
       "availability": true,
-      "stock": 2,
+      "stock": 1,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 2
+          "stock": 1
         }
       ],
       "warranty_type": "manufacturer",
@@ -851,11 +851,11 @@
       "price": 9295,
       "old_price": null,
       "availability": true,
-      "stock": 6,
+      "stock": 4,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 6
+          "stock": 4
         }
       ],
       "warranty_type": "manufacturer",
