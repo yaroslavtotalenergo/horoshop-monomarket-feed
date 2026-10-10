@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T13:33:29.331Z",
+  "updatedAt": "2026-10-10T13:40:47.387Z",
   "total": 97,
   "data": [
     {
@@ -525,8 +525,8 @@
     },
     {
       "code": "PMP482506000",
-      "price": 63947,
-      "old_price": null,
+      "price": 51157,
+      "old_price": 63947,
       "availability": true,
       "stock": 1,
       "warehouses": [
@@ -1401,7 +1401,7 @@
     },
     {
       "code": "SCIFP24200",
-      "price": 47063,
+      "price": 52292,
       "old_price": null,
       "availability": true,
       "stock": 1,
