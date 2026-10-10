@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T20:04:38.853Z",
+  "updatedAt": "2026-10-10T20:33:29.575Z",
   "total": 97,
   "data": [
     {
@@ -7,11 +7,11 @@
       "price": 10811,
       "old_price": null,
       "availability": true,
-      "stock": 13,
+      "stock": 12,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 13
+          "stock": 12
         }
       ],
       "warranty_type": "manufacturer",
@@ -169,11 +169,11 @@
       "price": 8109,
       "old_price": null,
       "availability": true,
-      "stock": 3,
+      "stock": 1,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 3
+          "stock": 1
         }
       ],
       "warranty_type": "manufacturer",
@@ -187,11 +187,11 @@
       "price": 11364,
       "old_price": null,
       "availability": true,
-      "stock": 6,
+      "stock": 4,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 6
+          "stock": 4
         }
       ],
       "warranty_type": "manufacturer",
@@ -783,14 +783,9 @@
       "code": "ORI121236140",
       "price": 14128,
       "old_price": null,
-      "availability": true,
-      "stock": 1,
-      "warehouses": [
-        {
-          "id": "stock01te",
-          "stock": 1
-        }
-      ],
+      "availability": false,
+      "stock": 0,
+      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -1239,11 +1234,11 @@
       "price": 20394,
       "old_price": null,
       "availability": true,
-      "stock": 2,
+      "stock": 1,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 2
+          "stock": 1
         }
       ],
       "warranty_type": "manufacturer",
