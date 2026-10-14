@@ -1646,18 +1646,18 @@ export default function App() {
           </div>
 
           {/* Table */}
-          <div style={{ overflowX: 'auto', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
-            <table style={{ margin: 0, width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem' }}>
+          <div style={{ borderRadius: '8px', border: '1px solid var(--border-color)', background: '#ffffff', overflow: 'visible' }}>
+            <table style={{ margin: 0, width: '100%', borderCollapse: 'separate', borderSpacing: 0, fontSize: '0.85rem' }}>
               <thead>
-                <tr style={{ background: '#f8fafc', borderBottom: '2px solid var(--border-color)' }}>
-                  <th style={{ width: '110px', padding: '0.75rem 1rem' }}>Артикул</th>
-                  <th style={{ padding: '0.75rem 1rem' }}>Товар</th>
-                  <th style={{ width: '110px', padding: '0.75rem 0.5rem', textAlign: 'center' }}>Склад (Excel)</th>
-                  <th style={{ width: '140px', padding: '0.75rem 0.5rem' }}>Хорошоп</th>
-                  <th style={{ width: '140px', padding: '0.75rem 0.5rem' }}>Prom.ua</th>
-                  <th style={{ width: '130px', padding: '0.75rem 0.5rem' }}>Мономаркет</th>
-                  <th style={{ width: '200px', padding: '0.75rem 0.5rem' }}>Статус / Зауваження</th>
-                  <th style={{ width: '130px', padding: '0.75rem 0.5rem', textAlign: 'center' }}>Швидка дія</th>
+                <tr style={{ background: '#f8fafc' }}>
+                  <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '110px', padding: '0.75rem 1rem', borderTopLeftRadius: '7px' }}>Артикул</th>
+                  <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', padding: '0.75rem 1rem' }}>Товар</th>
+                  <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '110px', padding: '0.75rem 0.5rem', textAlign: 'center' }}>Склад (Excel)</th>
+                  <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '140px', padding: '0.75rem 0.5rem' }}>Хорошоп</th>
+                  <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '140px', padding: '0.75rem 0.5rem' }}>Prom.ua</th>
+                  <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '130px', padding: '0.75rem 0.5rem' }}>Мономаркет</th>
+                  <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '200px', padding: '0.75rem 0.5rem' }}>Статус / Зауваження</th>
+                  <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '130px', padding: '0.75rem 0.5rem', textAlign: 'center', borderTopRightRadius: '7px' }}>Швидка дія</th>
                 </tr>
               </thead>
               <tbody>
