@@ -5,6 +5,7 @@
   "main": "src/convert.js",
   "scripts": {
     "sync-stock": "node src/sync-stock.js",
+    "sync-prom": "node src/sync-prom.js",
     "convert": "node src/sync-stock.js && node src/convert.js",
     "test": "node src/convert.js --test"
   },

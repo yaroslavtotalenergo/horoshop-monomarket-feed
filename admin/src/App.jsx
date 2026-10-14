@@ -125,6 +125,14 @@ export default function App() {
   const [filterMode, setFilterMode] = useState('all');
   const [activeTab, setActiveTab] = useState('catalog');
   
+  const [promWhitelist, setPromWhitelist] = useState([]);
+  const [promToken, setPromToken] = useState('d24092ed4ff1937f177358180846399f62841be0');
+  const [syncingProm, setSyncingProm] = useState(false);
+  const [savingProm, setSavingProm] = useState(false);
+  const [promSearchQuery, setPromSearchQuery] = useState('');
+  const [promFilterMode, setPromFilterMode] = useState('all');
+  const [promCategoryFilter, setPromCategoryFilter] = useState('all');
+  
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [syncing, setSyncing] = useState(false);
@@ -157,7 +165,7 @@ export default function App() {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [catalogRes, whitelistRes, barcodesRes, descRes, configRes, availRes, stockRes, namesRes, videosRes, sheetsRes, alwaysAvailRes] = await Promise.all([
+      const [catalogRes, whitelistRes, barcodesRes, descRes, configRes, availRes, stockRes, namesRes, videosRes, sheetsRes, alwaysAvailRes, promWhitelistRes, promConfigRes] = await Promise.all([
         api.getFile('feeds/catalog.json'),
         api.getFile('src/whitelist.json'),
         api.getFile('src/barcodes.json'),
@@ -168,7 +176,9 @@ export default function App() {
         api.getFile('src/names.json'),
         api.getFile('src/videos.json'),
         api.getFile('src/google-sheets.json'),
-        api.getFile('src/always-available.json')
+        api.getFile('src/always-available.json'),
+        api.getFile('src/prom-whitelist.json'),
+        api.getFile('src/prom-config.json')
       ]);
 
       if (catalogRes.content) {
@@ -188,6 +198,16 @@ export default function App() {
         setGoogleSheets(parsed.sheets || []);
       }
       if (configRes.content) setFeedUrl(JSON.parse(configRes.content).horoshopFeedUrl || '');
+      
+      if (promWhitelistRes && promWhitelistRes.content) {
+        try { setPromWhitelist(JSON.parse(promWhitelistRes.content) || []); } catch (e) { }
+      }
+      if (promConfigRes && promConfigRes.content) {
+        try {
+          const cfg = JSON.parse(promConfigRes.content);
+          if (cfg.token) setPromToken(cfg.token);
+        } catch (e) { }
+      }
       
       setShas({
         whitelist: whitelistRes.sha,
@@ -248,10 +268,119 @@ export default function App() {
     try {
       const confRes = await api.saveFile('src/config.json', JSON.stringify({ horoshopFeedUrl: feedUrl }, null, 2), shas.config, 'Update config via Admin Panel');
       setShas({ ...shas, config: confRes.content.sha });
+      if (promToken) {
+        await api.saveFile('src/prom-config.json', JSON.stringify({ token: promToken }, null, 2), null, 'Update Prom token via Settings');
+      }
       loadData();
     } catch (e) { console.error(e); }
     setSaving(false);
   };
+
+  const togglePromWhitelist = (vendorCode) => {
+    setPromWhitelist(prev =>
+      prev.includes(vendorCode)
+        ? prev.filter(c => c !== vendorCode)
+        : [...prev, vendorCode]
+    );
+  };
+
+  const handleSaveProm = async () => {
+    setSavingProm(true);
+    try {
+      await api.saveFile('src/prom-whitelist.json', JSON.stringify(promWhitelist, null, 2), null, 'Update Prom whitelist via UI');
+      if (promToken) {
+        await api.saveFile('src/prom-config.json', JSON.stringify({ token: promToken }, null, 2), null, 'Update Prom config via UI');
+      }
+      showToast('✅ Налаштування Prom.ua збережено!');
+    } catch (e) {
+      console.error('Prom save error:', e);
+      showToast('❌ Помилка: ' + (e?.message || 'невідома'));
+    }
+    setSavingProm(false);
+  };
+
+  const handleTriggerPromSync = async () => {
+    setSyncingProm(true);
+    try {
+      await api.triggerWorkflow('sync-prom.yml');
+      showToast('✅ Синхронізацію з Prom.ua запущено (~1-2 хв)');
+    } catch (e) {
+      showToast('❌ Помилка запуску: ' + (e?.message || ''));
+    }
+    setSyncingProm(false);
+  };
+
+  const handleBulkPromToggle = (enable) => {
+    const targetCodes = filteredPromCatalog.map(p => p.vendorCode).filter(Boolean);
+    setPromWhitelist(prev => {
+      const prevSet = new Set(prev);
+      targetCodes.forEach(code => {
+        if (enable) prevSet.add(code);
+        else prevSet.delete(code);
+      });
+      return Array.from(prevSet);
+    });
+    showToast(enable ? `🟣 Увімкнено ${targetCodes.length} товарів для Prom` : `⚪ Вимкнено ${targetCodes.length} товарів з Prom`);
+  };
+
+  const filteredPromCatalog = useMemo(() => {
+    const q = promSearchQuery.toLowerCase().trim();
+    return catalog.filter(p => {
+      const code = p.vendorCode || '';
+      const name = p.name || '';
+      if (q) {
+        const matchesQuery = name.toLowerCase().includes(q) || code.toLowerCase().includes(q);
+        if (!matchesQuery) return false;
+      }
+      if (promCategoryFilter !== 'all' && (p.category || 'Без категорії') !== promCategoryFilter) {
+        return false;
+      }
+      const isEnabled = promWhitelist.includes(code);
+      let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : (p.stock || 0);
+      if (alwaysAvailable.includes(code)) stock = Math.max(stock, 10);
+      if (isNaN(stock) || stock < 0) stock = 0;
+
+      if (promFilterMode === 'enabled') return isEnabled;
+      if (promFilterMode === 'disabled') return !isEnabled;
+      if (promFilterMode === 'in_stock') return isEnabled && stock > 0;
+      if (promFilterMode === 'out_of_stock') return isEnabled && stock === 0;
+
+      return true;
+    });
+  }, [catalog, promSearchQuery, promCategoryFilter, promFilterMode, promWhitelist, stockOverrides, alwaysAvailable]);
+
+  const promStats = useMemo(() => {
+    let enabledCount = 0;
+    let inStockCount = 0;
+    let outOfStockCount = 0;
+    let disabledCount = 0;
+
+    const promSet = new Set(promWhitelist);
+
+    catalog.forEach(p => {
+      const code = p.vendorCode || '';
+      const isEnabled = promSet.has(code);
+      let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : (p.stock || 0);
+      if (alwaysAvailable.includes(code)) stock = Math.max(stock, 10);
+      if (isNaN(stock) || stock < 0) stock = 0;
+
+      if (isEnabled) {
+        enabledCount++;
+        if (stock > 0) inStockCount++;
+        else outOfStockCount++;
+      } else {
+        disabledCount++;
+      }
+    });
+
+    return {
+      total: catalog.length,
+      enabled: enabledCount,
+      inStock: inStockCount,
+      outOfStock: outOfStockCount,
+      disabled: disabledCount
+    };
+  }, [catalog, promWhitelist, stockOverrides, alwaysAvailable]);
 
   const toggleAlwaysAvailable = (vendorCode) => {
     const isCurrentlyChecked = alwaysAvailable.includes(vendorCode);
@@ -622,8 +751,11 @@ export default function App() {
         </div>
         <div className="sidebar-menu">
           <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)', margin: '1rem 0 0.5rem 1rem', textTransform: 'uppercase' }}>Система</div>
-          <a className={`sidebar-item ${activeTab === 'catalog' ? 'active' : ''}`} onClick={() => setActiveTab('catalog')}>
+          <a className={`sidebar-item ${activeTab === 'catalog' || activeTab === 'import' ? 'active' : ''}`} onClick={() => setActiveTab('catalog')}>
             📦 Товари
+          </a>
+          <a className={`sidebar-item ${activeTab === 'prom' ? 'active' : ''}`} onClick={() => setActiveTab('prom')}>
+            🟣 Prom.ua
           </a>
           <a className="sidebar-item" onClick={() => { setShowLogs(true); loadLogs(); }}>
             ⏱️ Журнал логів
@@ -637,58 +769,112 @@ export default function App() {
         </div>
       </div>
       <div className="container">
-      <div className="header">
-        <div>
-          <h1>Огляд синхронізації</h1>
-          <p style={{ color: 'var(--text-muted)', margin: 0 }}>Моніторинг складських залишків у реальному часі</p>
+      {activeTab === 'prom' ? (
+        <div className="header">
+          <div>
+            <h1>🟣 Керування товарами Prom.ua</h1>
+            <p style={{ color: 'var(--text-muted)', margin: 0 }}>Синхронізація наявності та залишків через Prom API</p>
+          </div>
+          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+            <button
+              className="btn"
+              style={{ background: '#8b5cf6', color: '#fff' }}
+              onClick={handleTriggerPromSync}
+              disabled={syncingProm || loading || savingProm || !token}
+              title="Запустити синхронізацію з Prom.ua через GitHub Actions"
+            >
+              {syncingProm ? <span className="loader"></span> : '⚡ Синхронізувати з Prom.ua'}
+            </button>
+            <button
+              className="btn success"
+              onClick={handleSaveProm}
+              disabled={savingProm || syncingProm || loading || !token}
+            >
+              {savingProm ? <span className="loader"></span> : '💾 Зберегти зміни Prom'}
+            </button>
+          </div>
         </div>
-        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-          <button className="btn" style={{ background: '#0ea5e9' }} onClick={handleSync} disabled={syncing || loading || saving || !token}>
-            {syncing ? <span className="loader"></span> : '🔄 Оновити з Хорошопу'}
-          </button>
-          <button className="btn" style={{ background: '#10b981' }} onClick={handleTriggerFeed} disabled={syncing || loading || saving || !token} title="Запустити генерацію фіду без збереження">
-            {syncing ? <span className="loader"></span> : `⚡ Запустити фід (${daysToDispatch}д)`}
-          </button>
-          <button className="btn success" onClick={handleSaveAll} disabled={saving || syncing || loading || !token}>
-            {saving ? <span className="loader"></span> : '💾 Зберегти зміни'}
-          </button>
+      ) : (
+        <div className="header">
+          <div>
+            <h1>Огляд синхронізації</h1>
+            <p style={{ color: 'var(--text-muted)', margin: 0 }}>Моніторинг складських залишків у реальному часі</p>
+          </div>
+          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+            <button className="btn" style={{ background: '#0ea5e9' }} onClick={handleSync} disabled={syncing || loading || saving || !token}>
+              {syncing ? <span className="loader"></span> : '🔄 Оновити з Хорошопу'}
+            </button>
+            <button className="btn" style={{ background: '#10b981' }} onClick={handleTriggerFeed} disabled={syncing || loading || saving || !token} title="Запустити генерацію фіду без збереження">
+              {syncing ? <span className="loader"></span> : `⚡ Запустити фід (${daysToDispatch}д)`}
+            </button>
+            <button className="btn success" onClick={handleSaveAll} disabled={saving || syncing || loading || !token}>
+              {saving ? <span className="loader"></span> : '💾 Зберегти зміни'}
+            </button>
+          </div>
         </div>
-      </div>
+      )}
 
-      <div className="stats-grid">
-        <div className="stat-card">
-          <div className="stat-label">Всього товарів</div>
-          <div className="stat-value">{catalog.length}</div>
+      {activeTab === 'prom' ? (
+        <div className="stats-grid">
+          <div className="stat-card">
+            <div className="stat-label">Всього в каталозі</div>
+            <div className="stat-value">{promStats.total}</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-label">Увімкнено для Prom.ua</div>
+            <div className="stat-value" style={{ color: '#8b5cf6' }}>{promStats.enabled}</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-label">В наявності (готовий до відправки)</div>
+            <div className="stat-value" style={{ color: 'var(--success)' }}>{promStats.inStock}</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-label">Немає в наявності (0 шт.)</div>
+            <div className="stat-value" style={{ color: 'var(--danger)' }}>{promStats.outOfStock}</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-label">Вимкнено з Prom.ua</div>
+            <div className="stat-value" style={{ color: 'var(--text-muted)' }}>{promStats.disabled}</div>
+          </div>
         </div>
-        <div className="stat-card">
-          <div className="stat-label">Відмічено для Мономаркету</div>
-          <div className="stat-value" style={{ color: 'var(--success)' }}>{whitelist.length}</div>
+      ) : (
+        <div className="stats-grid">
+          <div className="stat-card">
+            <div className="stat-label">Всього товарів</div>
+            <div className="stat-value">{catalog.length}</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-label">Відмічено для Мономаркету</div>
+            <div className="stat-value" style={{ color: 'var(--success)' }}>{whitelist.length}</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-label">Категорій</div>
+            <div className="stat-value">{grouped.length}</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-label">Штрихкодів</div>
+            <div className="stat-value">{Object.keys(barcodes).length}</div>
+          </div>
         </div>
-        <div className="stat-card">
-          <div className="stat-label">Категорій</div>
-          <div className="stat-value">{grouped.length}</div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-label">Штрихкодів</div>
-          <div className="stat-value">{Object.keys(barcodes).length}</div>
-        </div>
-      </div>
+      )}
 
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-color)' }}>
-        <button 
-          onClick={() => setActiveTab('catalog')}
-          style={{ padding: '0.75rem 1.5rem', background: 'none', border: 'none', borderBottom: activeTab === 'catalog' ? '2px solid #3b82f6' : '2px solid transparent', color: activeTab === 'catalog' ? '#3b82f6' : 'var(--text-main)', cursor: 'pointer', fontWeight: 600, fontSize: '1rem', transition: 'all 0.2s' }}
-        >
-          📦 Каталог товарів
-        </button>
-        <button 
-          onClick={() => setActiveTab('import')}
-          style={{ padding: '0.75rem 1.5rem', background: 'none', border: 'none', borderBottom: activeTab === 'import' ? '2px solid #10b981' : '2px solid transparent', color: activeTab === 'import' ? '#10b981' : 'var(--text-main)', cursor: 'pointer', fontWeight: 600, fontSize: '1rem', transition: 'all 0.2s' }}
-        >
-          📥 Імпорт / Експорт (Excel)
-        </button>
-      </div>
+      {activeTab !== 'prom' && (
+        <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-color)' }}>
+          <button 
+            onClick={() => setActiveTab('catalog')}
+            style={{ padding: '0.75rem 1.5rem', background: 'none', border: 'none', borderBottom: activeTab === 'catalog' ? '2px solid #3b82f6' : '2px solid transparent', color: activeTab === 'catalog' ? '#3b82f6' : 'var(--text-main)', cursor: 'pointer', fontWeight: 600, fontSize: '1rem', transition: 'all 0.2s' }}
+          >
+            📦 Каталог товарів
+          </button>
+          <button 
+            onClick={() => setActiveTab('import')}
+            style={{ padding: '0.75rem 1.5rem', background: 'none', border: 'none', borderBottom: activeTab === 'import' ? '2px solid #10b981' : '2px solid transparent', color: activeTab === 'import' ? '#10b981' : 'var(--text-main)', cursor: 'pointer', fontWeight: 600, fontSize: '1rem', transition: 'all 0.2s' }}
+          >
+            📥 Імпорт / Експорт (Excel)
+          </button>
+        </div>
+      )}
 
       {activeTab === 'import' && (
         <div className="glass-panel" style={{ padding: '2rem' }}>
@@ -1054,6 +1240,192 @@ export default function App() {
 
       </div>
 
+      {activeTab === 'prom' && (
+        <div>
+          {/* Controls bar */}
+          <div style={{ marginBottom: '1.5rem', display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+            <div style={{ position: 'relative', flex: 1, minWidth: '280px' }}>
+              <span style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', fontSize: '1.1rem', pointerEvents: 'none' }}>🔍</span>
+              <input
+                type="text"
+                className="input-field"
+                placeholder="Пошук товарів Prom за назвою чи артикулом..."
+                value={promSearchQuery}
+                onChange={e => setPromSearchQuery(e.target.value)}
+                style={{ paddingLeft: '2.5rem', fontSize: '1rem' }}
+              />
+              {promSearchQuery && (
+                <button
+                  onClick={() => setPromSearchQuery('')}
+                  style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.1rem', color: 'var(--text-muted)' }}
+                >✕</button>
+              )}
+            </div>
+            <select
+              className="input-field"
+              style={{ width: '250px', fontSize: '0.95rem', cursor: 'pointer' }}
+              value={promFilterMode}
+              onChange={e => setPromFilterMode(e.target.value)}
+            >
+              <option value="all">👁️ Усі товари ({catalog.length})</option>
+              <option value="enabled">🟣 Увімкнені для Prom ({promStats.enabled})</option>
+              <option value="in_stock">🟢 В наявності ({promStats.inStock})</option>
+              <option value="out_of_stock">🔴 Немає в наявності ({promStats.outOfStock})</option>
+              <option value="disabled">⚪ Вимкнені з Prom ({promStats.disabled})</option>
+            </select>
+            <select
+              className="input-field"
+              style={{ width: '220px', fontSize: '0.95rem', cursor: 'pointer' }}
+              value={promCategoryFilter}
+              onChange={e => setPromCategoryFilter(e.target.value)}
+            >
+              <option value="all">📁 Усі категорії</option>
+              {grouped.map(([catName, prods]) => (
+                <option key={catName} value={catName}>{catName} ({prods.length})</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Quick bulk actions */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.75rem' }}>
+            <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+              Знайдено товарів: <strong style={{ color: 'var(--text-main)' }}>{filteredPromCatalog.length}</strong>
+            </div>
+            <div style={{ display: 'flex', gap: '0.5rem' }}>
+              <button
+                className="btn"
+                style={{ background: 'rgba(139, 92, 246, 0.1)', color: '#8b5cf6', border: '1px solid rgba(139, 92, 246, 0.3)', padding: '0.45rem 0.9rem', fontSize: '0.85rem' }}
+                onClick={() => handleBulkPromToggle(true)}
+              >
+                🟣 Увімкнути вибрані на Prom
+              </button>
+              <button
+                className="btn"
+                style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', border: '1px solid rgba(239, 68, 68, 0.3)', padding: '0.45rem 0.9rem', fontSize: '0.85rem' }}
+                onClick={() => handleBulkPromToggle(false)}
+              >
+                ⚪ Вимкнути вибрані з Prom
+              </button>
+            </div>
+          </div>
+
+          {/* Prom Table */}
+          <div className="glass-panel" style={{ padding: 0, overflow: 'hidden' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.95rem' }}>
+              <thead>
+                <tr style={{ background: '#f8fafc', borderBottom: '1px solid var(--border-color)', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                  <th style={{ padding: '1rem', width: '130px', textAlign: 'center' }}>Продавати на Prom</th>
+                  <th style={{ padding: '1rem', width: '70px', textAlign: 'center' }}>Фото</th>
+                  <th style={{ padding: '1rem', width: '160px' }}>Артикул</th>
+                  <th style={{ padding: '1rem' }}>Назва товару</th>
+                  <th style={{ padding: '1rem', width: '120px' }}>Ціна</th>
+                  <th style={{ padding: '1rem', width: '140px', textAlign: 'center' }}>Склад (Excel)</th>
+                  <th style={{ padding: '1rem', width: '230px' }}>Статус на Prom.ua</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredPromCatalog.slice(0, 200).map(product => {
+                  const code = product.vendorCode || '';
+                  const isEnabled = promWhitelist.includes(code);
+                  let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : (product.stock || 0);
+                  if (alwaysAvailable.includes(code)) stock = Math.max(stock, 10);
+                  if (isNaN(stock) || stock < 0) stock = 0;
+
+                  return (
+                    <tr
+                      key={product.id || code}
+                      style={{
+                        borderBottom: '1px solid var(--border-color)',
+                        background: !isEnabled ? 'rgba(243, 244, 246, 0.5)' : (stock > 0 ? 'transparent' : 'rgba(254, 242, 242, 0.25)'),
+                        transition: 'background 0.2s'
+                      }}
+                    >
+                      <td style={{ padding: '0.85rem', textAlign: 'center' }}>
+                        <label style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer', gap: '0.4rem' }}>
+                          <input
+                            type="checkbox"
+                            checked={isEnabled}
+                            onChange={() => togglePromWhitelist(code)}
+                            style={{ width: '20px', height: '20px', cursor: 'pointer', accentColor: '#8b5cf6' }}
+                          />
+                        </label>
+                      </td>
+                      <td style={{ padding: '0.85rem', textAlign: 'center' }}>
+                        {product.picture ? (
+                          <img
+                            src={product.picture}
+                            alt=""
+                            style={{ width: '42px', height: '42px', objectFit: 'contain', borderRadius: '4px', border: '1px solid var(--border-color)', background: '#fff' }}
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div style={{ width: '42px', height: '42px', background: '#e5e7eb', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', color: '#9ca3af' }}>—</div>
+                        )}
+                      </td>
+                      <td style={{ padding: '0.85rem' }}>
+                        <code style={{ background: '#f1f5f9', padding: '0.2rem 0.45rem', borderRadius: '4px', fontSize: '0.85rem', fontWeight: 600 }}>
+                          {code}
+                        </code>
+                      </td>
+                      <td style={{ padding: '0.85rem' }}>
+                        <div style={{ fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.2rem' }}>
+                          {names[code] || product.name}
+                        </div>
+                        <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                          {product.category || 'Без категорії'}
+                        </div>
+                      </td>
+                      <td style={{ padding: '0.85rem', fontWeight: 600, whiteSpace: 'nowrap' }}>
+                        {product.price ? `${Number(product.price).toLocaleString()} ₴` : '—'}
+                      </td>
+                      <td style={{ padding: '0.85rem', textAlign: 'center', whiteSpace: 'nowrap' }}>
+                        <span style={{
+                          display: 'inline-block',
+                          padding: '0.25rem 0.6rem',
+                          borderRadius: '6px',
+                          fontWeight: 700,
+                          fontSize: '0.9rem',
+                          background: stock > 0 ? '#dcfce7' : '#fee2e2',
+                          color: stock > 0 ? '#15803d' : '#b91c1c'
+                        }}>
+                          {stock} шт.
+                        </span>
+                      </td>
+                      <td style={{ padding: '0.85rem' }}>
+                        {!isEnabled ? (
+                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#f3f4f6', color: '#6b7280', fontSize: '0.85rem', fontWeight: 500 }}>
+                            ⚪ Вимкнено з Prom
+                          </span>
+                        ) : stock > 0 ? (
+                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#dcfce7', color: '#166534', fontSize: '0.85rem', fontWeight: 600 }}>
+                            🟢 В наявності ({stock} шт.)
+                          </span>
+                        ) : (
+                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#fee2e2', color: '#991b1b', fontSize: '0.85rem', fontWeight: 500 }}>
+                            🔴 Немає в наявності
+                          </span>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            {filteredPromCatalog.length > 200 && (
+              <div style={{ padding: '1rem', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.9rem', background: '#f8fafc', borderTop: '1px solid var(--border-color)' }}>
+                Показано перші 200 товарів із {filteredPromCatalog.length}. Використовуйте пошук або категорію для точного вибору.
+              </div>
+            )}
+            {filteredPromCatalog.length === 0 && (
+              <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+                <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🔍</div>
+                Товарів не знайдено за вказаними фільтрами
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* Logs modal */}
       {showLogs && (
         <div className="modal-overlay" onClick={() => setShowLogs(false)}>
@@ -1219,6 +1591,11 @@ export default function App() {
               <label>URL XML-фіду Хорошопу</label>
               <input type="url" className="input-field" value={feedUrl} onChange={e => setFeedUrl(e.target.value)} placeholder="https://..." />
               <small style={{ color: 'var(--text-muted)' }}>Посилання на ваш фід — всі товари з нього з'являться в таблиці.</small>
+            </div>
+            <div className="form-group">
+              <label>🟣 Prom.ua API Bearer Token</label>
+              <input type="password" className="input-field" value={promToken} onChange={e => setPromToken(e.target.value)} placeholder="d24092..." />
+              <small style={{ color: 'var(--text-muted)' }}>Токен доступу до REST API Prom.ua (Кабінет компанії → Налаштування → Керування API-токенами).</small>
             </div>
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '2rem' }}>
               <button className="btn" style={{ background: 'transparent', border: '1px solid var(--border-color)' }} onClick={() => setShowSettings(false)}>Скасувати</button>
