@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-14T08:33:35.879Z",
-  "total": 105,
+  "updatedAt": "2026-10-14T08:43:38.717Z",
+  "total": 97,
   "data": [
     {
       "code": "BPC123047002",
@@ -14,19 +14,6 @@
           "stock": 12
         }
       ],
-      "warranty_type": "manufacturer",
-      "warranty_period": 60,
-      "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
-      "manufacture": null
-    },
-    {
-      "code": "BPC123048002",
-      "price": 11618,
-      "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -225,19 +212,6 @@
           "stock": 1
         }
       ],
-      "warranty_type": "manufacturer",
-      "warranty_period": 60,
-      "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
-      "manufacture": null
-    },
-    {
-      "code": "BPC240831064R",
-      "price": 8158,
-      "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -813,19 +787,6 @@
       "manufacture": null
     },
     {
-      "code": "ORI122436120",
-      "price": 16130,
-      "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
-      "warranty_type": "manufacturer",
-      "warranty_period": 60,
-      "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
-      "manufacture": null
-    },
-    {
       "code": "ORI241236120",
       "price": 16130,
       "old_price": null,
@@ -855,45 +816,6 @@
           "stock": 1
         }
       ],
-      "warranty_type": "manufacturer",
-      "warranty_period": 60,
-      "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
-      "manufacture": null
-    },
-    {
-      "code": "ORI124838120",
-      "price": 16130,
-      "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
-      "warranty_type": "manufacturer",
-      "warranty_period": 60,
-      "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
-      "manufacture": null
-    },
-    {
-      "code": "ORI244840120",
-      "price": 16130,
-      "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
-      "warranty_type": "manufacturer",
-      "warranty_period": 60,
-      "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
-      "manufacture": null
-    },
-    {
-      "code": "ORI121236140",
-      "price": 14214,
-      "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -966,19 +888,6 @@
           "stock": 1
         }
       ],
-      "warranty_type": "manufacturer",
-      "warranty_period": 60,
-      "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
-      "manufacture": null
-    },
-    {
-      "code": "ORI242440140",
-      "price": 14214,
-      "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -1605,19 +1514,6 @@
     {
       "code": "SLSIFP51314A",
       "price": 126187,
-      "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
-      "warranty_type": "manufacturer",
-      "warranty_period": 60,
-      "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
-      "manufacture": null
-    },
-    {
-      "code": "ORI121221040",
-      "price": 24720,
       "old_price": null,
       "availability": false,
       "stock": 0,
