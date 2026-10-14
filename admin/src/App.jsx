@@ -1103,10 +1103,6 @@ export default function App() {
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#f3f4f6', color: '#4b5563', fontSize: '0.85rem', fontWeight: 500 }} title="Товар вимкнено для Prom: залишається видимим на сайті, але зі статусом 'Немає в наявності' (0 шт.)">
               ⚪ Вимкнено (Немає в наявн.)
             </span>
-          ) : isHoroshopOutOfStock(product) ? (
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#fee2e2', color: '#991b1b', fontSize: '0.85rem', fontWeight: 500 }} title="Хорошоп передає статус: Немає в наявності">
-              🔴 Немає в наявності на Хорошопі
-            </span>
           ) : stock > 0 ? (
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#dcfce7', color: '#166534', fontSize: '0.85rem', fontWeight: 600 }}>
               🟢 В наявності ({stock} шт.)
@@ -1234,10 +1230,6 @@ export default function App() {
           ) : isAlways ? (
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#f3e8ff', color: '#6b21a8', fontSize: '0.85rem', fontWeight: 600 }} title="Увімкнено примусово через 'Примусово ОЧ'">
               💜 Примусово ОЧ (6 пл.)
-            </span>
-          ) : isHoroshopOutOfStock(product) ? (
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#fee2e2', color: '#b91c1c', fontSize: '0.85rem', fontWeight: 500 }} title="Товару немає на складі та на Хорошопі">
-              ⚪ Немає в наявності на Хорошопі
             </span>
           ) : hasInstallments ? (
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#dcfce7', color: '#166534', fontSize: '0.85rem', fontWeight: 600 }} title="Товар в наявності на складі — ОЧ активна">
