@@ -124,8 +124,9 @@ async function syncProm() {
     let targetStatus, targetPresence, targetInStock, targetQuantity;
 
     if (!isEnabled) {
-      // Товар вимкнено для Prom (наприклад, запобіжники або вимкнені вручну)
-      targetStatus = 'not_on_display';
+      // Товар вимкнено для Prom (наприклад, запобіжники або вимкнені вручну):
+      // Товар НЕ приховується (залишається 'on_display'), але статус встановлюється на "немає в наявності" (not_available, 0 шт.)
+      targetStatus = 'on_display';
       targetPresence = 'not_available';
       targetInStock = false;
       targetQuantity = 0;

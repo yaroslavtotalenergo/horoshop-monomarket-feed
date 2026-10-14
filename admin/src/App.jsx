@@ -881,9 +881,9 @@ export default function App() {
             className="stat-card"
             style={{ cursor: 'pointer', border: promFilterMode === 'disabled' ? '2px solid var(--text-muted)' : '1px solid var(--border-color)', transition: 'all 0.2s', background: promFilterMode === 'disabled' ? '#f9fafb' : 'transparent' }}
             onClick={() => setPromFilterMode(promFilterMode === 'disabled' ? 'all' : 'disabled')}
-            title="Фільтр: вимкнено з Prom.ua"
+            title="Фільтр: вимкнено з Prom (статус 'Немає в наявності', видимий)"
           >
-            <div className="stat-label">Вимкнено з Prom.ua</div>
+            <div className="stat-label">Вимкнено (Немає в наявн.)</div>
             <div className="stat-value" style={{ color: 'var(--text-muted)' }}>{promStats.disabled}</div>
           </div>
         </div>
@@ -1322,7 +1322,7 @@ export default function App() {
               <option value="enabled">🟣 Увімкнені для Prom ({promStats.enabled})</option>
               <option value="in_stock">🟢 В наявності ({promStats.inStock})</option>
               <option value="out_of_stock">🔴 Немає в наявності ({promStats.outOfStock})</option>
-              <option value="disabled">⚪ Вимкнені з Prom ({promStats.disabled})</option>
+              <option value="disabled">⚪ Вимкнені (Немає в наявн.) ({promStats.disabled})</option>
             </select>
             <select
               className="input-field"
@@ -1451,8 +1451,8 @@ export default function App() {
                             ⚠️ Немає на Prom.ua
                           </span>
                         ) : !isEnabled ? (
-                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#f3f4f6', color: '#6b7280', fontSize: '0.85rem', fontWeight: 500 }}>
-                            ⚪ Вимкнено з Prom
+                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#f3f4f6', color: '#4b5563', fontSize: '0.85rem', fontWeight: 500 }} title="Товар вимкнено для Prom: залишається видимим на сайті, але зі статусом 'Немає в наявності' (0 шт.)">
+                            ⚪ Вимкнено (Немає в наявн.)
                           </span>
                         ) : stock > 0 ? (
                           <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#dcfce7', color: '#166534', fontSize: '0.85rem', fontWeight: 600 }}>
