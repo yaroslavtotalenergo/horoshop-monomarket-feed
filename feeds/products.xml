@@ -2854,6 +2854,47 @@
       </tags>
     </offer>
     <offer>
+      <id>ORI241240021</id>
+      <code>ORI241240021</code>
+      <vendor_code>ORI241240021</vendor_code>
+      <title><![CDATA[Конвертор Victron Energy DC-DC Orion 24/12-40]]></title>
+      <barcode>8719076038726</barcode>
+      <category>Перетворювачі DC-DC</category>
+      <brand>Victron Energy</brand>
+      <availability>Є в наявності</availability>
+      <description><![CDATA[<p><strong>Victron Orion 24/12-40</strong> — це потужний та надійний DC-DC перетворювач постійного струму, призначений для зниження напруги з 24 В до стабілізованих 12 В з максимальною силою струму до&nbsp;40 А. Ідеальний для використання у важкій техніці, транспорті, мобільних майстернях, морських та автономних енергосистемах, де потрібне стабільне та потужне живлення на 12 В.</p>        <h2 dir="ltr">Ключові переваги&nbsp;Victron Orion</h2>    <ul dir="ltr">   <li><strong>Номінальний струм: 40 А, потужність — до 480 Вт</strong></li>   <li><strong>Стабілізована вихідна напруга: 12 В ±3%</strong></li>   <li><strong>Широкий вхідний діапазон: 18–35 В</strong></li>   <li><strong>Гвинтові клеми високої якості</strong> — надійне підключення</li>   <li><strong>Компактний, міцний металевий корпус</strong>, вентиляційні отвори для охолодження</li>   <li><strong>Захист від КЗ, перегріву, перевантаження, зворотної полярності</strong></li>   <li><strong>Можливість паралельного підключення для збільшення потужності</strong></li>   <li><strong>Можливість керування вмиканням через дистанційний сигнал</strong></li>  </ul>        <h3 dir="ltr">Технологічні особливості</h3>    <p dir="ltr"><strong>Високий вихідний струм для потужних споживачів</strong></p>    <p dir="ltr"><strong>Orion 24/12-40 може живити:</strong></p>    <p dir="ltr">• Автомобільні холодильники, компресори</p>    <p dir="ltr">• Потужну LED-оптику</p>    <p dir="ltr">• Навігаційне та радіообладнання</p>    <p dir="ltr">• Зарядні пристрої, телеком-системи</p>    <p dir="ltr">• Електроінструмент, сервери, інвертори 12В</p>        <p dir="ltr"><strong>Інтелектуальна система захисту</strong></p>    <p dir="ltr">• Захист від короткого замикання</p>    <p dir="ltr">• Обмеження температури з автоматичним зниженням потужності</p>    <p dir="ltr">• Відновлення після помилки без втручання користувача</p>        <p dir="ltr"><strong>Гнучкість у підключенні та монтажі</strong></p>    <p dir="ltr">• Встановлення горизонтально або вертикально</p>    <p dir="ltr">• Міцний корпус для експлуатації у транспорті, спецтехніці, трейлерах</p>    <p dir="ltr">• Зручний доступ до клем навіть у щільних електрощитах</p>        <h4 dir="ltr">Сценарії використання</h4>    <ul dir="ltr">   <li><strong>Вантажівки, спецтехніка, будівельна техніка</strong> — живлення 12 В бортового обладнання</li>   <li><strong>Морські системи, катери, човни</strong> — живлення систем зв’язку, освітлення</li>   <li><strong>Мобільні майстерні, сервісні фургони</strong> — зарядка АКБ, живлення інструменту</li>   <li><strong>Телеком/ІТ рішення</strong> — живлення 12 В серверів, роутерів, антен</li>   <li><strong>Промислове обладнання</strong> — там, де потрібна висока потужність на 12 В</li>  </ul>        <h4 dir="ltr">Інтерфейси зв’язку</h4>    <ul dir="ltr">   <li><strong>Remote ON/OFF</strong> – Дистанційне увімкнення з BMS, двигуна або кнопки</li>   <li><strong>Можливість регулювання </strong>– Тримери для точного налаштування вихідної напруги</li>  </ul>        <h4 dir="ltr"><br></h4><ul dir="ltr">  </ul>]]></description>
+      <image_link>
+        <picture>https://total-energo.com.ua/content/images/22/konvertor-dc-dc-orion-24-12-40-ori241240021-15827902043906_+6b81977054.jpg</picture>
+        <picture>https://total-energo.com.ua/content/images/22/konvertor-dc-dc-orion-24-12-40-ori241240021-17853910419103_+61e9b7c27b.jpg</picture>
+        <picture>https://total-energo.com.ua/content/images/22/konvertor-dc-dc-orion-24-12-40-ori241240021-80393939002705_+930b204202.jpg</picture>
+        <picture>https://total-energo.com.ua/content/images/22/konvertor-dc-dc-orion-24-12-40-ori241240021-72383462705411_+096ed54764.jpg</picture>
+      </image_link>
+      <tags>
+        <param name="Діапазон вхідної напруги, В.">18-35</param>
+        <param name="Номінальна вхідна напруга, В">24</param>
+        <param name="Номінальна вихідна напруга, В">12</param>
+        <param name="Вихідна напруга, В.">13,2</param>
+        <param name="Максимальний вихідний струм, А.">55</param>
+        <param name="Вихідний струм, А">40</param>
+        <param name="Нижній поріг відкл. за напругою, В.">14</param>
+        <param name="Нижній поріг перезап. за напругою, В.">18</param>
+        <param name="Вихідна потужність, Вт">480</param>
+        <param name="Ефективність (ККД), %">95</param>
+        <param name="Струм холостого ходу">&lt; 20 мA</param>
+        <param name="Максимальна робоча температура, + °С">55</param>
+        <param name="Мінімальна робоча температура, - °С">20</param>
+        <param name="Розміри В х Ш x Д, мм">65 x 88 x 185</param>
+        <param name="Вага, кг">0.85</param>
+        <param name="Клас захисту">IP20</param>
+        <param name="Стандарти безпеки">EN 60950</param>
+        <param name="Стандарти електромагнітної сумісності">EN 55014-1</param>
+        <param name="Стандарти електромагнітної сумісності">EN 61000-6-3</param>
+        <param name="Стандарти стійкості до електромагнітних перешкод">EN 55014-2</param>
+        <param name="Стандарти автомобільної директиви">ECE R10-4</param>
+        <param name="Термін гарантії, міс.">60</param>
+      </tags>
+    </offer>
+    <offer>
       <id>ORI122410020</id>
       <code>ORI122410020</code>
       <vendor_code>ORI122410020</vendor_code>

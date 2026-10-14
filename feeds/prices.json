@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-14T08:43:38.717Z",
-  "total": 97,
+  "updatedAt": "2026-10-14T08:47:01.815Z",
+  "total": 98,
   "data": [
     {
       "code": "BPC123047002",
@@ -654,6 +654,24 @@
       "availability": false,
       "stock": 0,
       "warehouses": null,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "ORI241240021",
+      "price": 5562,
+      "old_price": null,
+      "availability": true,
+      "stock": 1,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 1
+        }
+      ],
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
