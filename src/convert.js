@@ -243,7 +243,8 @@ function transformOffer(offer) {
   const params = getParams(offer);
   const vendorCode = extractText(offer.vendorCode) || '';
 
-  let available = offer._available === true || offer._available === 'true';
+  const horoshopAvailable = offer._available === true || offer._available === 'true';
+  let available = horoshopAvailable;
   if (availabilityOverrides[vendorCode] !== undefined) {
     available = availabilityOverrides[vendorCode];
   }
@@ -294,6 +295,7 @@ function transformOffer(offer) {
 
     // Ціна та наявність
     available,
+    horoshopAvailable,
     stock,
     price: Math.round(parseFloat(offer.price) || 0),
     oldPrice: (offer.oldprice || offer.old_price || offer.price_old)
@@ -470,7 +472,8 @@ async function main() {
         category: o.category,
         description: o.description,
         stock: o.stock,
-        available: o.available
+        available: o.available,
+        horoshopAvailable: o.horoshopAvailable
       });
 
       // Фільтрація по whitelist (якщо він не порожній)

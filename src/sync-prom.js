@@ -66,6 +66,17 @@ async function syncProm() {
   } catch (e) { }
   const alwaysAvailableSet = new Set(alwaysAvailable.map(s => String(s).trim()));
 
+  let horoshopCatalogMap = {};
+  try {
+    const catalogPath = path.join(__dirname, '../feeds/catalog.json');
+    if (fs.existsSync(catalogPath)) {
+      const catalogData = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
+      for (const item of catalogData) {
+        if (item.vendorCode) horoshopCatalogMap[String(item.vendorCode).trim()] = item;
+      }
+    }
+  } catch (e) { }
+
   // 3. Завантаження всіх товарів з Prom.ua
   console.log('📥 Завантажуємо список товарів з Prom.ua...');
   let promProducts = [];
@@ -112,6 +123,14 @@ async function syncProm() {
     // Якщо список порожній (не налаштовано) — за замовчуванням увімкнено.
     const isEnabled = promWhitelist.length === 0 || whitelistSet.has(sku);
 
+    // Статус наявності з Хорошопу (available=false означає "Немає в наявності на Хорошопі")
+    const horoshopProduct = horoshopCatalogMap[sku];
+    const isHoroshopOutOfStock = horoshopProduct && (
+      horoshopProduct.horoshopAvailable !== undefined
+        ? (horoshopProduct.horoshopAvailable === false || horoshopProduct.horoshopAvailable === 'false')
+        : (horoshopProduct.available === false || horoshopProduct.available === 'false')
+    );
+
     let stockQty = 0;
     if (stockOverrides[sku] !== undefined) {
       stockQty = parseInt(stockOverrides[sku], 10);
@@ -123,14 +142,18 @@ async function syncProm() {
 
     let targetStatus, targetPresence, targetInStock, targetQuantity;
 
-    if (!isEnabled) {
-      // Товар вимкнено для Prom (наприклад, запобіжники або вимкнені вручну):
+    if (!isEnabled || isHoroshopOutOfStock) {
+      // Товар вимкнено для Prom АБО на Хорошопі стоїть "немає в наявності":
       // Товар НЕ приховується (залишається 'on_display'), але статус встановлюється на "немає в наявності" (not_available, 0 шт.)
       targetStatus = 'on_display';
       targetPresence = 'not_available';
       targetInStock = false;
       targetQuantity = 0;
-      disabledCount++;
+      if (!isEnabled) {
+        disabledCount++;
+      } else {
+        enabledOutOfStockCount++;
+      }
     } else {
       targetStatus = 'on_display';
       if (stockQty > 0) {

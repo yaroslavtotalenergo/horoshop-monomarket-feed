@@ -43,6 +43,14 @@ async function hashPassword(password) {
 const STORED_LOGIN = 'admin';
 const STORED_PASS_HASH = '316bceef33e561601a426930c141ce7dfc6b0f6df2a091d40135b0795cd1d4a9'; // totalenergoadmin
 
+function isHoroshopOutOfStock(product) {
+  if (!product) return false;
+  if (product.horoshopAvailable !== undefined) {
+    return product.horoshopAvailable === false || product.horoshopAvailable === 'false';
+  }
+  return product.available === false || product.available === 'false';
+}
+
 export function LoginGate({ children }) {
   const [authed, setAuthed] = useState(() => localStorage.getItem('panel_auth') === 'ok');
   const [login, setLogin] = useState('');
@@ -372,6 +380,7 @@ export default function App() {
       if (isNaN(stock) || stock < 0) stock = 0;
 
       if (promFilterMode === 'no_match') return !existsOnProm;
+      if (promFilterMode === 'out_of_stock_horoshop') return isHoroshopOutOfStock(p);
       if (promFilterMode === 'enabled') return isEnabled && existsOnProm;
       if (promFilterMode === 'disabled') return !isEnabled && existsOnProm;
       if (promFilterMode === 'in_stock') return isEnabled && existsOnProm && stock > 0;
@@ -387,6 +396,7 @@ export default function App() {
     let outOfStockCount = 0;
     let disabledCount = 0;
     let noMatchCount = 0;
+    let outOfStockHoroshopCount = 0;
 
     catalog.forEach(p => {
       const code = p.vendorCode ? String(p.vendorCode).trim() : '';
@@ -395,6 +405,10 @@ export default function App() {
       let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : 0;
       if (alwaysAvailable.includes(code)) stock = Math.max(stock, 10);
       if (isNaN(stock) || stock < 0) stock = 0;
+
+      if (isHoroshopOutOfStock(p)) {
+        outOfStockHoroshopCount++;
+      }
 
       if (!existsOnProm) {
         noMatchCount++;
@@ -413,7 +427,8 @@ export default function App() {
       inStock: inStockCount,
       outOfStock: outOfStockCount,
       disabled: disabledCount,
-      noMatch: noMatchCount
+      noMatch: noMatchCount,
+      outOfStockHoroshop: outOfStockHoroshopCount
     };
   }, [catalog, promWhitelistSet, stockOverrides, alwaysAvailable, promSkusSet]);
 
@@ -538,6 +553,7 @@ export default function App() {
     let forcedInstallments = 0;
     let disabledInstallments = 0;
     let outOfStock = 0;
+    let outOfStockHoroshop = 0;
 
     const alwaysSet = new Set(alwaysAvailable.map(s => String(s).trim()));
 
@@ -549,6 +565,10 @@ export default function App() {
       let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : 0;
       if (isAlways) stock = Math.max(stock, 10);
       if (isNaN(stock) || stock < 0) stock = 0;
+
+      if (isHoroshopOutOfStock(p)) {
+        outOfStockHoroshop++;
+      }
 
       if (isDisabled) {
         disabledInstallments++;
@@ -568,7 +588,8 @@ export default function App() {
       active: activeInstallments,
       forced: forcedInstallments,
       disabled: disabledInstallments,
-      outOfStock: outOfStock
+      outOfStock: outOfStock,
+      outOfStockHoroshop: outOfStockHoroshop
     };
   }, [catalog, alwaysAvailable, horoshopDisabledSet, availabilityOverrides, stockOverrides]);
 
@@ -596,6 +617,7 @@ export default function App() {
 
       const hasInstallments = !isDisabled && (isAlways || (isAvailable && stock > 0));
 
+      if (horoshopFilterMode === 'out_of_stock_horoshop') return isHoroshopOutOfStock(p);
       if (horoshopFilterMode === 'active') return hasInstallments;
       if (horoshopFilterMode === 'forced') return isAlways && !isDisabled;
       if (horoshopFilterMode === 'disabled') return isDisabled;
@@ -1030,8 +1052,27 @@ export default function App() {
           </code>
         </td>
         <td style={{ padding: '0.85rem' }}>
-          <div style={{ fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.2rem' }}>
-            {names[code] || product.name}
+          <div style={{ fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.2rem', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0.4rem' }}>
+            <span>{names[code] || product.name}</span>
+            {isHoroshopOutOfStock(product) && (
+              <span
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.25rem',
+                  fontSize: '0.75rem',
+                  padding: '0.15rem 0.5rem',
+                  borderRadius: '4px',
+                  background: '#fee2e2',
+                  color: '#b91c1c',
+                  fontWeight: 600,
+                  whiteSpace: 'nowrap'
+                }}
+                title="Хорошоп передає статус товару: Немає в наявності (available=false)"
+              >
+                ⚠️ Немає в наявності на Хорошопі
+              </span>
+            )}
           </div>
           <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
             {product.category || 'Без категорії'}
@@ -1061,6 +1102,10 @@ export default function App() {
           ) : !isEnabled ? (
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#f3f4f6', color: '#4b5563', fontSize: '0.85rem', fontWeight: 500 }} title="Товар вимкнено для Prom: залишається видимим на сайті, але зі статусом 'Немає в наявності' (0 шт.)">
               ⚪ Вимкнено (Немає в наявн.)
+            </span>
+          ) : isHoroshopOutOfStock(product) ? (
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#fee2e2', color: '#991b1b', fontSize: '0.85rem', fontWeight: 500 }} title="Хорошоп передає статус: Немає в наявності">
+              🔴 Немає в наявності на Хорошопі
             </span>
           ) : stock > 0 ? (
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#dcfce7', color: '#166534', fontSize: '0.85rem', fontWeight: 600 }}>
@@ -1139,8 +1184,27 @@ export default function App() {
           </code>
         </td>
         <td style={{ padding: '0.85rem' }}>
-          <div style={{ fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.2rem' }}>
-            {names[code] || product.name}
+          <div style={{ fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.2rem', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0.4rem' }}>
+            <span>{names[code] || product.name}</span>
+            {isHoroshopOutOfStock(product) && (
+              <span
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.25rem',
+                  fontSize: '0.75rem',
+                  padding: '0.15rem 0.5rem',
+                  borderRadius: '4px',
+                  background: '#fee2e2',
+                  color: '#b91c1c',
+                  fontWeight: 600,
+                  whiteSpace: 'nowrap'
+                }}
+                title="Хорошоп передає статус товару: Немає в наявності (available=false)"
+              >
+                ⚠️ Немає в наявності на Хорошопі
+              </span>
+            )}
           </div>
           <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
             {product.category || 'Без категорії'}
@@ -1170,6 +1234,10 @@ export default function App() {
           ) : isAlways ? (
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#f3e8ff', color: '#6b21a8', fontSize: '0.85rem', fontWeight: 600 }} title="Увімкнено примусово через 'Примусово ОЧ'">
               💜 Примусово ОЧ (6 пл.)
+            </span>
+          ) : isHoroshopOutOfStock(product) ? (
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#fee2e2', color: '#b91c1c', fontSize: '0.85rem', fontWeight: 500 }} title="Товару немає на складі та на Хорошопі">
+              ⚪ Немає в наявності на Хорошопі
             </span>
           ) : hasInstallments ? (
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#dcfce7', color: '#166534', fontSize: '0.85rem', fontWeight: 600 }} title="Товар в наявності на складі — ОЧ активна">
@@ -1585,6 +1653,11 @@ export default function App() {
                                 })()}
                                 <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
                                   {product.vendorCode} | {product.oldPrice ? <><span style={{ textDecoration: 'line-through', color: '#f87171' }}>{product.oldPrice}</span> <span style={{ color: '#10b981', fontWeight: 600 }}>{product.price} ₴</span></> : `${product.price} ₴`} | {product.category}
+                                  {isHoroshopOutOfStock(product) && (
+                                    <span style={{ marginLeft: '0.5rem', fontSize: '0.75rem', padding: '0.1rem 0.45rem', borderRadius: '4px', background: '#fee2e2', color: '#b91c1c', fontWeight: 600 }}>
+                                      ⚠️ Немає в наявності на Хорошопі
+                                    </span>
+                                  )}
                                 </div>
                               </div>
                             </div>
@@ -1735,6 +1808,11 @@ export default function App() {
                                     })()}
                                     <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
                                       {product.vendorCode} | {product.oldPrice ? <><span style={{ textDecoration: 'line-through', color: '#f87171' }}>{product.oldPrice}</span> <span style={{ color: '#10b981', fontWeight: 600 }}>{product.price} ₴</span></> : `${product.price} ₴`}
+                                      {isHoroshopOutOfStock(product) && (
+                                        <span style={{ marginLeft: '0.5rem', fontSize: '0.75rem', padding: '0.1rem 0.45rem', borderRadius: '4px', background: '#fee2e2', color: '#b91c1c', fontWeight: 600 }}>
+                                          ⚠️ Немає в наявності на Хорошопі
+                                        </span>
+                                      )}
                                     </div>
                                   </div>
                                 </div>
@@ -1802,6 +1880,7 @@ export default function App() {
             >
               <option value="all">👁️ Усі товари ({catalog.length})</option>
               <option value="no_match">⚠️ Немає збігу артикулу ({promStats.noMatch})</option>
+              <option value="out_of_stock_horoshop">⚠️ Немає в наявності на Хорошопі ({promStats.outOfStockHoroshop})</option>
               <option value="enabled">🟣 Увімкнені для Prom ({promStats.enabled})</option>
               <option value="in_stock">🟢 В наявності ({promStats.inStock})</option>
               <option value="out_of_stock">🔴 Немає в наявності ({promStats.outOfStock})</option>
@@ -2008,6 +2087,7 @@ export default function App() {
               onChange={e => setHoroshopFilterMode(e.target.value)}
             >
               <option value="all">👁️ Усі товари ({catalog.length})</option>
+              <option value="out_of_stock_horoshop">⚠️ Немає в наявності на Хорошопі ({horoshopStats.outOfStockHoroshop})</option>
               <option value="active">🟢 Оплата частинами активна ({horoshopStats.active})</option>
               <option value="forced">💜 Тільки "Примусово ОЧ" ({horoshopStats.forced})</option>
               <option value="disabled">🔴 Заборонено вручну ({horoshopStats.disabled})</option>
