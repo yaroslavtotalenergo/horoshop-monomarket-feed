@@ -884,43 +884,110 @@ export default function App() {
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-        {/* Banner with sync status & last run info */}
+        
+        {/* Section Title & Timeframe */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1rem' }}>
+          <div>
+            <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#2563eb', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '0.35rem' }}>
+              ОГЛЯД СИСТЕМИ
+            </div>
+            <h2 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#0f172a', margin: 0, letterSpacing: '-0.02em' }}>
+              Центр контролю синхронізації
+            </h2>
+            <p style={{ margin: '0.35rem 0 0 0', color: '#64748b', fontSize: '0.875rem' }}>
+              Ми миттєво відстежуємо розбіжності між складом та маркетплейсами
+            </p>
+          </div>
+          
+          <div style={{ display: 'flex', background: '#f1f5f9', padding: '0.25rem', borderRadius: '8px', border: '1px solid #e2e8f0', fontSize: '0.75rem', fontWeight: 600 }}>
+            <span style={{ padding: '0.35rem 0.85rem', background: '#ffffff', color: '#0f172a', borderRadius: '6px', boxShadow: '0 1px 2px rgba(0,0,0,0.05)' }}>
+              За 24 години
+            </span>
+            <span style={{ padding: '0.35rem 0.85rem', color: '#64748b', cursor: 'pointer' }}>
+              За тиждень
+            </span>
+          </div>
+        </div>
+
+        {/* Dark Status Banner (NO duplicate sync button here!) */}
         <div style={{
+          background: '#0b1329',
+          borderRadius: '16px',
+          padding: '1.25rem 1.75rem',
+          color: '#ffffff',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           flexWrap: 'wrap',
-          gap: '1rem',
-          padding: '1.25rem 1.5rem',
-          background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%)',
-          borderRadius: '12px',
-          border: '1px solid rgba(139, 92, 246, 0.25)'
+          gap: '1.25rem',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          boxShadow: '0 10px 25px -5px rgba(11, 19, 41, 0.25)'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-            <span style={{ fontSize: '1.8rem' }}>🔄</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <div style={{
+              width: '46px',
+              height: '46px',
+              borderRadius: '12px',
+              background: '#2563eb',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '1.35rem',
+              color: '#ffffff',
+              boxShadow: '0 0 16px rgba(37, 99, 235, 0.45)',
+              flexShrink: 0
+            }}>
+              {isWorkflowRunning ? '⏳' : '⚡'}
+            </div>
             <div>
-              <div style={{ fontWeight: 700, fontSize: '1rem', color: 'var(--text-main)' }}>
-                {isWorkflowRunning ? '⏳ Триває автоматична синхронізація через GitHub Actions...' : '🟢 Всі системи підключені та синхронізуються за розкладом (кожні 30 хв)'}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flexWrap: 'wrap' }}>
+                <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#ffffff' }}>
+                  {isWorkflowRunning
+                    ? 'Триває автоматична синхронізація через GitHub Actions...'
+                    : 'Автоматична синхронізація через GitHub Actions активна'}
+                </span>
+                <span style={{
+                  fontSize: '0.7rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.04em',
+                  padding: '0.2rem 0.6rem',
+                  borderRadius: '999px',
+                  background: isWorkflowRunning ? 'rgba(245, 158, 11, 0.2)' : 'rgba(16, 185, 129, 0.2)',
+                  color: isWorkflowRunning ? '#fbbf24' : '#34d399',
+                  border: isWorkflowRunning ? '1px solid rgba(245, 158, 11, 0.4)' : '1px solid rgba(16, 185, 129, 0.4)'
+                }}>
+                  {isWorkflowRunning ? 'ВИКОНУЄТЬСЯ' : 'АКТИВНО'}
+                </span>
               </div>
-              <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>
+              <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '0.35rem' }}>
                 {lastRun ? (
-                  <>Останній авто-запуск: <b>{new Date(lastRun.created_at).toLocaleString('uk-UA')}</b> ({lastRun.conclusion === 'success' ? '✅ Успішно' : lastRun.status === 'in_progress' ? '⏳ Виконується' : '⚠️ ' + (lastRun.conclusion || lastRun.status)})</>
-                ) : 'Очікування першого запуску'}
+                  <>
+                    Останній авто-запуск: <b style={{ color: '#cbd5e1' }}>{new Date(lastRun.created_at).toLocaleString('uk-UA')}</b>
+                    {' · '}{lastRun.conclusion === 'success' ? '✅ Успішно' : lastRun.status === 'in_progress' ? '⏳ Виконується' : '⚠️ ' + (lastRun.conclusion || lastRun.status)}
+                    {' · '}Наступний за розкладом (кожні 30 хв)
+                  </>
+                ) : 'Очікування першого запуску · Розклад кожні 30 хв'}
               </div>
             </div>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <button
               className="btn"
-              style={{ background: 'linear-gradient(135deg, #2563eb, #7c3aed)', color: '#fff', fontWeight: 600, padding: '0.6rem 1.2rem', fontSize: '0.875rem' }}
-              onClick={handleTriggerFullSync}
-              disabled={syncingAll || loading || !token}
-            >
-              {syncingAll ? <span className="loader" style={{ width: '16px', height: '16px' }}></span> : '⚡ Запустити синхронізацію зараз'}
-            </button>
-            <button
-              className="btn"
-              style={{ background: '#fff', color: 'var(--text-main)', border: '1px solid var(--border-color)', padding: '0.6rem 1rem', fontSize: '0.875rem' }}
+              style={{
+                background: 'rgba(255, 255, 255, 0.08)',
+                color: '#ffffff',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                padding: '0.6rem 1.25rem',
+                borderRadius: '8px',
+                fontSize: '0.85rem',
+                fontWeight: 600,
+                backdropFilter: 'blur(8px)',
+                transition: 'all 0.2s',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem'
+              }}
               onClick={() => { setShowLogs(true); loadLogs(); }}
               title="Переглянути історію запусків"
             >
@@ -933,34 +1000,85 @@ export default function App() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem' }}>
           
           {/* Card 1: Склад (Excel) */}
-          <div className="glass-panel" style={{ padding: '1.35rem', borderTop: '4px solid #10b981', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div className="glass-panel" style={{
+            padding: '1.4rem',
+            borderTop: '3px solid #10b981',
+            borderRadius: '16px',
+            background: '#ffffff',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.04)'
+          }}>
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-                <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#047857', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  🏬 Склад (Excel-таблиці)
-                </span>
-                <span style={{ fontSize: '0.75rem', background: '#dcfce7', color: '#15803d', padding: '0.2rem 0.55rem', borderRadius: '4px', fontWeight: 600 }}>
-                  {googleSheets.length} джерел
-                </span>
-              </div>
-              <div style={{ fontSize: '2.25rem', fontWeight: 800, color: '#15803d', letterSpacing: '-0.03em' }}>
-                {dashboardStats.warehouseInStock}
-                <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-muted)', marginLeft: '0.4rem' }}>в наявності (&gt;0)</span>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', marginTop: '1rem', fontSize: '0.85rem', borderTop: '1px solid var(--border-color)', paddingTop: '0.75rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: 'var(--text-muted)' }}>🔴 Немає на складі (0 шт.):</span>
-                  <span style={{ fontWeight: 700, color: '#b91c1c' }}>{dashboardStats.warehouseOutOfStock}</span>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                  <div style={{
+                    width: '34px',
+                    height: '34px',
+                    borderRadius: '8px',
+                    background: '#ecfdf5',
+                    color: '#059669',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontWeight: 800,
+                    fontSize: '0.75rem',
+                    border: '1px solid #a7f3d0'
+                  }}>
+                    XLS
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#0f172a' }}>Склад (Excel)</div>
+                    <span style={{ fontSize: '0.675rem', background: '#ecfdf5', color: '#059669', padding: '0.15rem 0.5rem', borderRadius: '4px', fontWeight: 700 }}>
+                      {googleSheets.length} ДЖЕРЕЛА
+                    </span>
+                  </div>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: 'var(--text-muted)' }}>❓ Не знайдено в Excel:</span>
-                  <span style={{ fontWeight: 700, color: '#6b7280' }}>{dashboardStats.warehouseMissing}</span>
+                <span style={{ color: '#94a3b8', fontSize: '0.9rem', cursor: 'help' }} title="Дані з Google Таблиць постачальників">ⓘ</span>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.65rem', marginBottom: '1rem' }}>
+                <span style={{ fontSize: '2.5rem', fontWeight: 800, color: '#0f172a', lineHeight: 1, letterSpacing: '-0.03em' }}>
+                  {dashboardStats.warehouseInStock}
+                </span>
+                <span style={{ fontSize: '0.75rem', fontWeight: 600, background: '#dcfce7', color: '#15803d', padding: '0.25rem 0.6rem', borderRadius: '6px' }}>
+                  в наявності (&gt;0)
+                </span>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.85rem', borderTop: '1px solid #f1f5f9', paddingTop: '0.85rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ color: '#64748b', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#ef4444' }}></span>
+                    Немає на складі
+                  </span>
+                  <span style={{ fontWeight: 700, color: '#0f172a' }}>{dashboardStats.warehouseOutOfStock}</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ color: '#64748b', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#94a3b8' }}></span>
+                    Не знайдено в Excel
+                  </span>
+                  <span style={{ fontWeight: 700, color: '#0f172a' }}>{dashboardStats.warehouseMissing}</span>
                 </div>
               </div>
             </div>
+
             <button
               className="btn"
-              style={{ marginTop: '1.25rem', width: '100%', background: '#ecfdf5', color: '#047857', border: '1px solid #a7f3d0', fontSize: '0.825rem', padding: '0.5rem' }}
+              style={{
+                marginTop: '1.25rem',
+                width: '100%',
+                background: '#f8fafc',
+                color: '#0f172a',
+                border: '1px solid #e2e8f0',
+                fontSize: '0.8rem',
+                fontWeight: 600,
+                padding: '0.6rem',
+                borderRadius: '8px',
+                transition: 'all 0.15s'
+              }}
               onClick={() => setShowSettings(true)}
             >
               ⚙️ Налаштувати Google Sheets
@@ -968,302 +1086,525 @@ export default function App() {
           </div>
 
           {/* Card 2: Prom.ua */}
-          <div className="glass-panel" style={{ padding: '1.35rem', borderTop: '4px solid #8b5cf6', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div className="glass-panel" style={{
+            padding: '1.4rem',
+            borderTop: '3px solid #8b5cf6',
+            borderRadius: '16px',
+            background: '#ffffff',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.04)'
+          }}>
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-                <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#6d28d9', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  🟣 Prom.ua (Маркетплейс)
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                  <div style={{
+                    width: '34px',
+                    height: '34px',
+                    borderRadius: '8px',
+                    background: '#f5f3ff',
+                    color: '#7c3aed',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '1rem',
+                    border: '1px solid #ddd6fe'
+                  }}>
+                    🏪
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#0f172a' }}>Prom.ua</div>
+                    <span style={{ fontSize: '0.675rem', background: '#f3e8ff', color: '#7c3aed', padding: '0.15rem 0.5rem', borderRadius: '4px', fontWeight: 700 }}>
+                      API СИНХРОНІЗАЦІЯ
+                    </span>
+                  </div>
+                </div>
+                <span style={{ color: '#94a3b8', fontSize: '0.9rem', cursor: 'help' }} title="Синхронізація наявності з кабінетом Prom.ua через офіційний API">ⓘ</span>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.65rem', marginBottom: '1rem' }}>
+                <span style={{ fontSize: '2.5rem', fontWeight: 800, color: '#0f172a', lineHeight: 1, letterSpacing: '-0.03em' }}>
+                  {dashboardStats.promInStock}
                 </span>
-                <span style={{ fontSize: '0.75rem', background: '#f3e8ff', color: '#6b21a8', padding: '0.2rem 0.55rem', borderRadius: '4px', fontWeight: 600 }}>
-                  API синхронізація
+                <span style={{ fontSize: '0.75rem', fontWeight: 600, background: '#f3e8ff', color: '#6b21a8', padding: '0.25rem 0.6rem', borderRadius: '6px' }}>
+                  активних на Prom
                 </span>
               </div>
-              <div style={{ fontSize: '2.25rem', fontWeight: 800, color: '#6d28d9', letterSpacing: '-0.03em' }}>
-                {dashboardStats.promInStock}
-                <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-muted)', marginLeft: '0.4rem' }}>в наявності на Prom</span>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', marginTop: '1rem', fontSize: '0.85rem', borderTop: '1px solid var(--border-color)', paddingTop: '0.75rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: 'var(--text-muted)' }}>🔴 Немає в наявності:</span>
-                  <span style={{ fontWeight: 700, color: '#b91c1c' }}>{dashboardStats.promOutOfStock}</span>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.85rem', borderTop: '1px solid #f1f5f9', paddingTop: '0.85rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ color: '#64748b', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#ef4444' }}></span>
+                    Немає в наявності
+                  </span>
+                  <span style={{ fontWeight: 700, color: '#0f172a' }}>{dashboardStats.promOutOfStock}</span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: 'var(--text-muted)' }}>⚪ Вимкнено для Prom:</span>
-                  <span style={{ fontWeight: 700, color: '#4b5563' }}>{dashboardStats.promDisabled}</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ color: '#64748b', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#94a3b8' }}></span>
+                    Вимкнено для Prom
+                  </span>
+                  <span style={{ fontWeight: 700, color: '#0f172a' }}>{dashboardStats.promDisabled}</span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: 'var(--text-muted)' }}>⚠️ Не створено на Prom:</span>
-                  <span style={{ fontWeight: 700, color: '#b45309' }}>{dashboardStats.promMissingSku}</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ color: '#64748b', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#f59e0b' }}></span>
+                    Не створено на Prom
+                  </span>
+                  <span style={{ fontWeight: 700, color: '#0f172a' }}>{dashboardStats.promMissingSku}</span>
                 </div>
               </div>
             </div>
+
             <button
               className="btn"
-              style={{ marginTop: '1.25rem', width: '100%', background: '#f5f3ff', color: '#6d28d9', border: '1px solid #ddd6fe', fontSize: '0.825rem', padding: '0.5rem' }}
+              style={{
+                marginTop: '1.25rem',
+                width: '100%',
+                background: '#faf5ff',
+                color: '#6b21a8',
+                border: '1px solid #e9d5ff',
+                fontSize: '0.8rem',
+                fontWeight: 600,
+                padding: '0.6rem',
+                borderRadius: '8px',
+                transition: 'all 0.15s'
+              }}
               onClick={() => setActiveTab('prom')}
             >
-              🟣 Перейти до Prom.ua →
+              Перейти до Prom.ua ↗
             </button>
           </div>
 
           {/* Card 3: Хорошоп */}
-          <div className="glass-panel" style={{ padding: '1.35rem', borderTop: '4px solid #ea580c', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div className="glass-panel" style={{
+            padding: '1.4rem',
+            borderTop: '3px solid #ea580c',
+            borderRadius: '16px',
+            background: '#ffffff',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.04)'
+          }}>
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-                <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#c2410c', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  🟠 Хорошоп (Сайт & ОЧ)
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                  <div style={{
+                    width: '34px',
+                    height: '34px',
+                    borderRadius: '8px',
+                    background: '#fff7ed',
+                    color: '#ea580c',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '1rem',
+                    border: '1px solid #fed7aa'
+                  }}>
+                    📦
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#0f172a' }}>Хорошоп</div>
+                    <span style={{ fontSize: '0.675rem', background: '#ffedd5', color: '#ea580c', padding: '0.15rem 0.5rem', borderRadius: '4px', fontWeight: 700 }}>
+                      {catalog.length} ТОВАРІВ
+                    </span>
+                  </div>
+                </div>
+                <span style={{ color: '#94a3b8', fontSize: '0.9rem', cursor: 'help' }} title="Каталог товарів інтернет-магазину Хорошоп та статус Оплати частинами">ⓘ</span>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.65rem', marginBottom: '1rem' }}>
+                <span style={{ fontSize: '2.5rem', fontWeight: 800, color: '#0f172a', lineHeight: 1, letterSpacing: '-0.03em' }}>
+                  {dashboardStats.horoshopActiveInstallments}
                 </span>
-                <span style={{ fontSize: '0.75rem', background: '#ffedd5', color: '#c2410c', padding: '0.2rem 0.55rem', borderRadius: '4px', fontWeight: 600 }}>
-                  {catalog.length} товарів
+                <span style={{ fontSize: '0.75rem', fontWeight: 600, background: '#ffedd5', color: '#c2410c', padding: '0.25rem 0.6rem', borderRadius: '6px' }}>
+                  ОЧ активна (6 пл.)
                 </span>
               </div>
-              <div style={{ fontSize: '2.25rem', fontWeight: 800, color: '#c2410c', letterSpacing: '-0.03em' }}>
-                {dashboardStats.horoshopActiveInstallments}
-                <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-muted)', marginLeft: '0.4rem' }}>ОЧ активна (6 пл.)</span>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', marginTop: '1rem', fontSize: '0.85rem', borderTop: '1px solid var(--border-color)', paddingTop: '0.75rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: 'var(--text-muted)' }}>⚠️ "Немає в наявн." на Хорошопі:</span>
-                  <span style={{ fontWeight: 700, color: '#b91c1c' }}>{dashboardStats.horoshopOutOfStockCount}</span>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.85rem', borderTop: '1px solid #f1f5f9', paddingTop: '0.85rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ color: '#64748b', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#ef4444' }}></span>
+                    Немає в наявн.
+                  </span>
+                  <span style={{ fontWeight: 700, color: '#0f172a' }}>{dashboardStats.horoshopOutOfStockCount}</span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: 'var(--text-muted)' }}>💜 Примусово ОЧ:</span>
-                  <span style={{ fontWeight: 700, color: '#7c3aed' }}>{horoshopStats.forced}</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ color: '#64748b', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#8b5cf6' }}></span>
+                    Примусово ОЧ
+                  </span>
+                  <span style={{ fontWeight: 700, color: '#0f172a' }}>{horoshopStats.forced}</span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: 'var(--text-muted)' }}>🔴 Заборонено ОЧ вручну:</span>
-                  <span style={{ fontWeight: 700, color: '#dc2626' }}>{horoshopStats.disabled}</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ color: '#64748b', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#ea580c' }}></span>
+                    Заборонено вручну
+                  </span>
+                  <span style={{ fontWeight: 700, color: '#0f172a' }}>{horoshopStats.disabled}</span>
                 </div>
               </div>
             </div>
+
             <button
               className="btn"
-              style={{ marginTop: '1.25rem', width: '100%', background: '#fff7ed', color: '#c2410c', border: '1px solid #fed7aa', fontSize: '0.825rem', padding: '0.5rem' }}
+              style={{
+                marginTop: '1.25rem',
+                width: '100%',
+                background: '#fff7ed',
+                color: '#c2410c',
+                border: '1px solid #fed7aa',
+                fontSize: '0.8rem',
+                fontWeight: 600,
+                padding: '0.6rem',
+                borderRadius: '8px',
+                transition: 'all 0.15s'
+              }}
               onClick={() => setActiveTab('horoshop')}
             >
-              🟠 Перейти до Хорошопу →
+              Перейти до Хорошопу ↗
             </button>
           </div>
 
           {/* Card 4: Мономаркет */}
-          <div className="glass-panel" style={{ padding: '1.35rem', borderTop: '4px solid #f59e0b', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div className="glass-panel" style={{
+            padding: '1.4rem',
+            borderTop: '3px solid #f59e0b',
+            borderRadius: '16px',
+            background: '#ffffff',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.04)'
+          }}>
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-                <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#b45309', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  🟡 Мономаркет (Фід)
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                  <div style={{
+                    width: '34px',
+                    height: '34px',
+                    borderRadius: '8px',
+                    background: '#fffbeb',
+                    color: '#d97706',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '1rem',
+                    border: '1px solid #fde68a'
+                  }}>
+                    🐾
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#0f172a' }}>Мономаркет</div>
+                    <span style={{ fontSize: '0.675rem', background: '#fef3c7', color: '#b45309', padding: '0.15rem 0.5rem', borderRadius: '4px', fontWeight: 700 }}>
+                      XML + ЦІНИ
+                    </span>
+                  </div>
+                </div>
+                <span style={{ color: '#94a3b8', fontSize: '0.9rem', cursor: 'help' }} title="XML-фід товарів та цін для маркетплейсу monobank">ⓘ</span>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.65rem', marginBottom: '1rem' }}>
+                <span style={{ fontSize: '2.5rem', fontWeight: 800, color: '#0f172a', lineHeight: 1, letterSpacing: '-0.03em' }}>
+                  {dashboardStats.monoActiveCount}
                 </span>
-                <span style={{ fontSize: '0.75rem', background: '#fef3c7', color: '#b45309', padding: '0.2rem 0.55rem', borderRadius: '4px', fontWeight: 600 }}>
-                  XML + ціни
+                <span style={{ fontSize: '0.75rem', fontWeight: 600, background: '#fef3c7', color: '#b45309', padding: '0.25rem 0.6rem', borderRadius: '6px' }}>
+                  у фіді monobank
                 </span>
               </div>
-              <div style={{ fontSize: '2.25rem', fontWeight: 800, color: '#b45309', letterSpacing: '-0.03em' }}>
-                {dashboardStats.monoActiveCount}
-                <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-muted)', marginLeft: '0.4rem' }}>у фіді monobank</span>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', marginTop: '1rem', fontSize: '0.85rem', borderTop: '1px solid var(--border-color)', paddingTop: '0.75rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: 'var(--text-muted)' }}>⚠️ Без штрихкоду (EAN):</span>
-                  <span style={{ fontWeight: 700, color: dashboardStats.monoMissingBarcodeCount > 0 ? '#b91c1c' : '#15803d' }}>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.85rem', borderTop: '1px solid #f1f5f9', paddingTop: '0.85rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ color: '#64748b', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: dashboardStats.monoMissingBarcodeCount > 0 ? '#ef4444' : '#10b981' }}></span>
+                    Без штрихкоду
+                  </span>
+                  <span style={{ fontWeight: 700, color: dashboardStats.monoMissingBarcodeCount > 0 ? '#ef4444' : '#10b981' }}>
                     {dashboardStats.monoMissingBarcodeCount}
                   </span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: 'var(--text-muted)' }}>📦 Штрихкодів всього:</span>
-                  <span style={{ fontWeight: 700, color: 'var(--text-main)' }}>{Object.keys(barcodes).length}</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ color: '#64748b', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#94a3b8' }}></span>
+                    Штрихкодів всього
+                  </span>
+                  <span style={{ fontWeight: 700, color: '#0f172a' }}>{Object.keys(barcodes).length}</span>
                 </div>
               </div>
             </div>
+
             <button
               className="btn"
-              style={{ marginTop: '1.25rem', width: '100%', background: '#fffbeb', color: '#b45309', border: '1px solid #fde68a', fontSize: '0.825rem', padding: '0.5rem' }}
+              style={{
+                marginTop: '1.25rem',
+                width: '100%',
+                background: '#fffbeb',
+                color: '#b45309',
+                border: '1px solid #fde68a',
+                fontSize: '0.8rem',
+                fontWeight: 600,
+                padding: '0.6rem',
+                borderRadius: '8px',
+                transition: 'all 0.15s'
+              }}
               onClick={() => setActiveTab('catalog')}
             >
-              🟡 Перейти до Мономаркету →
+              Перейти до Мономаркету ↗
             </button>
           </div>
 
         </div>
 
         {/* Cross-Platform Discrepancies & Issues Center */}
-        <div className="glass-panel" style={{ padding: '1.5rem', background: 'var(--surface-color)', borderRadius: '14px' }}>
+        <div className="glass-panel" style={{ padding: '1.5rem', background: '#ffffff', borderRadius: '16px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.25rem' }}>
-            <div>
-              <h2 style={{ margin: 0, fontSize: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <span>⚡</span> Центр розбіжностей та уваги
-                <span className="badge danger" style={{ fontSize: '0.85rem', padding: '0.2rem 0.6rem' }}>
-                  {dashboardStats.totalIssuesCount} товарів з зауваженнями
-                </span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+              <h2 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: '#0f172a', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span style={{ color: '#f59e0b' }}>⚡</span> Центр розбіжностей та уваги
               </h2>
-              <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-                Натисніть на будь-яку проблему нижче, щоб миттєво відфільтрувати список товарів:
-              </p>
+              <span style={{
+                background: '#fee2e2',
+                color: '#b91c1c',
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                padding: '0.25rem 0.65rem',
+                borderRadius: '999px',
+                border: '1px solid #fecaca'
+              }}>
+                {dashboardStats.totalIssuesCount} товарів з зауваженнями
+              </span>
             </div>
-            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+
+            <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', background: '#f8fafc', padding: '0.25rem', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
               <button
                 className="btn"
                 style={{
-                  background: dashboardFilter === 'issues' ? '#fee2e2' : '#f9fafb',
-                  color: dashboardFilter === 'issues' ? '#b91c1c' : 'var(--text-main)',
-                  border: dashboardFilter === 'issues' ? '1.5px solid #ef4444' : '1px solid var(--border-color)',
-                  fontSize: '0.85rem',
-                  padding: '0.4rem 0.8rem',
-                  fontWeight: 600
+                  background: dashboardFilter === 'issues' ? '#ffffff' : 'transparent',
+                  color: dashboardFilter === 'issues' ? '#b91c1c' : '#64748b',
+                  boxShadow: dashboardFilter === 'issues' ? '0 1px 3px rgba(0,0,0,0.06)' : 'none',
+                  border: 'none',
+                  fontSize: '0.8rem',
+                  padding: '0.35rem 0.75rem',
+                  fontWeight: 600,
+                  borderRadius: '6px'
                 }}
                 onClick={() => setDashboardFilter('issues')}
               >
-                ⚠️ Всі з зауваженнями ({dashboardStats.totalIssuesCount})
+                Всі зауваження ({dashboardStats.totalIssuesCount})
               </button>
               <button
                 className="btn"
                 style={{
-                  background: dashboardFilter === 'all' ? '#e0e7ff' : '#f9fafb',
-                  color: dashboardFilter === 'all' ? '#3730a3' : 'var(--text-main)',
-                  border: dashboardFilter === 'all' ? '1.5px solid #6366f1' : '1px solid var(--border-color)',
-                  fontSize: '0.85rem',
-                  padding: '0.4rem 0.8rem',
-                  fontWeight: 600
+                  background: dashboardFilter === 'all' ? '#ffffff' : 'transparent',
+                  color: dashboardFilter === 'all' ? '#2563eb' : '#64748b',
+                  boxShadow: dashboardFilter === 'all' ? '0 1px 3px rgba(0,0,0,0.06)' : 'none',
+                  border: 'none',
+                  fontSize: '0.8rem',
+                  padding: '0.35rem 0.75rem',
+                  fontWeight: 600,
+                  borderRadius: '6px'
                 }}
                 onClick={() => setDashboardFilter('all')}
               >
-                👁️ Всі товари ({catalog.length})
+                Всі товари ({catalog.length})
               </button>
               <button
                 className="btn"
                 style={{
-                  background: dashboardFilter === 'healthy' ? '#dcfce7' : '#f9fafb',
-                  color: dashboardFilter === 'healthy' ? '#15803d' : 'var(--text-main)',
-                  border: dashboardFilter === 'healthy' ? '1.5px solid #10b981' : '1px solid var(--border-color)',
-                  fontSize: '0.85rem',
-                  padding: '0.4rem 0.8rem',
-                  fontWeight: 600
+                  background: dashboardFilter === 'healthy' ? '#ffffff' : 'transparent',
+                  color: dashboardFilter === 'healthy' ? '#15803d' : '#64748b',
+                  boxShadow: dashboardFilter === 'healthy' ? '0 1px 3px rgba(0,0,0,0.06)' : 'none',
+                  border: 'none',
+                  fontSize: '0.8rem',
+                  padding: '0.35rem 0.75rem',
+                  fontWeight: 600,
+                  borderRadius: '6px'
                 }}
                 onClick={() => setDashboardFilter('healthy')}
               >
-                ✅ Без зауважень ({catalog.length - dashboardStats.totalIssuesCount})
+                Без зауважень ({catalog.length - dashboardStats.totalIssuesCount})
               </button>
             </div>
           </div>
 
-          {/* Quick Filter Chips Grid */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '0.75rem' }}>
+          {/* Quick Filter Cards Grid (Mockup Style with Colored Left Borders) */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
             
-            {/* Filter 1 */}
+            {/* Discrepancy Card 1: Wh > 0, Horo: Out */}
             <div
               onClick={() => setDashboardFilter(dashboardFilter === 'wh_in_horo_out' ? 'all' : 'wh_in_horo_out')}
               style={{
                 cursor: 'pointer',
-                padding: '0.85rem 1rem',
-                borderRadius: '8px',
-                background: dashboardFilter === 'wh_in_horo_out' ? '#fee2e2' : '#fef2f2',
-                border: dashboardFilter === 'wh_in_horo_out' ? '2px solid #ef4444' : '1px solid #fecaca',
+                padding: '1.1rem 1.25rem',
+                borderRadius: '12px',
+                background: dashboardFilter === 'wh_in_horo_out' ? '#fef2f2' : '#ffffff',
+                border: '1px solid #e2e8f0',
+                borderLeft: '4px solid #ef4444',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                boxShadow: dashboardFilter === 'wh_in_horo_out' ? '0 4px 12px rgba(239, 68, 68, 0.12)' : '0 1px 3px rgba(0,0,0,0.03)',
                 transition: 'all 0.15s ease'
               }}
               title="На складі товар є (>0), але на Хорошопі стоїть 'немає в наявності'"
             >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '0.825rem', fontWeight: 700, color: '#991b1b' }}>🚨 Склад &gt; 0, Хорошоп: Немає</span>
-                <span style={{ background: '#ef4444', color: '#fff', fontSize: '0.75rem', fontWeight: 800, padding: '0.1rem 0.45rem', borderRadius: '999px' }}>
-                  {dashboardStats.diffWarehouseInHoroshopOut}
-                </span>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
+                  <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#0f172a' }}>Склад &gt; 0, Хорошоп: Немає</span>
+                  <span style={{ background: '#ef4444', color: '#fff', fontSize: '0.75rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '999px' }}>
+                    {dashboardStats.diffWarehouseInHoroshopOut}
+                  </span>
+                </div>
+                <div style={{ fontSize: '0.775rem', color: '#64748b', lineHeight: 1.35 }}>
+                  Товар є на складі, але недоступний для замовлення на сайті
+                </div>
               </div>
-              <div style={{ fontSize: '0.75rem', color: '#b91c1c', marginTop: '0.35rem' }}>
-                Товар є на складі, але недоступний для замовлення на сайті
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '0.85rem', fontSize: '0.75rem', color: dashboardFilter === 'wh_in_horo_out' ? '#ef4444' : '#94a3b8', fontWeight: 600 }}>
+                <span>{dashboardFilter === 'wh_in_horo_out' ? 'Фільтр активний (скинути)' : 'Натисніть щоб відфільтрувати'}</span>
+                <span>→</span>
               </div>
             </div>
 
-            {/* Filter: Prom missing */}
+            {/* Discrepancy Card 2: Prom Missing */}
             <div
               onClick={() => setDashboardFilter(dashboardFilter === 'prom_missing' ? 'all' : 'prom_missing')}
               style={{
                 cursor: 'pointer',
-                padding: '0.85rem 1rem',
-                borderRadius: '8px',
-                background: dashboardFilter === 'prom_missing' ? '#f3e8ff' : '#faf5ff',
-                border: dashboardFilter === 'prom_missing' ? '2px solid #a855f7' : '1px solid #e9d5ff',
+                padding: '1.1rem 1.25rem',
+                borderRadius: '12px',
+                background: dashboardFilter === 'prom_missing' ? '#faf5ff' : '#ffffff',
+                border: '1px solid #e2e8f0',
+                borderLeft: '4px solid #8b5cf6',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                boxShadow: dashboardFilter === 'prom_missing' ? '0 4px 12px rgba(139, 92, 246, 0.12)' : '0 1px 3px rgba(0,0,0,0.03)',
                 transition: 'all 0.15s ease'
               }}
               title="Товар є в Хорошопі, але його артикул не знайдено на Prom.ua"
             >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '0.825rem', fontWeight: 700, color: '#6b21a8' }}>🟣 Немає на Prom.ua</span>
-                <span style={{ background: '#a855f7', color: '#fff', fontSize: '0.75rem', fontWeight: 800, padding: '0.1rem 0.45rem', borderRadius: '999px' }}>
-                  {dashboardStats.diffMissingFromProm}
-                </span>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
+                  <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#0f172a' }}>Немає на Prom.ua</span>
+                  <span style={{ background: '#8b5cf6', color: '#fff', fontSize: '0.75rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '999px' }}>
+                    {dashboardStats.diffMissingFromProm}
+                  </span>
+                </div>
+                <div style={{ fontSize: '0.775rem', color: '#64748b', lineHeight: 1.35 }}>
+                  Артикул не створено на маркетплейсі Prom.ua
+                </div>
               </div>
-              <div style={{ fontSize: '0.75rem', color: '#7e22ce', marginTop: '0.35rem' }}>
-                Артикул не створено на маркетплейсі Prom.ua
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '0.85rem', fontSize: '0.75rem', color: dashboardFilter === 'prom_missing' ? '#8b5cf6' : '#94a3b8', fontWeight: 600 }}>
+                <span>{dashboardFilter === 'prom_missing' ? 'Фільтр активний (скинути)' : 'Натисніть щоб відфільтрувати'}</span>
+                <span>→</span>
               </div>
             </div>
 
-            {/* Filter: Prom disabled with stock */}
+            {/* Discrepancy Card 3: Stock > 0, Prom disabled */}
             <div
               onClick={() => setDashboardFilter(dashboardFilter === 'prom_disabled_stock' ? 'all' : 'prom_disabled_stock')}
               style={{
                 cursor: 'pointer',
-                padding: '0.85rem 1rem',
-                borderRadius: '8px',
-                background: dashboardFilter === 'prom_disabled_stock' ? '#f3f4f6' : '#f9fafb',
-                border: dashboardFilter === 'prom_disabled_stock' ? '2px solid #6b7280' : '1px solid #e5e7eb',
+                padding: '1.1rem 1.25rem',
+                borderRadius: '12px',
+                background: dashboardFilter === 'prom_disabled_stock' ? '#f8fafc' : '#ffffff',
+                border: '1px solid #e2e8f0',
+                borderLeft: '4px solid #64748b',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                boxShadow: dashboardFilter === 'prom_disabled_stock' ? '0 4px 12px rgba(100, 116, 139, 0.12)' : '0 1px 3px rgba(0,0,0,0.03)',
                 transition: 'all 0.15s ease'
               }}
               title="Товар є на складі, але вимкнено для Prom"
             >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '0.825rem', fontWeight: 700, color: '#374151' }}>⚪ На складі є, Prom: Вимкн</span>
-                <span style={{ background: '#6b7280', color: '#fff', fontSize: '0.75rem', fontWeight: 800, padding: '0.1rem 0.45rem', borderRadius: '999px' }}>
-                  {dashboardStats.diffInStockPromDisabled}
-                </span>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
+                  <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#0f172a' }}>На складі є, Prom: Вимкн</span>
+                  <span style={{ background: '#64748b', color: '#fff', fontSize: '0.75rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '999px' }}>
+                    {dashboardStats.diffInStockPromDisabled}
+                  </span>
+                </div>
+                <div style={{ fontSize: '0.775rem', color: '#64748b', lineHeight: 1.35 }}>
+                  Товар в наявності, але знятий з продажу на Prom
+                </div>
               </div>
-              <div style={{ fontSize: '0.75rem', color: '#4b5563', marginTop: '0.35rem' }}>
-                Товар в наявності, але знятий з продажу на Prom
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '0.85rem', fontSize: '0.75rem', color: dashboardFilter === 'prom_disabled_stock' ? '#64748b' : '#94a3b8', fontWeight: 600 }}>
+                <span>{dashboardFilter === 'prom_disabled_stock' ? 'Фільтр активний (скинути)' : 'Натисніть щоб відфільтрувати'}</span>
+                <span>→</span>
               </div>
             </div>
 
-            {/* Filter: Mono missing barcode */}
+            {/* Discrepancy Card 4: Mono missing barcode */}
             <div
               onClick={() => setDashboardFilter(dashboardFilter === 'mono_no_barcode' ? 'all' : 'mono_no_barcode')}
               style={{
                 cursor: 'pointer',
-                padding: '0.85rem 1rem',
-                borderRadius: '8px',
-                background: dashboardFilter === 'mono_no_barcode' ? '#fef3c7' : '#fffbeb',
-                border: dashboardFilter === 'mono_no_barcode' ? '2px solid #eab308' : '1px solid #fde68a',
+                padding: '1.1rem 1.25rem',
+                borderRadius: '12px',
+                background: dashboardFilter === 'mono_no_barcode' ? '#fffbeb' : '#ffffff',
+                border: '1px solid #e2e8f0',
+                borderLeft: '4px solid #f59e0b',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                boxShadow: dashboardFilter === 'mono_no_barcode' ? '0 4px 12px rgba(245, 158, 11, 0.12)' : '0 1px 3px rgba(0,0,0,0.03)',
                 transition: 'all 0.15s ease'
               }}
               title="Товари в Мономаркеті без штрихкоду (EAN)"
             >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '0.825rem', fontWeight: 700, color: '#854d0e' }}>🟡 Моно: без штрихкоду</span>
-                <span style={{ background: '#eab308', color: '#fff', fontSize: '0.75rem', fontWeight: 800, padding: '0.1rem 0.45rem', borderRadius: '999px' }}>
-                  {dashboardStats.diffMonoMissingBarcode}
-                </span>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
+                  <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#0f172a' }}>Проблеми Мономаркет</span>
+                  <span style={{ background: '#f59e0b', color: '#fff', fontSize: '0.75rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '999px' }}>
+                    {dashboardStats.diffMonoMissingBarcode}
+                  </span>
+                </div>
+                <div style={{ fontSize: '0.775rem', color: '#64748b', lineHeight: 1.35 }}>
+                  Немає штрихкоду (EAN) для публікації в Мономаркет
+                </div>
               </div>
-              <div style={{ fontSize: '0.75rem', color: '#a16207', marginTop: '0.35rem' }}>
-                Для публікації в Мономаркет обов'язково потрібен штрихкод (EAN)
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '0.85rem', fontSize: '0.75rem', color: dashboardFilter === 'mono_no_barcode' ? '#d97706' : '#94a3b8', fontWeight: 600 }}>
+                <span>{dashboardFilter === 'mono_no_barcode' ? 'Фільтр активний (скинути)' : 'Натисніть щоб відфільтрувати'}</span>
+                <span>→</span>
               </div>
             </div>
 
-            {/* Filter 6 */}
+            {/* Discrepancy Card 5: Missing from Excel */}
             <div
               onClick={() => setDashboardFilter(dashboardFilter === 'excel_missing' ? 'all' : 'excel_missing')}
               style={{
                 cursor: 'pointer',
-                padding: '0.85rem 1rem',
-                borderRadius: '8px',
-                background: dashboardFilter === 'excel_missing' ? '#e0f2fe' : '#f0f9ff',
-                border: dashboardFilter === 'excel_missing' ? '2px solid #0ea5e9' : '1px solid #bae6fd',
+                padding: '1.1rem 1.25rem',
+                borderRadius: '12px',
+                background: dashboardFilter === 'excel_missing' ? '#f0f9ff' : '#ffffff',
+                border: '1px solid #e2e8f0',
+                borderLeft: '4px solid #0ea5e9',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                boxShadow: dashboardFilter === 'excel_missing' ? '0 4px 12px rgba(14, 165, 233, 0.12)' : '0 1px 3px rgba(0,0,0,0.03)',
                 transition: 'all 0.15s ease'
               }}
               title="Артикули не знайдено в жодній вкладці складів Excel"
             >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '0.825rem', fontWeight: 700, color: '#0369a1' }}>❓ Не знайдено в Excel</span>
-                <span style={{ background: '#0ea5e9', color: '#fff', fontSize: '0.75rem', fontWeight: 800, padding: '0.1rem 0.45rem', borderRadius: '999px' }}>
-                  {dashboardStats.warehouseMissing}
-                </span>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
+                  <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#0f172a' }}>Не знайдено в Excel</span>
+                  <span style={{ background: '#0ea5e9', color: '#fff', fontSize: '0.75rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '999px' }}>
+                    {dashboardStats.warehouseMissing}
+                  </span>
+                </div>
+                <div style={{ fontSize: '0.775rem', color: '#64748b', lineHeight: 1.35 }}>
+                  Товари з каталогу, артикулів яких немає в таблиці
+                </div>
               </div>
-              <div style={{ fontSize: '0.75rem', color: '#0284c7', marginTop: '0.35rem' }}>
-                Товари з каталогу, артикулів яких немає в таблиці
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '0.85rem', fontSize: '0.75rem', color: dashboardFilter === 'excel_missing' ? '#0ea5e9' : '#94a3b8', fontWeight: 600 }}>
+                <span>{dashboardFilter === 'excel_missing' ? 'Фільтр активний (скинути)' : 'Натисніть щоб відфільтрувати'}</span>
+                <span>→</span>
               </div>
             </div>
 
@@ -2099,67 +2440,203 @@ export default function App() {
     <div className="layout-wrapper">
       <div className="sidebar">
         <div className="sidebar-logo">
-          <div style={{ background: 'var(--primary)', color: 'white', borderRadius: '8px', padding: '4px', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>⚡</div> 
-          TOTAL ENERGO
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+            <div style={{
+              background: '#2563eb',
+              color: 'white',
+              borderRadius: '8px',
+              width: '32px',
+              height: '32px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 700,
+              fontSize: '1rem',
+              boxShadow: '0 2px 4px rgba(37,99,235,0.3)'
+            }}>
+              ⚡
+            </div> 
+            <span style={{ fontWeight: 800, fontSize: '1.15rem', color: '#0f172a', letterSpacing: '-0.02em' }}>
+              TotalEnergo
+            </span>
+          </div>
+          <span style={{ color: '#94a3b8', fontSize: '0.9rem', cursor: 'pointer' }} title="Згорнути">«</span>
         </div>
-        <div className="sidebar-menu">
-          <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)', margin: '1rem 0 0.5rem 1rem', textTransform: 'uppercase' }}>Система</div>
+
+        {/* Sidebar Search Bar */}
+        <div style={{ padding: '0 0.25rem', marginBottom: '1.25rem' }}>
+          <div style={{ position: 'relative' }}>
+            <span style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8', fontSize: '0.85rem', pointerEvents: 'none' }}>🔍</span>
+            <input
+              type="text"
+              placeholder="Search..."
+              value={dashboardSearchQuery}
+              onChange={e => {
+                setDashboardSearchQuery(e.target.value);
+                if (activeTab !== 'dashboard') setActiveTab('dashboard');
+              }}
+              style={{
+                width: '100%',
+                padding: '0.5rem 0.75rem 0.5rem 2.1rem',
+                borderRadius: '8px',
+                border: '1px solid #e2e8f0',
+                background: '#f8fafc',
+                fontSize: '0.85rem',
+                outline: 'none',
+                transition: 'border-color 0.2s'
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Sidebar Navigation Menu */}
+        <div className="sidebar-menu" style={{ flex: 1 }}>
           <a className={`sidebar-item ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')}>
-            📊 Дашборд
+            <span style={{ fontSize: '1.05rem' }}>📊</span> Dashboard
           </a>
           <a className={`sidebar-item ${activeTab === 'prom' ? 'active' : ''}`} onClick={() => setActiveTab('prom')}>
-            🟣 Prom.ua
+            <span style={{ fontSize: '1.05rem' }}>🏪</span> Prom.ua
           </a>
           <a className={`sidebar-item ${activeTab === 'horoshop' ? 'active' : ''}`} onClick={() => setActiveTab('horoshop')}>
-            🟠 Хорошоп
+            <span style={{ fontSize: '1.05rem' }}>📦</span> Horoshop
           </a>
-          <a className={`sidebar-item ${activeTab === 'catalog' || activeTab === 'import' ? 'active' : ''}`} onClick={() => setActiveTab('catalog')}>
-            🟡 Мономаркет
+          <a className={`sidebar-item ${activeTab === 'catalog' ? 'active' : ''}`} onClick={() => setActiveTab('catalog')}>
+            <span style={{ fontSize: '1.05rem' }}>🐾</span> Monomarket
           </a>
           <a className="sidebar-item" onClick={() => { setShowLogs(true); loadLogs(); }}>
-            ⏱️ Журнал логів
+            <span style={{ fontSize: '1.05rem' }}>⏱️</span> Logs
           </a>
           <a className="sidebar-item" onClick={() => setShowLinks(true)}>
-            🔗 XML фіди
+            <span style={{ fontSize: '1.05rem' }}>&lt;/&gt;</span> XML Feeds
+          </a>
+
+          <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#94a3b8', margin: '1.25rem 0 0.5rem 0.5rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+            CONNECTORS
+          </div>
+          <a className={`sidebar-item ${activeTab === 'import' ? 'active' : ''}`} onClick={() => setActiveTab('import')}>
+            <span style={{ fontSize: '1.05rem' }}>📥</span> Excel Import
           </a>
           <a className="sidebar-item" onClick={() => setShowSettings(true)}>
-            ⚙️ Налаштування
+            <span style={{ fontSize: '1.05rem' }}>⚙️</span> Settings
           </a>
         </div>
+
+        {/* User Card at bottom of Sidebar */}
+        <div style={{ marginTop: 'auto', paddingTop: '1rem', borderTop: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+            <div style={{
+              width: '34px',
+              height: '34px',
+              borderRadius: '50%',
+              background: 'linear-gradient(135deg, #1e293b, #334155)',
+              color: '#ffffff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 700,
+              fontSize: '0.85rem'
+            }}>
+              OB
+            </div>
+            <div>
+              <div style={{ fontSize: '0.825rem', fontWeight: 700, color: '#0f172a', lineHeight: 1.2 }}>Oleksii Bondarenko</div>
+              <div style={{ fontSize: '0.725rem', color: '#64748b' }}>Lead Integrator</div>
+            </div>
+          </div>
+          <button
+            onClick={() => { localStorage.removeItem('panel_auth'); window.location.reload(); }}
+            title="Вийти з панелі"
+            style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8', fontSize: '1.1rem', padding: '0.2rem' }}
+          >
+            ↪
+          </button>
+        </div>
       </div>
+
       <div className="container">
       {activeTab === 'dashboard' ? (
-        <div className="header">
-          <div>
-            <h1>📊 Головний Дашборд системи</h1>
-            <p style={{ color: 'var(--text-muted)', margin: 0 }}>Центр контролю: Склад (Excel) ⇄ Хорошоп ⇄ Prom.ua ⇄ Мономаркет</p>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '2rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+            <h1 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em' }}>
+              Головний Дашборд системи
+            </h1>
+            <div style={{ height: '18px', width: '1px', background: '#cbd5e1' }}></div>
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.45rem',
+              background: '#f1f5f9',
+              border: '1px solid #e2e8f0',
+              borderRadius: '999px',
+              padding: '0.25rem 0.85rem',
+              fontSize: '0.75rem',
+              fontWeight: 600,
+              color: '#475569'
+            }}>
+              <span>Склад (Excel)</span>
+              <span style={{ color: '#94a3b8' }}>›</span>
+              <span>Хорошоп</span>
+              <span style={{ color: '#94a3b8' }}>›</span>
+              <span>Prom.ua</span>
+              <span style={{ color: '#94a3b8' }}>›</span>
+              <span>Мономаркет</span>
+            </div>
           </div>
-          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
+
+          <div style={{ display: 'flex', gap: '0.6rem', alignItems: 'center', flexWrap: 'wrap' }}>
             <button
               className="btn"
-              style={{ background: 'linear-gradient(135deg, #2563eb, #7c3aed)', color: '#fff', fontWeight: 600 }}
+              style={{
+                background: '#2563eb',
+                color: '#ffffff',
+                fontWeight: 600,
+                padding: '0.6rem 1.25rem',
+                borderRadius: '8px',
+                fontSize: '0.875rem',
+                boxShadow: '0 1px 3px rgba(37, 99, 235, 0.3)'
+              }}
               onClick={handleTriggerFullSync}
               disabled={syncingAll || loading || !token}
               title="Запустити повний цикл оновлення (Excel -> Prom -> Хорошоп -> Моно)"
             >
-              {syncingAll ? <span className="loader"></span> : '⚡ Повна синхронізація всього'}
+              {syncingAll ? <span className="loader" style={{ width: '16px', height: '16px' }}></span> : '⚡ Повна синхронізація всього'}
             </button>
             <button
               className="btn"
-              style={{ background: '#f3f4f6', color: 'var(--text-main)', border: '1px solid var(--border-color)' }}
+              style={{
+                background: '#ffffff',
+                color: '#1e293b',
+                border: '1px solid #e2e8f0',
+                padding: '0.6rem 1rem',
+                borderRadius: '8px',
+                fontSize: '0.875rem',
+                fontWeight: 500
+              }}
               onClick={loadData}
               disabled={loading}
               title="Перезавантажити дані з GitHub"
             >
-              {loading ? <span className="loader"></span> : '🔄 Оновити дані'}
+              {loading ? <span className="loader" style={{ width: '16px', height: '16px', borderColor: 'rgba(0,0,0,0.2)', borderTopColor: '#000' }}></span> : '🔄 Оновити дані'}
             </button>
             <button
               className="btn"
-              style={{ background: '#f3f4f6', color: 'var(--text-main)', border: '1px solid var(--border-color)' }}
+              style={{
+                background: '#ffffff',
+                color: '#475569',
+                border: '1px solid #e2e8f0',
+                padding: '0.6rem',
+                width: '38px',
+                height: '38px',
+                borderRadius: '8px',
+                fontSize: '1rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
               onClick={() => setShowSettings(true)}
               title="Налаштування джерел Google Таблиць та токенів"
             >
-              ⚙️ Налаштування
+              ⚙️
             </button>
           </div>
         </div>
