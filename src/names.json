@@ -114,5 +114,7 @@
   "PCH012030001": "Зарядний пристрій Victron Energy Phoenix Charger 12/30(2+1) 120/240V ",
   "PIN245020000": "Інвертор Victron Energy Phoenix Inverter 24/5000 - 24/220В 5кВА/4кВт",
   "PIN483020000": "Інвертор Victron Energy Phoenix Inverter 48/3000 - 48/220В 3кВА/2,4кВт",
-  "PIN485020000": "Інвертор Victron Energy Phoenix Inverter 48/5000 - 48/220В 5кВА/4кВт"
+  "PIN485020000": "Інвертор Victron Energy Phoenix Inverter 48/5000 - 48/220В 5кВА/4кВт",
+  "BAM010700000 (R)": "Батарейний монітор Victron BMV-700 (У комплекті Шунт Victron 500A/50mV)",
+  "BAM010702000 (R)": "Батарейний монітор Victron BMV-702 (У комплекті Шунт Victron 500A/50mV)"
 }
