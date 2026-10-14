@@ -435,24 +435,6 @@ export default function App() {
     return { enabled, total: products.length };
   };
 
-  const toggleCategoryPromWhitelist = (products) => {
-    const validCodes = products
-      .map(p => p.vendorCode ? String(p.vendorCode).trim() : '')
-      .filter(code => code && promSkusSet.has(code));
-    if (validCodes.length === 0) return;
-
-    const allOn = validCodes.every(c => promWhitelistSet.has(c));
-    setPromWhitelist(prev => {
-      const prevSet = new Set(prev);
-      validCodes.forEach(c => {
-        if (allOn) prevSet.delete(c);
-        else prevSet.add(c);
-      });
-      return Array.from(prevSet);
-    });
-    showToast(allOn ? `⚪ Вимкнено категорію з Prom` : `🟣 Увімкнено категорію на Prom`);
-  };
-
   const togglePromCategory = (cat) => setCollapsedPromCategories(prev => {
     const isCurrentlyCollapsed = prev[cat] !== false;
     return { ...prev, [cat]: !isCurrentlyCollapsed };
@@ -650,24 +632,6 @@ export default function App() {
     return { active: activeCount, total: products.length };
   };
 
-  const toggleCategoryHoroshopAllowed = (products) => {
-    const codes = products
-      .map(p => p.vendorCode ? String(p.vendorCode).trim() : '')
-      .filter(Boolean);
-    if (codes.length === 0) return;
-
-    const allAllowed = codes.every(c => !horoshopDisabledSet.has(c));
-    setHoroshopDisabled(prev => {
-      const prevSet = new Set(prev);
-      codes.forEach(c => {
-        if (allAllowed) prevSet.add(c);
-        else prevSet.delete(c);
-      });
-      return Array.from(prevSet);
-    });
-    showToast(allAllowed ? `🔴 Заборонено ОЧ для категорії (${codes.length} тов.)` : `🟢 Дозволено ОЧ для категорії (${codes.length} тов.)`);
-  };
-
   const toggleHoroshopCategory = (cat) => setCollapsedHoroshopCategories(prev => {
     const isCurrentlyCollapsed = prev[cat] !== false;
     return { ...prev, [cat]: !isCurrentlyCollapsed };
@@ -835,16 +799,6 @@ export default function App() {
   };
   const daysToDispatch = getDaysToDispatch();
   const daysColor = daysToDispatch === 3 ? '#f59e0b' : daysToDispatch === 2 ? '#0ea5e9' : '#10b981';
-
-  const toggleCategoryWhitelist = (products) => {
-    const codes = products.map(p => p.vendorCode);
-    const allOn = codes.every(c => whitelist.includes(c));
-    if (allOn) {
-      setWhitelist(prev => prev.filter(c => !codes.includes(c)));
-    } else {
-      setWhitelist(prev => [...new Set([...prev, ...codes])]);
-    }
-  };
 
   const handleExportExcel = () => {
     const data = catalog.map(p => {
@@ -1693,29 +1647,24 @@ export default function App() {
         grouped.map(([categoryName, products]) => {
           const { selected, total } = getCategoryStats(products);
           const isCollapsed = collapsedCategories[categoryName] !== false; // collapsed by default
-          const allCatSelected = products.every(p => whitelist.includes(p.vendorCode));
 
           return (
             <div key={categoryName} className="glass-panel" style={{ marginBottom: '1rem', padding: 0, overflow: 'hidden' }}>
               {/* Category header */}
               <div
+                onClick={() => toggleCategory(categoryName)}
                 style={{
                   display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem 1.5rem',
                   cursor: 'pointer', borderBottom: isCollapsed ? 'none' : '1px solid var(--border-color)',
-                  background: 'rgba(59,130,246,0.05)'
+                  background: isCollapsed ? '#ffffff' : 'rgba(59,130,246,0.05)',
+                  transition: 'background 0.2s', userSelect: 'none'
                 }}
               >
-                {/* Category toggle switch */}
-                <label className="toggle-switch" onClick={e => e.stopPropagation()}>
-                  <input type="checkbox" checked={allCatSelected} onChange={() => toggleCategoryWhitelist(products)} />
-                  <span className="slider"></span>
-                </label>
-                {/* Category name + collapse */}
-                <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.75rem' }} onClick={() => toggleCategory(categoryName)}>
+                <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                   <span style={{ fontWeight: 700, fontSize: '1rem' }}>{categoryName}</span>
                   <span className="badge">{selected}/{total}</span>
                 </div>
-                <span style={{ color: 'var(--text-muted)', fontSize: '1.2rem' }} onClick={() => toggleCategory(categoryName)}>
+                <span style={{ color: 'var(--text-muted)', fontSize: '1.2rem' }}>
                   {isCollapsed ? '▶' : '▼'}
                 </span>
               </div>
@@ -1956,38 +1905,26 @@ export default function App() {
                 promGrouped.map(([categoryName, products]) => {
                   const { enabled, total } = getPromCategoryStats(products);
                   const isCollapsed = collapsedPromCategories[categoryName] !== false;
-                  const validCodes = products
-                    .map(p => p.vendorCode ? String(p.vendorCode).trim() : '')
-                    .filter(code => code && promSkusSet.has(code));
-                  const allCatSelected = validCodes.length > 0 && validCodes.every(c => promWhitelistSet.has(c));
 
                   return (
                     <div key={categoryName} className="glass-panel" style={{ marginBottom: '0.75rem', padding: 0, overflow: 'hidden' }}>
                       {/* Category header */}
                       <div
+                        onClick={() => togglePromCategory(categoryName)}
                         style={{
                           display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.9rem 1.25rem',
                           cursor: 'pointer', borderBottom: isCollapsed ? 'none' : '1px solid var(--border-color)',
                           background: isCollapsed ? '#ffffff' : 'rgba(139, 92, 246, 0.05)',
-                          transition: 'background 0.2s'
+                          transition: 'background 0.2s', userSelect: 'none'
                         }}
                       >
-                        <label className="toggle-switch" onClick={e => e.stopPropagation()} title={validCodes.length === 0 ? "У цій категорії немає товарів з Prom.ua" : (allCatSelected ? "Вимкнути всю категорію на Prom" : "Увімкнути всю категорію на Prom")}>
-                          <input
-                            type="checkbox"
-                            disabled={validCodes.length === 0}
-                            checked={allCatSelected}
-                            onChange={() => toggleCategoryPromWhitelist(products)}
-                          />
-                          <span className="slider" style={{ background: allCatSelected ? '#8b5cf6' : '' }}></span>
-                        </label>
-                        <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.75rem' }} onClick={() => togglePromCategory(categoryName)}>
+                        <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                           <span style={{ fontWeight: 700, fontSize: '0.95rem' }}>{categoryName}</span>
                           <span className="badge" style={{ background: enabled > 0 ? '#dcfce7' : '#f3f4f6', color: enabled > 0 ? '#15803d' : '#6b7280' }}>
                             {enabled}/{total}
                           </span>
                         </div>
-                        <span style={{ color: 'var(--text-muted)', fontSize: '1.1rem', padding: '0 0.5rem' }} onClick={() => togglePromCategory(categoryName)}>
+                        <span style={{ color: 'var(--text-muted)', fontSize: '1.1rem', padding: '0 0.5rem' }}>
                           {isCollapsed ? '▶' : '▼'}
                         </span>
                       </div>
@@ -2194,37 +2131,26 @@ export default function App() {
                 horoshopGrouped.map(([categoryName, products]) => {
                   const { active, total } = getHoroshopCategoryStats(products);
                   const isCollapsed = collapsedHoroshopCategories[categoryName] !== false;
-                  const codes = products
-                    .map(p => p.vendorCode ? String(p.vendorCode).trim() : '')
-                    .filter(Boolean);
-                  const allCatAllowed = codes.length > 0 && codes.every(c => !horoshopDisabledSet.has(c));
 
                   return (
                     <div key={categoryName} className="glass-panel" style={{ marginBottom: '0.75rem', padding: 0, overflow: 'hidden' }}>
                       {/* Category header */}
                       <div
+                        onClick={() => toggleHoroshopCategory(categoryName)}
                         style={{
                           display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.9rem 1.25rem',
                           cursor: 'pointer', borderBottom: isCollapsed ? 'none' : '1px solid var(--border-color)',
                           background: isCollapsed ? '#ffffff' : 'rgba(16, 185, 129, 0.05)',
-                          transition: 'background 0.2s'
+                          transition: 'background 0.2s', userSelect: 'none'
                         }}
                       >
-                        <label className="toggle-switch" onClick={e => e.stopPropagation()} title={allCatAllowed ? "Заборонити ОЧ для всієї категорії" : "Дозволити ОЧ для всієї категорії"}>
-                          <input
-                            type="checkbox"
-                            checked={allCatAllowed}
-                            onChange={() => toggleCategoryHoroshopAllowed(products)}
-                          />
-                          <span className="slider" style={{ background: allCatAllowed ? '#10b981' : '#9ca3af' }}></span>
-                        </label>
-                        <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.75rem' }} onClick={() => toggleHoroshopCategory(categoryName)}>
+                        <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                           <span style={{ fontWeight: 700, fontSize: '0.95rem' }}>{categoryName}</span>
                           <span className="badge" style={{ background: active > 0 ? '#dcfce7' : '#f3f4f6', color: active > 0 ? '#15803d' : '#6b7280' }}>
                             {active}/{total}
                           </span>
                         </div>
-                        <span style={{ color: 'var(--text-muted)', fontSize: '1.1rem', padding: '0 0.5rem' }} onClick={() => toggleHoroshopCategory(categoryName)}>
+                        <span style={{ color: 'var(--text-muted)', fontSize: '1.1rem', padding: '0 0.5rem' }}>
                           {isCollapsed ? '▶' : '▼'}
                         </span>
                       </div>
