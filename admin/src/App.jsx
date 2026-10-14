@@ -348,7 +348,7 @@ export default function App() {
       }
       const isEnabled = promWhitelistSet.has(code);
       const existsOnProm = promSkusSet.has(code);
-      let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : (p.stock || 0);
+      let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : 0;
       if (alwaysAvailable.includes(code)) stock = Math.max(stock, 10);
       if (isNaN(stock) || stock < 0) stock = 0;
 
@@ -373,7 +373,7 @@ export default function App() {
       const code = p.vendorCode ? String(p.vendorCode).trim() : '';
       const isEnabled = promWhitelistSet.has(code);
       const existsOnProm = promSkusSet.has(code);
-      let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : (p.stock || 0);
+      let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : 0;
       if (alwaysAvailable.includes(code)) stock = Math.max(stock, 10);
       if (isNaN(stock) || stock < 0) stock = 0;
 
@@ -1379,7 +1379,7 @@ export default function App() {
                   const code = product.vendorCode ? String(product.vendorCode).trim() : '';
                   const isEnabled = promWhitelistSet.has(code);
                   const existsOnProm = promSkusSet.has(code);
-                  let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : (product.stock || 0);
+                  let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : 0;
                   if (alwaysAvailable.includes(code)) stock = Math.max(stock, 10);
                   if (isNaN(stock) || stock < 0) stock = 0;
 
