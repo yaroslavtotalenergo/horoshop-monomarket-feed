@@ -131,7 +131,12 @@ export default function App() {
   const [collapsedCategories, setCollapsedCategories] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
   const [filterMode, setFilterMode] = useState('all');
-  const [activeTab, setActiveTab] = useState('catalog');
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [dashboardSearchQuery, setDashboardSearchQuery] = useState('');
+  const [dashboardFilter, setDashboardFilter] = useState('issues');
+  const [dashboardCategoryFilter, setDashboardCategoryFilter] = useState('all');
+  const [dashboardLimit, setDashboardLimit] = useState(100);
+  const [syncingAll, setSyncingAll] = useState(false);
   
   const [promWhitelist, setPromWhitelist] = useState([]);
   const [promSkus, setPromSkus] = useState([]);
@@ -667,6 +672,898 @@ export default function App() {
 
   const collapseAllHoroshop = () => {
     setCollapsedHoroshopCategories({});
+  };
+
+  const handleTriggerFullSync = async () => {
+    setSyncingAll(true);
+    try {
+      await api.triggerWorkflow();
+      showToast('🚀 Повну синхронізацію запущено! (Excel -> Prom -> Хорошоп -> Мономаркет, ~1-2 хв)');
+    } catch (e) {
+      showToast('❌ Помилка запуску: ' + (e?.message || ''));
+    }
+    setSyncingAll(false);
+  };
+
+  const navigateToProduct = (targetTab, sku) => {
+    setActiveTab(targetTab);
+    if (targetTab === 'prom') {
+      setPromSearchQuery(sku);
+      setPromFilterMode('all');
+    } else if (targetTab === 'horoshop') {
+      setHoroshopSearchQuery(sku);
+      setHoroshopFilterMode('all');
+    } else if (targetTab === 'catalog') {
+      setSearchQuery(sku);
+    }
+  };
+
+  const allCategories = useMemo(() => {
+    const cats = new Set();
+    catalog.forEach(p => { if (p.category) cats.add(p.category); });
+    return Array.from(cats).sort((a, b) => a.localeCompare(b, 'uk'));
+  }, [catalog]);
+
+  const dashboardStats = useMemo(() => {
+    let warehouseInStock = 0;
+    let warehouseOutOfStock = 0;
+    let warehouseMissing = 0;
+
+    let promInStock = 0;
+    let promOutOfStock = 0;
+    let promDisabled = 0;
+    let promMissingSku = 0;
+
+    let horoshopActiveInstallments = 0;
+    let horoshopOutOfStockCount = 0;
+
+    let monoActiveCount = 0;
+    let monoMissingBarcodeCount = 0;
+    let monoNameTooLongCount = 0;
+
+    // Discrepancy counters
+    let diffWarehouseInHoroshopOut = 0;
+    let diffWarehouseZeroHoroshopIn = 0;
+    let diffInStockPromDisabled = 0;
+    let diffMissingFromProm = 0;
+    let diffMonoIssues = 0;
+
+    const alwaysSet = new Set(alwaysAvailable.map(s => String(s).trim()));
+    const auditedProducts = [];
+
+    catalog.forEach(p => {
+      const code = p.vendorCode ? String(p.vendorCode).trim() : '';
+      const name = names[code] || p.name || '';
+      const category = p.category || 'Без категорії';
+
+      const hasExcelRecord = stockOverrides[code] !== undefined;
+      const rawExcelStock = hasExcelRecord ? parseInt(stockOverrides[code], 10) : null;
+      const isAlways = alwaysSet.has(code);
+      let stock = rawExcelStock !== null && !isNaN(rawExcelStock) ? rawExcelStock : 0;
+      if (isAlways) stock = Math.max(stock, 10);
+      if (stock < 0) stock = 0;
+
+      if (!hasExcelRecord) {
+        warehouseMissing++;
+      } else if (stock > 0) {
+        warehouseInStock++;
+      } else {
+        warehouseOutOfStock++;
+      }
+
+      // Horoshop status
+      const horoshopOut = isHoroshopOutOfStock(p);
+      if (horoshopOut) horoshopOutOfStockCount++;
+
+      const isHoroshopDisabled = horoshopDisabledSet.has(code);
+      const isHoroshopAvailOverride = availabilityOverrides[code] !== false;
+      const hasHoroshopInstallments = !isHoroshopDisabled && (isAlways || (isHoroshopAvailOverride && stock > 0));
+      if (hasHoroshopInstallments) horoshopActiveInstallments++;
+
+      // Prom status
+      const existsOnProm = promSkusSet.has(code);
+      const isPromEnabled = promWhitelistSet.has(code);
+      if (!existsOnProm) {
+        promMissingSku++;
+      } else if (!isPromEnabled) {
+        promDisabled++;
+      } else if (stock > 0) {
+        promInStock++;
+      } else {
+        promOutOfStock++;
+      }
+
+      // Monomarket status
+      const isMonoSelected = whitelist.includes(code);
+      const hasBarcode = !!(barcodes[code] || p.barcode);
+      const isNameTooLong = name.length > 50;
+
+      if (isMonoSelected) {
+        monoActiveCount++;
+        if (!hasBarcode) monoMissingBarcodeCount++;
+        if (isNameTooLong) monoNameTooLongCount++;
+      }
+
+      // Discrepancy flags
+      const isDiffWarehouseInHoroshopOut = stock > 0 && horoshopOut;
+      const isDiffWarehouseZeroHoroshopIn = hasExcelRecord && stock === 0 && !horoshopOut;
+      const isDiffInStockPromDisabled = existsOnProm && !isPromEnabled && stock > 0;
+      const isDiffMissingFromProm = !existsOnProm;
+      const isDiffMissingFromExcel = !hasExcelRecord;
+      const isDiffMonoIssue = isMonoSelected && (!hasBarcode || isNameTooLong);
+
+      if (isDiffWarehouseInHoroshopOut) diffWarehouseInHoroshopOut++;
+      if (isDiffWarehouseZeroHoroshopIn) diffWarehouseZeroHoroshopIn++;
+      if (isDiffInStockPromDisabled) diffInStockPromDisabled++;
+      if (isDiffMissingFromProm) diffMissingFromProm++;
+      if (isDiffMonoIssue) diffMonoIssues++;
+
+      const issues = [];
+      if (isDiffWarehouseInHoroshopOut) {
+        issues.push({ type: 'danger', key: 'wh_in_horo_out', text: '🚨 Склад > 0, але на Хорошопі: Немає' });
+      }
+      if (isDiffWarehouseZeroHoroshopIn) {
+        issues.push({ type: 'warning', key: 'wh_zero_horo_in', text: '⚠️ Склад = 0, але на Хорошопі: В наявності' });
+      }
+      if (isDiffMissingFromProm) {
+        issues.push({ type: 'purple', key: 'prom_missing', text: '🟣 Не знайдено на Prom.ua' });
+      }
+      if (isDiffInStockPromDisabled) {
+        issues.push({ type: 'neutral', key: 'in_stock_prom_disabled', text: '⚪ Є на складі, але вимкнено для Prom' });
+      }
+      if (isDiffMissingFromExcel) {
+        issues.push({ type: 'neutral', key: 'excel_missing', text: '❓ Немає в Excel-таблиці' });
+      }
+      if (isMonoSelected && !hasBarcode) {
+        issues.push({ type: 'warning', key: 'mono_no_barcode', text: '🟡 Моно: без штрихкоду' });
+      }
+      if (isMonoSelected && isNameTooLong) {
+        issues.push({ type: 'warning', key: 'mono_long_name', text: '🟡 Моно: назва > 50 симв.' });
+      }
+
+      auditedProducts.push({
+        product: p,
+        code,
+        name,
+        category,
+        price: p.price,
+        hasExcelRecord,
+        stock,
+        horoshopOut,
+        hasHoroshopInstallments,
+        isHoroshopDisabled,
+        existsOnProm,
+        isPromEnabled,
+        isMonoSelected,
+        hasBarcode,
+        isNameTooLong,
+        issues,
+        hasAnyIssue: issues.length > 0,
+        isDiffWarehouseInHoroshopOut,
+        isDiffWarehouseZeroHoroshopIn,
+        isDiffInStockPromDisabled,
+        isDiffMissingFromProm,
+        isDiffMissingFromExcel,
+        isDiffMonoIssue
+      });
+    });
+
+    const totalIssuesCount = auditedProducts.filter(item => item.hasAnyIssue).length;
+
+    return {
+      warehouseInStock,
+      warehouseOutOfStock,
+      warehouseMissing,
+      promInStock,
+      promOutOfStock,
+      promDisabled,
+      promMissingSku,
+      horoshopActiveInstallments,
+      horoshopOutOfStockCount,
+      monoActiveCount,
+      monoMissingBarcodeCount,
+      monoNameTooLongCount,
+      diffWarehouseInHoroshopOut,
+      diffWarehouseZeroHoroshopIn,
+      diffInStockPromDisabled,
+      diffMissingFromProm,
+      diffMonoIssues,
+      totalIssuesCount,
+      auditedProducts
+    };
+  }, [catalog, stockOverrides, alwaysAvailable, horoshopDisabledSet, availabilityOverrides, promSkusSet, promWhitelistSet, whitelist, barcodes, names]);
+
+  const filteredDashboardProducts = useMemo(() => {
+    const q = dashboardSearchQuery.toLowerCase().trim();
+    return dashboardStats.auditedProducts.filter(item => {
+      if (q) {
+        const matchesQuery = item.name.toLowerCase().includes(q) || item.code.toLowerCase().includes(q);
+        if (!matchesQuery) return false;
+      }
+      if (dashboardCategoryFilter !== 'all' && item.category !== dashboardCategoryFilter) {
+        return false;
+      }
+      if (dashboardFilter === 'issues') return item.hasAnyIssue;
+      if (dashboardFilter === 'wh_in_horo_out') return item.isDiffWarehouseInHoroshopOut;
+      if (dashboardFilter === 'wh_zero_horo_in') return item.isDiffWarehouseZeroHoroshopIn;
+      if (dashboardFilter === 'prom_missing') return item.isDiffMissingFromProm;
+      if (dashboardFilter === 'prom_disabled_stock') return item.isDiffInStockPromDisabled;
+      if (dashboardFilter === 'mono_issues') return item.isDiffMonoIssue;
+      if (dashboardFilter === 'excel_missing') return item.isDiffMissingFromExcel;
+      if (dashboardFilter === 'healthy') return !item.hasAnyIssue;
+      return true; // 'all'
+    });
+  }, [dashboardStats.auditedProducts, dashboardSearchQuery, dashboardCategoryFilter, dashboardFilter]);
+
+  const renderDashboard = () => {
+    const lastRun = workflowRuns && workflowRuns.length > 0 ? workflowRuns[0] : null;
+    const isWorkflowRunning = lastRun && (lastRun.status === 'in_progress' || lastRun.status === 'queued');
+
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+        {/* Banner with sync status & last run info */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '1rem',
+          padding: '1.25rem 1.5rem',
+          background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%)',
+          borderRadius: '12px',
+          border: '1px solid rgba(139, 92, 246, 0.25)'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+            <span style={{ fontSize: '1.8rem' }}>🔄</span>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: '1rem', color: 'var(--text-main)' }}>
+                {isWorkflowRunning ? '⏳ Триває автоматична синхронізація через GitHub Actions...' : '🟢 Всі системи підключені та синхронізуються за розкладом (кожні 30 хв)'}
+              </div>
+              <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>
+                {lastRun ? (
+                  <>Останній авто-запуск: <b>{new Date(lastRun.created_at).toLocaleString('uk-UA')}</b> ({lastRun.conclusion === 'success' ? '✅ Успішно' : lastRun.status === 'in_progress' ? '⏳ Виконується' : '⚠️ ' + (lastRun.conclusion || lastRun.status)})</>
+                ) : 'Очікування першого запуску'}
+              </div>
+            </div>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+            <button
+              className="btn"
+              style={{ background: 'linear-gradient(135deg, #2563eb, #7c3aed)', color: '#fff', fontWeight: 600, padding: '0.6rem 1.2rem', fontSize: '0.875rem' }}
+              onClick={handleTriggerFullSync}
+              disabled={syncingAll || loading || !token}
+            >
+              {syncingAll ? <span className="loader" style={{ width: '16px', height: '16px' }}></span> : '⚡ Запустити синхронізацію зараз'}
+            </button>
+            <button
+              className="btn"
+              style={{ background: '#fff', color: 'var(--text-main)', border: '1px solid var(--border-color)', padding: '0.6rem 1rem', fontSize: '0.875rem' }}
+              onClick={() => { setShowLogs(true); loadLogs(); }}
+              title="Переглянути історію запусків"
+            >
+              ⏱️ Журнал логів
+            </button>
+          </div>
+        </div>
+
+        {/* 4 Platform Health Overview Cards */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem' }}>
+          
+          {/* Card 1: Склад (Excel) */}
+          <div className="glass-panel" style={{ padding: '1.35rem', borderTop: '4px solid #10b981', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+                <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#047857', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  🏬 Склад (Excel-таблиці)
+                </span>
+                <span style={{ fontSize: '0.75rem', background: '#dcfce7', color: '#15803d', padding: '0.2rem 0.55rem', borderRadius: '4px', fontWeight: 600 }}>
+                  {googleSheets.length} джерел
+                </span>
+              </div>
+              <div style={{ fontSize: '2.25rem', fontWeight: 800, color: '#15803d', letterSpacing: '-0.03em' }}>
+                {dashboardStats.warehouseInStock}
+                <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-muted)', marginLeft: '0.4rem' }}>в наявності (&gt;0)</span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', marginTop: '1rem', fontSize: '0.85rem', borderTop: '1px solid var(--border-color)', paddingTop: '0.75rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>🔴 Немає на складі (0 шт.):</span>
+                  <span style={{ fontWeight: 700, color: '#b91c1c' }}>{dashboardStats.warehouseOutOfStock}</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>❓ Не знайдено в Excel:</span>
+                  <span style={{ fontWeight: 700, color: '#6b7280' }}>{dashboardStats.warehouseMissing}</span>
+                </div>
+              </div>
+            </div>
+            <button
+              className="btn"
+              style={{ marginTop: '1.25rem', width: '100%', background: '#ecfdf5', color: '#047857', border: '1px solid #a7f3d0', fontSize: '0.825rem', padding: '0.5rem' }}
+              onClick={() => setShowSettings(true)}
+            >
+              ⚙️ Налаштувати Google Sheets
+            </button>
+          </div>
+
+          {/* Card 2: Prom.ua */}
+          <div className="glass-panel" style={{ padding: '1.35rem', borderTop: '4px solid #8b5cf6', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+                <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#6d28d9', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  🟣 Prom.ua (Маркетплейс)
+                </span>
+                <span style={{ fontSize: '0.75rem', background: '#f3e8ff', color: '#6b21a8', padding: '0.2rem 0.55rem', borderRadius: '4px', fontWeight: 600 }}>
+                  API синхронізація
+                </span>
+              </div>
+              <div style={{ fontSize: '2.25rem', fontWeight: 800, color: '#6d28d9', letterSpacing: '-0.03em' }}>
+                {dashboardStats.promInStock}
+                <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-muted)', marginLeft: '0.4rem' }}>в наявності на Prom</span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', marginTop: '1rem', fontSize: '0.85rem', borderTop: '1px solid var(--border-color)', paddingTop: '0.75rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>🔴 Немає в наявності:</span>
+                  <span style={{ fontWeight: 700, color: '#b91c1c' }}>{dashboardStats.promOutOfStock}</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>⚪ Вимкнено для Prom:</span>
+                  <span style={{ fontWeight: 700, color: '#4b5563' }}>{dashboardStats.promDisabled}</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>⚠️ Не створено на Prom:</span>
+                  <span style={{ fontWeight: 700, color: '#b45309' }}>{dashboardStats.promMissingSku}</span>
+                </div>
+              </div>
+            </div>
+            <button
+              className="btn"
+              style={{ marginTop: '1.25rem', width: '100%', background: '#f5f3ff', color: '#6d28d9', border: '1px solid #ddd6fe', fontSize: '0.825rem', padding: '0.5rem' }}
+              onClick={() => setActiveTab('prom')}
+            >
+              🟣 Перейти до Prom.ua →
+            </button>
+          </div>
+
+          {/* Card 3: Хорошоп */}
+          <div className="glass-panel" style={{ padding: '1.35rem', borderTop: '4px solid #ea580c', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+                <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#c2410c', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  🟠 Хорошоп (Сайт & ОЧ)
+                </span>
+                <span style={{ fontSize: '0.75rem', background: '#ffedd5', color: '#c2410c', padding: '0.2rem 0.55rem', borderRadius: '4px', fontWeight: 600 }}>
+                  {catalog.length} товарів
+                </span>
+              </div>
+              <div style={{ fontSize: '2.25rem', fontWeight: 800, color: '#c2410c', letterSpacing: '-0.03em' }}>
+                {dashboardStats.horoshopActiveInstallments}
+                <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-muted)', marginLeft: '0.4rem' }}>ОЧ активна (6 пл.)</span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', marginTop: '1rem', fontSize: '0.85rem', borderTop: '1px solid var(--border-color)', paddingTop: '0.75rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>⚠️ "Немає в наявн." на Хорошопі:</span>
+                  <span style={{ fontWeight: 700, color: '#b91c1c' }}>{dashboardStats.horoshopOutOfStockCount}</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>💜 Примусово ОЧ:</span>
+                  <span style={{ fontWeight: 700, color: '#7c3aed' }}>{horoshopStats.forced}</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>🔴 Заборонено ОЧ вручну:</span>
+                  <span style={{ fontWeight: 700, color: '#dc2626' }}>{horoshopStats.disabled}</span>
+                </div>
+              </div>
+            </div>
+            <button
+              className="btn"
+              style={{ marginTop: '1.25rem', width: '100%', background: '#fff7ed', color: '#c2410c', border: '1px solid #fed7aa', fontSize: '0.825rem', padding: '0.5rem' }}
+              onClick={() => setActiveTab('horoshop')}
+            >
+              🟠 Перейти до Хорошопу →
+            </button>
+          </div>
+
+          {/* Card 4: Мономаркет */}
+          <div className="glass-panel" style={{ padding: '1.35rem', borderTop: '4px solid #f59e0b', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+                <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#b45309', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  🟡 Мономаркет (Фід)
+                </span>
+                <span style={{ fontSize: '0.75rem', background: '#fef3c7', color: '#b45309', padding: '0.2rem 0.55rem', borderRadius: '4px', fontWeight: 600 }}>
+                  XML + ціни
+                </span>
+              </div>
+              <div style={{ fontSize: '2.25rem', fontWeight: 800, color: '#b45309', letterSpacing: '-0.03em' }}>
+                {dashboardStats.monoActiveCount}
+                <span style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--text-muted)', marginLeft: '0.4rem' }}>у фіді monobank</span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', marginTop: '1rem', fontSize: '0.85rem', borderTop: '1px solid var(--border-color)', paddingTop: '0.75rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>⚠️ Без штрихкоду (EAN):</span>
+                  <span style={{ fontWeight: 700, color: dashboardStats.monoMissingBarcodeCount > 0 ? '#b91c1c' : '#15803d' }}>
+                    {dashboardStats.monoMissingBarcodeCount}
+                  </span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>⚠️ Назва &gt; 50 символів:</span>
+                  <span style={{ fontWeight: 700, color: dashboardStats.monoNameTooLongCount > 0 ? '#b45309' : '#15803d' }}>
+                    {dashboardStats.monoNameTooLongCount}
+                  </span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>📦 Штрихкодів всього:</span>
+                  <span style={{ fontWeight: 700, color: 'var(--text-main)' }}>{Object.keys(barcodes).length}</span>
+                </div>
+              </div>
+            </div>
+            <button
+              className="btn"
+              style={{ marginTop: '1.25rem', width: '100%', background: '#fffbeb', color: '#b45309', border: '1px solid #fde68a', fontSize: '0.825rem', padding: '0.5rem' }}
+              onClick={() => setActiveTab('catalog')}
+            >
+              🟡 Перейти до Мономаркету →
+            </button>
+          </div>
+
+        </div>
+
+        {/* Cross-Platform Discrepancies & Issues Center */}
+        <div className="glass-panel" style={{ padding: '1.5rem', background: 'var(--surface-color)', borderRadius: '14px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.25rem' }}>
+            <div>
+              <h2 style={{ margin: 0, fontSize: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span>⚡</span> Центр розбіжностей та уваги
+                <span className="badge danger" style={{ fontSize: '0.85rem', padding: '0.2rem 0.6rem' }}>
+                  {dashboardStats.totalIssuesCount} товарів з зауваженнями
+                </span>
+              </h2>
+              <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+                Натисніть на будь-яку проблему нижче, щоб миттєво відфільтрувати список товарів:
+              </p>
+            </div>
+            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+              <button
+                className="btn"
+                style={{
+                  background: dashboardFilter === 'issues' ? '#fee2e2' : '#f9fafb',
+                  color: dashboardFilter === 'issues' ? '#b91c1c' : 'var(--text-main)',
+                  border: dashboardFilter === 'issues' ? '1.5px solid #ef4444' : '1px solid var(--border-color)',
+                  fontSize: '0.85rem',
+                  padding: '0.4rem 0.8rem',
+                  fontWeight: 600
+                }}
+                onClick={() => setDashboardFilter('issues')}
+              >
+                ⚠️ Всі з зауваженнями ({dashboardStats.totalIssuesCount})
+              </button>
+              <button
+                className="btn"
+                style={{
+                  background: dashboardFilter === 'all' ? '#e0e7ff' : '#f9fafb',
+                  color: dashboardFilter === 'all' ? '#3730a3' : 'var(--text-main)',
+                  border: dashboardFilter === 'all' ? '1.5px solid #6366f1' : '1px solid var(--border-color)',
+                  fontSize: '0.85rem',
+                  padding: '0.4rem 0.8rem',
+                  fontWeight: 600
+                }}
+                onClick={() => setDashboardFilter('all')}
+              >
+                👁️ Всі товари ({catalog.length})
+              </button>
+              <button
+                className="btn"
+                style={{
+                  background: dashboardFilter === 'healthy' ? '#dcfce7' : '#f9fafb',
+                  color: dashboardFilter === 'healthy' ? '#15803d' : 'var(--text-main)',
+                  border: dashboardFilter === 'healthy' ? '1.5px solid #10b981' : '1px solid var(--border-color)',
+                  fontSize: '0.85rem',
+                  padding: '0.4rem 0.8rem',
+                  fontWeight: 600
+                }}
+                onClick={() => setDashboardFilter('healthy')}
+              >
+                ✅ Без зауважень ({catalog.length - dashboardStats.totalIssuesCount})
+              </button>
+            </div>
+          </div>
+
+          {/* Quick Filter Chips Grid */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '0.75rem' }}>
+            
+            {/* Filter 1 */}
+            <div
+              onClick={() => setDashboardFilter(dashboardFilter === 'wh_in_horo_out' ? 'all' : 'wh_in_horo_out')}
+              style={{
+                cursor: 'pointer',
+                padding: '0.85rem 1rem',
+                borderRadius: '8px',
+                background: dashboardFilter === 'wh_in_horo_out' ? '#fee2e2' : '#fef2f2',
+                border: dashboardFilter === 'wh_in_horo_out' ? '2px solid #ef4444' : '1px solid #fecaca',
+                transition: 'all 0.15s ease'
+              }}
+              title="На складі товар є (>0), але на Хорошопі стоїть 'немає в наявності'"
+            >
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '0.825rem', fontWeight: 700, color: '#991b1b' }}>🚨 Склад &gt; 0, Хорошоп: Немає</span>
+                <span style={{ background: '#ef4444', color: '#fff', fontSize: '0.75rem', fontWeight: 800, padding: '0.1rem 0.45rem', borderRadius: '999px' }}>
+                  {dashboardStats.diffWarehouseInHoroshopOut}
+                </span>
+              </div>
+              <div style={{ fontSize: '0.75rem', color: '#b91c1c', marginTop: '0.35rem' }}>
+                Товар є на складі, але недоступний для замовлення на сайті
+              </div>
+            </div>
+
+            {/* Filter 2 */}
+            <div
+              onClick={() => setDashboardFilter(dashboardFilter === 'wh_zero_horo_in' ? 'all' : 'wh_zero_horo_in')}
+              style={{
+                cursor: 'pointer',
+                padding: '0.85rem 1rem',
+                borderRadius: '8px',
+                background: dashboardFilter === 'wh_zero_horo_in' ? '#ffedd5' : '#fff7ed',
+                border: dashboardFilter === 'wh_zero_horo_in' ? '2px solid #f97316' : '1px solid #fed7aa',
+                transition: 'all 0.15s ease'
+              }}
+              title="На складі 0 шт, але на Хорошопі стоїть 'в наявності'"
+            >
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '0.825rem', fontWeight: 700, color: '#9a3412' }}>⚠️ Склад = 0, Хорошоп: Є</span>
+                <span style={{ background: '#f97316', color: '#fff', fontSize: '0.75rem', fontWeight: 800, padding: '0.1rem 0.45rem', borderRadius: '999px' }}>
+                  {dashboardStats.diffWarehouseZeroHoroshopIn}
+                </span>
+              </div>
+              <div style={{ fontSize: '0.75rem', color: '#c2410c', marginTop: '0.35rem' }}>
+                Залишок на складі 0, ризик продати відсутній товар
+              </div>
+            </div>
+
+            {/* Filter 3 */}
+            <div
+              onClick={() => setDashboardFilter(dashboardFilter === 'prom_missing' ? 'all' : 'prom_missing')}
+              style={{
+                cursor: 'pointer',
+                padding: '0.85rem 1rem',
+                borderRadius: '8px',
+                background: dashboardFilter === 'prom_missing' ? '#f3e8ff' : '#faf5ff',
+                border: dashboardFilter === 'prom_missing' ? '2px solid #a855f7' : '1px solid #e9d5ff',
+                transition: 'all 0.15s ease'
+              }}
+              title="Товар є в Хорошопі, але його артикул не знайдено на Prom.ua"
+            >
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '0.825rem', fontWeight: 700, color: '#6b21a8' }}>🟣 Немає на Prom.ua</span>
+                <span style={{ background: '#a855f7', color: '#fff', fontSize: '0.75rem', fontWeight: 800, padding: '0.1rem 0.45rem', borderRadius: '999px' }}>
+                  {dashboardStats.diffMissingFromProm}
+                </span>
+              </div>
+              <div style={{ fontSize: '0.75rem', color: '#7e22ce', marginTop: '0.35rem' }}>
+                Артикул не створено на маркетплейсі Prom.ua
+              </div>
+            </div>
+
+            {/* Filter 4 */}
+            <div
+              onClick={() => setDashboardFilter(dashboardFilter === 'prom_disabled_stock' ? 'all' : 'prom_disabled_stock')}
+              style={{
+                cursor: 'pointer',
+                padding: '0.85rem 1rem',
+                borderRadius: '8px',
+                background: dashboardFilter === 'prom_disabled_stock' ? '#f3f4f6' : '#f9fafb',
+                border: dashboardFilter === 'prom_disabled_stock' ? '2px solid #6b7280' : '1px solid #e5e7eb',
+                transition: 'all 0.15s ease'
+              }}
+              title="Товар є на складі, але вимкнено для Prom"
+            >
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '0.825rem', fontWeight: 700, color: '#374151' }}>⚪ На складі є, Prom: Вимкн</span>
+                <span style={{ background: '#6b7280', color: '#fff', fontSize: '0.75rem', fontWeight: 800, padding: '0.1rem 0.45rem', borderRadius: '999px' }}>
+                  {dashboardStats.diffInStockPromDisabled}
+                </span>
+              </div>
+              <div style={{ fontSize: '0.75rem', color: '#4b5563', marginTop: '0.35rem' }}>
+                Товар в наявності, але знятий з продажу на Prom
+              </div>
+            </div>
+
+            {/* Filter 5 */}
+            <div
+              onClick={() => setDashboardFilter(dashboardFilter === 'mono_issues' ? 'all' : 'mono_issues')}
+              style={{
+                cursor: 'pointer',
+                padding: '0.85rem 1rem',
+                borderRadius: '8px',
+                background: dashboardFilter === 'mono_issues' ? '#fef3c7' : '#fffbeb',
+                border: dashboardFilter === 'mono_issues' ? '2px solid #eab308' : '1px solid #fde68a',
+                transition: 'all 0.15s ease'
+              }}
+              title="Товари в Мономаркеті без штрихкоду або з назвою більше 50 символів"
+            >
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '0.825rem', fontWeight: 700, color: '#854d0e' }}>🟡 Проблеми Мономаркет</span>
+                <span style={{ background: '#eab308', color: '#fff', fontSize: '0.75rem', fontWeight: 800, padding: '0.1rem 0.45rem', borderRadius: '999px' }}>
+                  {dashboardStats.diffMonoIssues}
+                </span>
+              </div>
+              <div style={{ fontSize: '0.75rem', color: '#a16207', marginTop: '0.35rem' }}>
+                Немає штрихкоду або довжина назви перевищує 50 симв.
+              </div>
+            </div>
+
+            {/* Filter 6 */}
+            <div
+              onClick={() => setDashboardFilter(dashboardFilter === 'excel_missing' ? 'all' : 'excel_missing')}
+              style={{
+                cursor: 'pointer',
+                padding: '0.85rem 1rem',
+                borderRadius: '8px',
+                background: dashboardFilter === 'excel_missing' ? '#e0f2fe' : '#f0f9ff',
+                border: dashboardFilter === 'excel_missing' ? '2px solid #0ea5e9' : '1px solid #bae6fd',
+                transition: 'all 0.15s ease'
+              }}
+              title="Артикули не знайдено в жодній вкладці складів Excel"
+            >
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '0.825rem', fontWeight: 700, color: '#0369a1' }}>❓ Не знайдено в Excel</span>
+                <span style={{ background: '#0ea5e9', color: '#fff', fontSize: '0.75rem', fontWeight: 800, padding: '0.1rem 0.45rem', borderRadius: '999px' }}>
+                  {dashboardStats.warehouseMissing}
+                </span>
+              </div>
+              <div style={{ fontSize: '0.75rem', color: '#0284c7', marginTop: '0.35rem' }}>
+                Товари з каталогу, артикулів яких немає в таблиці
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* Master Cross-Platform Audit Table */}
+        <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '14px' }}>
+          
+          {/* Controls Bar */}
+          <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
+            <div style={{ position: 'relative', flex: 1, minWidth: '240px' }}>
+              <span style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }}>🔍</span>
+              <input
+                type="text"
+                className="input-field"
+                placeholder="Пошук товару на всіх платформах за артикулом або назвою..."
+                value={dashboardSearchQuery}
+                onChange={e => setDashboardSearchQuery(e.target.value)}
+                style={{ paddingLeft: '2.5rem' }}
+              />
+            </div>
+            
+            <select
+              className="input-field"
+              style={{ width: 'auto', minWidth: '200px' }}
+              value={dashboardCategoryFilter}
+              onChange={e => setDashboardCategoryFilter(e.target.value)}
+            >
+              <option value="all">📁 Всі категорії ({catalog.length})</option>
+              {allCategories.map(cat => (
+                <option key={cat} value={cat}>{cat}</option>
+              ))}
+            </select>
+
+            <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
+              Знайдено: <b>{filteredDashboardProducts.length}</b> товарів
+            </div>
+          </div>
+
+          {/* Table */}
+          <div style={{ overflowX: 'auto', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+            <table style={{ margin: 0, width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem' }}>
+              <thead>
+                <tr style={{ background: '#f8fafc', borderBottom: '2px solid var(--border-color)' }}>
+                  <th style={{ width: '110px', padding: '0.75rem 1rem' }}>Артикул</th>
+                  <th style={{ padding: '0.75rem 1rem' }}>Товар</th>
+                  <th style={{ width: '110px', padding: '0.75rem 0.5rem', textAlign: 'center' }}>Склад (Excel)</th>
+                  <th style={{ width: '140px', padding: '0.75rem 0.5rem' }}>Хорошоп</th>
+                  <th style={{ width: '140px', padding: '0.75rem 0.5rem' }}>Prom.ua</th>
+                  <th style={{ width: '130px', padding: '0.75rem 0.5rem' }}>Мономаркет</th>
+                  <th style={{ width: '200px', padding: '0.75rem 0.5rem' }}>Статус / Зауваження</th>
+                  <th style={{ width: '130px', padding: '0.75rem 0.5rem', textAlign: 'center' }}>Швидка дія</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredDashboardProducts.slice(0, dashboardLimit).map(item => {
+                  return (
+                    <tr
+                      key={item.code}
+                      style={{
+                        borderBottom: '1px solid var(--border-color)',
+                        background: item.isDiffWarehouseInHoroshopOut ? 'rgba(239, 68, 68, 0.03)' : 'transparent'
+                      }}
+                    >
+                      {/* SKU */}
+                      <td style={{ padding: '0.75rem 1rem', verticalAlign: 'middle' }}>
+                        <code style={{ background: '#f1f5f9', padding: '0.2rem 0.4rem', borderRadius: '4px', fontSize: '0.8rem', fontWeight: 600 }}>
+                          {item.code}
+                        </code>
+                      </td>
+
+                      {/* Product Name & Category */}
+                      <td style={{ padding: '0.75rem 1rem', verticalAlign: 'middle' }}>
+                        <div style={{ fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.2rem' }} title={item.name}>
+                          {item.name}
+                        </div>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                          {item.category} | {item.price ? `${Number(item.price).toLocaleString()} ₴` : '—'}
+                        </div>
+                      </td>
+
+                      {/* Warehouse (Excel) */}
+                      <td style={{ padding: '0.75rem 0.5rem', textAlign: 'center', verticalAlign: 'middle' }}>
+                        {item.hasExcelRecord ? (
+                          <span style={{
+                            display: 'inline-block',
+                            padding: '0.2rem 0.5rem',
+                            borderRadius: '4px',
+                            fontWeight: 700,
+                            fontSize: '0.85rem',
+                            background: item.stock > 0 ? '#dcfce7' : '#fee2e2',
+                            color: item.stock > 0 ? '#15803d' : '#b91c1c'
+                          }}>
+                            {item.stock} шт.
+                          </span>
+                        ) : (
+                          <span style={{ fontSize: '0.75rem', color: '#6b7280', background: '#f3f4f6', padding: '0.2rem 0.4rem', borderRadius: '4px' }}>
+                            ❓ Немає в Excel
+                          </span>
+                        )}
+                      </td>
+
+                      {/* Horoshop */}
+                      <td style={{ padding: '0.75rem 0.5rem', verticalAlign: 'middle' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+                          {item.horoshopOut ? (
+                            <span style={{ fontSize: '0.75rem', color: '#b91c1c', fontWeight: 600 }}>
+                              🔴 Немає на сайті
+                            </span>
+                          ) : (
+                            <span style={{ fontSize: '0.75rem', color: '#15803d', fontWeight: 600 }}>
+                              🟢 В наявності
+                            </span>
+                          )}
+                          <div style={{ fontSize: '0.75rem' }}>
+                            {item.isHoroshopDisabled ? (
+                              <span style={{ color: '#dc2626' }}>🔴 ОЧ заборонено</span>
+                            ) : item.hasHoroshopInstallments ? (
+                              <span style={{ color: '#15803d' }}>🟢 ОЧ активна</span>
+                            ) : (
+                              <span style={{ color: '#9ca3af' }}>⚪ ОЧ вимкн</span>
+                            )}
+                          </div>
+                        </div>
+                      </td>
+
+                      {/* Prom.ua */}
+                      <td style={{ padding: '0.75rem 0.5rem', verticalAlign: 'middle' }}>
+                        {!item.existsOnProm ? (
+                          <span style={{ fontSize: '0.75rem', color: '#b45309', background: '#fef3c7', padding: '0.15rem 0.4rem', borderRadius: '4px', fontWeight: 600 }}>
+                            ⚠️ Немає на Prom
+                          </span>
+                        ) : !item.isPromEnabled ? (
+                          <span style={{ fontSize: '0.75rem', color: '#4b5563', background: '#f3f4f6', padding: '0.15rem 0.4rem', borderRadius: '4px' }}>
+                            ⚪ Вимкнено
+                          </span>
+                        ) : item.stock > 0 ? (
+                          <span style={{ fontSize: '0.75rem', color: '#15803d', fontWeight: 600 }}>
+                            🟢 В наявності ({item.stock})
+                          </span>
+                        ) : (
+                          <span style={{ fontSize: '0.75rem', color: '#b91c1c', fontWeight: 500 }}>
+                            🔴 0 шт. (немає)
+                          </span>
+                        )}
+                      </td>
+
+                      {/* Monomarket */}
+                      <td style={{ padding: '0.75rem 0.5rem', verticalAlign: 'middle' }}>
+                        {item.isMonoSelected ? (
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.15rem' }}>
+                            <span style={{ fontSize: '0.75rem', color: '#15803d', fontWeight: 600 }}>
+                              🟢 У фіді
+                            </span>
+                            {!item.hasBarcode ? (
+                              <span style={{ fontSize: '0.7rem', color: '#b45309' }}>⚠️ Без штрихкоду</span>
+                            ) : (
+                              <span style={{ fontSize: '0.7rem', color: '#6b7280' }}>🏷️ EAN є</span>
+                            )}
+                          </div>
+                        ) : (
+                          <span style={{ fontSize: '0.75rem', color: '#9ca3af' }}>⚪ Не у фіді</span>
+                        )}
+                      </td>
+
+                      {/* Status / Discrepancies */}
+                      <td style={{ padding: '0.75rem 0.5rem', verticalAlign: 'middle' }}>
+                        {item.issues.length > 0 ? (
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                            {item.issues.map(iss => (
+                              <span
+                                key={iss.key}
+                                style={{
+                                  display: 'inline-block',
+                                  fontSize: '0.725rem',
+                                  padding: '0.15rem 0.45rem',
+                                  borderRadius: '4px',
+                                  fontWeight: 600,
+                                  background: iss.type === 'danger' ? '#fee2e2' : iss.type === 'warning' ? '#ffedd5' : iss.type === 'purple' ? '#f3e8ff' : '#f3f4f6',
+                                  color: iss.type === 'danger' ? '#b91c1c' : iss.type === 'warning' ? '#c2410c' : iss.type === 'purple' ? '#6b21a8' : '#4b5563',
+                                  width: 'fit-content'
+                                }}
+                              >
+                                {iss.text}
+                              </span>
+                            ))}
+                          </div>
+                        ) : (
+                          <span style={{ fontSize: '0.75rem', color: '#15803d', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '0.2rem' }}>
+                            ✅ Синхронно
+                          </span>
+                        )}
+                      </td>
+
+                      {/* Quick Navigation Action */}
+                      <td style={{ padding: '0.75rem 0.5rem', textAlign: 'center', verticalAlign: 'middle' }}>
+                        <div style={{ display: 'flex', gap: '0.3rem', justifyContent: 'center' }}>
+                          <button
+                            className="btn"
+                            style={{ padding: '0.25rem 0.45rem', fontSize: '0.7rem', background: '#f5f3ff', color: '#6d28d9', border: '1px solid #ddd6fe' }}
+                            onClick={() => navigateToProduct('prom', item.code)}
+                            title="Відкрити цей товар у вкладці Prom.ua"
+                          >
+                            🟣 Prom
+                          </button>
+                          <button
+                            className="btn"
+                            style={{ padding: '0.25rem 0.45rem', fontSize: '0.7rem', background: '#fff7ed', color: '#c2410c', border: '1px solid #fed7aa' }}
+                            onClick={() => navigateToProduct('horoshop', item.code)}
+                            title="Відкрити цей товар у вкладці Хорошоп"
+                          >
+                            🟠 Хорошоп
+                          </button>
+                          <button
+                            className="btn"
+                            style={{ padding: '0.25rem 0.45rem', fontSize: '0.7rem', background: '#fffbeb', color: '#b45309', border: '1px solid #fde68a' }}
+                            onClick={() => navigateToProduct('catalog', item.code)}
+                            title="Відкрити цей товар у вкладці Мономаркет"
+                          >
+                            🟡 Моно
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Pagination limit control */}
+          {filteredDashboardProducts.length > dashboardLimit && (
+            <div style={{ textAlign: 'center', marginTop: '1.25rem' }}>
+              <button
+                className="btn"
+                style={{ background: '#f3f4f6', color: 'var(--text-main)', border: '1px solid var(--border-color)', fontWeight: 600 }}
+                onClick={() => setDashboardLimit(prev => prev + 200)}
+              >
+                Показати ще 200 товарів (залишилось {filteredDashboardProducts.length - dashboardLimit})
+              </button>
+              <button
+                className="btn"
+                style={{ marginLeft: '0.75rem', background: '#fff', color: 'var(--text-main)', border: '1px solid var(--border-color)' }}
+                onClick={() => setDashboardLimit(filteredDashboardProducts.length)}
+              >
+                Показати всі {filteredDashboardProducts.length}
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    );
   };
 
   const toggleWhitelist = (vendorCode) => {
@@ -1254,14 +2151,17 @@ export default function App() {
         </div>
         <div className="sidebar-menu">
           <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)', margin: '1rem 0 0.5rem 1rem', textTransform: 'uppercase' }}>Система</div>
-          <a className={`sidebar-item ${activeTab === 'catalog' || activeTab === 'import' ? 'active' : ''}`} onClick={() => setActiveTab('catalog')}>
-            🟡 Мономаркет
+          <a className={`sidebar-item ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')}>
+            📊 Дашборд
           </a>
           <a className={`sidebar-item ${activeTab === 'prom' ? 'active' : ''}`} onClick={() => setActiveTab('prom')}>
             🟣 Prom.ua
           </a>
           <a className={`sidebar-item ${activeTab === 'horoshop' ? 'active' : ''}`} onClick={() => setActiveTab('horoshop')}>
             🟠 Хорошоп
+          </a>
+          <a className={`sidebar-item ${activeTab === 'catalog' || activeTab === 'import' ? 'active' : ''}`} onClick={() => setActiveTab('catalog')}>
+            🟡 Мономаркет
           </a>
           <a className="sidebar-item" onClick={() => { setShowLogs(true); loadLogs(); }}>
             ⏱️ Журнал логів
@@ -1275,7 +2175,42 @@ export default function App() {
         </div>
       </div>
       <div className="container">
-      {activeTab === 'prom' ? (
+      {activeTab === 'dashboard' ? (
+        <div className="header">
+          <div>
+            <h1>📊 Головний Дашборд системи</h1>
+            <p style={{ color: 'var(--text-muted)', margin: 0 }}>Центр контролю: Склад (Excel) ⇄ Хорошоп ⇄ Prom.ua ⇄ Мономаркет</p>
+          </div>
+          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
+            <button
+              className="btn"
+              style={{ background: 'linear-gradient(135deg, #2563eb, #7c3aed)', color: '#fff', fontWeight: 600 }}
+              onClick={handleTriggerFullSync}
+              disabled={syncingAll || loading || !token}
+              title="Запустити повний цикл оновлення (Excel -> Prom -> Хорошоп -> Моно)"
+            >
+              {syncingAll ? <span className="loader"></span> : '⚡ Повна синхронізація всього'}
+            </button>
+            <button
+              className="btn"
+              style={{ background: '#f3f4f6', color: 'var(--text-main)', border: '1px solid var(--border-color)' }}
+              onClick={loadData}
+              disabled={loading}
+              title="Перезавантажити дані з GitHub"
+            >
+              {loading ? <span className="loader"></span> : '🔄 Оновити дані'}
+            </button>
+            <button
+              className="btn"
+              style={{ background: '#f3f4f6', color: 'var(--text-main)', border: '1px solid var(--border-color)' }}
+              onClick={() => setShowSettings(true)}
+              title="Налаштування джерел Google Таблиць та токенів"
+            >
+              ⚙️ Налаштування
+            </button>
+          </div>
+        </div>
+      ) : activeTab === 'prom' ? (
         <div className="header">
           <div>
             <h1>🟣 Керування товарами Prom.ua</h1>
@@ -1345,7 +2280,7 @@ export default function App() {
         </div>
       )}
 
-      {activeTab === 'prom' ? (
+      {activeTab === 'dashboard' ? null : activeTab === 'prom' ? (
         <div className="stats-grid">
           <div
             className="stat-card"
@@ -1472,7 +2407,7 @@ export default function App() {
       )}
 
       {/* Tabs */}
-      {activeTab !== 'prom' && (
+      {(activeTab === 'catalog' || activeTab === 'import') && (
         <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-color)' }}>
           <button 
             onClick={() => setActiveTab('catalog')}
@@ -1488,6 +2423,8 @@ export default function App() {
           </button>
         </div>
       )}
+
+      {activeTab === 'dashboard' && renderDashboard()}
 
       {activeTab === 'import' && (
         <div className="glass-panel" style={{ padding: '2rem' }}>
