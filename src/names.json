@@ -95,5 +95,13 @@
   "SCC115085411": "Сонячний контролер SmartSolar (Bluetooth) MPPT 150V/85A-Tr VE.Can",
   "SCC115110411": "Сонячний контролер SmartSolar (Bluetooth) MPPT 150V/100A-Tr VE.Can",
   "SCC125070221": "Сонячний контролер SmartSolar (Bluetooth) MPPT 250V/70A-Tr",
-  "PMP122160000": "Інвертор MultiPlus 12/1600/70-16 гiбридний 12/220В 1.3кВт"
+  "PMP122160000": "Інвертор MultiPlus 12/1600/70-16 гiбридний 12/220В 1.3кВт",
+  "ORI241230022": "Конвертор Victron Energy DC-DC Orion 24/12-30",
+  "ORI241224110": "Конвертор DC-DC Orion-Tr 24/12-20A (240W) Victron Energy ",
+  "ORI241210110(R)": "Конвертор DC-DC Orion-Tr 24/12-9A (110W) Victron Energy",
+  "ORI122420020": "Конвертор Victron Energy DC-DC Orion 12/24-20 ",
+  "ORI122410020": "Конвертор Victron Energy DC-DC Orion 12/24-10 ",
+  "BPC240813006": "Зарядний пристрій Blue Smart IP67 Charger 24/8 (1)",
+  "BPC240513006": "Зарядний пристрій Blue Smart IP67 Charger 24/5 (1)",
+  "BPC240531064R": "Зарядний пристрій Blue Smart IP65 Charger 24/5 + DC connector "
 }
