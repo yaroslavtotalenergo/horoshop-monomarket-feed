@@ -19,6 +19,7 @@ async function updateHoroshop() {
   let availabilityOverrides = {};
   let whitelist = [];
   let alwaysAvailable = [];
+  let horoshopDisabled = [];
 
   try {
     if (fs.existsSync('src/stock.json')) {
@@ -34,10 +35,13 @@ async function updateHoroshop() {
     if (fs.existsSync('src/always-available.json')) {
       alwaysAvailable = JSON.parse(fs.readFileSync('src/always-available.json', 'utf8'));
     }
+    if (fs.existsSync('src/horoshop-disabled.json')) {
+      horoshopDisabled = JSON.parse(fs.readFileSync('src/horoshop-disabled.json', 'utf8'));
+    }
     for (const article of alwaysAvailable) {
       availabilityOverrides[article] = true;
       // We also track stock overrides for iteration
-      stockOverrides[article] = 10;
+      stockOverrides[article] = Math.max(stockOverrides[article] || 0, 10);
     }
   } catch (e) {
     console.error('❌ Помилка читання файлів:', e.message);
@@ -69,8 +73,20 @@ async function updateHoroshop() {
   }
 
   // 3. Формуємо масив товарів для оновлення
-  // Беремо всі артикули, про які знаємо з таблиці
-  const articles = Object.keys(stockOverrides);
+  const articleSet = new Set(Object.keys(stockOverrides));
+  for (const a of alwaysAvailable) articleSet.add(a);
+  for (const a of horoshopDisabled) articleSet.add(a);
+
+  if (fs.existsSync('feeds/catalog.json')) {
+    try {
+      const cat = JSON.parse(fs.readFileSync('feeds/catalog.json', 'utf8'));
+      for (const p of cat) {
+        if (p.vendorCode) articleSet.add(String(p.vendorCode).trim());
+      }
+    } catch (e) {}
+  }
+
+  const articles = Array.from(articleSet);
   if (articles.length === 0) {
     console.log('⚠️ Немає товарів для оновлення (stock.json порожній).');
     return;
@@ -78,14 +94,23 @@ async function updateHoroshop() {
 
   const products = [];
   for (const article of articles) {
-    const isAvailable = availabilityOverrides[article] || false;
-    const isWhitelisted = whitelist.includes(article);
+    const isDisabled = horoshopDisabled.includes(article);
     const isAlwaysAvailable = alwaysAvailable.includes(article);
+    const rawStock = stockOverrides[article] !== undefined ? parseInt(stockOverrides[article], 10) : 0;
+    const stock = isNaN(rawStock) ? 0 : rawStock;
+    const isAvailable = availabilityOverrides[article] !== false && stock > 0;
 
-    // Якщо товар у списку "Завжди 10", ми примусово вмикаємо йому 6 платежів на Хорошопі, 
-    // навіть якщо для самого Мономаркету він вимкнений (isWhitelisted = false).
-    // Якщо ж він не в списку "Завжди 10", тоді діє стандартне правило: (Увімкнено + Є в наявності).
-    const monoInstallmentsId = (isAlwaysAvailable || (isWhitelisted && isAvailable)) ? 6 : 1;
+    // Логіка Оплати частинами (Монобанк) для Хорошопу:
+    // 1. Якщо товар заборонено в адмінці (в списку horoshopDisabled) -> ОЧ вимкнено (id: 1) навіть якщо є на складі.
+    // 2. Якщо товар увімкнено примусово (alwaysAvailable) -> ОЧ увімкнено (id: 6).
+    // 3. Якщо товар є в наявності на складі (stock > 0) -> ОЧ увімкнено (id: 6).
+    // 4. Інакше (немає на складі) -> ОЧ вимкнено (id: 1).
+    let monoInstallmentsId = 1;
+    if (!isDisabled) {
+      if (isAlwaysAvailable || isAvailable) {
+        monoInstallmentsId = 6;
+      }
+    }
 
     // Відправляємо ТІЛЬКИ налаштування Оплати частинами. Більше НІЧОГО не чіпаємо.
     products.push({
