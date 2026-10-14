@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-14T20:25:54.677Z",
-  "total": 115,
+  "updatedAt": "2026-10-14T20:32:03.861Z",
+  "total": 117,
   "data": [
     {
       "code": "BPC123047002",
@@ -1162,6 +1162,42 @@
     {
       "code": "BPP900451100",
       "price": 16377,
+      "old_price": null,
+      "availability": true,
+      "stock": 1,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 1
+        }
+      ],
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "BAM010700000 (R)",
+      "price": 6551,
+      "old_price": null,
+      "availability": true,
+      "stock": 1,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 1
+        }
+      ],
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "BAM010702000 (R)",
+      "price": 8158,
       "old_price": null,
       "availability": true,
       "stock": 1,
