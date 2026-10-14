@@ -719,14 +719,12 @@ export default function App() {
 
     let monoActiveCount = 0;
     let monoMissingBarcodeCount = 0;
-    let monoNameTooLongCount = 0;
 
     // Discrepancy counters
     let diffWarehouseInHoroshopOut = 0;
-    let diffWarehouseZeroHoroshopIn = 0;
     let diffInStockPromDisabled = 0;
     let diffMissingFromProm = 0;
-    let diffMonoIssues = 0;
+    let diffMonoMissingBarcode = 0;
 
     const alwaysSet = new Set(alwaysAvailable.map(s => String(s).trim()));
     const auditedProducts = [];
@@ -776,34 +774,27 @@ export default function App() {
       // Monomarket status
       const isMonoSelected = whitelist.includes(code);
       const hasBarcode = !!(barcodes[code] || p.barcode);
-      const isNameTooLong = name.length > 50;
 
       if (isMonoSelected) {
         monoActiveCount++;
         if (!hasBarcode) monoMissingBarcodeCount++;
-        if (isNameTooLong) monoNameTooLongCount++;
       }
 
       // Discrepancy flags
       const isDiffWarehouseInHoroshopOut = stock > 0 && horoshopOut;
-      const isDiffWarehouseZeroHoroshopIn = hasExcelRecord && stock === 0 && !horoshopOut;
       const isDiffInStockPromDisabled = existsOnProm && !isPromEnabled && stock > 0;
       const isDiffMissingFromProm = !existsOnProm;
       const isDiffMissingFromExcel = !hasExcelRecord;
-      const isDiffMonoIssue = isMonoSelected && (!hasBarcode || isNameTooLong);
+      const isDiffMonoMissingBarcode = isMonoSelected && !hasBarcode;
 
       if (isDiffWarehouseInHoroshopOut) diffWarehouseInHoroshopOut++;
-      if (isDiffWarehouseZeroHoroshopIn) diffWarehouseZeroHoroshopIn++;
       if (isDiffInStockPromDisabled) diffInStockPromDisabled++;
       if (isDiffMissingFromProm) diffMissingFromProm++;
-      if (isDiffMonoIssue) diffMonoIssues++;
+      if (isDiffMonoMissingBarcode) diffMonoMissingBarcode++;
 
       const issues = [];
       if (isDiffWarehouseInHoroshopOut) {
         issues.push({ type: 'danger', key: 'wh_in_horo_out', text: '🚨 Склад > 0, але на Хорошопі: Немає' });
-      }
-      if (isDiffWarehouseZeroHoroshopIn) {
-        issues.push({ type: 'warning', key: 'wh_zero_horo_in', text: '⚠️ Склад = 0, але на Хорошопі: В наявності' });
       }
       if (isDiffMissingFromProm) {
         issues.push({ type: 'purple', key: 'prom_missing', text: '🟣 Не знайдено на Prom.ua' });
@@ -815,10 +806,7 @@ export default function App() {
         issues.push({ type: 'neutral', key: 'excel_missing', text: '❓ Немає в Excel-таблиці' });
       }
       if (isMonoSelected && !hasBarcode) {
-        issues.push({ type: 'warning', key: 'mono_no_barcode', text: '🟡 Моно: без штрихкоду' });
-      }
-      if (isMonoSelected && isNameTooLong) {
-        issues.push({ type: 'warning', key: 'mono_long_name', text: '🟡 Моно: назва > 50 симв.' });
+        issues.push({ type: 'warning', key: 'mono_no_barcode', text: '🟡 Моно: без штрихкоду (EAN)' });
       }
 
       auditedProducts.push({
@@ -836,15 +824,13 @@ export default function App() {
         isPromEnabled,
         isMonoSelected,
         hasBarcode,
-        isNameTooLong,
         issues,
         hasAnyIssue: issues.length > 0,
         isDiffWarehouseInHoroshopOut,
-        isDiffWarehouseZeroHoroshopIn,
         isDiffInStockPromDisabled,
         isDiffMissingFromProm,
         isDiffMissingFromExcel,
-        isDiffMonoIssue
+        isDiffMonoMissingBarcode
       });
     });
 
@@ -862,12 +848,10 @@ export default function App() {
       horoshopOutOfStockCount,
       monoActiveCount,
       monoMissingBarcodeCount,
-      monoNameTooLongCount,
       diffWarehouseInHoroshopOut,
-      diffWarehouseZeroHoroshopIn,
       diffInStockPromDisabled,
       diffMissingFromProm,
-      diffMonoIssues,
+      diffMonoMissingBarcode,
       totalIssuesCount,
       auditedProducts
     };
@@ -885,10 +869,9 @@ export default function App() {
       }
       if (dashboardFilter === 'issues') return item.hasAnyIssue;
       if (dashboardFilter === 'wh_in_horo_out') return item.isDiffWarehouseInHoroshopOut;
-      if (dashboardFilter === 'wh_zero_horo_in') return item.isDiffWarehouseZeroHoroshopIn;
       if (dashboardFilter === 'prom_missing') return item.isDiffMissingFromProm;
       if (dashboardFilter === 'prom_disabled_stock') return item.isDiffInStockPromDisabled;
-      if (dashboardFilter === 'mono_issues') return item.isDiffMonoIssue;
+      if (dashboardFilter === 'mono_no_barcode') return item.isDiffMonoMissingBarcode;
       if (dashboardFilter === 'excel_missing') return item.isDiffMissingFromExcel;
       if (dashboardFilter === 'healthy') return !item.hasAnyIssue;
       return true; // 'all'
@@ -1085,12 +1068,6 @@ export default function App() {
                   </span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: 'var(--text-muted)' }}>⚠️ Назва &gt; 50 символів:</span>
-                  <span style={{ fontWeight: 700, color: dashboardStats.monoNameTooLongCount > 0 ? '#b45309' : '#15803d' }}>
-                    {dashboardStats.monoNameTooLongCount}
-                  </span>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span style={{ color: 'var(--text-muted)' }}>📦 Штрихкодів всього:</span>
                   <span style={{ fontWeight: 700, color: 'var(--text-main)' }}>{Object.keys(barcodes).length}</span>
                 </div>
@@ -1194,31 +1171,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* Filter 2 */}
-            <div
-              onClick={() => setDashboardFilter(dashboardFilter === 'wh_zero_horo_in' ? 'all' : 'wh_zero_horo_in')}
-              style={{
-                cursor: 'pointer',
-                padding: '0.85rem 1rem',
-                borderRadius: '8px',
-                background: dashboardFilter === 'wh_zero_horo_in' ? '#ffedd5' : '#fff7ed',
-                border: dashboardFilter === 'wh_zero_horo_in' ? '2px solid #f97316' : '1px solid #fed7aa',
-                transition: 'all 0.15s ease'
-              }}
-              title="На складі 0 шт, але на Хорошопі стоїть 'в наявності'"
-            >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '0.825rem', fontWeight: 700, color: '#9a3412' }}>⚠️ Склад = 0, Хорошоп: Є</span>
-                <span style={{ background: '#f97316', color: '#fff', fontSize: '0.75rem', fontWeight: 800, padding: '0.1rem 0.45rem', borderRadius: '999px' }}>
-                  {dashboardStats.diffWarehouseZeroHoroshopIn}
-                </span>
-              </div>
-              <div style={{ fontSize: '0.75rem', color: '#c2410c', marginTop: '0.35rem' }}>
-                Залишок на складі 0, ризик продати відсутній товар
-              </div>
-            </div>
-
-            {/* Filter 3 */}
+            {/* Filter: Prom missing */}
             <div
               onClick={() => setDashboardFilter(dashboardFilter === 'prom_missing' ? 'all' : 'prom_missing')}
               style={{
@@ -1242,7 +1195,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* Filter 4 */}
+            {/* Filter: Prom disabled with stock */}
             <div
               onClick={() => setDashboardFilter(dashboardFilter === 'prom_disabled_stock' ? 'all' : 'prom_disabled_stock')}
               style={{
@@ -1266,27 +1219,27 @@ export default function App() {
               </div>
             </div>
 
-            {/* Filter 5 */}
+            {/* Filter: Mono missing barcode */}
             <div
-              onClick={() => setDashboardFilter(dashboardFilter === 'mono_issues' ? 'all' : 'mono_issues')}
+              onClick={() => setDashboardFilter(dashboardFilter === 'mono_no_barcode' ? 'all' : 'mono_no_barcode')}
               style={{
                 cursor: 'pointer',
                 padding: '0.85rem 1rem',
                 borderRadius: '8px',
-                background: dashboardFilter === 'mono_issues' ? '#fef3c7' : '#fffbeb',
-                border: dashboardFilter === 'mono_issues' ? '2px solid #eab308' : '1px solid #fde68a',
+                background: dashboardFilter === 'mono_no_barcode' ? '#fef3c7' : '#fffbeb',
+                border: dashboardFilter === 'mono_no_barcode' ? '2px solid #eab308' : '1px solid #fde68a',
                 transition: 'all 0.15s ease'
               }}
-              title="Товари в Мономаркеті без штрихкоду або з назвою більше 50 символів"
+              title="Товари в Мономаркеті без штрихкоду (EAN)"
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '0.825rem', fontWeight: 700, color: '#854d0e' }}>🟡 Проблеми Мономаркет</span>
+                <span style={{ fontSize: '0.825rem', fontWeight: 700, color: '#854d0e' }}>🟡 Моно: без штрихкоду</span>
                 <span style={{ background: '#eab308', color: '#fff', fontSize: '0.75rem', fontWeight: 800, padding: '0.1rem 0.45rem', borderRadius: '999px' }}>
-                  {dashboardStats.diffMonoIssues}
+                  {dashboardStats.diffMonoMissingBarcode}
                 </span>
               </div>
               <div style={{ fontSize: '0.75rem', color: '#a16207', marginTop: '0.35rem' }}>
-                Немає штрихкоду або довжина назви перевищує 50 симв.
+                Для публікації в Мономаркет обов'язково потрібен штрихкод (EAN)
               </div>
             </div>
 
