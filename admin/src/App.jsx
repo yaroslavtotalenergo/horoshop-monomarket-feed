@@ -133,6 +133,7 @@ export default function App() {
   const [promSearchQuery, setPromSearchQuery] = useState('');
   const [promFilterMode, setPromFilterMode] = useState('all');
   const [promCategoryFilter, setPromCategoryFilter] = useState('all');
+  const [collapsedPromCategories, setCollapsedPromCategories] = useState({});
   
   const [savingHoroshop, setSavingHoroshop] = useState(false);
   const [syncingHoroshop, setSyncingHoroshop] = useState(false);
@@ -140,6 +141,7 @@ export default function App() {
   const [horoshopFilterMode, setHoroshopFilterMode] = useState('all');
   const [horoshopCategoryFilter, setHoroshopCategoryFilter] = useState('all');
   const [horoshopDisabled, setHoroshopDisabled] = useState([]);
+  const [collapsedHoroshopCategories, setCollapsedHoroshopCategories] = useState({});
   
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -415,6 +417,57 @@ export default function App() {
     };
   }, [catalog, promWhitelistSet, stockOverrides, alwaysAvailable, promSkusSet]);
 
+  const promGrouped = useMemo(() => {
+    const map = {};
+    for (const product of filteredPromCatalog) {
+      const cat = product.category || 'Без категорії';
+      if (!map[cat]) map[cat] = [];
+      map[cat].push(product);
+    }
+    return Object.entries(map).sort(([a], [b]) => a.localeCompare(b, 'uk'));
+  }, [filteredPromCatalog]);
+
+  const getPromCategoryStats = (products) => {
+    const enabled = products.filter(p => {
+      const code = p.vendorCode ? String(p.vendorCode).trim() : '';
+      return promWhitelistSet.has(code) && promSkusSet.has(code);
+    }).length;
+    return { enabled, total: products.length };
+  };
+
+  const toggleCategoryPromWhitelist = (products) => {
+    const validCodes = products
+      .map(p => p.vendorCode ? String(p.vendorCode).trim() : '')
+      .filter(code => code && promSkusSet.has(code));
+    if (validCodes.length === 0) return;
+
+    const allOn = validCodes.every(c => promWhitelistSet.has(c));
+    setPromWhitelist(prev => {
+      const prevSet = new Set(prev);
+      validCodes.forEach(c => {
+        if (allOn) prevSet.delete(c);
+        else prevSet.add(c);
+      });
+      return Array.from(prevSet);
+    });
+    showToast(allOn ? `⚪ Вимкнено категорію з Prom` : `🟣 Увімкнено категорію на Prom`);
+  };
+
+  const togglePromCategory = (cat) => setCollapsedPromCategories(prev => {
+    const isCurrentlyCollapsed = prev[cat] !== false;
+    return { ...prev, [cat]: !isCurrentlyCollapsed };
+  });
+
+  const expandAllProm = () => {
+    const next = {};
+    promGrouped.forEach(([cat]) => { next[cat] = false; });
+    setCollapsedPromCategories(next);
+  };
+
+  const collapseAllProm = () => {
+    setCollapsedPromCategories({});
+  };
+
   const toggleAlwaysAvailable = (vendorCode) => {
     setAlwaysAvailable(prev =>
       prev.includes(vendorCode)
@@ -570,6 +623,66 @@ export default function App() {
     });
   }, [catalog, horoshopSearchQuery, horoshopCategoryFilter, horoshopFilterMode, alwaysAvailable, horoshopDisabledSet, availabilityOverrides, stockOverrides]);
 
+  const horoshopGrouped = useMemo(() => {
+    const map = {};
+    for (const product of filteredHoroshopCatalog) {
+      const cat = product.category || 'Без категорії';
+      if (!map[cat]) map[cat] = [];
+      map[cat].push(product);
+    }
+    return Object.entries(map).sort(([a], [b]) => a.localeCompare(b, 'uk'));
+  }, [filteredHoroshopCatalog]);
+
+  const getHoroshopCategoryStats = (products) => {
+    let activeCount = 0;
+    products.forEach(p => {
+      const code = p.vendorCode ? String(p.vendorCode).trim() : '';
+      const isDisabled = horoshopDisabledSet.has(code);
+      const isAlways = alwaysAvailable.includes(code);
+      const isAvailable = availabilityOverrides[code] !== false;
+      let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : 0;
+      if (isAlways) stock = Math.max(stock, 10);
+      if (isNaN(stock) || stock < 0) stock = 0;
+      if (!isDisabled && (isAlways || (isAvailable && stock > 0))) {
+        activeCount++;
+      }
+    });
+    return { active: activeCount, total: products.length };
+  };
+
+  const toggleCategoryHoroshopAllowed = (products) => {
+    const codes = products
+      .map(p => p.vendorCode ? String(p.vendorCode).trim() : '')
+      .filter(Boolean);
+    if (codes.length === 0) return;
+
+    const allAllowed = codes.every(c => !horoshopDisabledSet.has(c));
+    setHoroshopDisabled(prev => {
+      const prevSet = new Set(prev);
+      codes.forEach(c => {
+        if (allAllowed) prevSet.add(c);
+        else prevSet.delete(c);
+      });
+      return Array.from(prevSet);
+    });
+    showToast(allAllowed ? `🔴 Заборонено ОЧ для категорії (${codes.length} тов.)` : `🟢 Дозволено ОЧ для категорії (${codes.length} тов.)`);
+  };
+
+  const toggleHoroshopCategory = (cat) => setCollapsedHoroshopCategories(prev => {
+    const isCurrentlyCollapsed = prev[cat] !== false;
+    return { ...prev, [cat]: !isCurrentlyCollapsed };
+  });
+
+  const expandAllHoroshop = () => {
+    const next = {};
+    horoshopGrouped.forEach(([cat]) => { next[cat] = false; });
+    setCollapsedHoroshopCategories(next);
+  };
+
+  const collapseAllHoroshop = () => {
+    setCollapsedHoroshopCategories({});
+  };
+
   const toggleWhitelist = (vendorCode) => {
     setWhitelist(prev => prev.includes(vendorCode) ? prev.filter(v => v !== vendorCode) : [...prev, vendorCode]);
   };
@@ -649,7 +762,10 @@ export default function App() {
   };
   const copyToClipboard = (text) => { navigator.clipboard.writeText(text); showToast('📋 Посилання скопійовано!'); };
 
-  const toggleCategory = (cat) => setCollapsedCategories(prev => ({ ...prev, [cat]: !prev[cat] }));
+  const toggleCategory = (cat) => setCollapsedCategories(prev => {
+    const isCurrentlyCollapsed = prev[cat] !== false;
+    return { ...prev, [cat]: !isCurrentlyCollapsed };
+  });
 
   // handle bulk select/deselect of searched items
   const handleBulkAction = (turnOn) => {
@@ -911,6 +1027,208 @@ export default function App() {
       showToast('❌ Помилка синхронізації з Google Sheets: ' + e.message);
     }
     setSyncing(false);
+  };
+
+  const renderPromProductRow = (product) => {
+    const code = product.vendorCode ? String(product.vendorCode).trim() : '';
+    const isEnabled = promWhitelistSet.has(code);
+    const existsOnProm = promSkusSet.has(code);
+    let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : 0;
+    if (alwaysAvailable.includes(code)) stock = Math.max(stock, 10);
+    if (isNaN(stock) || stock < 0) stock = 0;
+
+    return (
+      <tr
+        key={product.id || code}
+        style={{
+          borderBottom: '1px solid var(--border-color)',
+          background: !existsOnProm ? 'rgba(254, 243, 199, 0.28)' : (!isEnabled ? 'rgba(243, 244, 246, 0.5)' : (stock > 0 ? 'transparent' : 'rgba(254, 242, 242, 0.25)')),
+          transition: 'background 0.2s'
+        }}
+      >
+        <td style={{ padding: '0.85rem', textAlign: 'center' }}>
+          <label style={{ display: 'inline-flex', alignItems: 'center', cursor: !existsOnProm ? 'not-allowed' : 'pointer', gap: '0.4rem' }}>
+            <input
+              type="checkbox"
+              disabled={!existsOnProm}
+              title={!existsOnProm ? 'Товару ще немає на Prom.ua' : ''}
+              checked={isEnabled && existsOnProm}
+              onChange={() => togglePromWhitelist(code)}
+              style={{ width: '20px', height: '20px', cursor: !existsOnProm ? 'not-allowed' : 'pointer', accentColor: '#8b5cf6', opacity: !existsOnProm ? 0.35 : 1 }}
+            />
+          </label>
+        </td>
+        <td style={{ padding: '0.85rem', textAlign: 'center' }}>
+          {product.picture ? (
+            <img
+              src={product.picture}
+              alt=""
+              style={{ width: '42px', height: '42px', objectFit: 'contain', borderRadius: '4px', border: '1px solid var(--border-color)', background: '#fff' }}
+              loading="lazy"
+            />
+          ) : (
+            <div style={{ width: '42px', height: '42px', background: '#e5e7eb', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', color: '#9ca3af' }}>—</div>
+          )}
+        </td>
+        <td style={{ padding: '0.85rem' }}>
+          <code style={{ background: '#f1f5f9', padding: '0.2rem 0.45rem', borderRadius: '4px', fontSize: '0.85rem', fontWeight: 600 }}>
+            {code}
+          </code>
+        </td>
+        <td style={{ padding: '0.85rem' }}>
+          <div style={{ fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.2rem' }}>
+            {names[code] || product.name}
+          </div>
+          <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+            {product.category || 'Без категорії'}
+          </div>
+        </td>
+        <td style={{ padding: '0.85rem', fontWeight: 600, whiteSpace: 'nowrap' }}>
+          {product.price ? `${Number(product.price).toLocaleString()} ₴` : '—'}
+        </td>
+        <td style={{ padding: '0.85rem', textAlign: 'center', whiteSpace: 'nowrap' }}>
+          <span style={{
+            display: 'inline-block',
+            padding: '0.25rem 0.6rem',
+            borderRadius: '6px',
+            fontWeight: 700,
+            fontSize: '0.9rem',
+            background: stock > 0 ? '#dcfce7' : '#fee2e2',
+            color: stock > 0 ? '#15803d' : '#b91c1c'
+          }}>
+            {stock} шт.
+          </span>
+        </td>
+        <td style={{ padding: '0.85rem' }}>
+          {!existsOnProm ? (
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#fef3c7', color: '#92400e', fontSize: '0.85rem', fontWeight: 600 }} title="Товар є у фіді Хорошопу, але його артикул не знайдено на Prom.ua">
+              ⚠️ Немає на Prom.ua
+            </span>
+          ) : !isEnabled ? (
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#f3f4f6', color: '#4b5563', fontSize: '0.85rem', fontWeight: 500 }} title="Товар вимкнено для Prom: залишається видимим на сайті, але зі статусом 'Немає в наявності' (0 шт.)">
+              ⚪ Вимкнено (Немає в наявн.)
+            </span>
+          ) : stock > 0 ? (
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#dcfce7', color: '#166534', fontSize: '0.85rem', fontWeight: 600 }}>
+              🟢 В наявності ({stock} шт.)
+            </span>
+          ) : (
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#fee2e2', color: '#991b1b', fontSize: '0.85rem', fontWeight: 500 }}>
+              🔴 Немає в наявності
+            </span>
+          )}
+        </td>
+      </tr>
+    );
+  };
+
+  const renderHoroshopProductRow = (product) => {
+    const code = product.vendorCode ? String(product.vendorCode).trim() : '';
+    const isDisabled = horoshopDisabledSet.has(code);
+    const isAlways = alwaysAvailable.includes(code);
+    const isAvailable = availabilityOverrides[code] !== false;
+    let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : 0;
+    if (isAlways) stock = Math.max(stock, 10);
+    if (isNaN(stock) || stock < 0) stock = 0;
+
+    const hasInstallments = !isDisabled && (isAlways || (isAvailable && stock > 0));
+
+    return (
+      <tr
+        key={product.id || code}
+        style={{
+          borderBottom: '1px solid var(--border-color)',
+          background: isDisabled
+            ? 'rgba(254, 242, 242, 0.45)'
+            : isAlways
+              ? 'rgba(245, 243, 255, 0.45)'
+              : (stock > 0 ? 'transparent' : 'rgba(243, 244, 246, 0.4)'),
+          transition: 'background 0.2s'
+        }}
+      >
+        <td style={{ padding: '0.85rem', textAlign: 'center' }}>
+          <label className="toggle-switch" title={isDisabled ? "Оплата частинами заборонена (натисніть, щоб дозволити)" : "Оплата частинами дозволена (натисніть, щоб заборонити)"}>
+            <input
+              type="checkbox"
+              checked={!isDisabled}
+              onChange={() => toggleHoroshopAllowed(code)}
+            />
+            <span className="slider" style={{ background: !isDisabled ? '#10b981' : '#9ca3af' }}></span>
+          </label>
+        </td>
+        <td style={{ padding: '0.85rem', textAlign: 'center' }}>
+          <label className="toggle-switch" style={{ opacity: isDisabled ? 0.35 : 1 }} title={isDisabled ? "Спочатку дозвольте Оплату частинами для цього товару" : "Примусово увімкнути Оплату частинами (6 платежів) навіть при 0 на складі"}>
+            <input
+              type="checkbox"
+              disabled={isDisabled}
+              checked={isAlways && !isDisabled}
+              onChange={() => toggleAlwaysAvailable(code)}
+            />
+            <span className="slider" style={{ background: (isAlways && !isDisabled) ? '#8b5cf6' : '' }}></span>
+          </label>
+        </td>
+        <td style={{ padding: '0.85rem', textAlign: 'center' }}>
+          {product.picture ? (
+            <img
+              src={product.picture}
+              alt=""
+              style={{ width: '42px', height: '42px', objectFit: 'contain', borderRadius: '4px', border: '1px solid var(--border-color)', background: '#fff' }}
+              loading="lazy"
+            />
+          ) : (
+            <div style={{ width: '42px', height: '42px', background: '#e5e7eb', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', color: '#9ca3af' }}>—</div>
+          )}
+        </td>
+        <td style={{ padding: '0.85rem' }}>
+          <code style={{ background: '#f1f5f9', padding: '0.2rem 0.45rem', borderRadius: '4px', fontSize: '0.85rem', fontWeight: 600 }}>
+            {code}
+          </code>
+        </td>
+        <td style={{ padding: '0.85rem' }}>
+          <div style={{ fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.2rem' }}>
+            {names[code] || product.name}
+          </div>
+          <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+            {product.category || 'Без категорії'}
+          </div>
+        </td>
+        <td style={{ padding: '0.85rem', fontWeight: 600, whiteSpace: 'nowrap' }}>
+          {product.price ? `${Number(product.price).toLocaleString()} ₴` : '—'}
+        </td>
+        <td style={{ padding: '0.85rem', textAlign: 'center', whiteSpace: 'nowrap' }}>
+          <span style={{
+            display: 'inline-block',
+            padding: '0.25rem 0.6rem',
+            borderRadius: '6px',
+            fontWeight: 700,
+            fontSize: '0.9rem',
+            background: stock > 0 ? '#dcfce7' : '#fee2e2',
+            color: stock > 0 ? '#15803d' : '#b91c1c'
+          }}>
+            {stock} шт.
+          </span>
+        </td>
+        <td style={{ padding: '0.85rem' }}>
+          {isDisabled ? (
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#fee2e2', color: '#b91c1c', fontSize: '0.85rem', fontWeight: 600 }} title="Оплату частинами заборонено вручну (навіть при наявності товару на складі ОЧ не передається)">
+              🔴 ОЧ вимкнено (заборонено)
+            </span>
+          ) : isAlways ? (
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#f3e8ff', color: '#6b21a8', fontSize: '0.85rem', fontWeight: 600 }} title="Увімкнено примусово через 'Примусово ОЧ'">
+              💜 Примусово ОЧ (6 пл.)
+            </span>
+          ) : hasInstallments ? (
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#dcfce7', color: '#166534', fontSize: '0.85rem', fontWeight: 600 }} title="Товар в наявності на складі — ОЧ активна">
+              🟢 ОЧ активна (на складі)
+            </span>
+          ) : (
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#f3f4f6', color: '#6b7280', fontSize: '0.85rem', fontWeight: 500 }} title="Товару немає на складі — Оплата частинами вимкнена">
+              ⚪ ОЧ вимкнено (0 на складі)
+            </span>
+          )}
+        </td>
+      </tr>
+    );
   };
 
   return (
@@ -1556,147 +1874,151 @@ export default function App() {
           {/* Quick bulk actions */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.75rem' }}>
             <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-              Знайдено товарів: <strong style={{ color: 'var(--text-main)' }}>{filteredPromCatalog.length}</strong>
+              Знайдено: <strong style={{ color: 'var(--text-main)' }}>{filteredPromCatalog.length}</strong> товарів {!promSearchQuery.trim() && `у ${promGrouped.length} категоріях`}
             </div>
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
               <button
                 className="btn"
                 style={{ background: 'rgba(139, 92, 246, 0.1)', color: '#8b5cf6', border: '1px solid rgba(139, 92, 246, 0.3)', padding: '0.45rem 0.9rem', fontSize: '0.85rem' }}
                 onClick={() => handleBulkPromToggle(true)}
               >
-                🟣 Увімкнути вибрані на Prom
+                🟣 Увімкнути всі для Prom
               </button>
               <button
                 className="btn"
                 style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', border: '1px solid rgba(239, 68, 68, 0.3)', padding: '0.45rem 0.9rem', fontSize: '0.85rem' }}
                 onClick={() => handleBulkPromToggle(false)}
               >
-                ⚪ Вимкнути вибрані з Prom
+                ⚪ Вимкнути всі з Prom
               </button>
+              {!promSearchQuery.trim() && (
+                <>
+                  <button
+                    className="btn"
+                    style={{ background: 'transparent', color: 'var(--text-main)', border: '1px solid var(--border-color)', padding: '0.45rem 0.85rem', fontSize: '0.85rem' }}
+                    onClick={expandAllProm}
+                    title="Розгорнути всі категорії"
+                  >
+                    ▼ Розгорнути всі
+                  </button>
+                  <button
+                    className="btn"
+                    style={{ background: 'transparent', color: 'var(--text-main)', border: '1px solid var(--border-color)', padding: '0.45rem 0.85rem', fontSize: '0.85rem' }}
+                    onClick={collapseAllProm}
+                    title="Згорнути всі категорії"
+                  >
+                    ▶ Згорнути всі
+                  </button>
+                </>
+              )}
             </div>
           </div>
 
-          {/* Prom Table */}
-          <div className="glass-panel" style={{ padding: 0, overflow: 'hidden' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.95rem' }}>
-              <thead>
-                <tr style={{ background: '#f8fafc', borderBottom: '1px solid var(--border-color)', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-                  <th style={{ padding: '1rem', width: '130px', textAlign: 'center' }}>Продавати на Prom</th>
-                  <th style={{ padding: '1rem', width: '70px', textAlign: 'center' }}>Фото</th>
-                  <th style={{ padding: '1rem', width: '160px' }}>Артикул</th>
-                  <th style={{ padding: '1rem' }}>Назва товару</th>
-                  <th style={{ padding: '1rem', width: '120px' }}>Ціна</th>
-                  <th style={{ padding: '1rem', width: '140px', textAlign: 'center' }}>Склад (Excel)</th>
-                  <th style={{ padding: '1rem', width: '230px' }}>Статус на Prom.ua</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredPromCatalog.slice(0, 200).map(product => {
-                  const code = product.vendorCode ? String(product.vendorCode).trim() : '';
-                  const isEnabled = promWhitelistSet.has(code);
-                  const existsOnProm = promSkusSet.has(code);
-                  let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : 0;
-                  if (alwaysAvailable.includes(code)) stock = Math.max(stock, 10);
-                  if (isNaN(stock) || stock < 0) stock = 0;
+          {/* Prom Products: Flat Table on Search, Accordion on Categories */}
+          {promSearchQuery.trim() ? (
+            <div className="glass-panel" style={{ padding: 0, overflow: 'hidden' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.95rem' }}>
+                <thead>
+                  <tr style={{ background: '#f8fafc', borderBottom: '1px solid var(--border-color)', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                    <th style={{ padding: '1rem', width: '130px', textAlign: 'center' }}>Продавати на Prom</th>
+                    <th style={{ padding: '1rem', width: '70px', textAlign: 'center' }}>Фото</th>
+                    <th style={{ padding: '1rem', width: '160px' }}>Артикул</th>
+                    <th style={{ padding: '1rem' }}>Назва товару</th>
+                    <th style={{ padding: '1rem', width: '120px' }}>Ціна</th>
+                    <th style={{ padding: '1rem', width: '140px', textAlign: 'center' }}>Склад (Excel)</th>
+                    <th style={{ padding: '1rem', width: '230px' }}>Статус на Prom.ua</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredPromCatalog.slice(0, 200).map(product => renderPromProductRow(product))}
+                </tbody>
+              </table>
+              {filteredPromCatalog.length > 200 && (
+                <div style={{ padding: '1rem', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.9rem', background: '#f8fafc', borderTop: '1px solid var(--border-color)' }}>
+                  Показано перші 200 товарів із {filteredPromCatalog.length}.
+                </div>
+              )}
+              {filteredPromCatalog.length === 0 && (
+                <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+                  <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🔍</div>
+                  Товарів не знайдено за вказаними фільтрами
+                </div>
+              )}
+            </div>
+          ) : (
+            <div>
+              {promGrouped.length === 0 ? (
+                <div className="glass-panel" style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+                  <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🔍</div>
+                  Товарів не знайдено за вказаними фільтрами
+                </div>
+              ) : (
+                promGrouped.map(([categoryName, products]) => {
+                  const { enabled, total } = getPromCategoryStats(products);
+                  const isCollapsed = collapsedPromCategories[categoryName] !== false;
+                  const validCodes = products
+                    .map(p => p.vendorCode ? String(p.vendorCode).trim() : '')
+                    .filter(code => code && promSkusSet.has(code));
+                  const allCatSelected = validCodes.length > 0 && validCodes.every(c => promWhitelistSet.has(c));
 
                   return (
-                    <tr
-                      key={product.id || code}
-                      style={{
-                        borderBottom: '1px solid var(--border-color)',
-                        background: !existsOnProm ? 'rgba(254, 243, 199, 0.28)' : (!isEnabled ? 'rgba(243, 244, 246, 0.5)' : (stock > 0 ? 'transparent' : 'rgba(254, 242, 242, 0.25)')),
-                        transition: 'background 0.2s'
-                      }}
-                    >
-                      <td style={{ padding: '0.85rem', textAlign: 'center' }}>
-                        <label style={{ display: 'inline-flex', alignItems: 'center', cursor: !existsOnProm ? 'not-allowed' : 'pointer', gap: '0.4rem' }}>
+                    <div key={categoryName} className="glass-panel" style={{ marginBottom: '0.75rem', padding: 0, overflow: 'hidden' }}>
+                      {/* Category header */}
+                      <div
+                        style={{
+                          display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.9rem 1.25rem',
+                          cursor: 'pointer', borderBottom: isCollapsed ? 'none' : '1px solid var(--border-color)',
+                          background: isCollapsed ? '#ffffff' : 'rgba(139, 92, 246, 0.05)',
+                          transition: 'background 0.2s'
+                        }}
+                      >
+                        <label className="toggle-switch" onClick={e => e.stopPropagation()} title={validCodes.length === 0 ? "У цій категорії немає товарів з Prom.ua" : (allCatSelected ? "Вимкнути всю категорію на Prom" : "Увімкнути всю категорію на Prom")}>
                           <input
                             type="checkbox"
-                            disabled={!existsOnProm}
-                            title={!existsOnProm ? 'Товару ще немає на Prom.ua' : ''}
-                            checked={isEnabled && existsOnProm}
-                            onChange={() => togglePromWhitelist(code)}
-                            style={{ width: '20px', height: '20px', cursor: !existsOnProm ? 'not-allowed' : 'pointer', accentColor: '#8b5cf6', opacity: !existsOnProm ? 0.35 : 1 }}
+                            disabled={validCodes.length === 0}
+                            checked={allCatSelected}
+                            onChange={() => toggleCategoryPromWhitelist(products)}
                           />
+                          <span className="slider" style={{ background: allCatSelected ? '#8b5cf6' : '' }}></span>
                         </label>
-                      </td>
-                      <td style={{ padding: '0.85rem', textAlign: 'center' }}>
-                        {product.picture ? (
-                          <img
-                            src={product.picture}
-                            alt=""
-                            style={{ width: '42px', height: '42px', objectFit: 'contain', borderRadius: '4px', border: '1px solid var(--border-color)', background: '#fff' }}
-                            loading="lazy"
-                          />
-                        ) : (
-                          <div style={{ width: '42px', height: '42px', background: '#e5e7eb', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', color: '#9ca3af' }}>—</div>
-                        )}
-                      </td>
-                      <td style={{ padding: '0.85rem' }}>
-                        <code style={{ background: '#f1f5f9', padding: '0.2rem 0.45rem', borderRadius: '4px', fontSize: '0.85rem', fontWeight: 600 }}>
-                          {code}
-                        </code>
-                      </td>
-                      <td style={{ padding: '0.85rem' }}>
-                        <div style={{ fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.2rem' }}>
-                          {names[code] || product.name}
+                        <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.75rem' }} onClick={() => togglePromCategory(categoryName)}>
+                          <span style={{ fontWeight: 700, fontSize: '0.95rem' }}>{categoryName}</span>
+                          <span className="badge" style={{ background: enabled > 0 ? '#dcfce7' : '#f3f4f6', color: enabled > 0 ? '#15803d' : '#6b7280' }}>
+                            {enabled}/{total}
+                          </span>
                         </div>
-                        <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                          {product.category || 'Без категорії'}
-                        </div>
-                      </td>
-                      <td style={{ padding: '0.85rem', fontWeight: 600, whiteSpace: 'nowrap' }}>
-                        {product.price ? `${Number(product.price).toLocaleString()} ₴` : '—'}
-                      </td>
-                      <td style={{ padding: '0.85rem', textAlign: 'center', whiteSpace: 'nowrap' }}>
-                        <span style={{
-                          display: 'inline-block',
-                          padding: '0.25rem 0.6rem',
-                          borderRadius: '6px',
-                          fontWeight: 700,
-                          fontSize: '0.9rem',
-                          background: stock > 0 ? '#dcfce7' : '#fee2e2',
-                          color: stock > 0 ? '#15803d' : '#b91c1c'
-                        }}>
-                          {stock} шт.
+                        <span style={{ color: 'var(--text-muted)', fontSize: '1.1rem', padding: '0 0.5rem' }} onClick={() => togglePromCategory(categoryName)}>
+                          {isCollapsed ? '▶' : '▼'}
                         </span>
-                      </td>
-                      <td style={{ padding: '0.85rem' }}>
-                        {!existsOnProm ? (
-                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#fef3c7', color: '#92400e', fontSize: '0.85rem', fontWeight: 600 }} title="Товар є у фіді Хорошопу, але його артикул не знайдено на Prom.ua">
-                            ⚠️ Немає на Prom.ua
-                          </span>
-                        ) : !isEnabled ? (
-                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#f3f4f6', color: '#4b5563', fontSize: '0.85rem', fontWeight: 500 }} title="Товар вимкнено для Prom: залишається видимим на сайті, але зі статусом 'Немає в наявності' (0 шт.)">
-                            ⚪ Вимкнено (Немає в наявн.)
-                          </span>
-                        ) : stock > 0 ? (
-                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#dcfce7', color: '#166534', fontSize: '0.85rem', fontWeight: 600 }}>
-                            🟢 В наявності ({stock} шт.)
-                          </span>
-                        ) : (
-                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#fee2e2', color: '#991b1b', fontSize: '0.85rem', fontWeight: 500 }}>
-                            🔴 Немає в наявності
-                          </span>
-                        )}
-                      </td>
-                    </tr>
+                      </div>
+
+                      {/* Category table */}
+                      {!isCollapsed && (
+                        <div style={{ overflowX: 'auto' }}>
+                          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.95rem' }}>
+                            <thead>
+                              <tr style={{ background: '#f8fafc', borderBottom: '1px solid var(--border-color)', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                                <th style={{ padding: '0.85rem 1rem', width: '130px', textAlign: 'center' }}>Продавати на Prom</th>
+                                <th style={{ padding: '0.85rem 1rem', width: '70px', textAlign: 'center' }}>Фото</th>
+                                <th style={{ padding: '0.85rem 1rem', width: '160px' }}>Артикул</th>
+                                <th style={{ padding: '0.85rem 1rem' }}>Назва товару</th>
+                                <th style={{ padding: '0.85rem 1rem', width: '120px' }}>Ціна</th>
+                                <th style={{ padding: '0.85rem 1rem', width: '140px', textAlign: 'center' }}>Склад (Excel)</th>
+                                <th style={{ padding: '0.85rem 1rem', width: '230px' }}>Статус на Prom.ua</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {products.map(product => renderPromProductRow(product))}
+                            </tbody>
+                          </table>
+                        </div>
+                      )}
+                    </div>
                   );
-                })}
-              </tbody>
-            </table>
-            {filteredPromCatalog.length > 200 && (
-              <div style={{ padding: '1rem', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.9rem', background: '#f8fafc', borderTop: '1px solid var(--border-color)' }}>
-                Показано перші 200 товарів із {filteredPromCatalog.length}. Використовуйте пошук або категорію для точного вибору.
-              </div>
-            )}
-            {filteredPromCatalog.length === 0 && (
-              <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-                <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🔍</div>
-                Товарів не знайдено за вказаними фільтрами
-              </div>
-            )}
-          </div>
+                })
+              )}
+            </div>
+          )}
         </div>
       )}
 
@@ -1771,7 +2093,7 @@ export default function App() {
           {/* Bulk actions */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', paddingBottom: '0.75rem', borderBottom: '1px solid var(--border-color)', flexWrap: 'wrap', gap: '0.75rem' }}>
             <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-              Знайдено: <strong>{filteredHoroshopCatalog.length}</strong> товарів
+              Знайдено: <strong>{filteredHoroshopCatalog.length}</strong> товарів {!horoshopSearchQuery.trim() && `у ${horoshopGrouped.length} категоріях`}
             </div>
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
               <button
@@ -1806,147 +2128,135 @@ export default function App() {
               >
                 ⚪ Зняти примусово ОЧ
               </button>
+              {!horoshopSearchQuery.trim() && (
+                <>
+                  <button
+                    className="btn"
+                    style={{ background: 'transparent', color: 'var(--text-main)', border: '1px solid var(--border-color)', padding: '0.4rem 0.8rem', fontSize: '0.85rem' }}
+                    onClick={expandAllHoroshop}
+                    title="Розгорнути всі категорії"
+                  >
+                    ▼ Розгорнути всі
+                  </button>
+                  <button
+                    className="btn"
+                    style={{ background: 'transparent', color: 'var(--text-main)', border: '1px solid var(--border-color)', padding: '0.4rem 0.8rem', fontSize: '0.85rem' }}
+                    onClick={collapseAllHoroshop}
+                    title="Згорнути всі категорії"
+                  >
+                    ▶ Згорнути всі
+                  </button>
+                </>
+              )}
             </div>
           </div>
 
-          {/* Table */}
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-              <thead>
-                <tr style={{ borderBottom: '2px solid var(--border-color)', background: 'rgba(0,0,0,0.02)' }}>
-                  <th style={{ padding: '1rem', width: '110px', textAlign: 'center' }}>Дозволити ОЧ</th>
-                  <th style={{ padding: '1rem', width: '120px', textAlign: 'center' }}>Примусово ОЧ</th>
-                  <th style={{ padding: '1rem', width: '60px', textAlign: 'center' }}>Фото</th>
-                  <th style={{ padding: '1rem', width: '150px' }}>Артикул</th>
-                  <th style={{ padding: '1rem' }}>Назва товару</th>
-                  <th style={{ padding: '1rem', width: '110px' }}>Ціна</th>
-                  <th style={{ padding: '1rem', width: '120px', textAlign: 'center' }}>Склад (Excel)</th>
-                  <th style={{ padding: '1rem', width: '230px' }}>Статус Оплати частинами</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredHoroshopCatalog.slice(0, 200).map(product => {
-                  const code = product.vendorCode ? String(product.vendorCode).trim() : '';
-                  const isDisabled = horoshopDisabledSet.has(code);
-                  const isAlways = alwaysAvailable.includes(code);
-                  const isAvailable = availabilityOverrides[code] !== false;
-                  let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : 0;
-                  if (isAlways) stock = Math.max(stock, 10);
-                  if (isNaN(stock) || stock < 0) stock = 0;
-
-                  const hasInstallments = !isDisabled && (isAlways || (isAvailable && stock > 0));
+          {/* Horoshop Products: Flat Table on Search, Accordion on Categories */}
+          {horoshopSearchQuery.trim() ? (
+            <div className="glass-panel" style={{ padding: 0, overflow: 'hidden' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.95rem' }}>
+                <thead>
+                  <tr style={{ background: '#f8fafc', borderBottom: '1px solid var(--border-color)', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                    <th style={{ padding: '1rem', width: '110px', textAlign: 'center' }}>Дозволити ОЧ</th>
+                    <th style={{ padding: '1rem', width: '120px', textAlign: 'center' }}>Примусово ОЧ</th>
+                    <th style={{ padding: '1rem', width: '60px', textAlign: 'center' }}>Фото</th>
+                    <th style={{ padding: '1rem', width: '150px' }}>Артикул</th>
+                    <th style={{ padding: '1rem' }}>Назва товару</th>
+                    <th style={{ padding: '1rem', width: '110px' }}>Ціна</th>
+                    <th style={{ padding: '1rem', width: '120px', textAlign: 'center' }}>Склад (Excel)</th>
+                    <th style={{ padding: '1rem', width: '230px' }}>Статус Оплати частинами</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredHoroshopCatalog.slice(0, 200).map(product => renderHoroshopProductRow(product))}
+                </tbody>
+              </table>
+              {filteredHoroshopCatalog.length > 200 && (
+                <div style={{ padding: '1rem', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.9rem', background: '#f8fafc', borderTop: '1px solid var(--border-color)' }}>
+                  Показано перші 200 товарів із {filteredHoroshopCatalog.length}. Використовуйте фільтр категорій для точного вибору.
+                </div>
+              )}
+              {filteredHoroshopCatalog.length === 0 && (
+                <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+                  <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🔍</div>
+                  Товарів не знайдено за вказаними фільтрами
+                </div>
+              )}
+            </div>
+          ) : (
+            <div>
+              {horoshopGrouped.length === 0 ? (
+                <div className="glass-panel" style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+                  <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🔍</div>
+                  Товарів не знайдено за вказаними фільтрами
+                </div>
+              ) : (
+                horoshopGrouped.map(([categoryName, products]) => {
+                  const { active, total } = getHoroshopCategoryStats(products);
+                  const isCollapsed = collapsedHoroshopCategories[categoryName] !== false;
+                  const codes = products
+                    .map(p => p.vendorCode ? String(p.vendorCode).trim() : '')
+                    .filter(Boolean);
+                  const allCatAllowed = codes.length > 0 && codes.every(c => !horoshopDisabledSet.has(c));
 
                   return (
-                    <tr
-                      key={product.id || code}
-                      style={{
-                        borderBottom: '1px solid var(--border-color)',
-                        background: isDisabled
-                          ? 'rgba(254, 242, 242, 0.45)'
-                          : isAlways
-                            ? 'rgba(245, 243, 255, 0.45)'
-                            : (stock > 0 ? 'transparent' : 'rgba(243, 244, 246, 0.4)'),
-                        transition: 'background 0.2s'
-                      }}
-                    >
-                      <td style={{ padding: '0.85rem', textAlign: 'center' }}>
-                        <label className="toggle-switch" title={isDisabled ? "Оплата частинами заборонена (натисніть, щоб дозволити)" : "Оплата частинами дозволена (натисніть, щоб заборонити)"}>
+                    <div key={categoryName} className="glass-panel" style={{ marginBottom: '0.75rem', padding: 0, overflow: 'hidden' }}>
+                      {/* Category header */}
+                      <div
+                        style={{
+                          display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.9rem 1.25rem',
+                          cursor: 'pointer', borderBottom: isCollapsed ? 'none' : '1px solid var(--border-color)',
+                          background: isCollapsed ? '#ffffff' : 'rgba(16, 185, 129, 0.05)',
+                          transition: 'background 0.2s'
+                        }}
+                      >
+                        <label className="toggle-switch" onClick={e => e.stopPropagation()} title={allCatAllowed ? "Заборонити ОЧ для всієї категорії" : "Дозволити ОЧ для всієї категорії"}>
                           <input
                             type="checkbox"
-                            checked={!isDisabled}
-                            onChange={() => toggleHoroshopAllowed(code)}
+                            checked={allCatAllowed}
+                            onChange={() => toggleCategoryHoroshopAllowed(products)}
                           />
-                          <span className="slider" style={{ background: !isDisabled ? '#10b981' : '#9ca3af' }}></span>
+                          <span className="slider" style={{ background: allCatAllowed ? '#10b981' : '#9ca3af' }}></span>
                         </label>
-                      </td>
-                      <td style={{ padding: '0.85rem', textAlign: 'center' }}>
-                        <label className="toggle-switch" style={{ opacity: isDisabled ? 0.35 : 1 }} title={isDisabled ? "Спочатку дозвольте Оплату частинами для цього товару" : "Примусово увімкнути Оплату частинами (6 платежів) навіть при 0 на складі"}>
-                          <input
-                            type="checkbox"
-                            disabled={isDisabled}
-                            checked={isAlways && !isDisabled}
-                            onChange={() => toggleAlwaysAvailable(code)}
-                          />
-                          <span className="slider" style={{ background: (isAlways && !isDisabled) ? '#8b5cf6' : '' }}></span>
-                        </label>
-                      </td>
-                      <td style={{ padding: '0.85rem', textAlign: 'center' }}>
-                        {product.picture ? (
-                          <img
-                            src={product.picture}
-                            alt=""
-                            style={{ width: '42px', height: '42px', objectFit: 'contain', borderRadius: '4px', border: '1px solid var(--border-color)', background: '#fff' }}
-                            loading="lazy"
-                          />
-                        ) : (
-                          <div style={{ width: '42px', height: '42px', background: '#e5e7eb', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', color: '#9ca3af' }}>—</div>
-                        )}
-                      </td>
-                      <td style={{ padding: '0.85rem' }}>
-                        <code style={{ background: '#f1f5f9', padding: '0.2rem 0.45rem', borderRadius: '4px', fontSize: '0.85rem', fontWeight: 600 }}>
-                          {code}
-                        </code>
-                      </td>
-                      <td style={{ padding: '0.85rem' }}>
-                        <div style={{ fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.2rem' }}>
-                          {names[code] || product.name}
+                        <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.75rem' }} onClick={() => toggleHoroshopCategory(categoryName)}>
+                          <span style={{ fontWeight: 700, fontSize: '0.95rem' }}>{categoryName}</span>
+                          <span className="badge" style={{ background: active > 0 ? '#dcfce7' : '#f3f4f6', color: active > 0 ? '#15803d' : '#6b7280' }}>
+                            {active}/{total}
+                          </span>
                         </div>
-                        <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                          {product.category || 'Без категорії'}
-                        </div>
-                      </td>
-                      <td style={{ padding: '0.85rem', fontWeight: 600, whiteSpace: 'nowrap' }}>
-                        {product.price ? `${Number(product.price).toLocaleString()} ₴` : '—'}
-                      </td>
-                      <td style={{ padding: '0.85rem', textAlign: 'center', whiteSpace: 'nowrap' }}>
-                        <span style={{
-                          display: 'inline-block',
-                          padding: '0.25rem 0.6rem',
-                          borderRadius: '6px',
-                          fontWeight: 700,
-                          fontSize: '0.9rem',
-                          background: stock > 0 ? '#dcfce7' : '#fee2e2',
-                          color: stock > 0 ? '#15803d' : '#b91c1c'
-                        }}>
-                          {stock} шт.
+                        <span style={{ color: 'var(--text-muted)', fontSize: '1.1rem', padding: '0 0.5rem' }} onClick={() => toggleHoroshopCategory(categoryName)}>
+                          {isCollapsed ? '▶' : '▼'}
                         </span>
-                      </td>
-                      <td style={{ padding: '0.85rem' }}>
-                        {isDisabled ? (
-                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#fee2e2', color: '#b91c1c', fontSize: '0.85rem', fontWeight: 600 }} title="Оплату частинами заборонено вручну (навіть при наявності товару на складі ОЧ не передається)">
-                            🔴 ОЧ вимкнено (заборонено)
-                          </span>
-                        ) : isAlways ? (
-                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#f3e8ff', color: '#6b21a8', fontSize: '0.85rem', fontWeight: 600 }} title="Увімкнено примусово через 'Примусово ОЧ'">
-                            💜 Примусово ОЧ (6 пл.)
-                          </span>
-                        ) : hasInstallments ? (
-                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#dcfce7', color: '#166534', fontSize: '0.85rem', fontWeight: 600 }} title="Товар в наявності на складі — ОЧ активна">
-                            🟢 ОЧ активна (на складі)
-                          </span>
-                        ) : (
-                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#f3f4f6', color: '#6b7280', fontSize: '0.85rem', fontWeight: 500 }} title="Товару немає на складі — Оплата частинами вимкнена">
-                            ⚪ ОЧ вимкнено (0 на складі)
-                          </span>
-                        )}
-                      </td>
-                    </tr>
+                      </div>
+
+                      {/* Category table */}
+                      {!isCollapsed && (
+                        <div style={{ overflowX: 'auto' }}>
+                          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.95rem' }}>
+                            <thead>
+                              <tr style={{ background: '#f8fafc', borderBottom: '1px solid var(--border-color)', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                                <th style={{ padding: '0.85rem 1rem', width: '110px', textAlign: 'center' }}>Дозволити ОЧ</th>
+                                <th style={{ padding: '0.85rem 1rem', width: '120px', textAlign: 'center' }}>Примусово ОЧ</th>
+                                <th style={{ padding: '0.85rem 1rem', width: '60px', textAlign: 'center' }}>Фото</th>
+                                <th style={{ padding: '0.85rem 1rem', width: '150px' }}>Артикул</th>
+                                <th style={{ padding: '0.85rem 1rem' }}>Назва товару</th>
+                                <th style={{ padding: '0.85rem 1rem', width: '110px' }}>Ціна</th>
+                                <th style={{ padding: '0.85rem 1rem', width: '120px', textAlign: 'center' }}>Склад (Excel)</th>
+                                <th style={{ padding: '0.85rem 1rem', width: '230px' }}>Статус Оплати частинами</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {products.map(product => renderHoroshopProductRow(product))}
+                            </tbody>
+                          </table>
+                        </div>
+                      )}
+                    </div>
                   );
-                })}
-              </tbody>
-            </table>
-            {filteredHoroshopCatalog.length > 200 && (
-              <div style={{ padding: '1rem', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.9rem', background: '#f8fafc', borderTop: '1px solid var(--border-color)' }}>
-                Показано перші 200 товарів із {filteredHoroshopCatalog.length}. Використовуйте пошук або категорію для точного вибору.
-              </div>
-            )}
-            {filteredHoroshopCatalog.length === 0 && (
-              <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-                <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🔍</div>
-                Товарів не знайдено за вказаними фільтрами
-              </div>
-            )}
-          </div>
+                })
+              )}
+            </div>
+          )}
         </div>
       )}
 
