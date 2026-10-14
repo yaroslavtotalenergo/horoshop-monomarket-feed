@@ -302,7 +302,7 @@ export default function App() {
   const handleTriggerPromSync = async () => {
     setSyncingProm(true);
     try {
-      await api.triggerWorkflow('sync-prom.yml');
+      await api.triggerWorkflow();
       showToast('✅ Синхронізацію з Prom.ua запущено (~1-2 хв)');
     } catch (e) {
       showToast('❌ Помилка запуску: ' + (e?.message || ''));

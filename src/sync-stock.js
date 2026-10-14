@@ -183,7 +183,16 @@ async function main() {
     console.error('⚠️ Не вдалося додати файли до git:', err.message);
   }
 
-  console.log(`✅ Синхронізацію завершено! Оновлено/перевірено ${updatedCount} товарів.`);
+  console.log(`✅ Синхронізацію залишків завершено! Оновлено/перевірено ${updatedCount} товарів.`);
+
+  // ── 6. Синхронізація з Prom.ua ───────────────────────────────
+  try {
+    const syncProm = require('./sync-prom');
+    console.log('🔄 Запуск оновлення наявності та залишків на Prom.ua...');
+    await syncProm();
+  } catch (err) {
+    console.warn('⚠️ Оновлення Prom.ua пропущено або помилка:', err.message);
+  }
 
   // ── 5. Telegram-сповіщення тільки при помилках ───────────────
   // Успішне оновлення — без сповіщення
