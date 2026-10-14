@@ -648,66 +648,6 @@
       </tags>
     </offer>
     <offer>
-      <id>PCH012030001</id>
-      <code>PCH012030001</code>
-      <vendor_code>PCH012030001</vendor_code>
-      <title><![CDATA[Зарядний пристрій Victron Energy Phoenix Charger 12/30(2+1) 120/240V]]></title>
-      <category>Зарядні пристрої</category>
-      <brand>Victron Energy</brand>
-      <availability>Немає в наявності</availability>
-      <description><![CDATA[<h2><meta charset="utf-8"></h2>    <p><strong>Phoenix Charger 12/30&nbsp;(2+1)</strong> – це професійний триканальний зарядний пристрій від Victron Energy, призначений для ефективного та безпечного заряджання 12В акумуляторних батарей з максимальним струмом 30А. Він підтримує одночасне заряджання двох основних акумуляторів і додаткової стартерної батареї, що робить його ідеальним рішенням для морського, автомобільного та промислового енергетичного застосування.</p>    <p dir="ltr">Цей пристрій використовує інтелектуальну 4-етапну адаптивну систему заряджання та має вбудовані режими BatterySafe і Storage Mode, що значно підвищують довговічність акумуляторів і безпеку експлуатації, а також знижує бюджет на утримання системи через менший інтервал сервісної заміни акумуляторів.</p>        <h2>Ключові переваги&nbsp;Phoenix Charger</h2>    <ul>  </ul>    <ul>   <li aria-level="1" dir="ltr">   <p dir="ltr" role="presentation"><strong>Адаптивний 4-етапний алгоритм заряджання</strong> – Bulk, Absorption, Float, Storage.</p>   </li>   <li aria-level="1" dir="ltr">   <p dir="ltr" role="presentation"><strong>Одночасне заряджання</strong> 2 основних батарей + 1 стартерної.</p>   </li>   <li aria-level="1" dir="ltr">   <p dir="ltr" role="presentation"><strong>Широкий діапазон вхідної напруги 90-265 В AC / 90-400 В DC</strong> – підходить для автономних систем, всіх типів берегових систем та генераторів.</p>   </li>   <li aria-level="1" dir="ltr">   <p dir="ltr" role="presentation"><strong>BatterySafe Mode</strong> – захищає від перегріву та надмірного газоутворення.</p>   </li>   <li aria-level="1" dir="ltr">   <p dir="ltr" role="presentation"><strong>Storage Mode</strong> – знижує старіння акумуляторів при тривалому зберіганні.</p>   </li>   <li aria-level="1" dir="ltr">   <p dir="ltr" role="presentation"><strong>Датчик температури</strong> – автоматичне коригування напруги заряду.</p>   </li>   <li aria-level="1" dir="ltr">   <p dir="ltr" role="presentation"><strong>Можливість роботи в режимі джерела живлення</strong> (Power Supply Mode).</p>   </li>   <li aria-level="1" dir="ltr">   <p dir="ltr" role="presentation"><strong>Вбудований RS-485 порт</strong> для комп'ютерного моніторингу та налаштувань.</p>   </li>   <li aria-level="1" dir="ltr">   <p dir="ltr" role="presentation"><strong>Компактний алюмінієвий корпус</strong> із покриттям для захисту від вологи та пилу.</p>   </li>  </ul>        <h3 dir="ltr">Технологічні особливості</h3>    <ul>   <li aria-level="1" dir="ltr">   <p dir="ltr" role="presentation"><strong>Дві незалежні основні вихідні лінії</strong> + додатковий вихід для стартерної батареї.</p>   </li>   <li aria-level="1" dir="ltr">   <p dir="ltr" role="presentation"><strong>Адаптивне заряджання</strong> – пристрій автоматично регулює час і рівень напруги залежно від стану батареї.</p>   </li>   <li aria-level="1" dir="ltr">   <p dir="ltr" role="presentation"><strong>Алюмінієвий корпус </strong>зі зручним кріпленням, стійкий до механічного впливу</p>   </li>   <li aria-level="1" dir="ltr">   <p dir="ltr" role="presentation"><strong>BatterySafe Mode</strong> – запобігає перезаряду та надмірному газоутворенню при високих струмах.</p>   </li>   <li aria-level="1" dir="ltr">   <p dir="ltr" role="presentation"><strong>Storage Mode</strong> – підтримує мінімальний рівень напруги для акумуляторів, що не використовуються тривалий час.</p>   </li>   <li aria-level="1" dir="ltr">   <p dir="ltr" role="presentation"><strong>Вбудований температурний датчик</strong> – компенсує напругу залежно від змін температури.</p>   </li>   <li aria-level="1" dir="ltr">   <p dir="ltr" role="presentation"><strong>Дистанційний моніторинг</strong> через RS-485 інтерфейс – можливість налаштувань і керування через ПК.</p>   </li>   <li aria-level="1" dir="ltr">   <p dir="ltr" role="presentation"><strong>Підтримує підключення віддаленої панелі керування</strong> – Phoenix Charger Control.</p>   </li>   <li aria-level="1" dir="ltr">   <p dir="ltr" role="presentation"><strong>Функція Voltage Sense </strong>– компенсує падіння напруги на кабелях для точного заряду батарей.</p>   </li>  </ul>        <h3 dir="ltr">Сценарії використання</h3>    <ul>   <li aria-level="1" dir="ltr">   <p dir="ltr" role="presentation"><strong>Морське застосування</strong> – живлення навігаційних і допоміжних систем на човнах та яхтах.</p>   </li>   <li aria-level="1" dir="ltr">   <p dir="ltr" role="presentation"><strong>Автомобільний транспорт та кемпери </strong>– підтримка зарядженості акумуляторів у подорожах.</p>   </li>   <li aria-level="1" dir="ltr">   <p dir="ltr" role="presentation"><strong>Промислові та телекомунікаційні системи</strong> – забезпечення безперебійного живлення.</p>   </li>   <li aria-level="1" dir="ltr">   <p dir="ltr" role="presentation"><strong>Вантажні та спеціалізовані транспортні засоби</strong> – заряджання бортових систем електроживлення.</p>   </li>   <li aria-level="1" dir="ltr">   <p dir="ltr" role="presentation"><strong>Автономні сонячні системи</strong> – заряджання батарей у гібридних і резервних енергосистемах.&nbsp;</p>   </li>  </ul>]]></description>
-      <image_link>
-        <picture>https://total-energo.com.ua/content/images/36/zariadnyi-prystrii-phoenix-charger-12-3021-120-240v-pch012030001-31464902575060_+636cff8543.png</picture>
-        <picture>https://total-energo.com.ua/content/images/36/zariadnyi-prystrii-phoenix-charger-12-3021-120-240v-pch012030001-41393560897993_+70b3ee4961.png</picture>
-        <picture>https://total-energo.com.ua/content/images/36/zariadnyi-prystrii-phoenix-charger-12-3021-120-240v-pch012030001-22812853959170_+f9cc13d59f.png</picture>
-        <picture>https://total-energo.com.ua/content/images/36/zariadnyi-prystrii-phoenix-charger-12-3021-120-240v-pch012030001-83667589457549_+045cb96676.png</picture>
-        <picture>https://total-energo.com.ua/content/images/36/zariadnyi-prystrii-phoenix-charger-12-3021-120-240v-pch012030001-97353732471806_+192a5702d8.png</picture>
-        <picture>https://total-energo.com.ua/content/images/36/zariadnyi-prystrii-phoenix-charger-12-3021-120-240v-pch012030001-92963459913402_+d24c93a425.jpg</picture>
-      </image_link>
-      <tags>
-        <param name="Вага">4</param>
-        <param name="Максимальна вхідна напруга AC, В~">265</param>
-        <param name="Мінімальна вхідна напруга AC, В~">90</param>
-        <param name="Максимальна вхідна напруга DC, В=">400</param>
-        <param name="Мінімальна вхідна напруга DC, В=">90</param>
-        <param name="Зарядний струм, A">30</param>
-        <param name="Вихідна напруга, В">12</param>
-        <param name="Кількість виходів">3</param>
-        <param name="Напруга «плаваючого» заряду DC, В=">13,8</param>
-        <param name="Напруга заряду «поглинання» DC, В=">14,4</param>
-        <param name="Режим зберігання DC, В=">13,2</param>
-        <param name="Струм заряду внутрішньої батареї, А (2)">30</param>
-        <param name="Струм заряду стартерної батареї, A.">4</param>
-        <param name="Коефіцієнт потужності">1</param>
-        <param name="Максимальна вхідна частота напруги (Гц)">65</param>
-        <param name="Мінімальна вхідна частота напруги (Гц)">45</param>
-        <param name="Датчик температури">Так</param>
-        <param name="Алгоритм зарядки (кількість стадій)">4</param>
-        <param name="Примусове охолодження">Так</param>
-        <param name="Може використовуватись у якості джерела живлення">Так</param>
-        <param name="Рекомендована ємність акумулятора, Аг.">100-400</param>
-        <param name="Вологість (без конденсату)">95%</param>
-        <param name="Захист">Висока напруга АКБ</param>
-        <param name="Захист">Зворотна полярність</param>
-        <param name="Захист">Коротке замикання</param>
-        <param name="Захист">Перегрів</param>
-        <param name="Максимальна робоча температура (+°С)">60</param>
-        <param name="Мінімальна робоча температура (-°С)">20</param>
-        <param name="Матеріал">Алюміній</param>
-        <param name="Підключення батареї">Болти M6</param>
-        <param name="Підключення мережі 230В">Гвинтовий затискач 4 мм² (AWG 11)</param>
-        <param name="Розміри, мм (В х Ш х Г)">350x200x108</param>
-        <param name="Вага, кг">3.8</param>
-        <param name="Стандарти електромагнітної сумісності">EN 55014-1</param>
-        <param name="Стандарти електромагнітної сумісності">EN 61000-3-2</param>
-        <param name="Стандарти стійкості до електромагнітних перешкод">EN 55014-2</param>
-        <param name="Стандарти стійкості до електромагнітних перешкод">EN 61000-3-3</param>
-        <param name="Вібрація">IEC68-2-6:10-150Hz/1.0G</param>
-        <param name="Клас захисту">IP21</param>
-        <param name="Термін гарантії, міс">60</param>
-      </tags>
-    </offer>
-    <offer>
       <id>BPC120433064R</id>
       <code>BPC120433064R</code>
       <vendor_code>BPC120433064R</vendor_code>
