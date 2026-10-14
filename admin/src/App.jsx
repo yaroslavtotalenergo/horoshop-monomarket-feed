@@ -126,6 +126,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('catalog');
   
   const [promWhitelist, setPromWhitelist] = useState([]);
+  const [promSkus, setPromSkus] = useState([]);
   const [promToken, setPromToken] = useState('d24092ed4ff1937f177358180846399f62841be0');
   const [syncingProm, setSyncingProm] = useState(false);
   const [savingProm, setSavingProm] = useState(false);
@@ -165,7 +166,7 @@ export default function App() {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [catalogRes, whitelistRes, barcodesRes, descRes, configRes, availRes, stockRes, namesRes, videosRes, sheetsRes, alwaysAvailRes, promWhitelistRes, promConfigRes] = await Promise.all([
+      const [catalogRes, whitelistRes, barcodesRes, descRes, configRes, availRes, stockRes, namesRes, videosRes, sheetsRes, alwaysAvailRes, promWhitelistRes, promConfigRes, promSkusRes] = await Promise.all([
         api.getFile('feeds/catalog.json'),
         api.getFile('src/whitelist.json'),
         api.getFile('src/barcodes.json'),
@@ -178,7 +179,8 @@ export default function App() {
         api.getFile('src/google-sheets.json'),
         api.getFile('src/always-available.json'),
         api.getFile('src/prom-whitelist.json'),
-        api.getFile('src/prom-config.json')
+        api.getFile('src/prom-config.json'),
+        api.getFile('src/prom-skus.json')
       ]);
 
       if (catalogRes.content) {
@@ -201,6 +203,9 @@ export default function App() {
       
       if (promWhitelistRes && promWhitelistRes.content) {
         try { setPromWhitelist(JSON.parse(promWhitelistRes.content) || []); } catch (e) { }
+      }
+      if (promSkusRes && promSkusRes.content) {
+        try { setPromSkus(JSON.parse(promSkusRes.content) || []); } catch (e) { }
       }
       if (promConfigRes && promConfigRes.content) {
         try {
@@ -310,8 +315,13 @@ export default function App() {
     setSyncingProm(false);
   };
 
+  const promSkusSet = useMemo(() => new Set(promSkus.map(s => String(s).trim())), [promSkus]);
+  const promWhitelistSet = useMemo(() => new Set(promWhitelist.map(s => String(s).trim())), [promWhitelist]);
+
   const handleBulkPromToggle = (enable) => {
-    const targetCodes = filteredPromCatalog.map(p => p.vendorCode).filter(Boolean);
+    const targetCodes = filteredPromCatalog
+      .map(p => p.vendorCode ? String(p.vendorCode).trim() : '')
+      .filter(code => code && (enable ? promSkusSet.has(code) : true));
     setPromWhitelist(prev => {
       const prevSet = new Set(prev);
       targetCodes.forEach(code => {
@@ -325,8 +335,9 @@ export default function App() {
 
   const filteredPromCatalog = useMemo(() => {
     const q = promSearchQuery.toLowerCase().trim();
+
     return catalog.filter(p => {
-      const code = p.vendorCode || '';
+      const code = p.vendorCode ? String(p.vendorCode).trim() : '';
       const name = p.name || '';
       if (q) {
         const matchesQuery = name.toLowerCase().includes(q) || code.toLowerCase().includes(q);
@@ -335,36 +346,40 @@ export default function App() {
       if (promCategoryFilter !== 'all' && (p.category || 'Без категорії') !== promCategoryFilter) {
         return false;
       }
-      const isEnabled = promWhitelist.includes(code);
+      const isEnabled = promWhitelistSet.has(code);
+      const existsOnProm = promSkusSet.has(code);
       let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : (p.stock || 0);
       if (alwaysAvailable.includes(code)) stock = Math.max(stock, 10);
       if (isNaN(stock) || stock < 0) stock = 0;
 
-      if (promFilterMode === 'enabled') return isEnabled;
-      if (promFilterMode === 'disabled') return !isEnabled;
-      if (promFilterMode === 'in_stock') return isEnabled && stock > 0;
-      if (promFilterMode === 'out_of_stock') return isEnabled && stock === 0;
+      if (promFilterMode === 'no_match') return !existsOnProm;
+      if (promFilterMode === 'enabled') return isEnabled && existsOnProm;
+      if (promFilterMode === 'disabled') return !isEnabled && existsOnProm;
+      if (promFilterMode === 'in_stock') return isEnabled && existsOnProm && stock > 0;
+      if (promFilterMode === 'out_of_stock') return isEnabled && existsOnProm && stock === 0;
 
       return true;
     });
-  }, [catalog, promSearchQuery, promCategoryFilter, promFilterMode, promWhitelist, stockOverrides, alwaysAvailable]);
+  }, [catalog, promSearchQuery, promCategoryFilter, promFilterMode, promWhitelistSet, stockOverrides, alwaysAvailable, promSkusSet]);
 
   const promStats = useMemo(() => {
     let enabledCount = 0;
     let inStockCount = 0;
     let outOfStockCount = 0;
     let disabledCount = 0;
-
-    const promSet = new Set(promWhitelist);
+    let noMatchCount = 0;
 
     catalog.forEach(p => {
-      const code = p.vendorCode || '';
-      const isEnabled = promSet.has(code);
+      const code = p.vendorCode ? String(p.vendorCode).trim() : '';
+      const isEnabled = promWhitelistSet.has(code);
+      const existsOnProm = promSkusSet.has(code);
       let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : (p.stock || 0);
       if (alwaysAvailable.includes(code)) stock = Math.max(stock, 10);
       if (isNaN(stock) || stock < 0) stock = 0;
 
-      if (isEnabled) {
+      if (!existsOnProm) {
+        noMatchCount++;
+      } else if (isEnabled) {
         enabledCount++;
         if (stock > 0) inStockCount++;
         else outOfStockCount++;
@@ -378,9 +393,10 @@ export default function App() {
       enabled: enabledCount,
       inStock: inStockCount,
       outOfStock: outOfStockCount,
-      disabled: disabledCount
+      disabled: disabledCount,
+      noMatch: noMatchCount
     };
-  }, [catalog, promWhitelist, stockOverrides, alwaysAvailable]);
+  }, [catalog, promWhitelistSet, stockOverrides, alwaysAvailable, promSkusSet]);
 
   const toggleAlwaysAvailable = (vendorCode) => {
     const isCurrentlyChecked = alwaysAvailable.includes(vendorCode);
@@ -816,23 +832,57 @@ export default function App() {
 
       {activeTab === 'prom' ? (
         <div className="stats-grid">
-          <div className="stat-card">
+          <div
+            className="stat-card"
+            style={{ cursor: 'pointer', border: promFilterMode === 'all' ? '2px solid #8b5cf6' : '1px solid var(--border-color)', transition: 'all 0.2s', background: promFilterMode === 'all' ? '#f5f3ff' : 'transparent' }}
+            onClick={() => setPromFilterMode('all')}
+            title="Показати всі товари"
+          >
             <div className="stat-label">Всього в каталозі</div>
             <div className="stat-value">{promStats.total}</div>
           </div>
-          <div className="stat-card">
+          <div
+            className="stat-card"
+            style={{ cursor: 'pointer', border: promFilterMode === 'enabled' ? '2px solid #8b5cf6' : '1px solid var(--border-color)', transition: 'all 0.2s', background: promFilterMode === 'enabled' ? '#f5f3ff' : 'transparent' }}
+            onClick={() => setPromFilterMode(promFilterMode === 'enabled' ? 'all' : 'enabled')}
+            title="Фільтр: увімкнені для Prom.ua"
+          >
             <div className="stat-label">Увімкнено для Prom.ua</div>
             <div className="stat-value" style={{ color: '#8b5cf6' }}>{promStats.enabled}</div>
           </div>
-          <div className="stat-card">
+          <div
+            className="stat-card"
+            style={{ cursor: 'pointer', border: promFilterMode === 'in_stock' ? '2px solid var(--success)' : '1px solid var(--border-color)', transition: 'all 0.2s', background: promFilterMode === 'in_stock' ? '#f0fdf4' : 'transparent' }}
+            onClick={() => setPromFilterMode(promFilterMode === 'in_stock' ? 'all' : 'in_stock')}
+            title="Фільтр: в наявності"
+          >
             <div className="stat-label">В наявності (готовий до відправки)</div>
             <div className="stat-value" style={{ color: 'var(--success)' }}>{promStats.inStock}</div>
           </div>
-          <div className="stat-card">
+          <div
+            className="stat-card"
+            style={{ cursor: 'pointer', border: promFilterMode === 'out_of_stock' ? '2px solid var(--danger)' : '1px solid var(--border-color)', transition: 'all 0.2s', background: promFilterMode === 'out_of_stock' ? '#fef2f2' : 'transparent' }}
+            onClick={() => setPromFilterMode(promFilterMode === 'out_of_stock' ? 'all' : 'out_of_stock')}
+            title="Фільтр: немає в наявності"
+          >
             <div className="stat-label">Немає в наявності (0 шт.)</div>
             <div className="stat-value" style={{ color: 'var(--danger)' }}>{promStats.outOfStock}</div>
           </div>
-          <div className="stat-card">
+          <div
+            className="stat-card"
+            style={{ cursor: 'pointer', border: promFilterMode === 'no_match' ? '2px solid #d97706' : '1px solid var(--border-color)', transition: 'all 0.2s', background: promFilterMode === 'no_match' ? '#fffbeb' : 'transparent' }}
+            onClick={() => setPromFilterMode(promFilterMode === 'no_match' ? 'all' : 'no_match')}
+            title="Фільтр: немає збігу артикулу з Prom.ua"
+          >
+            <div className="stat-label">⚠️ Немає збігу артикулу</div>
+            <div className="stat-value" style={{ color: '#d97706' }}>{promStats.noMatch}</div>
+          </div>
+          <div
+            className="stat-card"
+            style={{ cursor: 'pointer', border: promFilterMode === 'disabled' ? '2px solid var(--text-muted)' : '1px solid var(--border-color)', transition: 'all 0.2s', background: promFilterMode === 'disabled' ? '#f9fafb' : 'transparent' }}
+            onClick={() => setPromFilterMode(promFilterMode === 'disabled' ? 'all' : 'disabled')}
+            title="Фільтр: вимкнено з Prom.ua"
+          >
             <div className="stat-label">Вимкнено з Prom.ua</div>
             <div className="stat-value" style={{ color: 'var(--text-muted)' }}>{promStats.disabled}</div>
           </div>
@@ -1263,11 +1313,12 @@ export default function App() {
             </div>
             <select
               className="input-field"
-              style={{ width: '250px', fontSize: '0.95rem', cursor: 'pointer' }}
+              style={{ width: '275px', fontSize: '0.95rem', cursor: 'pointer' }}
               value={promFilterMode}
               onChange={e => setPromFilterMode(e.target.value)}
             >
               <option value="all">👁️ Усі товари ({catalog.length})</option>
+              <option value="no_match">⚠️ Немає збігу артикулу ({promStats.noMatch})</option>
               <option value="enabled">🟣 Увімкнені для Prom ({promStats.enabled})</option>
               <option value="in_stock">🟢 В наявності ({promStats.inStock})</option>
               <option value="out_of_stock">🔴 Немає в наявності ({promStats.outOfStock})</option>
@@ -1325,8 +1376,9 @@ export default function App() {
               </thead>
               <tbody>
                 {filteredPromCatalog.slice(0, 200).map(product => {
-                  const code = product.vendorCode || '';
-                  const isEnabled = promWhitelist.includes(code);
+                  const code = product.vendorCode ? String(product.vendorCode).trim() : '';
+                  const isEnabled = promWhitelistSet.has(code);
+                  const existsOnProm = promSkusSet.has(code);
                   let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : (product.stock || 0);
                   if (alwaysAvailable.includes(code)) stock = Math.max(stock, 10);
                   if (isNaN(stock) || stock < 0) stock = 0;
@@ -1336,17 +1388,19 @@ export default function App() {
                       key={product.id || code}
                       style={{
                         borderBottom: '1px solid var(--border-color)',
-                        background: !isEnabled ? 'rgba(243, 244, 246, 0.5)' : (stock > 0 ? 'transparent' : 'rgba(254, 242, 242, 0.25)'),
+                        background: !existsOnProm ? 'rgba(254, 243, 199, 0.28)' : (!isEnabled ? 'rgba(243, 244, 246, 0.5)' : (stock > 0 ? 'transparent' : 'rgba(254, 242, 242, 0.25)')),
                         transition: 'background 0.2s'
                       }}
                     >
                       <td style={{ padding: '0.85rem', textAlign: 'center' }}>
-                        <label style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer', gap: '0.4rem' }}>
+                        <label style={{ display: 'inline-flex', alignItems: 'center', cursor: !existsOnProm ? 'not-allowed' : 'pointer', gap: '0.4rem' }}>
                           <input
                             type="checkbox"
-                            checked={isEnabled}
+                            disabled={!existsOnProm}
+                            title={!existsOnProm ? 'Товару ще немає на Prom.ua' : ''}
+                            checked={isEnabled && existsOnProm}
                             onChange={() => togglePromWhitelist(code)}
-                            style={{ width: '20px', height: '20px', cursor: 'pointer', accentColor: '#8b5cf6' }}
+                            style={{ width: '20px', height: '20px', cursor: !existsOnProm ? 'not-allowed' : 'pointer', accentColor: '#8b5cf6', opacity: !existsOnProm ? 0.35 : 1 }}
                           />
                         </label>
                       </td>
@@ -1392,7 +1446,11 @@ export default function App() {
                         </span>
                       </td>
                       <td style={{ padding: '0.85rem' }}>
-                        {!isEnabled ? (
+                        {!existsOnProm ? (
+                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#fef3c7', color: '#92400e', fontSize: '0.85rem', fontWeight: 600 }} title="Товар є у фіді Хорошопу, але його артикул не знайдено на Prom.ua">
+                            ⚠️ Немає на Prom.ua
+                          </span>
+                        ) : !isEnabled ? (
                           <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#f3f4f6', color: '#6b7280', fontSize: '0.85rem', fontWeight: 500 }}>
                             ⚪ Вимкнено з Prom
                           </span>

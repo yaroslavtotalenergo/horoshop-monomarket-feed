@@ -83,6 +83,16 @@ async function syncProm() {
 
   console.log(`✅ Отримано з Prom.ua: ${promProducts.length} товарів.`);
 
+  // Збереження списку існуючих на Prom артикулів для фільтрації в адмінці
+  try {
+    const allSkus = Array.from(new Set(promProducts.map(p => p.sku ? String(p.sku).trim() : null).filter(Boolean)));
+    fs.writeFileSync(path.join(__dirname, 'prom-skus.json'), JSON.stringify(allSkus, null, 2), 'utf8');
+    try {
+      const { execSync } = require('child_process');
+      execSync('git add src/prom-skus.json');
+    } catch (_) { }
+  } catch (e) { }
+
   // 4. Аналіз та формування оновлень
   const updates = [];
   let enabledInStockCount = 0;
