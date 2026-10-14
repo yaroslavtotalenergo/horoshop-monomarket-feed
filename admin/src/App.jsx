@@ -134,6 +134,12 @@ export default function App() {
   const [promFilterMode, setPromFilterMode] = useState('all');
   const [promCategoryFilter, setPromCategoryFilter] = useState('all');
   
+  const [savingHoroshop, setSavingHoroshop] = useState(false);
+  const [syncingHoroshop, setSyncingHoroshop] = useState(false);
+  const [horoshopSearchQuery, setHoroshopSearchQuery] = useState('');
+  const [horoshopFilterMode, setHoroshopFilterMode] = useState('all');
+  const [horoshopCategoryFilter, setHoroshopCategoryFilter] = useState('all');
+  
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [syncing, setSyncing] = useState(false);
@@ -405,17 +411,125 @@ export default function App() {
   }, [catalog, promWhitelistSet, stockOverrides, alwaysAvailable, promSkusSet]);
 
   const toggleAlwaysAvailable = (vendorCode) => {
-    const isCurrentlyChecked = alwaysAvailable.includes(vendorCode);
-    const isWhitelisted = whitelist.includes(vendorCode);
-    const isAvailable = availabilityOverrides[vendorCode] !== false;
-    
-    if (!isCurrentlyChecked && isWhitelisted && isAvailable) {
-      showToast('⚠️ Дублювання функцій: товар і так увімкнений та є на складі.');
-      return;
-    }
-    
-    setAlwaysAvailable(prev => prev.includes(vendorCode) ? prev.filter(v => v !== vendorCode) : [...prev, vendorCode]);
+    setAlwaysAvailable(prev =>
+      prev.includes(vendorCode)
+        ? prev.filter(v => v !== vendorCode)
+        : [...prev, vendorCode]
+    );
   };
+
+  const handleBulkHoroshopToggle = (enable) => {
+    const targetCodes = filteredHoroshopCatalog
+      .map(p => p.vendorCode ? String(p.vendorCode).trim() : '')
+      .filter(Boolean);
+    setAlwaysAvailable(prev => {
+      const prevSet = new Set(prev);
+      targetCodes.forEach(code => {
+        if (enable) prevSet.add(code);
+        else prevSet.delete(code);
+      });
+      return Array.from(prevSet);
+    });
+    showToast(enable ? `💜 Увімкнено примусово ОЧ для ${targetCodes.length} товарів` : `⚪ Вимкнено примусово ОЧ для ${targetCodes.length} товарів`);
+  };
+
+  const handleSaveHoroshop = async () => {
+    setSavingHoroshop(true);
+    try {
+      await api.saveFile('src/always-available.json', JSON.stringify(alwaysAvailable, null, 2), null, 'Update Horoshop always available via UI');
+      showToast('💾 Збережено! Запускаємо передачу в Хорошоп...');
+      try {
+        await api.triggerWorkflow();
+        showToast('✅ Збережено та передається в Хорошоп! (~1-2 хв)');
+      } catch (_) {
+        showToast('✅ Збережено! (Оновиться за графіком або натисніть "Оновити Хорошоп")');
+      }
+    } catch (e) {
+      console.error('Horoshop save error:', e);
+      showToast('❌ Помилка: ' + (e?.message || 'невідома'));
+    }
+    setSavingHoroshop(false);
+  };
+
+  const handleTriggerHoroshopSync = async () => {
+    setSyncingHoroshop(true);
+    try {
+      await api.triggerWorkflow();
+      showToast('✅ Оновлення Хорошопу запущено (~1-2 хв)');
+    } catch (e) {
+      showToast('❌ Помилка запуску: ' + (e?.message || ''));
+    }
+    setSyncingHoroshop(false);
+  };
+
+  const horoshopCategories = useMemo(() => {
+    return Array.from(new Set(catalog.map(p => p.category || 'Без категорії'))).sort();
+  }, [catalog]);
+
+  const horoshopStats = useMemo(() => {
+    let activeInstallments = 0;
+    let forcedInstallments = 0;
+    let disabledInstallments = 0;
+
+    const alwaysSet = new Set(alwaysAvailable.map(s => String(s).trim()));
+    const whiteSet = new Set(whitelist.map(s => String(s).trim()));
+
+    catalog.forEach(p => {
+      const code = p.vendorCode ? String(p.vendorCode).trim() : '';
+      const isAlways = alwaysSet.has(code);
+      const isWhitelisted = whiteSet.has(code);
+      const isAvailable = availabilityOverrides[code] !== false;
+      let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : 0;
+      if (isAlways) stock = Math.max(stock, 10);
+      if (isNaN(stock) || stock < 0) stock = 0;
+
+      const hasInstallments = isAlways || (isWhitelisted && isAvailable && stock > 0);
+
+      if (isAlways) forcedInstallments++;
+      if (hasInstallments) activeInstallments++;
+      else disabledInstallments++;
+    });
+
+    return {
+      total: catalog.length,
+      active: activeInstallments,
+      forced: forcedInstallments,
+      disabled: disabledInstallments
+    };
+  }, [catalog, alwaysAvailable, whitelist, availabilityOverrides, stockOverrides]);
+
+  const filteredHoroshopCatalog = useMemo(() => {
+    const q = horoshopSearchQuery.toLowerCase().trim();
+    const alwaysSet = new Set(alwaysAvailable.map(s => String(s).trim()));
+    const whiteSet = new Set(whitelist.map(s => String(s).trim()));
+
+    return catalog.filter(p => {
+      const code = p.vendorCode ? String(p.vendorCode).trim() : '';
+      const name = p.name || '';
+      if (q) {
+        const matchesQuery = name.toLowerCase().includes(q) || code.toLowerCase().includes(q);
+        if (!matchesQuery) return false;
+      }
+      if (horoshopCategoryFilter !== 'all' && (p.category || 'Без категорії') !== horoshopCategoryFilter) {
+        return false;
+      }
+
+      const isAlways = alwaysSet.has(code);
+      const isWhitelisted = whiteSet.has(code);
+      const isAvailable = availabilityOverrides[code] !== false;
+      let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : 0;
+      if (isAlways) stock = Math.max(stock, 10);
+      if (isNaN(stock) || stock < 0) stock = 0;
+
+      const hasInstallments = isAlways || (isWhitelisted && isAvailable && stock > 0);
+
+      if (horoshopFilterMode === 'active') return hasInstallments;
+      if (horoshopFilterMode === 'forced') return isAlways;
+      if (horoshopFilterMode === 'disabled') return !hasInstallments;
+
+      return true;
+    });
+  }, [catalog, horoshopSearchQuery, horoshopCategoryFilter, horoshopFilterMode, alwaysAvailable, whitelist, availabilityOverrides, stockOverrides]);
 
   const toggleWhitelist = (vendorCode) => {
     setWhitelist(prev => prev.includes(vendorCode) ? prev.filter(v => v !== vendorCode) : [...prev, vendorCode]);
@@ -514,8 +628,6 @@ export default function App() {
     
     if (filterMode === 'enabled') {
       result = result.filter(p => whitelist.includes(p.vendorCode));
-    } else if (filterMode === 'always_10') {
-      result = result.filter(p => alwaysAvailable.includes(p.vendorCode));
     } else if (filterMode === 'no_barcode') {
       result = result.filter(p => !barcodes[p.vendorCode] && !p.barcode);
     }
@@ -535,15 +647,13 @@ export default function App() {
       );
     }
     return result;
-  }, [catalog, searchQuery, filterMode, whitelist, barcodes, alwaysAvailable]);
+  }, [catalog, searchQuery, filterMode, whitelist, barcodes]);
 
   const grouped = useMemo(() => {
     const map = {};
     let baseCatalog = catalog;
     if (filterMode === 'enabled') {
       baseCatalog = catalog.filter(p => whitelist.includes(p.vendorCode));
-    } else if (filterMode === 'always_10') {
-      baseCatalog = catalog.filter(p => alwaysAvailable.includes(p.vendorCode));
     } else if (filterMode === 'no_barcode') {
       baseCatalog = catalog.filter(p => !barcodes[p.vendorCode] && !p.barcode);
     }
@@ -553,7 +663,7 @@ export default function App() {
       map[cat].push(product);
     }
     return Object.entries(map).sort(([a], [b]) => a.localeCompare(b, 'uk'));
-  }, [catalog, filterMode, whitelist, barcodes, alwaysAvailable]);
+  }, [catalog, filterMode, whitelist, barcodes]);
 
   const getCategoryStats = (products) => {
     const selected = products.filter(p => whitelist.includes(p.vendorCode)).length;
@@ -774,10 +884,13 @@ export default function App() {
         <div className="sidebar-menu">
           <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)', margin: '1rem 0 0.5rem 1rem', textTransform: 'uppercase' }}>Система</div>
           <a className={`sidebar-item ${activeTab === 'catalog' || activeTab === 'import' ? 'active' : ''}`} onClick={() => setActiveTab('catalog')}>
-            📦 Товари
+            🟡 Мономаркет
           </a>
           <a className={`sidebar-item ${activeTab === 'prom' ? 'active' : ''}`} onClick={() => setActiveTab('prom')}>
             🟣 Prom.ua
+          </a>
+          <a className={`sidebar-item ${activeTab === 'horoshop' ? 'active' : ''}`} onClick={() => setActiveTab('horoshop')}>
+            🟠 Хорошоп
           </a>
           <a className="sidebar-item" onClick={() => { setShowLogs(true); loadLogs(); }}>
             ⏱️ Журнал логів
@@ -816,11 +929,36 @@ export default function App() {
             </button>
           </div>
         </div>
+      ) : activeTab === 'horoshop' ? (
+        <div className="header">
+          <div>
+            <h1>🟠 Керування Хорошоп</h1>
+            <p style={{ color: 'var(--text-muted)', margin: 0 }}>Оплата частинами (monobank) та статуси товарів по API</p>
+          </div>
+          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+            <button
+              className="btn"
+              style={{ background: '#ea580c', color: '#fff' }}
+              onClick={handleTriggerHoroshopSync}
+              disabled={syncingHoroshop || loading || savingHoroshop || !token}
+              title="Запустити оновлення Хорошопу по API через GitHub Actions"
+            >
+              {syncingHoroshop ? <span className="loader"></span> : '⚡ Оновити Хорошоп зараз'}
+            </button>
+            <button
+              className="btn success"
+              onClick={handleSaveHoroshop}
+              disabled={savingHoroshop || syncingHoroshop || loading || !token}
+            >
+              {savingHoroshop ? <span className="loader"></span> : '💾 Зберегти зміни Хорошоп'}
+            </button>
+          </div>
+        </div>
       ) : (
         <div className="header">
           <div>
-            <h1>Огляд синхронізації</h1>
-            <p style={{ color: 'var(--text-muted)', margin: 0 }}>Моніторинг складських залишків у реальному часі</p>
+            <h1>🟡 Керування Мономаркет</h1>
+            <p style={{ color: 'var(--text-muted)', margin: 0 }}>Товарний фід та налаштування для маркетплейсу monobank</p>
           </div>
           <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
             <button className="btn" style={{ background: '#0ea5e9' }} onClick={handleSync} disabled={syncing || loading || saving || !token}>
@@ -891,6 +1029,45 @@ export default function App() {
           >
             <div className="stat-label">Вимкнено (Немає в наявн.)</div>
             <div className="stat-value" style={{ color: 'var(--text-muted)' }}>{promStats.disabled}</div>
+          </div>
+        </div>
+      ) : activeTab === 'horoshop' ? (
+        <div className="stats-grid">
+          <div
+            className="stat-card"
+            style={{ cursor: 'pointer', border: horoshopFilterMode === 'all' ? '2px solid #ea580c' : '1px solid var(--border-color)', transition: 'all 0.2s', background: horoshopFilterMode === 'all' ? '#fff7ed' : 'transparent' }}
+            onClick={() => setHoroshopFilterMode('all')}
+            title="Показати всі товари"
+          >
+            <div className="stat-label">Всього в каталозі</div>
+            <div className="stat-value">{horoshopStats.total}</div>
+          </div>
+          <div
+            className="stat-card"
+            style={{ cursor: 'pointer', border: horoshopFilterMode === 'active' ? '2px solid var(--success)' : '1px solid var(--border-color)', transition: 'all 0.2s', background: horoshopFilterMode === 'active' ? '#f0fdf4' : 'transparent' }}
+            onClick={() => setHoroshopFilterMode('active')}
+            title="Фільтр: Оплата частинами активна"
+          >
+            <div className="stat-label">🟢 Оплата частинами (6 пл.)</div>
+            <div className="stat-value" style={{ color: 'var(--success)' }}>{horoshopStats.active}</div>
+          </div>
+          <div
+            className="stat-card"
+            style={{ cursor: 'pointer', border: horoshopFilterMode === 'forced' ? '2px solid #8b5cf6' : '1px solid var(--border-color)', transition: 'all 0.2s', background: horoshopFilterMode === 'forced' ? '#f5f3ff' : 'transparent' }}
+            onClick={() => setHoroshopFilterMode('forced')}
+            title="Фільтр: Примусово увімкнена Оплата частинами"
+          >
+            <div className="stat-label">💜 Примусово "Оплата частинами"</div>
+            <div className="stat-value" style={{ color: '#8b5cf6' }}>{horoshopStats.forced}</div>
+          </div>
+          <div
+            className="stat-card"
+            style={{ cursor: 'pointer', border: horoshopFilterMode === 'disabled' ? '2px solid var(--text-muted)' : '1px solid var(--border-color)', transition: 'all 0.2s', background: horoshopFilterMode === 'disabled' ? '#f9fafb' : 'transparent' }}
+            onClick={() => setHoroshopFilterMode('disabled')}
+            title="Фільтр: Оплата частинами вимкнена"
+          >
+            <div className="stat-label">⚪ Оплата частинами вимкнена</div>
+            <div className="stat-value" style={{ color: 'var(--text-muted)' }}>{horoshopStats.disabled}</div>
           </div>
         </div>
       ) : (
@@ -997,7 +1174,6 @@ export default function App() {
           <select className="input-field" style={{ width: '220px', fontSize: '0.95rem', cursor: 'pointer' }} value={filterMode} onChange={e => setFilterMode(e.target.value)}>
             <option value="all">👁️ Усі товари</option>
             <option value="enabled">🟢 Тільки увімкнені в фід</option>
-            <option value="always_10">💜 Тільки "Завжди 10"</option>
             <option value="no_barcode">⚠️ Без штрихкоду</option>
           </select>
         </div>
@@ -1030,7 +1206,6 @@ export default function App() {
                   <tr>
                     <th style={{ width: '60px' }}>Увімк</th>
                     <th style={{ width: '90px' }}>Наявність</th>
-                    <th style={{ width: '80px', textAlign: 'center' }} title="Ігнорувати склад (Завжди 10 шт)">Завжди 10</th>
                     <th style={{ width: '80px' }}>Залишок</th>
                     <th>Товар</th>
                     <th style={{ width: '55px', textAlign: 'center' }}>Дні</th>
@@ -1054,12 +1229,6 @@ export default function App() {
                           <label className="toggle-switch" style={{ opacity: isSelected ? 1 : 0.4 }}>
                             <input type="checkbox" checked={isAvailable} disabled={!isSelected} onChange={() => toggleAvailability(product.vendorCode)} />
                             <span className="slider" style={{ background: isAvailable ? '#10b981' : '#f87171' }}></span>
-                          </label>
-                        </td>
-                        <td style={{ textAlign: 'center' }}>
-                          <label className="toggle-switch" title="Ігнорувати склад (Завжди 10 шт)">
-                            <input type="checkbox" checked={alwaysAvailable.includes(product.vendorCode)} onChange={() => toggleAlwaysAvailable(product.vendorCode)} />
-                            <span className="slider" style={{ background: alwaysAvailable.includes(product.vendorCode) ? '#8b5cf6' : '' }}></span>
                           </label>
                         </td>
                         <td>
@@ -1192,7 +1361,6 @@ export default function App() {
                       <tr>
                         <th style={{ width: '60px' }}>Увімк</th>
                         <th style={{ width: '90px' }}>Наявність</th>
-                    <th style={{ width: '80px', textAlign: 'center' }} title="Ігнорувати склад (Завжди 10 шт)">Завжди 10</th>
                         <th style={{ width: '80px' }}>Залишок</th>
                         <th>Товар</th>
                         <th style={{ width: '55px', textAlign: 'center' }}>Дні</th>
@@ -1216,12 +1384,6 @@ export default function App() {
                           <label className="toggle-switch" style={{ opacity: isSelected ? 1 : 0.4 }}>
                             <input type="checkbox" checked={isAvailable} disabled={!isSelected} onChange={() => toggleAvailability(product.vendorCode)} />
                             <span className="slider" style={{ background: isAvailable ? '#10b981' : '#f87171' }}></span>
-                          </label>
-                        </td>
-                        <td style={{ textAlign: 'center' }}>
-                          <label className="toggle-switch" title="Ігнорувати склад (Завжди 10 шт)">
-                            <input type="checkbox" checked={alwaysAvailable.includes(product.vendorCode)} onChange={() => toggleAlwaysAvailable(product.vendorCode)} />
-                            <span className="slider" style={{ background: alwaysAvailable.includes(product.vendorCode) ? '#8b5cf6' : '' }}></span>
                           </label>
                         </td>
                             <td>
@@ -1481,6 +1643,214 @@ export default function App() {
               </div>
             )}
             {filteredPromCatalog.length === 0 && (
+              <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+                <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🔍</div>
+                Товарів не знайдено за вказаними фільтрами
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {activeTab === 'horoshop' && (
+        <div className="glass-panel" style={{ padding: '1.25rem', marginBottom: '1.5rem' }}>
+          {/* Info Banner */}
+          <div style={{ padding: '0.85rem 1.15rem', borderRadius: '8px', background: 'rgba(234, 88, 12, 0.08)', border: '1px solid rgba(234, 88, 12, 0.25)', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem' }}>
+            <div style={{ fontSize: '0.9rem', color: 'var(--text-main)', lineHeight: '1.4', maxWidth: '850px' }}>
+              💡 <strong>Як працює Оплата частинами на Хорошоп:</strong> Товари в наявності на складі (&gt; 0 шт.) автоматично отримують статус «Оплата частинами від monobank (6 платежів)». Якщо потрібно увімкнути ОЧ для товару примусово (навіть коли його 0 на складі) — активуйте тумблер <strong>«Примусово ОЧ»</strong>.
+            </div>
+            <button
+              className="btn"
+              style={{ fontSize: '0.85rem', padding: '0.4rem 0.75rem', background: 'rgba(234, 88, 12, 0.15)', color: '#c2410c', border: '1px solid rgba(234, 88, 12, 0.3)' }}
+              onClick={() => copyToClipboard(FEED_URLS.horoshop)}
+              title="Копіювати URL XML-файлу для імпорту ОЧ в Хорошоп"
+            >
+              📋 Скопіювати XML фід ОЧ
+            </button>
+          </div>
+
+          {/* Search, Filter dropdown, Category filter */}
+          <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap', marginBottom: '1rem' }}>
+            <div style={{ position: 'relative', flex: 1, minWidth: '260px' }}>
+              <span style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', fontSize: '1.1rem', pointerEvents: 'none' }}>🔍</span>
+              <input
+                type="text"
+                className="input-field"
+                placeholder="Пошук у Хорошоп за назвою або артикулом..."
+                value={horoshopSearchQuery}
+                onChange={e => setHoroshopSearchQuery(e.target.value)}
+                style={{ paddingLeft: '2.5rem', fontSize: '0.95rem', width: '100%' }}
+              />
+              {horoshopSearchQuery && (
+                <button
+                  onClick={() => setHoroshopSearchQuery('')}
+                  style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.1rem', color: 'var(--text-muted)' }}
+                >✕</button>
+              )}
+            </div>
+
+            <select
+              className="input-field"
+              style={{ width: '270px', fontSize: '0.95rem', cursor: 'pointer' }}
+              value={horoshopFilterMode}
+              onChange={e => setHoroshopFilterMode(e.target.value)}
+            >
+              <option value="all">👁️ Усі товари ({catalog.length})</option>
+              <option value="active">🟢 Оплата частинами активна ({horoshopStats.active})</option>
+              <option value="forced">💜 Тільки "Примусово ОЧ" ({horoshopStats.forced})</option>
+              <option value="disabled">⚪ Оплата частинами вимкнена ({horoshopStats.disabled})</option>
+            </select>
+
+            <select
+              className="input-field"
+              style={{ width: '220px', fontSize: '0.95rem', cursor: 'pointer' }}
+              value={horoshopCategoryFilter}
+              onChange={e => setHoroshopCategoryFilter(e.target.value)}
+            >
+              <option value="all">📁 Всі категорії ({horoshopCategories.length})</option>
+              {horoshopCategories.map(cat => (
+                <option key={cat} value={cat}>{cat}</option>
+              ))}
+            </select>
+          </div>
+
+          {/* Bulk actions */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', paddingBottom: '0.75rem', borderBottom: '1px solid var(--border-color)', flexWrap: 'wrap', gap: '0.75rem' }}>
+            <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+              Знайдено: <strong>{filteredHoroshopCatalog.length}</strong> товарів
+            </div>
+            <div style={{ display: 'flex', gap: '0.5rem' }}>
+              <button
+                className="btn"
+                style={{ fontSize: '0.85rem', padding: '0.4rem 0.8rem', background: '#f5f3ff', color: '#7c3aed', border: '1px solid #ddd6fe' }}
+                onClick={() => handleBulkHoroshopToggle(true)}
+                title="Увімкнути примусову ОЧ для всіх відфільтрованих товарів"
+              >
+                💜 Увімкнути примусово ОЧ
+              </button>
+              <button
+                className="btn"
+                style={{ fontSize: '0.85rem', padding: '0.4rem 0.8rem', background: '#f3f4f6', color: '#4b5563', border: '1px solid #e5e7eb' }}
+                onClick={() => handleBulkHoroshopToggle(false)}
+                title="Вимкнути примусову ОЧ для відфільтрованих товарів"
+              >
+                ⚪ Вимкнути примусово ОЧ
+              </button>
+            </div>
+          </div>
+
+          {/* Table */}
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+              <thead>
+                <tr style={{ borderBottom: '2px solid var(--border-color)', background: 'rgba(0,0,0,0.02)' }}>
+                  <th style={{ padding: '1rem', width: '130px', textAlign: 'center' }}>Примусово ОЧ</th>
+                  <th style={{ padding: '1rem', width: '60px', textAlign: 'center' }}>Фото</th>
+                  <th style={{ padding: '1rem', width: '150px' }}>Артикул</th>
+                  <th style={{ padding: '1rem' }}>Назва товару</th>
+                  <th style={{ padding: '1rem', width: '120px' }}>Ціна</th>
+                  <th style={{ padding: '1rem', width: '130px', textAlign: 'center' }}>Склад (Excel)</th>
+                  <th style={{ padding: '1rem', width: '230px' }}>Статус Оплати частинами</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredHoroshopCatalog.slice(0, 200).map(product => {
+                  const code = product.vendorCode ? String(product.vendorCode).trim() : '';
+                  const isAlways = alwaysAvailable.includes(code);
+                  const isWhitelisted = whitelist.includes(code);
+                  const isAvailable = availabilityOverrides[code] !== false;
+                  let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : 0;
+                  if (isAlways) stock = Math.max(stock, 10);
+                  if (isNaN(stock) || stock < 0) stock = 0;
+
+                  const hasInstallments = isAlways || (isWhitelisted && isAvailable && stock > 0);
+
+                  return (
+                    <tr
+                      key={product.id || code}
+                      style={{
+                        borderBottom: '1px solid var(--border-color)',
+                        background: isAlways ? 'rgba(245, 243, 255, 0.45)' : (hasInstallments ? 'transparent' : 'rgba(243, 244, 246, 0.4)'),
+                        transition: 'background 0.2s'
+                      }}
+                    >
+                      <td style={{ padding: '0.85rem', textAlign: 'center' }}>
+                        <label className="toggle-switch" title="Примусово увімкнути Оплату частинами (6 платежів)">
+                          <input
+                            type="checkbox"
+                            checked={isAlways}
+                            onChange={() => toggleAlwaysAvailable(code)}
+                          />
+                          <span className="slider" style={{ background: isAlways ? '#8b5cf6' : '' }}></span>
+                        </label>
+                      </td>
+                      <td style={{ padding: '0.85rem', textAlign: 'center' }}>
+                        {product.picture ? (
+                          <img
+                            src={product.picture}
+                            alt=""
+                            style={{ width: '42px', height: '42px', objectFit: 'contain', borderRadius: '4px', border: '1px solid var(--border-color)', background: '#fff' }}
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div style={{ width: '42px', height: '42px', background: '#e5e7eb', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', color: '#9ca3af' }}>—</div>
+                        )}
+                      </td>
+                      <td style={{ padding: '0.85rem' }}>
+                        <code style={{ background: '#f1f5f9', padding: '0.2rem 0.45rem', borderRadius: '4px', fontSize: '0.85rem', fontWeight: 600 }}>
+                          {code}
+                        </code>
+                      </td>
+                      <td style={{ padding: '0.85rem' }}>
+                        <div style={{ fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.2rem' }}>
+                          {names[code] || product.name}
+                        </div>
+                        <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                          {product.category || 'Без категорії'}
+                        </div>
+                      </td>
+                      <td style={{ padding: '0.85rem', fontWeight: 600, whiteSpace: 'nowrap' }}>
+                        {product.price ? `${Number(product.price).toLocaleString()} ₴` : '—'}
+                      </td>
+                      <td style={{ padding: '0.85rem', textAlign: 'center', whiteSpace: 'nowrap' }}>
+                        <span style={{
+                          display: 'inline-block',
+                          padding: '0.25rem 0.6rem',
+                          borderRadius: '6px',
+                          fontWeight: 700,
+                          fontSize: '0.9rem',
+                          background: stock > 0 ? '#dcfce7' : '#fee2e2',
+                          color: stock > 0 ? '#15803d' : '#b91c1c'
+                        }}>
+                          {stock} шт.
+                        </span>
+                      </td>
+                      <td style={{ padding: '0.85rem' }}>
+                        {isAlways ? (
+                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#f3e8ff', color: '#6b21a8', fontSize: '0.85rem', fontWeight: 600 }} title="Увімкнено примусово через 'Примусово ОЧ'">
+                            💜 Примусово ОЧ (6 пл.)
+                          </span>
+                        ) : hasInstallments ? (
+                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#dcfce7', color: '#166534', fontSize: '0.85rem', fontWeight: 600 }} title="Товар в наявності на складі — ОЧ активна">
+                            🟢 ОЧ активна (на складі)
+                          </span>
+                        ) : (
+                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#f3f4f6', color: '#6b7280', fontSize: '0.85rem', fontWeight: 500 }} title="Товару немає на складі — Оплата частинами вимкнена">
+                            ⚪ ОЧ вимкнено (0 на складі)
+                          </span>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            {filteredHoroshopCatalog.length > 200 && (
+              <div style={{ padding: '1rem', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.9rem', background: '#f8fafc', borderTop: '1px solid var(--border-color)' }}>
+                Показано перші 200 товарів із {filteredHoroshopCatalog.length}. Використовуйте пошук або категорію для точного вибору.
+              </div>
+            )}
+            {filteredHoroshopCatalog.length === 0 && (
               <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-muted)' }}>
                 <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🔍</div>
                 Товарів не знайдено за вказаними фільтрами
