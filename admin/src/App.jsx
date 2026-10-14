@@ -296,7 +296,13 @@ export default function App() {
       if (promToken) {
         await api.saveFile('src/prom-config.json', JSON.stringify({ token: promToken }, null, 2), null, 'Update Prom config via UI');
       }
-      showToast('✅ Налаштування Prom.ua збережено!');
+      showToast('💾 Збережено! Запускаємо передачу на Prom.ua...');
+      try {
+        await api.triggerWorkflow();
+        showToast('✅ Збережено та відправлено на Prom.ua! (~1-2 хв)');
+      } catch (_) {
+        showToast('✅ Збережено! (Оновиться за графіком або натисніть "Синхронізувати")');
+      }
     } catch (e) {
       console.error('Prom save error:', e);
       showToast('❌ Помилка: ' + (e?.message || 'невідома'));
