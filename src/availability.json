@@ -761,5 +761,7 @@
   "REL200320100": false,
   "PCH012050001": false,
   "PIN482161000": false,
-  "PIN481800200": false
+  "PIN481800200": false,
+  "CMP128010000": false,
+  "CMP242120000": false
 }
