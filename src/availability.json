@@ -754,5 +754,8 @@
   "CIP134050020": false,
   "CIN121220000": false,
   "CEP121620000": false,
-  "BPP900400100": false
+  "BPP900400100": false,
+  "PYLUS2000CTE": false,
+  "PYLUS3000CTE": false,
+  "PYLUS5000TE": false
 }
