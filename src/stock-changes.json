@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": "SCIFP12100_1792083874886_lrm3y",
+    "timestamp": "2026-10-15T17:04:34.886Z",
+    "vendorCode": "SCIFP12100",
+    "name": "Акумулятор LiFePO4 Sacred Sun SCIFP12100 12В 100Аг (1.28 кВт·г) з BMS та Bluetooth моніторингом",
+    "category": "Акумулятори",
+    "price": 15494,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  }
+]
