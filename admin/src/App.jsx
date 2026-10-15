@@ -942,6 +942,9 @@ export default function App() {
     let diffPromMissingZeroStock = 0;
     let diffMissingFromProm = 0;
     let diffMonoMissingBarcode = 0;
+    let diffMonoEnabledZeroStock = 0;
+    let diffMonoDisabledHoroOch = 0;
+    let diffMonoIssues = 0;
 
     const alwaysSet = new Set(alwaysAvailable.map(s => String(s).trim()));
     const auditedProducts = [];
@@ -1028,7 +1031,14 @@ export default function App() {
 
       // Discrepancy flags - Mono
       const isDiffMonoMissingBarcode = isMonoSelected && !hasBarcode;
+      const isDiffMonoEnabledZeroStock = isMonoSelected && stock <= 0;
+      const isDiffMonoDisabledHoroOch = hasHoroshopInstallments && !isMonoSelected;
+      const isDiffMonoIssues = isDiffMonoMissingBarcode || isDiffMonoEnabledZeroStock || isDiffMonoDisabledHoroOch;
+
       if (isDiffMonoMissingBarcode) diffMonoMissingBarcode++;
+      if (isDiffMonoEnabledZeroStock) diffMonoEnabledZeroStock++;
+      if (isDiffMonoDisabledHoroOch) diffMonoDisabledHoroOch++;
+      if (isDiffMonoIssues) diffMonoIssues++;
 
       // Discrepancy flags - Excel
       const isDiffMissingFromExcel = !hasExcelRecord;
@@ -1074,6 +1084,12 @@ export default function App() {
       if (isDiffMonoMissingBarcode) {
         issues.push({ platform: 'mono', type: 'mono', key: 'mono_no_barcode', text: '⚫ Моно: без штрихкоду (EAN)' });
       }
+      if (isDiffMonoEnabledZeroStock) {
+        issues.push({ platform: 'mono', type: 'danger', key: 'mono_enabled_zero_stock', text: '⚠️ Увімкнено в Моно, але на складі 0' });
+      }
+      if (isDiffMonoDisabledHoroOch) {
+        issues.push({ platform: 'mono', type: 'warning', key: 'mono_disabled_horo_och', text: '🔒 На Хорошопі ОЧ увімкнено, але вимкнено в Моно' });
+      }
 
       auditedProducts.push({
         product: p,
@@ -1105,7 +1121,10 @@ export default function App() {
         isDiffPromIssues,
         isDiffMissingFromProm,
         isDiffMissingFromExcel,
-        isDiffMonoMissingBarcode
+        isDiffMonoMissingBarcode,
+        isDiffMonoEnabledZeroStock,
+        isDiffMonoDisabledHoroOch,
+        isDiffMonoIssues
       });
     });
 
@@ -1162,7 +1181,10 @@ export default function App() {
         isDiffPromEnabledHoroOut: isEnabled,
         isDiffPromIssues: true,
         isDiffMissingFromExcel: !hasExcel,
-        isDiffMonoMissingBarcode: false
+        isDiffMonoMissingBarcode: false,
+        isDiffMonoEnabledZeroStock: false,
+        isDiffMonoDisabledHoroOch: false,
+        isDiffMonoIssues: false
       });
     });
 
@@ -1195,6 +1217,9 @@ export default function App() {
       diffPromIssues,
       diffMissingFromProm,
       diffMonoMissingBarcode,
+      diffMonoEnabledZeroStock,
+      diffMonoDisabledHoroOch,
+      diffMonoIssues,
       totalIssuesCount,
       auditedProducts
     };
@@ -1224,7 +1249,10 @@ export default function App() {
       if (dashboardFilter === 'prom_ghosts') return item.isGhostProm;
       if (dashboardFilter === 'prom_missing_zero') return item.isDiffPromMissingZeroStock;
       if (dashboardFilter === 'prom_missing') return item.isDiffMissingFromProm;
-      if (dashboardFilter === 'mono_issues' || dashboardFilter === 'mono_no_barcode') return item.isDiffMonoMissingBarcode;
+      if (dashboardFilter === 'mono_issues') return item.isDiffMonoIssues;
+      if (dashboardFilter === 'mono_no_barcode') return item.isDiffMonoMissingBarcode;
+      if (dashboardFilter === 'mono_enabled_zero_stock') return item.isDiffMonoEnabledZeroStock;
+      if (dashboardFilter === 'mono_disabled_horo_och') return item.isDiffMonoDisabledHoroOch;
       if (dashboardFilter === 'excel_issues' || dashboardFilter === 'excel_missing') return item.isDiffMissingFromExcel;
       if (dashboardFilter === 'healthy') return !item.hasAnyIssue;
       return true; // 'all'
@@ -1262,7 +1290,10 @@ export default function App() {
     if (dashboardSortBy === 'card_prom') return sortByFlag('isDiffPromIssues');
 
     // Card-based Mono error sorting
-    if (dashboardSortBy === 'err_mono_no_barcode' || dashboardSortBy === 'card_mono') return sortByFlag('isDiffMonoMissingBarcode');
+    if (dashboardSortBy === 'card_mono') return sortByFlag('isDiffMonoIssues');
+    if (dashboardSortBy === 'err_mono_no_barcode') return sortByFlag('isDiffMonoMissingBarcode');
+    if (dashboardSortBy === 'err_mono_enabled_zero_stock') return sortByFlag('isDiffMonoEnabledZeroStock');
+    if (dashboardSortBy === 'err_mono_disabled_horo_och') return sortByFlag('isDiffMonoDisabledHoroOch');
 
     // Card-based Excel error sorting
     if (dashboardSortBy === 'err_excel_missing' || dashboardSortBy === 'card_excel') return sortByFlag('isDiffMissingFromExcel');
@@ -1928,7 +1959,11 @@ export default function App() {
               const isActive = dashboardFilter === 'mono_issues' || dashboardFilter.startsWith('mono_');
               return (
                 <div
-                  onClick={() => setDashboardFilter(isActive ? 'all' : 'mono_issues')}
+                  onClick={() => {
+                    const next = isActive ? 'all' : 'mono_issues';
+                    setDashboardFilter(next);
+                    setDashboardSortBy(next === 'mono_issues' ? 'card_mono' : 'issues_first');
+                  }}
                   style={{
                     cursor: 'pointer',
                     padding: '1.1rem 1.25rem',
@@ -1947,7 +1982,7 @@ export default function App() {
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <span style={{ fontSize: '0.95rem', fontWeight: 700, color: '#0f172a' }}>Проблеми Моно</span>
                     <span style={{ background: '#18181b', color: '#fff', fontSize: '0.8rem', fontWeight: 700, padding: '0.15rem 0.6rem', borderRadius: '999px' }}>
-                      {dashboardStats.diffMonoMissingBarcode}
+                      {dashboardStats.diffMonoIssues}
                     </span>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '1rem', fontSize: '0.775rem', color: isActive ? '#18181b' : '#94a3b8', fontWeight: 600 }}>
@@ -2303,7 +2338,7 @@ export default function App() {
             </div>
           )}
 
-          {(dashboardFilter === 'mono_issues' || dashboardFilter === 'mono_no_barcode') && (
+          {(dashboardFilter === 'mono_issues' || dashboardFilter.startsWith('mono_')) && (
             <div style={{
               background: '#f4f4f5',
               border: '1px solid #d4d4d8',
@@ -2314,33 +2349,130 @@ export default function App() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              gap: '1rem'
+              gap: '1rem',
+              flexWrap: 'wrap'
             }}>
-              <div>
+              <div style={{ flex: 1, minWidth: '300px' }}>
                 <div style={{ fontWeight: 700, color: '#18181b', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <span>⚫</span> Проблеми Моно ({dashboardStats.diffMonoMissingBarcode} товарів)
+                  <span>⚫</span> Проблеми Моно ({dashboardStats.diffMonoIssues} товарів)
                 </div>
-                <div style={{ fontSize: '0.825rem', color: '#1e293b', marginTop: '0.25rem', lineHeight: 1.45 }}>
-                  <b>Проблема:</b> Товари включені у вивантаження Мономаркет, але <b>не мають штрихкоду (EAN)</b>. Мономаркет не приймає товари без штрихкоду.
+                <div style={{ fontSize: '0.825rem', color: '#1e293b', marginTop: '0.35rem', lineHeight: 1.45 }}>
+                  <div style={{ marginBottom: '0.35rem', color: '#475569' }}>
+                    Виявлені невідповідності та зауваження для маркетплейсу Мономаркет:
+                  </div>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const next = dashboardFilter === 'mono_no_barcode' ? 'mono_issues' : 'mono_no_barcode';
+                        setDashboardFilter(next);
+                        setDashboardSortBy(next === 'mono_no_barcode' ? 'err_mono_no_barcode' : 'card_mono');
+                      }}
+                      style={{
+                        background: dashboardFilter === 'mono_no_barcode' ? '#18181b' : '#ffffff',
+                        color: dashboardFilter === 'mono_no_barcode' ? '#ffffff' : '#18181b',
+                        padding: '0.2rem 0.55rem',
+                        borderRadius: '6px',
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                        border: '1px solid #d4d4d8',
+                        cursor: 'pointer',
+                        transition: 'all 0.15s'
+                      }}
+                      title="Фільтрувати: Без штрихкоду EAN"
+                    >
+                      ⚫ Без штрихкоду EAN: {dashboardStats.diffMonoMissingBarcode}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const next = dashboardFilter === 'mono_enabled_zero_stock' ? 'mono_issues' : 'mono_enabled_zero_stock';
+                        setDashboardFilter(next);
+                        setDashboardSortBy(next === 'mono_enabled_zero_stock' ? 'err_mono_enabled_zero_stock' : 'card_mono');
+                      }}
+                      style={{
+                        background: dashboardFilter === 'mono_enabled_zero_stock' ? '#b91c1c' : '#fee2e2',
+                        color: dashboardFilter === 'mono_enabled_zero_stock' ? '#ffffff' : '#b91c1c',
+                        padding: '0.2rem 0.55rem',
+                        borderRadius: '6px',
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                        border: '1px solid #fca5a5',
+                        cursor: 'pointer',
+                        transition: 'all 0.15s'
+                      }}
+                      title="Фільтрувати: Увімкнено в Моно, але на складі 0"
+                    >
+                      ⚠️ Увімкнено в Моно, на складі 0: {dashboardStats.diffMonoEnabledZeroStock}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const next = dashboardFilter === 'mono_disabled_horo_och' ? 'mono_issues' : 'mono_disabled_horo_och';
+                        setDashboardFilter(next);
+                        setDashboardSortBy(next === 'mono_disabled_horo_och' ? 'err_mono_disabled_horo_och' : 'card_mono');
+                      }}
+                      style={{
+                        background: dashboardFilter === 'mono_disabled_horo_och' ? '#b45309' : '#fef3c7',
+                        color: dashboardFilter === 'mono_disabled_horo_och' ? '#ffffff' : '#b45309',
+                        padding: '0.2rem 0.55rem',
+                        borderRadius: '6px',
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                        border: '1px solid #fde68a',
+                        cursor: 'pointer',
+                        transition: 'all 0.15s'
+                      }}
+                      title="Фільтрувати: На Хорошопі ОЧ увімкнено, але вимкнено в Моно"
+                    >
+                      🔒 ОЧ увімкнено на Хорошопі, вимкнено в Моно: {dashboardStats.diffMonoDisabledHoroOch}
+                    </button>
+                  </div>
                 </div>
               </div>
-              <button
-                onClick={() => setDashboardFilter('all')}
-                className="btn"
-                style={{
-                  background: '#ffffff',
-                  border: '1px solid #d4d4d8',
-                  color: '#18181b',
-                  fontWeight: 600,
-                  fontSize: '0.8rem',
-                  padding: '0.4rem 0.85rem',
-                  borderRadius: '6px',
-                  whiteSpace: 'nowrap',
-                  cursor: 'pointer'
-                }}
-              >
-                ✕ Скинути фільтр
-              </button>
+              <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                {dashboardFilter !== 'mono_issues' && (
+                  <button
+                    onClick={() => {
+                      setDashboardFilter('mono_issues');
+                      setDashboardSortBy('card_mono');
+                    }}
+                    className="btn"
+                    style={{
+                      background: '#e4e4e7',
+                      border: '1px solid #d4d4d8',
+                      color: '#18181b',
+                      fontWeight: 600,
+                      fontSize: '0.8rem',
+                      padding: '0.4rem 0.85rem',
+                      borderRadius: '6px',
+                      whiteSpace: 'nowrap',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    Всі проблеми Моно ({dashboardStats.diffMonoIssues})
+                  </button>
+                )}
+                <button
+                  onClick={() => setDashboardFilter('all')}
+                  className="btn"
+                  style={{
+                    background: '#ffffff',
+                    border: '1px solid #d4d4d8',
+                    color: '#18181b',
+                    fontWeight: 600,
+                    fontSize: '0.8rem',
+                    padding: '0.4rem 0.85rem',
+                    borderRadius: '6px',
+                    whiteSpace: 'nowrap',
+                    cursor: 'pointer'
+                  }}
+                >
+                  ✕ Скинути фільтр
+                </button>
+              </div>
             </div>
           )}
 
@@ -2432,7 +2564,7 @@ export default function App() {
                     <option value="issues_first">⚡ Будь-які помилки в каталозі ({dashboardStats.totalIssuesCount})</option>
                     <option value="critical_first">🚨 Тільки критичні помилки</option>
                     <option value="card_prom">🟣 Проблеми Prom.ua ({dashboardStats.diffPromIssues})</option>
-                    <option value="err_mono_no_barcode">⚫ Моно: без штрихкоду ({dashboardStats.diffMonoMissingBarcode})</option>
+                    <option value="card_mono">⚫ Проблеми Мономаркет ({dashboardStats.diffMonoIssues})</option>
                     <option value="err_excel_missing">📊 Не знайдено в Excel ({dashboardStats.warehouseMissing})</option>
                   </optgroup>
                 </>
@@ -2450,7 +2582,23 @@ export default function App() {
                     <option value="issues_first">⚡ Будь-які помилки в каталозі ({dashboardStats.totalIssuesCount})</option>
                     <option value="critical_first">🚨 Тільки критичні помилки</option>
                     <option value="card_horoshop">🔵 Проблеми Хорошоп ({dashboardStats.diffHoroshopIssues})</option>
-                    <option value="err_mono_no_barcode">⚫ Моно: без штрихкоду ({dashboardStats.diffMonoMissingBarcode})</option>
+                    <option value="card_mono">⚫ Проблеми Мономаркет ({dashboardStats.diffMonoIssues})</option>
+                    <option value="err_excel_missing">📊 Не знайдено в Excel ({dashboardStats.warehouseMissing})</option>
+                  </optgroup>
+                </>
+              ) : (dashboardFilter === 'mono_issues' || dashboardFilter.startsWith('mono_')) ? (
+                <>
+                  <optgroup label="⚫ Помилки з картки «Мономаркет»">
+                    <option value="card_mono">⚫ Всі проблеми Мономаркет ({dashboardStats.diffMonoIssues})</option>
+                    <option value="err_mono_no_barcode">⚫ Без штрихкоду EAN ({dashboardStats.diffMonoMissingBarcode})</option>
+                    <option value="err_mono_enabled_zero_stock">⚠️ Увімкнено в Моно, на складі 0 ({dashboardStats.diffMonoEnabledZeroStock})</option>
+                    <option value="err_mono_disabled_horo_och">🔒 ОЧ на сайті, але вимкнено в Моно ({dashboardStats.diffMonoDisabledHoroOch})</option>
+                  </optgroup>
+                  <optgroup label="⚡ Інші помилки">
+                    <option value="issues_first">⚡ Будь-які помилки в каталозі ({dashboardStats.totalIssuesCount})</option>
+                    <option value="critical_first">🚨 Тільки критичні помилки</option>
+                    <option value="card_horoshop">🔵 Проблеми Хорошоп ({dashboardStats.diffHoroshopIssues})</option>
+                    <option value="card_prom">🟣 Проблеми Prom.ua ({dashboardStats.diffPromIssues})</option>
                     <option value="err_excel_missing">📊 Не знайдено в Excel ({dashboardStats.warehouseMissing})</option>
                   </optgroup>
                 </>
@@ -2476,7 +2624,10 @@ export default function App() {
                     <option value="card_prom">🟣 Будь-які проблеми Prom.ua ({dashboardStats.diffPromIssues})</option>
                   </optgroup>
                   <optgroup label="⚫ Помилки з картки «Моно»">
-                    <option value="err_mono_no_barcode">⚫ Моно: без штрихкоду EAN ({dashboardStats.diffMonoMissingBarcode})</option>
+                    <option value="err_mono_no_barcode">⚫ Без штрихкоду EAN ({dashboardStats.diffMonoMissingBarcode})</option>
+                    <option value="err_mono_enabled_zero_stock">⚠️ Увімкнено в Моно, на складі 0 ({dashboardStats.diffMonoEnabledZeroStock})</option>
+                    <option value="err_mono_disabled_horo_och">🔒 ОЧ на сайті, але вимкнено в Моно ({dashboardStats.diffMonoDisabledHoroOch})</option>
+                    <option value="card_mono">⚫ Будь-які проблеми Мономаркет ({dashboardStats.diffMonoIssues})</option>
                   </optgroup>
                   <optgroup label="📊 Помилки з картки «Ексель»">
                     <option value="err_excel_missing">📊 Не знайдено в Excel-складі ({dashboardStats.warehouseMissing})</option>
@@ -2515,7 +2666,7 @@ export default function App() {
                       } else if (dashboardFilter === 'prom_issues' || dashboardFilter.startsWith('prom_')) {
                         setDashboardSortBy(prev => prev === 'card_prom' ? 'stock_desc' : 'card_prom');
                       } else if (dashboardFilter === 'mono_issues' || dashboardFilter.startsWith('mono_')) {
-                        setDashboardSortBy(prev => prev === 'err_mono_no_barcode' ? 'stock_desc' : 'err_mono_no_barcode');
+                        setDashboardSortBy(prev => prev === 'card_mono' ? 'stock_desc' : 'card_mono');
                       } else if (dashboardFilter === 'excel_issues' || dashboardFilter.startsWith('excel_')) {
                         setDashboardSortBy(prev => prev === 'err_excel_missing' ? 'stock_desc' : 'err_excel_missing');
                       } else {
@@ -2655,14 +2806,25 @@ export default function App() {
                             <span style={{ fontSize: '0.75rem', color: '#18181b', fontWeight: 700 }}>
                               🟢 У фіді
                             </span>
-                            {!item.hasBarcode ? (
+                            {!item.hasBarcode && (
                               <span style={{ fontSize: '0.7rem', color: '#b91c1c', fontWeight: 600 }}>⚠️ Без штрихкоду</span>
-                            ) : (
+                            )}
+                            {item.stock <= 0 && (
+                              <span style={{ fontSize: '0.7rem', color: '#dc2626', fontWeight: 600 }}>🔴 0 на складі</span>
+                            )}
+                            {item.hasBarcode && item.stock > 0 && (
                               <span style={{ fontSize: '0.7rem', color: '#6b7280' }}>🏷️ EAN є</span>
                             )}
                           </div>
                         ) : (
-                          <span style={{ fontSize: '0.75rem', color: '#9ca3af' }}>⚪ Не у фіді</span>
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.15rem' }}>
+                            <span style={{ fontSize: '0.75rem', color: '#9ca3af' }}>⚪ Не у фіді</span>
+                            {item.hasHoroshopInstallments && (
+                              <span style={{ fontSize: '0.7rem', color: '#b45309', fontWeight: 600 }} title="На Хорошопі ОЧ увімкнено, але в Моно товар вимкнено">
+                                🔒 ОЧ на сайті
+                              </span>
+                            )}
+                          </div>
                         )}
                       </td>
 
@@ -2871,41 +3033,73 @@ export default function App() {
     }
   };
 
+  const getProductStock = (code, fallbackStock) => {
+    if (stockOverrides[code] !== undefined) {
+      const parsed = parseInt(stockOverrides[code], 10);
+      return isNaN(parsed) || parsed < 0 ? 0 : parsed;
+    }
+    if (alwaysAvailable.includes(code)) return 10;
+    const fb = fallbackStock !== undefined ? fallbackStock : 0;
+    return isNaN(fb) || fb < 0 ? 0 : fb;
+  };
+
+  const getProductHasHoroOch = (code, fallbackStock) => {
+    const isAlways = alwaysAvailable.includes(code);
+    const isHoroshopDisabled = horoshopDisabled.includes(code);
+    const isHoroshopAvailOverride = availabilityOverrides[code] !== false;
+    const stock = getProductStock(code, fallbackStock);
+    return !isHoroshopDisabled && (isAlways || (isHoroshopAvailOverride && stock > 0));
+  };
+
   const sortMonoProducts = (list) => {
     return [...list].sort((a, b) => {
+      const aCode = a.vendorCode || '';
+      const bCode = b.vendorCode || '';
+
       if (monoSortBy === 'err_mono_no_barcode') {
-        const aNoBarcode = !barcodes[a.vendorCode] && !a.barcode;
-        const bNoBarcode = !barcodes[b.vendorCode] && !b.barcode;
+        const aNoBarcode = !barcodes[aCode] && !a.barcode;
+        const bNoBarcode = !barcodes[bCode] && !b.barcode;
         if (aNoBarcode && !bNoBarcode) return -1;
         if (!aNoBarcode && bNoBarcode) return 1;
-        return (a.vendorCode || '').localeCompare(b.vendorCode || '');
+        return aCode.localeCompare(bCode);
+      }
+      if (monoSortBy === 'err_mono_enabled_zero_stock') {
+        const aHit = whitelist.includes(aCode) && getProductStock(aCode, a.stock) <= 0;
+        const bHit = whitelist.includes(bCode) && getProductStock(bCode, b.stock) <= 0;
+        if (aHit && !bHit) return -1;
+        if (!aHit && bHit) return 1;
+        return aCode.localeCompare(bCode);
+      }
+      if (monoSortBy === 'err_mono_disabled_horo_och') {
+        const aHit = !whitelist.includes(aCode) && getProductHasHoroOch(aCode, a.stock);
+        const bHit = !whitelist.includes(bCode) && getProductHasHoroOch(bCode, b.stock);
+        if (aHit && !bHit) return -1;
+        if (!aHit && bHit) return 1;
+        return aCode.localeCompare(bCode);
       }
       if (monoSortBy === 'issues_first') {
-        const aSelected = whitelist.includes(a.vendorCode);
-        const bSelected = whitelist.includes(b.vendorCode);
-        const aNoBarcode = aSelected && !barcodes[a.vendorCode] && !a.barcode;
-        const bNoBarcode = bSelected && !barcodes[b.vendorCode] && !b.barcode;
-        if (aNoBarcode && !bNoBarcode) return -1;
-        if (!aNoBarcode && bNoBarcode) return 1;
+        const aInMono = whitelist.includes(aCode);
+        const bInMono = whitelist.includes(bCode);
+        const aIssue = (aInMono && !barcodes[aCode] && !a.barcode) ||
+                       (aInMono && getProductStock(aCode, a.stock) <= 0) ||
+                       (!aInMono && getProductHasHoroOch(aCode, a.stock));
+        const bIssue = (bInMono && !barcodes[bCode] && !b.barcode) ||
+                       (bInMono && getProductStock(bCode, b.stock) <= 0) ||
+                       (!bInMono && getProductHasHoroOch(bCode, b.stock));
+        if (aIssue && !bIssue) return -1;
+        if (!aIssue && bIssue) return 1;
 
-        const aName = names[a.vendorCode] !== undefined ? names[a.vendorCode] : (a.name || '');
-        const bName = names[b.vendorCode] !== undefined ? names[b.vendorCode] : (b.name || '');
-        const aOver = aName.length > 50;
-        const bOver = bName.length > 50;
-        if (aOver && !bOver) return -1;
-        if (!aOver && bOver) return 1;
-
-        if (aSelected && !bSelected) return -1;
-        if (!aSelected && bSelected) return 1;
-        return (a.vendorCode || '').localeCompare(b.vendorCode || '');
+        if (aInMono && !bInMono) return -1;
+        if (!aInMono && bInMono) return 1;
+        return aCode.localeCompare(bCode);
       }
       if (monoSortBy === 'stock_desc') {
-        const aStock = stockOverrides[a.vendorCode] !== undefined ? parseInt(stockOverrides[a.vendorCode], 10) : (a.stock ?? 10);
-        const bStock = stockOverrides[b.vendorCode] !== undefined ? parseInt(stockOverrides[b.vendorCode], 10) : (b.stock ?? 10);
-        return (isNaN(bStock) ? 0 : bStock) - (isNaN(aStock) ? 0 : aStock);
+        const aStock = getProductStock(aCode, a.stock);
+        const bStock = getProductStock(bCode, b.stock);
+        return bStock - aStock;
       }
-      if (monoSortBy === 'sku_asc') return (a.vendorCode || '').localeCompare(b.vendorCode || '');
-      if (monoSortBy === 'name_asc') return (names[a.vendorCode] || a.name || '').localeCompare(names[b.vendorCode] || b.name || '');
+      if (monoSortBy === 'sku_asc') return aCode.localeCompare(bCode);
+      if (monoSortBy === 'name_asc') return (names[aCode] || a.name || '').localeCompare(names[bCode] || b.name || '');
       if (monoSortBy === 'price_desc') return (Number(b.price) || 0) - (Number(a.price) || 0);
       return 0;
     });
@@ -2919,6 +3113,10 @@ export default function App() {
       result = result.filter(p => whitelist.includes(p.vendorCode));
     } else if (filterMode === 'no_barcode') {
       result = result.filter(p => !barcodes[p.vendorCode] && !p.barcode);
+    } else if (filterMode === 'enabled_zero_stock') {
+      result = result.filter(p => whitelist.includes(p.vendorCode) && getProductStock(p.vendorCode, p.stock) <= 0);
+    } else if (filterMode === 'disabled_horo_och') {
+      result = result.filter(p => !whitelist.includes(p.vendorCode) && getProductHasHoroOch(p.vendorCode, p.stock));
     }
     
     if (searchQuery.trim()) {
@@ -2936,7 +3134,7 @@ export default function App() {
       }
     }
     return sortMonoProducts(result);
-  }, [catalog, searchQuery, filterMode, whitelist, barcodes, monoSortBy, names, stockOverrides]);
+  }, [catalog, searchQuery, filterMode, whitelist, barcodes, monoSortBy, names, stockOverrides, alwaysAvailable, horoshopDisabled, availabilityOverrides]);
 
   const grouped = useMemo(() => {
     const map = {};
@@ -2945,6 +3143,10 @@ export default function App() {
       baseCatalog = catalog.filter(p => whitelist.includes(p.vendorCode));
     } else if (filterMode === 'no_barcode') {
       baseCatalog = catalog.filter(p => !barcodes[p.vendorCode] && !p.barcode);
+    } else if (filterMode === 'enabled_zero_stock') {
+      baseCatalog = catalog.filter(p => whitelist.includes(p.vendorCode) && getProductStock(p.vendorCode, p.stock) <= 0);
+    } else if (filterMode === 'disabled_horo_och') {
+      baseCatalog = catalog.filter(p => !whitelist.includes(p.vendorCode) && getProductHasHoroOch(p.vendorCode, p.stock));
     }
     for (const product of baseCatalog) {
       const cat = product.category || 'Без категорії';
@@ -2955,13 +3157,19 @@ export default function App() {
       .map(([cat, prods]) => [cat, sortMonoProducts(prods)])
       .sort(([catA, prodsA], [catB, prodsB]) => {
         if (monoSortBy === 'issues_first') {
-          const aIssues = prodsA.filter(p => whitelist.includes(p.vendorCode) && !barcodes[p.vendorCode] && !p.barcode).length;
-          const bIssues = prodsB.filter(p => whitelist.includes(p.vendorCode) && !barcodes[p.vendorCode] && !p.barcode).length;
+          const countIssues = prods => prods.filter(p => {
+            const inMono = whitelist.includes(p.vendorCode);
+            return (inMono && !barcodes[p.vendorCode] && !p.barcode) ||
+                   (inMono && getProductStock(p.vendorCode, p.stock) <= 0) ||
+                   (!inMono && getProductHasHoroOch(p.vendorCode, p.stock));
+          }).length;
+          const aIssues = countIssues(prodsA);
+          const bIssues = countIssues(prodsB);
           if (bIssues !== aIssues) return bIssues - aIssues;
         }
         return catA.localeCompare(catB, 'uk');
       });
-  }, [catalog, filterMode, whitelist, barcodes, monoSortBy, names, stockOverrides]);
+  }, [catalog, filterMode, whitelist, barcodes, monoSortBy, names, stockOverrides, alwaysAvailable, horoshopDisabled, availabilityOverrides]);
 
   const getCategoryStats = (products) => {
     const selected = products.filter(p => whitelist.includes(p.vendorCode)).length;
@@ -3915,21 +4123,25 @@ export default function App() {
               >✕</button>
             )}
           </div>
-          <select className="input-field" style={{ width: '220px', fontSize: '0.95rem', cursor: 'pointer' }} value={filterMode} onChange={e => setFilterMode(e.target.value)}>
+          <select className="input-field" style={{ width: 'auto', minWidth: '220px', fontSize: '0.95rem', cursor: 'pointer' }} value={filterMode} onChange={e => setFilterMode(e.target.value)}>
             <option value="all">👁️ Усі товари</option>
             <option value="enabled">🟢 Тільки увімкнені в фід</option>
-            <option value="no_barcode">⚠️ Без штрихкоду</option>
+            <option value="no_barcode">⚫ Без штрихкоду EAN ({dashboardStats.diffMonoMissingBarcode})</option>
+            <option value="enabled_zero_stock">⚠️ Увімкнено в Моно, на складі 0 ({dashboardStats.diffMonoEnabledZeroStock})</option>
+            <option value="disabled_horo_och">🔒 ОЧ на сайті, але вимкнено в Моно ({dashboardStats.diffMonoDisabledHoroOch})</option>
           </select>
           <select
             className="input-field"
-            style={{ width: 'auto', minWidth: '250px', fontSize: '0.95rem', cursor: 'pointer' }}
+            style={{ width: 'auto', minWidth: '260px', fontSize: '0.95rem', cursor: 'pointer' }}
             value={monoSortBy}
             onChange={e => setMonoSortBy(e.target.value)}
             title="Сортування товарів Мономаркет за помилками"
           >
             <optgroup label="⚫ Помилки з картки «Мономаркет»">
-              <option value="issues_first">⚡ Спочатку з зауваженнями (без EAN)</option>
+              <option value="issues_first">⚡ Всі проблеми Моно ({dashboardStats.diffMonoIssues})</option>
               <option value="err_mono_no_barcode">⚫ Без штрихкоду EAN ({dashboardStats.diffMonoMissingBarcode})</option>
+              <option value="err_mono_enabled_zero_stock">⚠️ Увімкнено в Моно, на складі 0 ({dashboardStats.diffMonoEnabledZeroStock})</option>
+              <option value="err_mono_disabled_horo_och">🔒 ОЧ на сайті, але вимкнено в Моно ({dashboardStats.diffMonoDisabledHoroOch})</option>
             </optgroup>
             <optgroup label="📦 Загальне сортування">
               <option value="stock_desc">📦 Залишок на складі (від більшого)</option>
