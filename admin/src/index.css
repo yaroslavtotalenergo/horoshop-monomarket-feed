@@ -15,6 +15,22 @@
   --warning: #F59E0B;
   --warning-bg: #FEF3C7;
   --sidebar-w: 260px;
+
+  /* Brand platform colors */
+  --horoshop-primary: #4360a0;
+  --horoshop-hover: #344d82;
+  --horoshop-bg: #eef2f9;
+  --horoshop-border: #cbd7ee;
+
+  --prom-primary: #7c3aed;
+  --prom-hover: #6d28d9;
+  --prom-bg: #f5f3ff;
+  --prom-border: #ddd6fe;
+
+  --mono-primary: #18181b;
+  --mono-hover: #09090b;
+  --mono-bg: #f4f4f5;
+  --mono-border: #d4d4d8;
 }
 
 body {
@@ -96,6 +112,46 @@ body {
   color: #FFFFFF !important;
 }
 
+.sidebar-item.prom.active {
+  background: var(--prom-primary) !important;
+  color: #FFFFFF !important;
+}
+
+.sidebar-item.prom:hover:not(.active) {
+  background: var(--prom-bg);
+  color: var(--prom-primary);
+}
+
+.sidebar-item.horoshop.active {
+  background: var(--horoshop-primary) !important;
+  color: #FFFFFF !important;
+}
+
+.sidebar-item.horoshop:hover:not(.active) {
+  background: var(--horoshop-bg);
+  color: var(--horoshop-primary);
+}
+
+.sidebar-item.mono.active {
+  background: var(--mono-primary) !important;
+  color: #FFFFFF !important;
+}
+
+.sidebar-item.mono:hover:not(.active) {
+  background: var(--mono-bg);
+  color: var(--mono-primary);
+}
+
+.sidebar-item.import.active {
+  background: #059669 !important;
+  color: #FFFFFF !important;
+}
+
+.sidebar-item.import:hover:not(.active) {
+  background: #ecfdf5;
+  color: #059669;
+}
+
 .container {
   flex: 1;
   margin-left: var(--sidebar-w);
@@ -172,6 +228,15 @@ h2, h3 {
 
 .btn.success { background: var(--success); }
 .btn.success:hover { background: #059669; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2); }
+
+.btn.horoshop { background: var(--horoshop-primary); color: #FFFFFF; }
+.btn.horoshop:hover { background: var(--horoshop-hover); box-shadow: 0 4px 6px -1px rgba(67, 96, 160, 0.25); }
+
+.btn.prom { background: var(--prom-primary); color: #FFFFFF; }
+.btn.prom:hover { background: var(--prom-hover); box-shadow: 0 4px 6px -1px rgba(124, 58, 237, 0.25); }
+
+.btn.mono { background: var(--mono-primary); color: #FFFFFF; }
+.btn.mono:hover { background: var(--mono-hover); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.25); }
 
 /* Inputs */
 .input-field {

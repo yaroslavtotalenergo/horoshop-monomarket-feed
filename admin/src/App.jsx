@@ -806,7 +806,7 @@ export default function App() {
         issues.push({ type: 'neutral', key: 'excel_missing', text: '❓ Немає в Excel-таблиці' });
       }
       if (isMonoSelected && !hasBarcode) {
-        issues.push({ type: 'warning', key: 'mono_no_barcode', text: '🟡 Моно: без штрихкоду (EAN)' });
+        issues.push({ type: 'mono', key: 'mono_no_barcode', text: '⚫ Моно: без штрихкоду (EAN)' });
       }
 
       auditedProducts.push({
@@ -1180,7 +1180,7 @@ export default function App() {
           {/* Card 3: Хорошоп */}
           <div className="glass-panel" style={{
             padding: '1.4rem',
-            borderTop: '3px solid #ea580c',
+            borderTop: '3px solid #4360a0',
             borderRadius: '16px',
             background: '#ffffff',
             display: 'flex',
@@ -1195,19 +1195,19 @@ export default function App() {
                     width: '34px',
                     height: '34px',
                     borderRadius: '8px',
-                    background: '#fff7ed',
-                    color: '#ea580c',
+                    background: '#eef2f9',
+                    color: '#4360a0',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontSize: '1rem',
-                    border: '1px solid #fed7aa'
+                    border: '1px solid #cbd7ee'
                   }}>
                     📦
                   </div>
                   <div>
                     <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#0f172a' }}>Хорошоп</div>
-                    <span style={{ fontSize: '0.675rem', background: '#ffedd5', color: '#ea580c', padding: '0.15rem 0.5rem', borderRadius: '4px', fontWeight: 700 }}>
+                    <span style={{ fontSize: '0.675rem', background: '#e0e8f7', color: '#4360a0', padding: '0.15rem 0.5rem', borderRadius: '4px', fontWeight: 700 }}>
                       {catalog.length} ТОВАРІВ
                     </span>
                   </div>
@@ -1219,7 +1219,7 @@ export default function App() {
                 <span style={{ fontSize: '2.5rem', fontWeight: 800, color: '#0f172a', lineHeight: 1, letterSpacing: '-0.03em' }}>
                   {dashboardStats.horoshopActiveInstallments}
                 </span>
-                <span style={{ fontSize: '0.75rem', fontWeight: 600, background: '#ffedd5', color: '#c2410c', padding: '0.25rem 0.6rem', borderRadius: '6px' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 600, background: '#eef2f9', color: '#344d82', padding: '0.25rem 0.6rem', borderRadius: '6px' }}>
                   ОЧ активна (6 пл.)
                 </span>
               </div>
@@ -1241,7 +1241,7 @@ export default function App() {
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span style={{ color: '#64748b', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#ea580c' }}></span>
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#4360a0' }}></span>
                     Заборонено вручну
                   </span>
                   <span style={{ fontWeight: 700, color: '#0f172a' }}>{horoshopStats.disabled}</span>
@@ -1254,9 +1254,9 @@ export default function App() {
               style={{
                 marginTop: '1.25rem',
                 width: '100%',
-                background: '#fff7ed',
-                color: '#c2410c',
-                border: '1px solid #fed7aa',
+                background: '#eef2f9',
+                color: '#4360a0',
+                border: '1px solid #cbd7ee',
                 fontSize: '0.8rem',
                 fontWeight: 600,
                 padding: '0.6rem',
@@ -1272,7 +1272,7 @@ export default function App() {
           {/* Card 4: Мономаркет */}
           <div className="glass-panel" style={{
             padding: '1.4rem',
-            borderTop: '3px solid #f59e0b',
+            borderTop: '3px solid #18181b',
             borderRadius: '16px',
             background: '#ffffff',
             display: 'flex',
@@ -1287,19 +1287,19 @@ export default function App() {
                     width: '34px',
                     height: '34px',
                     borderRadius: '8px',
-                    background: '#fffbeb',
-                    color: '#d97706',
+                    background: '#18181b',
+                    color: '#ffffff',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontSize: '1rem',
-                    border: '1px solid #fde68a'
+                    border: '1px solid #18181b'
                   }}>
                     🐾
                   </div>
                   <div>
                     <div style={{ fontWeight: 700, fontSize: '0.95rem', color: '#0f172a' }}>Мономаркет</div>
-                    <span style={{ fontSize: '0.675rem', background: '#fef3c7', color: '#b45309', padding: '0.15rem 0.5rem', borderRadius: '4px', fontWeight: 700 }}>
+                    <span style={{ fontSize: '0.675rem', background: '#18181b', color: '#ffffff', padding: '0.15rem 0.5rem', borderRadius: '4px', fontWeight: 700 }}>
                       XML + ЦІНИ
                     </span>
                   </div>
@@ -1311,7 +1311,7 @@ export default function App() {
                 <span style={{ fontSize: '2.5rem', fontWeight: 800, color: '#0f172a', lineHeight: 1, letterSpacing: '-0.03em' }}>
                   {dashboardStats.monoActiveCount}
                 </span>
-                <span style={{ fontSize: '0.75rem', fontWeight: 600, background: '#fef3c7', color: '#b45309', padding: '0.25rem 0.6rem', borderRadius: '6px' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 600, background: '#f4f4f5', color: '#18181b', padding: '0.25rem 0.6rem', borderRadius: '6px', border: '1px solid #e4e4e7' }}>
                   у фіді monobank
                 </span>
               </div>
@@ -1328,7 +1328,7 @@ export default function App() {
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span style={{ color: '#64748b', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#94a3b8' }}></span>
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#18181b' }}></span>
                     Штрихкодів всього
                   </span>
                   <span style={{ fontWeight: 700, color: '#0f172a' }}>{Object.keys(barcodes).length}</span>
@@ -1341,9 +1341,9 @@ export default function App() {
               style={{
                 marginTop: '1.25rem',
                 width: '100%',
-                background: '#fffbeb',
-                color: '#b45309',
-                border: '1px solid #fde68a',
+                background: '#18181b',
+                color: '#ffffff',
+                border: '1px solid #18181b',
                 fontSize: '0.8rem',
                 fontWeight: 600,
                 padding: '0.6rem',
@@ -1545,13 +1545,13 @@ export default function App() {
                 cursor: 'pointer',
                 padding: '1.1rem 1.25rem',
                 borderRadius: '12px',
-                background: dashboardFilter === 'mono_no_barcode' ? '#fffbeb' : '#ffffff',
+                background: dashboardFilter === 'mono_no_barcode' ? '#f4f4f5' : '#ffffff',
                 border: '1px solid #e2e8f0',
-                borderLeft: '4px solid #f59e0b',
+                borderLeft: '4px solid #18181b',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                boxShadow: dashboardFilter === 'mono_no_barcode' ? '0 4px 12px rgba(245, 158, 11, 0.12)' : '0 1px 3px rgba(0,0,0,0.03)',
+                boxShadow: dashboardFilter === 'mono_no_barcode' ? '0 4px 12px rgba(0, 0, 0, 0.12)' : '0 1px 3px rgba(0,0,0,0.03)',
                 transition: 'all 0.15s ease'
               }}
               title="Товари в Мономаркеті без штрихкоду (EAN)"
@@ -1559,7 +1559,7 @@ export default function App() {
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
                   <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#0f172a' }}>Проблеми Мономаркет</span>
-                  <span style={{ background: '#f59e0b', color: '#fff', fontSize: '0.75rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '999px' }}>
+                  <span style={{ background: '#18181b', color: '#fff', fontSize: '0.75rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '999px' }}>
                     {dashboardStats.diffMonoMissingBarcode}
                   </span>
                 </div>
@@ -1567,7 +1567,7 @@ export default function App() {
                   Немає штрихкоду (EAN) для публікації в Мономаркет
                 </div>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '0.85rem', fontSize: '0.75rem', color: dashboardFilter === 'mono_no_barcode' ? '#d97706' : '#94a3b8', fontWeight: 600 }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '0.85rem', fontSize: '0.75rem', color: dashboardFilter === 'mono_no_barcode' ? '#18181b' : '#94a3b8', fontWeight: 600 }}>
                 <span>{dashboardFilter === 'mono_no_barcode' ? 'Фільтр активний (скинути)' : 'Натисніть щоб відфільтрувати'}</span>
                 <span>→</span>
               </div>
@@ -1653,9 +1653,9 @@ export default function App() {
                   <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '110px', padding: '0.75rem 1rem', borderTopLeftRadius: '7px' }}>Артикул</th>
                   <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', padding: '0.75rem 1rem' }}>Товар</th>
                   <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '110px', padding: '0.75rem 0.5rem', textAlign: 'center' }}>Склад (Excel)</th>
-                  <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '140px', padding: '0.75rem 0.5rem' }}>Хорошоп</th>
-                  <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '140px', padding: '0.75rem 0.5rem' }}>Prom.ua</th>
-                  <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '130px', padding: '0.75rem 0.5rem' }}>Мономаркет</th>
+                  <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '140px', padding: '0.75rem 0.5rem', color: '#4360a0' }}>🔵 Хорошоп</th>
+                  <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '140px', padding: '0.75rem 0.5rem', color: '#7c3aed' }}>🟣 Prom.ua</th>
+                  <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '130px', padding: '0.75rem 0.5rem', color: '#18181b' }}>⚫ Мономаркет</th>
                   <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '200px', padding: '0.75rem 0.5rem' }}>Статус / Зауваження</th>
                   <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '130px', padding: '0.75rem 0.5rem', textAlign: 'center', borderTopRightRadius: '7px' }}>Швидка дія</th>
                 </tr>
@@ -1757,11 +1757,11 @@ export default function App() {
                       <td style={{ padding: '0.75rem 0.5rem', verticalAlign: 'middle' }}>
                         {item.isMonoSelected ? (
                           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.15rem' }}>
-                            <span style={{ fontSize: '0.75rem', color: '#15803d', fontWeight: 600 }}>
+                            <span style={{ fontSize: '0.75rem', color: '#18181b', fontWeight: 700 }}>
                               🟢 У фіді
                             </span>
                             {!item.hasBarcode ? (
-                              <span style={{ fontSize: '0.7rem', color: '#b45309' }}>⚠️ Без штрихкоду</span>
+                              <span style={{ fontSize: '0.7rem', color: '#b91c1c', fontWeight: 600 }}>⚠️ Без штрихкоду</span>
                             ) : (
                               <span style={{ fontSize: '0.7rem', color: '#6b7280' }}>🏷️ EAN є</span>
                             )}
@@ -1784,8 +1784,9 @@ export default function App() {
                                   padding: '0.15rem 0.45rem',
                                   borderRadius: '4px',
                                   fontWeight: 600,
-                                  background: iss.type === 'danger' ? '#fee2e2' : iss.type === 'warning' ? '#ffedd5' : iss.type === 'purple' ? '#f3e8ff' : '#f3f4f6',
-                                  color: iss.type === 'danger' ? '#b91c1c' : iss.type === 'warning' ? '#c2410c' : iss.type === 'purple' ? '#6b21a8' : '#4b5563',
+                                  background: iss.type === 'danger' ? '#fee2e2' : iss.type === 'warning' ? '#ffedd5' : iss.type === 'purple' ? '#f3e8ff' : iss.type === 'mono' ? '#f4f4f5' : '#f3f4f6',
+                                  color: iss.type === 'danger' ? '#b91c1c' : iss.type === 'warning' ? '#c2410c' : iss.type === 'purple' ? '#6b21a8' : iss.type === 'mono' ? '#18181b' : '#4b5563',
+                                  border: iss.type === 'mono' ? '1px solid #d4d4d8' : 'none',
                                   width: 'fit-content'
                                 }}
                               >
@@ -1813,19 +1814,19 @@ export default function App() {
                           </button>
                           <button
                             className="btn"
-                            style={{ padding: '0.25rem 0.45rem', fontSize: '0.7rem', background: '#fff7ed', color: '#c2410c', border: '1px solid #fed7aa' }}
+                            style={{ padding: '0.25rem 0.45rem', fontSize: '0.7rem', background: '#eef2f9', color: '#4360a0', border: '1px solid #cbd7ee' }}
                             onClick={() => navigateToProduct('horoshop', item.code)}
                             title="Відкрити цей товар у вкладці Хорошоп"
                           >
-                            🟠 Хорошоп
+                            🔵 Хорошоп
                           </button>
                           <button
                             className="btn"
-                            style={{ padding: '0.25rem 0.45rem', fontSize: '0.7rem', background: '#fffbeb', color: '#b45309', border: '1px solid #fde68a' }}
+                            style={{ padding: '0.25rem 0.45rem', fontSize: '0.7rem', background: '#f4f4f5', color: '#18181b', border: '1px solid #d4d4d8' }}
                             onClick={() => navigateToProduct('catalog', item.code)}
                             title="Відкрити цей товар у вкладці Мономаркет"
                           >
-                            🟡 Моно
+                            ⚫ Моно
                           </button>
                         </div>
                       </td>
@@ -2491,17 +2492,17 @@ export default function App() {
 
         {/* Sidebar Navigation Menu */}
         <div className="sidebar-menu" style={{ flex: 1 }}>
-          <a className={`sidebar-item ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')}>
+          <a className={`sidebar-item dashboard ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')}>
             <span style={{ fontSize: '1.05rem' }}>📊</span> Dashboard
           </a>
-          <a className={`sidebar-item ${activeTab === 'prom' ? 'active' : ''}`} onClick={() => setActiveTab('prom')}>
+          <a className={`sidebar-item prom ${activeTab === 'prom' ? 'active' : ''}`} onClick={() => setActiveTab('prom')}>
             <span style={{ fontSize: '1.05rem' }}>🏪</span> Prom.ua
           </a>
-          <a className={`sidebar-item ${activeTab === 'horoshop' ? 'active' : ''}`} onClick={() => setActiveTab('horoshop')}>
-            <span style={{ fontSize: '1.05rem' }}>📦</span> Horoshop
+          <a className={`sidebar-item horoshop ${activeTab === 'horoshop' ? 'active' : ''}`} onClick={() => setActiveTab('horoshop')}>
+            <span style={{ fontSize: '1.05rem' }}>📦</span> Хорошоп
           </a>
-          <a className={`sidebar-item ${activeTab === 'catalog' ? 'active' : ''}`} onClick={() => setActiveTab('catalog')}>
-            <span style={{ fontSize: '1.05rem' }}>🐾</span> Monomarket
+          <a className={`sidebar-item mono ${activeTab === 'catalog' ? 'active' : ''}`} onClick={() => setActiveTab('catalog')}>
+            <span style={{ fontSize: '1.05rem' }}>🐾</span> Мономаркет
           </a>
           <a className="sidebar-item" onClick={() => { setShowLogs(true); loadLogs(); }}>
             <span style={{ fontSize: '1.05rem' }}>⏱️</span> Logs
@@ -2513,7 +2514,7 @@ export default function App() {
           <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#94a3b8', margin: '1.25rem 0 0.5rem 0.5rem', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             CONNECTORS
           </div>
-          <a className={`sidebar-item ${activeTab === 'import' ? 'active' : ''}`} onClick={() => setActiveTab('import')}>
+          <a className={`sidebar-item import ${activeTab === 'import' ? 'active' : ''}`} onClick={() => setActiveTab('import')}>
             <span style={{ fontSize: '1.05rem' }}>📥</span> Excel Import
           </a>
           <a className="sidebar-item" onClick={() => setShowSettings(true)}>
@@ -2564,7 +2565,7 @@ export default function App() {
             <div style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '0.45rem',
+              gap: '0.5rem',
               background: '#f1f5f9',
               border: '1px solid #e2e8f0',
               borderRadius: '999px',
@@ -2573,13 +2574,25 @@ export default function App() {
               fontWeight: 600,
               color: '#475569'
             }}>
-              <span>Склад (Excel)</span>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#059669' }}></span>
+                Склад (Excel)
+              </span>
               <span style={{ color: '#94a3b8' }}>›</span>
-              <span>Хорошоп</span>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#4360a0' }}></span>
+                Хорошоп
+              </span>
               <span style={{ color: '#94a3b8' }}>›</span>
-              <span>Prom.ua</span>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#7c3aed' }}></span>
+                Prom.ua
+              </span>
               <span style={{ color: '#94a3b8' }}>›</span>
-              <span>Мономаркет</span>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#18181b' }}></span>
+                Мономаркет
+              </span>
             </div>
           </div>
 
@@ -2668,13 +2681,16 @@ export default function App() {
       ) : activeTab === 'horoshop' ? (
         <div className="header">
           <div>
-            <h1>🟠 Керування Хорошоп</h1>
+            <h1 style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+              <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '34px', height: '34px', borderRadius: '8px', background: '#eef2f9', color: '#4360a0', fontSize: '1.1rem', border: '1px solid #cbd7ee' }}>📦</span>
+              Керування Хорошоп
+            </h1>
             <p style={{ color: 'var(--text-muted)', margin: 0 }}>Оплата частинами (monobank) та статуси товарів по API</p>
           </div>
           <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
             <button
               className="btn"
-              style={{ background: '#ea580c', color: '#fff' }}
+              style={{ background: '#4360a0', color: '#fff', boxShadow: '0 2px 4px rgba(67, 96, 160, 0.25)' }}
               onClick={handleTriggerHoroshopSync}
               disabled={syncingHoroshop || loading || savingHoroshop || !token}
               title="Запустити оновлення Хорошопу по API через GitHub Actions"
@@ -2693,14 +2709,17 @@ export default function App() {
       ) : (
         <div className="header">
           <div>
-            <h1>🟡 Керування Мономаркет</h1>
+            <h1 style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+              <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '34px', height: '34px', borderRadius: '8px', background: '#18181b', color: '#ffffff', fontSize: '1.1rem' }}>🐾</span>
+              Керування Мономаркет
+            </h1>
             <p style={{ color: 'var(--text-muted)', margin: 0 }}>Товарний фід та налаштування для маркетплейсу monobank</p>
           </div>
           <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-            <button className="btn" style={{ background: '#0ea5e9' }} onClick={handleSync} disabled={syncing || loading || saving || !token}>
+            <button className="btn" style={{ background: '#4360a0', color: '#fff' }} onClick={handleSync} disabled={syncing || loading || saving || !token} title="Оновити залишки та товари з Хорошопу">
               {syncing ? <span className="loader"></span> : '🔄 Оновити з Хорошопу'}
             </button>
-            <button className="btn" style={{ background: '#10b981' }} onClick={handleTriggerFeed} disabled={syncing || loading || saving || !token} title="Запустити генерацію фіду без збереження">
+            <button className="btn" style={{ background: '#18181b', color: '#ffffff', boxShadow: '0 2px 4px rgba(0,0,0,0.2)' }} onClick={handleTriggerFeed} disabled={syncing || loading || saving || !token} title="Запустити генерацію фіду без збереження">
               {syncing ? <span className="loader"></span> : `⚡ Запустити фід (${daysToDispatch}д)`}
             </button>
             <button className="btn success" onClick={handleSaveAll} disabled={saving || syncing || loading || !token}>
@@ -2771,12 +2790,12 @@ export default function App() {
         <div className="stats-grid">
           <div
             className="stat-card"
-            style={{ cursor: 'pointer', border: horoshopFilterMode === 'all' ? '2px solid #ea580c' : '1px solid var(--border-color)', transition: 'all 0.2s', background: horoshopFilterMode === 'all' ? '#fff7ed' : 'transparent' }}
+            style={{ cursor: 'pointer', border: horoshopFilterMode === 'all' ? '2px solid #4360a0' : '1px solid var(--border-color)', transition: 'all 0.2s', background: horoshopFilterMode === 'all' ? '#eef2f9' : 'transparent' }}
             onClick={() => setHoroshopFilterMode('all')}
             title="Показати всі товари"
           >
             <div className="stat-label">Всього в каталозі</div>
-            <div className="stat-value">{horoshopStats.total}</div>
+            <div className="stat-value" style={{ color: horoshopFilterMode === 'all' ? '#4360a0' : 'var(--text-main)' }}>{horoshopStats.total}</div>
           </div>
           <div
             className="stat-card"
@@ -2823,7 +2842,7 @@ export default function App() {
           </div>
           <div className="stat-card">
             <div className="stat-label">Відмічено для Мономаркету</div>
-            <div className="stat-value" style={{ color: 'var(--success)' }}>{whitelist.length}</div>
+            <div className="stat-value" style={{ color: '#18181b' }}>{whitelist.length}</div>
           </div>
           <div className="stat-card">
             <div className="stat-label">Категорій</div>
@@ -2841,13 +2860,13 @@ export default function App() {
         <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', borderBottom: '1px solid var(--border-color)' }}>
           <button 
             onClick={() => setActiveTab('catalog')}
-            style={{ padding: '0.75rem 1.5rem', background: 'none', border: 'none', borderBottom: activeTab === 'catalog' ? '2px solid #3b82f6' : '2px solid transparent', color: activeTab === 'catalog' ? '#3b82f6' : 'var(--text-main)', cursor: 'pointer', fontWeight: 600, fontSize: '1rem', transition: 'all 0.2s' }}
+            style={{ padding: '0.75rem 1.5rem', background: 'none', border: 'none', borderBottom: activeTab === 'catalog' ? '2px solid #18181b' : '2px solid transparent', color: activeTab === 'catalog' ? '#18181b' : 'var(--text-main)', cursor: 'pointer', fontWeight: 600, fontSize: '1rem', transition: 'all 0.2s' }}
           >
-            📦 Каталог товарів
+            🐾 Каталог Мономаркет
           </button>
           <button 
             onClick={() => setActiveTab('import')}
-            style={{ padding: '0.75rem 1.5rem', background: 'none', border: 'none', borderBottom: activeTab === 'import' ? '2px solid #10b981' : '2px solid transparent', color: activeTab === 'import' ? '#10b981' : 'var(--text-main)', cursor: 'pointer', fontWeight: 600, fontSize: '1rem', transition: 'all 0.2s' }}
+            style={{ padding: '0.75rem 1.5rem', background: 'none', border: 'none', borderBottom: activeTab === 'import' ? '2px solid #059669' : '2px solid transparent', color: activeTab === 'import' ? '#059669' : 'var(--text-main)', cursor: 'pointer', fontWeight: 600, fontSize: '1rem', transition: 'all 0.2s' }}
           >
             📥 Імпорт / Експорт (Excel)
           </button>
@@ -2929,13 +2948,13 @@ export default function App() {
       {/* Плоскі результати пошуку */}
       {searchQuery.trim() && (
         <div className="glass-panel" style={{ marginBottom: '1rem', padding: 0, overflow: 'hidden' }}>
-          <div style={{ padding: '0.75rem 1.5rem', borderBottom: '1px solid var(--border-color)', background: 'rgba(59,130,246,0.05)', display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+          <div style={{ padding: '0.75rem 1.5rem', borderBottom: '1px solid var(--border-color)', background: 'rgba(24, 24, 27, 0.04)', display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
             <span style={{ fontWeight: 700 }}>🔍 Результати пошуку</span>
-            <span className="badge">{filteredCatalog.length} товарів</span>
+            <span className="badge" style={{ background: '#18181b', color: '#ffffff' }}>{filteredCatalog.length} товарів</span>
             
             {filteredCatalog.length > 0 && (
               <div style={{ marginLeft: 'auto', display: 'flex', gap: '0.5rem' }}>
-                <button className="btn" style={{ padding: '0.35rem 0.75rem', fontSize: '0.85rem' }} onClick={() => handleBulkAction(true)}>
+                <button className="btn" style={{ padding: '0.35rem 0.75rem', fontSize: '0.85rem', background: '#18181b', color: '#ffffff' }} onClick={() => handleBulkAction(true)}>
                   ✅ Увімкнути всі {filteredCatalog.length}
                 </button>
                 <button className="btn" style={{ padding: '0.35rem 0.75rem', fontSize: '0.85rem', background: 'var(--surface-color)', color: 'var(--text-main)', border: '1px solid var(--border-color)' }} onClick={() => handleBulkAction(false)}>
@@ -3088,13 +3107,13 @@ export default function App() {
                 style={{
                   display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem 1.5rem',
                   cursor: 'pointer', borderBottom: isCollapsed ? 'none' : '1px solid var(--border-color)',
-                  background: isCollapsed ? '#ffffff' : 'rgba(59,130,246,0.05)',
+                  background: isCollapsed ? '#ffffff' : 'rgba(24, 24, 27, 0.04)',
                   transition: 'background 0.2s', userSelect: 'none'
                 }}
               >
                 <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                   <span style={{ fontWeight: 700, fontSize: '1rem' }}>{categoryName}</span>
-                  <span className="badge">{selected}/{total}</span>
+                  <span className="badge" style={{ background: selected > 0 ? '#18181b' : '#f3f4f6', color: selected > 0 ? '#ffffff' : '#6b7280' }}>{selected}/{total}</span>
                 </div>
                 <span style={{ color: 'var(--text-muted)', fontSize: '1.2rem' }}>
                   {isCollapsed ? '▶' : '▼'}
@@ -3400,7 +3419,7 @@ export default function App() {
       {activeTab === 'horoshop' && (
         <div className="glass-panel" style={{ padding: '1.25rem', marginBottom: '1.5rem' }}>
           {/* Info Banner */}
-          <div style={{ padding: '0.9rem 1.15rem', borderRadius: '8px', background: 'rgba(234, 88, 12, 0.08)', border: '1px solid rgba(234, 88, 12, 0.25)', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem' }}>
+          <div style={{ padding: '0.9rem 1.15rem', borderRadius: '8px', background: 'rgba(67, 96, 160, 0.08)', border: '1px solid rgba(67, 96, 160, 0.25)', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem' }}>
             <div style={{ fontSize: '0.9rem', color: 'var(--text-main)', lineHeight: '1.45', maxWidth: '850px' }}>
               💡 <strong>Як працює Оплата частинами на Хорошоп:</strong>
               <div style={{ marginTop: '0.35rem', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
@@ -3411,7 +3430,7 @@ export default function App() {
             </div>
             <button
               className="btn"
-              style={{ fontSize: '0.85rem', padding: '0.4rem 0.75rem', background: 'rgba(234, 88, 12, 0.15)', color: '#c2410c', border: '1px solid rgba(234, 88, 12, 0.3)' }}
+              style={{ fontSize: '0.85rem', padding: '0.4rem 0.75rem', background: 'rgba(67, 96, 160, 0.12)', color: '#4360a0', border: '1px solid rgba(67, 96, 160, 0.3)' }}
               onClick={() => copyToClipboard(FEED_URLS.horoshop)}
               title="Копіювати URL XML-файлу для імпорту ОЧ в Хорошоп"
             >
@@ -3579,13 +3598,13 @@ export default function App() {
                         style={{
                           display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.9rem 1.25rem',
                           cursor: 'pointer', borderBottom: isCollapsed ? 'none' : '1px solid var(--border-color)',
-                          background: isCollapsed ? '#ffffff' : 'rgba(16, 185, 129, 0.05)',
+                          background: isCollapsed ? '#ffffff' : 'rgba(67, 96, 160, 0.06)',
                           transition: 'background 0.2s', userSelect: 'none'
                         }}
                       >
                         <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                           <span style={{ fontWeight: 700, fontSize: '0.95rem' }}>{categoryName}</span>
-                          <span className="badge" style={{ background: active > 0 ? '#dcfce7' : '#f3f4f6', color: active > 0 ? '#15803d' : '#6b7280' }}>
+                          <span className="badge" style={{ background: active > 0 ? '#e0e8f7' : '#f3f4f6', color: active > 0 ? '#4360a0' : '#6b7280' }}>
                             {active}/{total}
                           </span>
                         </div>
