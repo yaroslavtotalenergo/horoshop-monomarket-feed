@@ -135,6 +135,7 @@ export default function App() {
   const [dashboardSearchQuery, setDashboardSearchQuery] = useState('');
   const [dashboardFilter, setDashboardFilter] = useState('issues');
   const [dashboardCategoryFilter, setDashboardCategoryFilter] = useState('all');
+  const [dashboardSortBy, setDashboardSortBy] = useState('issues_first');
   const [dashboardLimit, setDashboardLimit] = useState(100);
   const [syncingAll, setSyncingAll] = useState(false);
   
@@ -146,6 +147,7 @@ export default function App() {
   const [promSearchQuery, setPromSearchQuery] = useState('');
   const [promFilterMode, setPromFilterMode] = useState('all');
   const [promCategoryFilter, setPromCategoryFilter] = useState('all');
+  const [promSortBy, setPromSortBy] = useState('issues_first');
   const [collapsedPromCategories, setCollapsedPromCategories] = useState({});
   
   const [savingHoroshop, setSavingHoroshop] = useState(false);
@@ -153,8 +155,10 @@ export default function App() {
   const [horoshopSearchQuery, setHoroshopSearchQuery] = useState('');
   const [horoshopFilterMode, setHoroshopFilterMode] = useState('all');
   const [horoshopCategoryFilter, setHoroshopCategoryFilter] = useState('all');
+  const [horoshopSortBy, setHoroshopSortBy] = useState('issues_first');
   const [horoshopDisabled, setHoroshopDisabled] = useState([]);
   const [collapsedHoroshopCategories, setCollapsedHoroshopCategories] = useState({});
+  const [monoSortBy, setMonoSortBy] = useState('issues_first');
   
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -368,7 +372,7 @@ export default function App() {
   const filteredPromCatalog = useMemo(() => {
     const q = promSearchQuery.toLowerCase().trim();
 
-    return catalog.filter(p => {
+    const filtered = catalog.filter(p => {
       const code = p.vendorCode ? String(p.vendorCode).trim() : '';
       const name = p.name || '';
       if (q) {
@@ -380,12 +384,18 @@ export default function App() {
       }
       const isEnabled = promWhitelistSet.has(code);
       const existsOnProm = promSkusSet.has(code);
-      let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : 0;
+      const hasExcel = stockOverrides[code] !== undefined;
+      let stock = hasExcel ? parseInt(stockOverrides[code], 10) : 0;
       if (alwaysAvailable.includes(code)) stock = Math.max(stock, 10);
       if (isNaN(stock) || stock < 0) stock = 0;
+      const horoOut = isHoroshopOutOfStock(p);
 
+      if (promFilterMode === 'prom_missing_in_stock') return !existsOnProm && stock > 0;
+      if (promFilterMode === 'prom_disabled_stock') return existsOnProm && !isEnabled && stock > 0;
+      if (promFilterMode === 'prom_no_excel') return existsOnProm && !hasExcel;
+      if (promFilterMode === 'prom_enabled_horo_out') return existsOnProm && isEnabled && stock > 0 && horoOut;
       if (promFilterMode === 'no_match') return !existsOnProm;
-      if (promFilterMode === 'out_of_stock_horoshop') return isHoroshopOutOfStock(p);
+      if (promFilterMode === 'out_of_stock_horoshop') return horoOut;
       if (promFilterMode === 'enabled') return isEnabled && existsOnProm;
       if (promFilterMode === 'disabled') return !isEnabled && existsOnProm;
       if (promFilterMode === 'in_stock') return isEnabled && existsOnProm && stock > 0;
@@ -393,7 +403,47 @@ export default function App() {
 
       return true;
     });
-  }, [catalog, promSearchQuery, promCategoryFilter, promFilterMode, promWhitelistSet, stockOverrides, alwaysAvailable, promSkusSet]);
+
+    return [...filtered].sort((a, b) => {
+      if (promSortBy === 'issues_first') {
+        const getPromSev = (p) => {
+          const code = p.vendorCode ? String(p.vendorCode).trim() : '';
+          const exists = promSkusSet.has(code);
+          const enabled = promWhitelistSet.has(code);
+          const hasExcel = stockOverrides[code] !== undefined;
+          let stock = hasExcel ? parseInt(stockOverrides[code], 10) : 0;
+          if (alwaysAvailable.includes(code)) stock = Math.max(stock, 10);
+          if (isNaN(stock) || stock < 0) stock = 0;
+          const outHoro = isHoroshopOutOfStock(p);
+
+          // Danger 1: Склад > 0, але немає на Prom.ua
+          if (!exists && stock > 0) return 4;
+          // Danger 2: На Prom увімкнено, але на Хорошопі стоїть «Немає на сайті»
+          if (exists && enabled && stock > 0 && outHoro) return 3;
+          // Warning: Є на складі, але вимкнено для Prom
+          if (exists && !enabled && stock > 0) return 2;
+          // Info: Створено на Prom, але немає в Excel
+          if (exists && !hasExcel) return 1;
+          // Info 2: Немає на Prom (0 на складі)
+          if (!exists) return 1;
+          return 0;
+        };
+        const aSev = getPromSev(a);
+        const bSev = getPromSev(b);
+        if (bSev !== aSev) return bSev - aSev;
+        return (a.vendorCode || '').localeCompare(b.vendorCode || '');
+      }
+      if (promSortBy === 'stock_desc') {
+        const aStock = stockOverrides[a.vendorCode] !== undefined ? parseInt(stockOverrides[a.vendorCode], 10) : 0;
+        const bStock = stockOverrides[b.vendorCode] !== undefined ? parseInt(stockOverrides[b.vendorCode], 10) : 0;
+        return (isNaN(bStock) ? 0 : bStock) - (isNaN(aStock) ? 0 : aStock);
+      }
+      if (promSortBy === 'sku_asc') return (a.vendorCode || '').localeCompare(b.vendorCode || '');
+      if (promSortBy === 'name_asc') return (names[a.vendorCode] || a.name || '').localeCompare(names[b.vendorCode] || b.name || '');
+      if (promSortBy === 'price_desc') return (Number(b.price) || 0) - (Number(a.price) || 0);
+      return 0;
+    });
+  }, [catalog, promSearchQuery, promCategoryFilter, promFilterMode, promSortBy, promWhitelistSet, stockOverrides, alwaysAvailable, promSkusSet, names]);
 
   const promStats = useMemo(() => {
     let enabledCount = 0;
@@ -444,8 +494,24 @@ export default function App() {
       if (!map[cat]) map[cat] = [];
       map[cat].push(product);
     }
-    return Object.entries(map).sort(([a], [b]) => a.localeCompare(b, 'uk'));
-  }, [filteredPromCatalog]);
+    return Object.entries(map).sort(([catA, prodsA], [catB, prodsB]) => {
+      if (promSortBy === 'issues_first') {
+        const countIssues = (prods) => prods.filter(p => {
+          const code = p.vendorCode ? String(p.vendorCode).trim() : '';
+          const exists = promSkusSet.has(code);
+          const enabled = promWhitelistSet.has(code);
+          let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : 0;
+          if (alwaysAvailable.includes(code)) stock = Math.max(stock, 10);
+          if (isNaN(stock) || stock < 0) stock = 0;
+          return (!exists && stock > 0) || (exists && !enabled && stock > 0) || (exists && enabled && stock > 0 && isHoroshopOutOfStock(p)) || (exists && stockOverrides[code] === undefined);
+        }).length;
+        const aIss = countIssues(prodsA);
+        const bIss = countIssues(prodsB);
+        if (bIss !== aIss) return bIss - aIss;
+      }
+      return catA.localeCompare(catB, 'uk');
+    });
+  }, [filteredPromCatalog, promSortBy, promSkusSet, promWhitelistSet, stockOverrides, alwaysAvailable]);
 
   const getPromCategoryStats = (products) => {
     const enabled = products.filter(p => {
@@ -602,7 +668,7 @@ export default function App() {
     const q = horoshopSearchQuery.toLowerCase().trim();
     const alwaysSet = new Set(alwaysAvailable.map(s => String(s).trim()));
 
-    return catalog.filter(p => {
+    const filtered = catalog.filter(p => {
       const code = p.vendorCode ? String(p.vendorCode).trim() : '';
       const name = p.name || '';
       if (q) {
@@ -622,6 +688,7 @@ export default function App() {
 
       const hasInstallments = !isDisabled && (isAlways || (isAvailable && stock > 0));
 
+      if (horoshopFilterMode === 'wh_in_horo_out') return isHoroshopOutOfStock(p) && stock > 0;
       if (horoshopFilterMode === 'out_of_stock_horoshop') return isHoroshopOutOfStock(p);
       if (horoshopFilterMode === 'active') return hasInstallments;
       if (horoshopFilterMode === 'forced') return isAlways && !isDisabled;
@@ -630,7 +697,44 @@ export default function App() {
 
       return true;
     });
-  }, [catalog, horoshopSearchQuery, horoshopCategoryFilter, horoshopFilterMode, alwaysAvailable, horoshopDisabledSet, availabilityOverrides, stockOverrides]);
+
+    return [...filtered].sort((a, b) => {
+      if (horoshopSortBy === 'issues_first') {
+        const getHoroSeverity = (p) => {
+          const code = p.vendorCode ? String(p.vendorCode).trim() : '';
+          const isAlways = alwaysSet.has(code);
+          let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : 0;
+          if (isAlways) stock = Math.max(stock, 10);
+          if (isNaN(stock) || stock < 0) stock = 0;
+          const out = isHoroshopOutOfStock(p);
+          const disabled = horoshopDisabledSet.has(code);
+          const noPrice = !p.price || Number(p.price) <= 0;
+          const noPhoto = !p.picture || !p.picture.trim();
+
+          // High severity: in stock in warehouse but out on Horoshop (lost revenue!) or missing price
+          if ((out && stock > 0) || noPrice) return 3;
+          // Medium severity: installments disabled for in-stock item or no photo
+          if ((disabled && stock > 0) || noPhoto) return 2;
+          // Minor: out of stock on site
+          if (out) return 1;
+          return 0;
+        };
+        const aSev = getHoroSeverity(a);
+        const bSev = getHoroSeverity(b);
+        if (bSev !== aSev) return bSev - aSev;
+        return (a.vendorCode || '').localeCompare(b.vendorCode || '');
+      }
+      if (horoshopSortBy === 'stock_desc') {
+        const aStock = stockOverrides[a.vendorCode] !== undefined ? parseInt(stockOverrides[a.vendorCode], 10) : 0;
+        const bStock = stockOverrides[b.vendorCode] !== undefined ? parseInt(stockOverrides[b.vendorCode], 10) : 0;
+        return (isNaN(bStock) ? 0 : bStock) - (isNaN(aStock) ? 0 : aStock);
+      }
+      if (horoshopSortBy === 'sku_asc') return (a.vendorCode || '').localeCompare(b.vendorCode || '');
+      if (horoshopSortBy === 'name_asc') return (names[a.vendorCode] || a.name || '').localeCompare(names[b.vendorCode] || b.name || '');
+      if (horoshopSortBy === 'price_desc') return (Number(b.price) || 0) - (Number(a.price) || 0);
+      return 0;
+    });
+  }, [catalog, horoshopSearchQuery, horoshopCategoryFilter, horoshopFilterMode, horoshopSortBy, alwaysAvailable, horoshopDisabledSet, availabilityOverrides, stockOverrides, names]);
 
   const horoshopGrouped = useMemo(() => {
     const map = {};
@@ -639,8 +743,22 @@ export default function App() {
       if (!map[cat]) map[cat] = [];
       map[cat].push(product);
     }
-    return Object.entries(map).sort(([a], [b]) => a.localeCompare(b, 'uk'));
-  }, [filteredHoroshopCatalog]);
+    return Object.entries(map).sort(([catA, prodsA], [catB, prodsB]) => {
+      if (horoshopSortBy === 'issues_first') {
+        const countHoroIssues = (prods) => prods.filter(p => {
+          const code = p.vendorCode ? String(p.vendorCode).trim() : '';
+          let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : 0;
+          if (alwaysAvailable.includes(code)) stock = Math.max(stock, 10);
+          if (isNaN(stock) || stock < 0) stock = 0;
+          return (isHoroshopOutOfStock(p) && stock > 0) || (horoshopDisabledSet.has(code) && stock > 0) || (!p.price || Number(p.price) <= 0) || (!p.picture || !p.picture.trim());
+        }).length;
+        const aIss = countHoroIssues(prodsA);
+        const bIss = countHoroIssues(prodsB);
+        if (bIss !== aIss) return bIss - aIss;
+      }
+      return catA.localeCompare(catB, 'uk');
+    });
+  }, [filteredHoroshopCatalog, horoshopSortBy, horoshopDisabledSet, stockOverrides, alwaysAvailable]);
 
   const getHoroshopCategoryStats = (products) => {
     let activeCount = 0;
@@ -727,7 +845,12 @@ export default function App() {
     let diffHoroshopNoPhoto = 0;
     let diffHoroshopIssues = 0;
 
+    let diffPromMissingInStock = 0;
     let diffInStockPromDisabled = 0;
+    let diffPromNoExcelRecord = 0;
+    let diffPromEnabledHoroOut = 0;
+    let diffPromGhosts = 0;
+    let diffPromMissingZeroStock = 0;
     let diffMissingFromProm = 0;
     let diffMonoMissingBarcode = 0;
 
@@ -799,9 +922,19 @@ export default function App() {
       if (isDiffHoroshopIssues) diffHoroshopIssues++;
 
       // Discrepancy flags - Prom
+      const isDiffPromMissingInStock = !existsOnProm && stock > 0;
+      const isDiffPromMissingZeroStock = !existsOnProm && stock <= 0;
       const isDiffInStockPromDisabled = existsOnProm && !isPromEnabled && stock > 0;
+      const isDiffPromNoExcelRecord = existsOnProm && !hasExcelRecord;
+      const isDiffPromEnabledHoroOut = existsOnProm && isPromEnabled && stock > 0 && (horoshopOut || isHoroshopDisabled);
       const isDiffMissingFromProm = !existsOnProm;
+      const isDiffPromIssues = isDiffPromMissingInStock || isDiffInStockPromDisabled || isDiffPromNoExcelRecord || isDiffPromEnabledHoroOut;
+
+      if (isDiffPromMissingInStock) diffPromMissingInStock++;
+      if (isDiffPromMissingZeroStock) diffPromMissingZeroStock++;
       if (isDiffInStockPromDisabled) diffInStockPromDisabled++;
+      if (isDiffPromNoExcelRecord) diffPromNoExcelRecord++;
+      if (isDiffPromEnabledHoroOut) diffPromEnabledHoroOut++;
       if (isDiffMissingFromProm) diffMissingFromProm++;
 
       // Discrepancy flags - Mono
@@ -827,11 +960,20 @@ export default function App() {
       }
 
       // Prom issues
-      if (isDiffMissingFromProm) {
-        issues.push({ platform: 'prom', type: 'purple', key: 'prom_missing', text: '🟣 Не знайдено на Prom.ua' });
+      if (isDiffPromMissingInStock) {
+        issues.push({ platform: 'prom', type: 'danger', key: 'prom_missing_in_stock', text: '🚨 Склад > 0, але немає на Prom.ua' });
       }
       if (isDiffInStockPromDisabled) {
-        issues.push({ platform: 'prom', type: 'neutral', key: 'in_stock_prom_disabled', text: '⚪ Є на складі, але вимкнено для Prom' });
+        issues.push({ platform: 'prom', type: 'warning', key: 'in_stock_prom_disabled', text: '⚪ Є на складі, але вимкнено для Prom' });
+      }
+      if (isDiffPromNoExcelRecord) {
+        issues.push({ platform: 'prom', type: 'neutral', key: 'prom_no_excel_record', text: '❓ Створено на Prom, але немає в Excel-складі' });
+      }
+      if (isDiffPromEnabledHoroOut) {
+        issues.push({ platform: 'prom', type: 'danger', key: 'prom_enabled_horo_out', text: '⚠️ На Prom увімкнено, але на Хорошопі: Немає' });
+      }
+      if (isDiffPromMissingZeroStock) {
+        issues.push({ platform: 'prom', type: 'purple', key: 'prom_missing_zero_stock', text: '🟣 Немає на Prom.ua (0 на складі)' });
       }
 
       // Excel issues
@@ -866,15 +1008,77 @@ export default function App() {
         isDiffHoroshopNoPrice,
         isDiffHoroshopNoPhoto,
         isDiffHoroshopIssues,
+        isDiffPromMissingInStock,
         isDiffInStockPromDisabled,
+        isDiffPromNoExcelRecord,
+        isDiffPromEnabledHoroOut,
+        isDiffPromMissingZeroStock,
+        isDiffPromIssues,
         isDiffMissingFromProm,
         isDiffMissingFromExcel,
         isDiffMonoMissingBarcode
       });
     });
 
+    // 350 Prom Ghost Items (SKUs on Prom.ua that do not exist in Horoshop catalog)
+    const catSet = new Set(catalog.map(p => (p.vendorCode ? String(p.vendorCode).trim() : '')));
+    promSkusSet.forEach(sku => {
+      const cleanSku = String(sku).trim();
+      if (!cleanSku || catSet.has(cleanSku)) return;
+
+      diffPromGhosts++;
+      const isEnabled = promWhitelistSet.has(cleanSku);
+      const hasExcel = stockOverrides[cleanSku] !== undefined;
+      const rawStock = hasExcel ? parseInt(stockOverrides[cleanSku], 10) : 0;
+      const stock = isNaN(rawStock) || rawStock < 0 ? 0 : rawStock;
+
+      const ghostIssues = [
+        { platform: 'prom', type: 'warning', key: 'prom_ghost', text: '👻 Привид на Prom (немає в Хорошопі)' }
+      ];
+      if (!hasExcel) {
+        ghostIssues.push({ platform: 'prom', type: 'neutral', key: 'prom_no_excel_record', text: '❓ Створено на Prom, але немає в Excel-складі' });
+      }
+      if (isEnabled) {
+        ghostIssues.push({ platform: 'prom', type: 'danger', key: 'prom_enabled_horo_out', text: '⚠️ На Prom увімкнено, але на Хорошопі: Немає' });
+      }
+
+      auditedProducts.push({
+        product: { vendorCode: cleanSku, name: names[cleanSku] || `Товар з Prom.ua [${cleanSku}]`, price: 0, category: 'Тільки на Prom.ua' },
+        code: cleanSku,
+        name: names[cleanSku] || `Товар з Prom.ua [${cleanSku}]`,
+        category: 'Тільки на Prom.ua',
+        price: 0,
+        hasExcelRecord: hasExcel,
+        stock: stock,
+        horoshopOut: true,
+        hasHoroshopInstallments: false,
+        isHoroshopDisabled: false,
+        existsOnProm: true,
+        isPromEnabled: isEnabled,
+        isMonoSelected: false,
+        hasBarcode: false,
+        issues: ghostIssues,
+        hasAnyIssue: true,
+        isGhostProm: true,
+        isDiffWarehouseInHoroshopOut: false,
+        isDiffHoroshopInstallmentsDisabled: false,
+        isDiffHoroshopNoPrice: false,
+        isDiffHoroshopNoPhoto: false,
+        isDiffHoroshopIssues: false,
+        isDiffInStockPromDisabled: false,
+        isDiffMissingFromProm: false,
+        isDiffPromMissingInStock: false,
+        isDiffPromMissingZeroStock: false,
+        isDiffPromNoExcelRecord: !hasExcel,
+        isDiffPromEnabledHoroOut: isEnabled,
+        isDiffPromIssues: true,
+        isDiffMissingFromExcel: !hasExcel,
+        isDiffMonoMissingBarcode: false
+      });
+    });
+
     const totalIssuesCount = auditedProducts.filter(item => item.hasAnyIssue).length;
-    const diffPromIssues = diffMissingFromProm + diffInStockPromDisabled;
+    const diffPromIssues = auditedProducts.filter(item => item.isDiffPromIssues).length;
 
     return {
       warehouseInStock,
@@ -893,9 +1097,14 @@ export default function App() {
       diffHoroshopNoPrice,
       diffHoroshopNoPhoto,
       diffHoroshopIssues,
+      diffPromMissingInStock,
       diffInStockPromDisabled,
-      diffMissingFromProm,
+      diffPromNoExcelRecord,
+      diffPromEnabledHoroOut,
+      diffPromGhosts,
+      diffPromMissingZeroStock,
       diffPromIssues,
+      diffMissingFromProm,
       diffMonoMissingBarcode,
       totalIssuesCount,
       auditedProducts
@@ -915,15 +1124,54 @@ export default function App() {
       if (dashboardFilter === 'issues') return item.hasAnyIssue;
       if (dashboardFilter === 'horoshop_issues') return item.isDiffHoroshopIssues;
       if (dashboardFilter === 'wh_in_horo_out') return item.isDiffWarehouseInHoroshopOut;
-      if (dashboardFilter === 'prom_issues') return item.isDiffMissingFromProm || item.isDiffInStockPromDisabled;
-      if (dashboardFilter === 'prom_missing') return item.isDiffMissingFromProm;
+      if (dashboardFilter === 'horo_installments_disabled') return item.isDiffHoroshopInstallmentsDisabled;
+      if (dashboardFilter === 'horo_no_price') return item.isDiffHoroshopNoPrice;
+      if (dashboardFilter === 'horo_no_photo') return item.isDiffHoroshopNoPhoto;
+      if (dashboardFilter === 'prom_issues') return item.isDiffPromIssues;
+      if (dashboardFilter === 'prom_missing_in_stock') return item.isDiffPromMissingInStock;
       if (dashboardFilter === 'prom_disabled_stock') return item.isDiffInStockPromDisabled;
+      if (dashboardFilter === 'prom_no_excel') return item.isDiffPromNoExcelRecord;
+      if (dashboardFilter === 'prom_enabled_horo_out') return item.isDiffPromEnabledHoroOut;
+      if (dashboardFilter === 'prom_ghosts') return item.isGhostProm;
+      if (dashboardFilter === 'prom_missing_zero') return item.isDiffPromMissingZeroStock;
+      if (dashboardFilter === 'prom_missing') return item.isDiffMissingFromProm;
       if (dashboardFilter === 'mono_issues' || dashboardFilter === 'mono_no_barcode') return item.isDiffMonoMissingBarcode;
       if (dashboardFilter === 'excel_issues' || dashboardFilter === 'excel_missing') return item.isDiffMissingFromExcel;
       if (dashboardFilter === 'healthy') return !item.hasAnyIssue;
       return true; // 'all'
     });
   }, [dashboardStats.auditedProducts, dashboardSearchQuery, dashboardCategoryFilter, dashboardFilter]);
+
+  const sortedDashboardProducts = useMemo(() => {
+    const list = [...filteredDashboardProducts];
+    if (dashboardSortBy === 'issues_first') {
+      return list.sort((a, b) => {
+        if (a.hasAnyIssue && !b.hasAnyIssue) return -1;
+        if (!a.hasAnyIssue && b.hasAnyIssue) return 1;
+        const aDanger = a.issues.some(i => i.type === 'danger');
+        const bDanger = b.issues.some(i => i.type === 'danger');
+        if (aDanger && !bDanger) return -1;
+        if (!aDanger && bDanger) return 1;
+        if (b.issues.length !== a.issues.length) return b.issues.length - a.issues.length;
+        return a.code.localeCompare(b.code);
+      });
+    }
+    if (dashboardSortBy === 'critical_first') {
+      return list.sort((a, b) => {
+        const aDanger = a.issues.filter(i => i.type === 'danger').length;
+        const bDanger = b.issues.filter(i => i.type === 'danger').length;
+        if (bDanger !== aDanger) return bDanger - aDanger;
+        return b.issues.length - a.issues.length;
+      });
+    }
+    if (dashboardSortBy === 'stock_desc') return list.sort((a, b) => b.stock - a.stock);
+    if (dashboardSortBy === 'sku_asc') return list.sort((a, b) => a.code.localeCompare(b.code));
+    if (dashboardSortBy === 'sku_desc') return list.sort((a, b) => b.code.localeCompare(a.code));
+    if (dashboardSortBy === 'name_asc') return list.sort((a, b) => a.name.localeCompare(b.name));
+    if (dashboardSortBy === 'price_desc') return list.sort((a, b) => (Number(b.price) || 0) - (Number(a.price) || 0));
+    if (dashboardSortBy === 'price_asc') return list.sort((a, b) => (Number(a.price) || 0) - (Number(b.price) || 0));
+    return list;
+  }, [filteredDashboardProducts, dashboardSortBy]);
 
   const renderDashboard = () => {
     const lastRun = workflowRuns && workflowRuns.length > 0 ? workflowRuns[0] : null;
@@ -1482,7 +1730,7 @@ export default function App() {
             
             {/* Platform Card 1: Horoshop */}
             {(() => {
-              const isActive = dashboardFilter === 'horoshop_issues' || dashboardFilter === 'wh_in_horo_out';
+              const isActive = dashboardFilter === 'horoshop_issues' || dashboardFilter.startsWith('horo_') || dashboardFilter === 'wh_in_horo_out';
               return (
                 <div
                   onClick={() => setDashboardFilter(isActive ? 'all' : 'horoshop_issues')}
@@ -1517,7 +1765,7 @@ export default function App() {
 
             {/* Platform Card 2: Prom */}
             {(() => {
-              const isActive = dashboardFilter === 'prom_issues' || dashboardFilter === 'prom_missing' || dashboardFilter === 'prom_disabled_stock';
+              const isActive = dashboardFilter === 'prom_issues' || dashboardFilter.startsWith('prom_');
               return (
                 <div
                   onClick={() => setDashboardFilter(isActive ? 'all' : 'prom_issues')}
@@ -1552,7 +1800,7 @@ export default function App() {
 
             {/* Platform Card 3: Mono */}
             {(() => {
-              const isActive = dashboardFilter === 'mono_issues' || dashboardFilter === 'mono_no_barcode';
+              const isActive = dashboardFilter === 'mono_issues' || dashboardFilter.startsWith('mono_');
               return (
                 <div
                   onClick={() => setDashboardFilter(isActive ? 'all' : 'mono_issues')}
@@ -1587,7 +1835,7 @@ export default function App() {
 
             {/* Platform Card 4: Excel */}
             {(() => {
-              const isActive = dashboardFilter === 'excel_issues' || dashboardFilter === 'excel_missing';
+              const isActive = dashboardFilter === 'excel_issues' || dashboardFilter.startsWith('excel_');
               return (
                 <div
                   onClick={() => setDashboardFilter(isActive ? 'all' : 'excel_issues')}
@@ -1627,7 +1875,8 @@ export default function App() {
         <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '14px' }}>
           
           {/* Active Section Problem Description Banner */}
-          {(dashboardFilter === 'horoshop_issues' || dashboardFilter === 'wh_in_horo_out') && (
+          {/* Active Section Problem Description Banner */}
+          {(dashboardFilter === 'horoshop_issues' || dashboardFilter === 'wh_in_horo_out' || dashboardFilter.startsWith('horo_')) && (
             <div style={{
               background: '#eef2f9',
               border: '1px solid #cbd7ee',
@@ -1638,9 +1887,10 @@ export default function App() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              gap: '1rem'
+              gap: '1rem',
+              flexWrap: 'wrap'
             }}>
-              <div>
+              <div style={{ flex: 1, minWidth: '280px' }}>
                 <div style={{ fontWeight: 700, color: '#4360a0', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <span>🔵</span> Проблеми Хорошоп ({dashboardStats.diffHoroshopIssues} товарів)
                 </div>
@@ -1649,48 +1899,125 @@ export default function App() {
                     Виявлені невідповідності та зауваження до каталогу сайту Хорошоп:
                   </div>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
-                    <span style={{ background: '#fee2e2', color: '#b91c1c', padding: '0.15rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600 }}>
+                    <button
+                      type="button"
+                      onClick={() => setDashboardFilter(dashboardFilter === 'wh_in_horo_out' ? 'horoshop_issues' : 'wh_in_horo_out')}
+                      style={{
+                        background: dashboardFilter === 'wh_in_horo_out' ? '#b91c1c' : '#fee2e2',
+                        color: dashboardFilter === 'wh_in_horo_out' ? '#ffffff' : '#b91c1c',
+                        padding: '0.2rem 0.55rem',
+                        borderRadius: '6px',
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                        border: '1px solid #fca5a5',
+                        cursor: 'pointer'
+                      }}
+                      title="Фільтрувати: Склад > 0, на сайті немає"
+                    >
                       🚨 Склад &gt; 0, на сайті немає: {dashboardStats.diffWarehouseInHoroshopOut}
-                    </span>
+                    </button>
                     {dashboardStats.diffHoroshopInstallmentsDisabled > 0 && (
-                      <span style={{ background: '#fef3c7', color: '#b45309', padding: '0.15rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600 }}>
-                        🔒 Оплата частинами вимкнена (в наявності): {dashboardStats.diffHoroshopInstallmentsDisabled}
-                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setDashboardFilter(dashboardFilter === 'horo_installments_disabled' ? 'horoshop_issues' : 'horo_installments_disabled')}
+                        style={{
+                          background: dashboardFilter === 'horo_installments_disabled' ? '#b45309' : '#fef3c7',
+                          color: dashboardFilter === 'horo_installments_disabled' ? '#ffffff' : '#b45309',
+                          padding: '0.2rem 0.55rem',
+                          borderRadius: '6px',
+                          fontSize: '0.75rem',
+                          fontWeight: 600,
+                          border: '1px solid #fde68a',
+                          cursor: 'pointer'
+                        }}
+                        title="Фільтрувати: Оплата частинами вимкнена для товару в наявності"
+                      >
+                        🔒 Оплата частинами вимкнена: {dashboardStats.diffHoroshopInstallmentsDisabled}
+                      </button>
                     )}
                     {dashboardStats.diffHoroshopNoPrice > 0 && (
-                      <span style={{ background: '#fee2e2', color: '#b91c1c', padding: '0.15rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600 }}>
+                      <button
+                        type="button"
+                        onClick={() => setDashboardFilter(dashboardFilter === 'horo_no_price' ? 'horoshop_issues' : 'horo_no_price')}
+                        style={{
+                          background: dashboardFilter === 'horo_no_price' ? '#b91c1c' : '#fee2e2',
+                          color: dashboardFilter === 'horo_no_price' ? '#ffffff' : '#b91c1c',
+                          padding: '0.2rem 0.55rem',
+                          borderRadius: '6px',
+                          fontSize: '0.75rem',
+                          fontWeight: 600,
+                          border: '1px solid #fca5a5',
+                          cursor: 'pointer'
+                        }}
+                        title="Фільтрувати: Немає ціни"
+                      >
                         💸 Немає ціни: {dashboardStats.diffHoroshopNoPrice}
-                      </span>
+                      </button>
                     )}
                     {dashboardStats.diffHoroshopNoPhoto > 0 && (
-                      <span style={{ background: '#ffedd5', color: '#c2410c', padding: '0.15rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600 }}>
+                      <button
+                        type="button"
+                        onClick={() => setDashboardFilter(dashboardFilter === 'horo_no_photo' ? 'horoshop_issues' : 'horo_no_photo')}
+                        style={{
+                          background: dashboardFilter === 'horo_no_photo' ? '#c2410c' : '#ffedd5',
+                          color: dashboardFilter === 'horo_no_photo' ? '#ffffff' : '#c2410c',
+                          padding: '0.2rem 0.55rem',
+                          borderRadius: '6px',
+                          fontSize: '0.75rem',
+                          fontWeight: 600,
+                          border: '1px solid #fed7aa',
+                          cursor: 'pointer'
+                        }}
+                        title="Фільтрувати: Немає фотографії"
+                      >
                         🖼️ Немає фотографії: {dashboardStats.diffHoroshopNoPhoto}
-                      </span>
+                      </button>
                     )}
                   </div>
                 </div>
               </div>
-              <button
-                onClick={() => setDashboardFilter('all')}
-                className="btn"
-                style={{
-                  background: '#ffffff',
-                  border: '1px solid #cbd7ee',
-                  color: '#4360a0',
-                  fontWeight: 600,
-                  fontSize: '0.8rem',
-                  padding: '0.4rem 0.85rem',
-                  borderRadius: '6px',
-                  whiteSpace: 'nowrap',
-                  cursor: 'pointer'
-                }}
-              >
-                ✕ Скинути фільтр
-              </button>
+              <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                {dashboardFilter !== 'horoshop_issues' && (
+                  <button
+                    onClick={() => setDashboardFilter('horoshop_issues')}
+                    className="btn"
+                    style={{
+                      background: '#dbeafe',
+                      border: '1px solid #bfdbfe',
+                      color: '#1d4ed8',
+                      fontWeight: 600,
+                      fontSize: '0.8rem',
+                      padding: '0.4rem 0.85rem',
+                      borderRadius: '6px',
+                      whiteSpace: 'nowrap',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    Всі проблеми Хорошоп
+                  </button>
+                )}
+                <button
+                  onClick={() => setDashboardFilter('all')}
+                  className="btn"
+                  style={{
+                    background: '#ffffff',
+                    border: '1px solid #cbd7ee',
+                    color: '#4360a0',
+                    fontWeight: 600,
+                    fontSize: '0.8rem',
+                    padding: '0.4rem 0.85rem',
+                    borderRadius: '6px',
+                    whiteSpace: 'nowrap',
+                    cursor: 'pointer'
+                  }}
+                >
+                  ✕ Скинути фільтр
+                </button>
+              </div>
             </div>
           )}
 
-          {(dashboardFilter === 'prom_issues' || dashboardFilter === 'prom_missing' || dashboardFilter === 'prom_disabled_stock') && (
+          {(dashboardFilter === 'prom_issues' || dashboardFilter.startsWith('prom_')) && (
             <div style={{
               background: '#faf5ff',
               border: '1px solid #ddd6fe',
@@ -1701,33 +2028,153 @@ export default function App() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              gap: '1rem'
+              gap: '1rem',
+              flexWrap: 'wrap'
             }}>
-              <div>
+              <div style={{ flex: 1, minWidth: '300px' }}>
                 <div style={{ fontWeight: 700, color: '#7c3aed', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <span>🟣</span> Проблеми Пром ({dashboardStats.diffPromIssues} товарів)
                 </div>
-                <div style={{ fontSize: '0.825rem', color: '#1e293b', marginTop: '0.25rem', lineHeight: 1.45 }}>
-                  <b>Проблема:</b> Товари не опубліковані на Prom.ua: <b>{dashboardStats.diffMissingFromProm}</b> товарів відсутні в каталозі Prom (не створено артикул), а <b>{dashboardStats.diffInStockPromDisabled}</b> товарів є на складі, але вимкнені з продажу на Prom.
+                <div style={{ fontSize: '0.825rem', color: '#1e293b', marginTop: '0.35rem', lineHeight: 1.45 }}>
+                  <div style={{ marginBottom: '0.35rem', color: '#475569' }}>
+                    Невідповідності між складом, каталогом Хорошопу та Prom.ua:
+                  </div>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+                    <button
+                      type="button"
+                      onClick={() => setDashboardFilter(dashboardFilter === 'prom_missing_in_stock' ? 'prom_issues' : 'prom_missing_in_stock')}
+                      style={{
+                        background: dashboardFilter === 'prom_missing_in_stock' ? '#b91c1c' : '#fee2e2',
+                        color: dashboardFilter === 'prom_missing_in_stock' ? '#ffffff' : '#b91c1c',
+                        padding: '0.2rem 0.55rem',
+                        borderRadius: '6px',
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                        border: '1px solid #fca5a5',
+                        cursor: 'pointer',
+                        transition: 'all 0.15s'
+                      }}
+                      title="Фільтрувати: Склад > 0, але товару немає на Prom.ua"
+                    >
+                      🚨 Склад &gt; 0, немає на Prom: {dashboardStats.diffPromMissingInStock}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setDashboardFilter(dashboardFilter === 'prom_disabled_stock' ? 'prom_issues' : 'prom_disabled_stock')}
+                      style={{
+                        background: dashboardFilter === 'prom_disabled_stock' ? '#475569' : '#f1f5f9',
+                        color: dashboardFilter === 'prom_disabled_stock' ? '#ffffff' : '#334155',
+                        padding: '0.2rem 0.55rem',
+                        borderRadius: '6px',
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                        border: '1px solid #cbd5e1',
+                        cursor: 'pointer',
+                        transition: 'all 0.15s'
+                      }}
+                      title="Фільтрувати: Є на складі, але вимкнено для Prom"
+                    >
+                      ⚪ Є на складі, але вимкнено: {dashboardStats.diffInStockPromDisabled}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setDashboardFilter(dashboardFilter === 'prom_no_excel' ? 'prom_issues' : 'prom_no_excel')}
+                      style={{
+                        background: dashboardFilter === 'prom_no_excel' ? '#4f46e5' : '#e0e7ff',
+                        color: dashboardFilter === 'prom_no_excel' ? '#ffffff' : '#3730a3',
+                        padding: '0.2rem 0.55rem',
+                        borderRadius: '6px',
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                        border: '1px solid #c7d2fe',
+                        cursor: 'pointer',
+                        transition: 'all 0.15s'
+                      }}
+                      title="Фільтрувати: Створено на Prom, але немає в Excel-складі"
+                    >
+                      ❓ Створено на Prom, немає в Excel: {dashboardStats.diffPromNoExcelRecord}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setDashboardFilter(dashboardFilter === 'prom_enabled_horo_out' ? 'prom_issues' : 'prom_enabled_horo_out')}
+                      style={{
+                        background: dashboardFilter === 'prom_enabled_horo_out' ? '#c2410c' : '#ffedd5',
+                        color: dashboardFilter === 'prom_enabled_horo_out' ? '#ffffff' : '#9a3412',
+                        padding: '0.2rem 0.55rem',
+                        borderRadius: '6px',
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                        border: '1px solid #fed7aa',
+                        cursor: 'pointer',
+                        transition: 'all 0.15s'
+                      }}
+                      title="Фільтрувати: На Prom увімкнено, але на Хорошопі стоїть «Немає на сайті»"
+                    >
+                      ⚠️ На Prom увімкнено, на сайті «Немає»: {dashboardStats.diffPromEnabledHoroOut}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setDashboardFilter(dashboardFilter === 'prom_ghosts' ? 'prom_issues' : 'prom_ghosts')}
+                      style={{
+                        background: dashboardFilter === 'prom_ghosts' ? '#6b21a8' : '#f3e8ff',
+                        color: dashboardFilter === 'prom_ghosts' ? '#ffffff' : '#6b21a8',
+                        padding: '0.2rem 0.55rem',
+                        borderRadius: '6px',
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                        border: '1px solid #d8b4fe',
+                        cursor: 'pointer',
+                        transition: 'all 0.15s'
+                      }}
+                      title="Фільтрувати: Товари-привиди на Prom (350 позицій на Prom, яких немає в Хорошопі)"
+                    >
+                      👻 Товари-привиди на Prom: {dashboardStats.diffPromGhosts}
+                    </button>
+                  </div>
                 </div>
               </div>
-              <button
-                onClick={() => setDashboardFilter('all')}
-                className="btn"
-                style={{
-                  background: '#ffffff',
-                  border: '1px solid #ddd6fe',
-                  color: '#7c3aed',
-                  fontWeight: 600,
-                  fontSize: '0.8rem',
-                  padding: '0.4rem 0.85rem',
-                  borderRadius: '6px',
-                  whiteSpace: 'nowrap',
-                  cursor: 'pointer'
-                }}
-              >
-                ✕ Скинути фільтр
-              </button>
+              <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                {dashboardFilter !== 'prom_issues' && (
+                  <button
+                    onClick={() => setDashboardFilter('prom_issues')}
+                    className="btn"
+                    style={{
+                      background: '#ede9fe',
+                      border: '1px solid #c4b5fd',
+                      color: '#6d28d9',
+                      fontWeight: 600,
+                      fontSize: '0.8rem',
+                      padding: '0.4rem 0.85rem',
+                      borderRadius: '6px',
+                      whiteSpace: 'nowrap',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    Всі проблеми Prom ({dashboardStats.diffPromIssues})
+                  </button>
+                )}
+                <button
+                  onClick={() => setDashboardFilter('all')}
+                  className="btn"
+                  style={{
+                    background: '#ffffff',
+                    border: '1px solid #ddd6fe',
+                    color: '#7c3aed',
+                    fontWeight: 600,
+                    fontSize: '0.8rem',
+                    padding: '0.4rem 0.85rem',
+                    borderRadius: '6px',
+                    whiteSpace: 'nowrap',
+                    cursor: 'pointer'
+                  }}
+                >
+                  ✕ Скинути фільтр
+                </button>
+              </div>
             </div>
           )}
 
@@ -1839,8 +2286,23 @@ export default function App() {
               ))}
             </select>
 
+            <select
+              className="input-field"
+              style={{ width: 'auto', minWidth: '220px' }}
+              value={dashboardSortBy}
+              onChange={e => setDashboardSortBy(e.target.value)}
+              title="Сортування товарів"
+            >
+              <option value="issues_first">⚡ Спочатку з помилками / розбіжностями</option>
+              <option value="critical_first">🚨 Тільки критичні помилки першими</option>
+              <option value="stock_desc">📦 Залишок на складі (від більшого)</option>
+              <option value="sku_asc">🔢 Артикул (А-Я / 0-9)</option>
+              <option value="name_asc">🔤 Назва товару (А-Я)</option>
+              <option value="price_desc">💰 Ціна (від більшої)</option>
+            </select>
+
             <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
-              Знайдено: <b>{filteredDashboardProducts.length}</b> товарів
+              Знайдено: <b>{sortedDashboardProducts.length}</b> товарів
             </div>
           </div>
 
@@ -1855,18 +2317,40 @@ export default function App() {
                   <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '140px', padding: '0.75rem 0.5rem', color: '#4360a0' }}>🔵 Хорошоп</th>
                   <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '140px', padding: '0.75rem 0.5rem', color: '#7c3aed' }}>🟣 Prom.ua</th>
                   <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '130px', padding: '0.75rem 0.5rem', color: '#18181b' }}>⚫ Мономаркет</th>
-                  <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '220px', padding: '0.75rem 0.5rem' }}>
-                    {dashboardFilter === 'horoshop_issues' || dashboardFilter === 'wh_in_horo_out' ? '🔵 Зауваження Хорошоп' :
-                     dashboardFilter === 'prom_issues' || dashboardFilter === 'prom_missing' || dashboardFilter === 'prom_disabled_stock' ? '🟣 Зауваження Prom' :
-                     dashboardFilter === 'mono_issues' || dashboardFilter === 'mono_no_barcode' ? '⚫ Зауваження Моно' :
-                     dashboardFilter === 'excel_issues' || dashboardFilter === 'excel_missing' ? '📊 Зауваження Excel' :
-                     'Статус / Зауваження'}
+                  <th
+                    onClick={() => setDashboardSortBy(prev => prev === 'issues_first' ? 'stock_desc' : 'issues_first')}
+                    style={{
+                      position: 'sticky',
+                      top: 0,
+                      zIndex: 30,
+                      background: '#f8fafc',
+                      borderBottom: '2px solid var(--border-color)',
+                      boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
+                      width: '240px',
+                      padding: '0.75rem 0.5rem',
+                      cursor: 'pointer',
+                      userSelect: 'none'
+                    }}
+                    title="Натисніть для сортування за зауваженнями / розбіжностями"
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.25rem' }}>
+                      <span>
+                        {dashboardFilter === 'horoshop_issues' || dashboardFilter.startsWith('horo_') || dashboardFilter === 'wh_in_horo_out' ? '🔵 Зауваження Хорошоп' :
+                         dashboardFilter === 'prom_issues' || dashboardFilter.startsWith('prom_') ? '🟣 Зауваження Prom' :
+                         dashboardFilter === 'mono_issues' || dashboardFilter.startsWith('mono_') ? '⚫ Зауваження Моно' :
+                         dashboardFilter === 'excel_issues' || dashboardFilter.startsWith('excel_') ? '📊 Зауваження Excel' :
+                         'Статус / Зауваження'}
+                      </span>
+                      <span style={{ fontSize: '0.75rem', color: dashboardSortBy === 'issues_first' || dashboardSortBy === 'critical_first' ? '#ef4444' : '#94a3b8' }}>
+                        {dashboardSortBy === 'issues_first' ? '⚡▼' : dashboardSortBy === 'critical_first' ? '🚨▼' : '⇅'}
+                      </span>
+                    </div>
                   </th>
                   <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '130px', padding: '0.75rem 0.5rem', textAlign: 'center', borderTopRightRadius: '7px' }}>Швидка дія</th>
                 </tr>
               </thead>
               <tbody>
-                {filteredDashboardProducts.slice(0, dashboardLimit).map(item => {
+                {sortedDashboardProducts.slice(0, dashboardLimit).map(item => {
                   return (
                     <tr
                       key={item.code}
@@ -1980,13 +2464,13 @@ export default function App() {
                       <td style={{ padding: '0.75rem 0.5rem', verticalAlign: 'middle' }}>
                         {(() => {
                           let platformFilter = null;
-                          if (dashboardFilter === 'horoshop_issues' || dashboardFilter === 'wh_in_horo_out') {
+                          if (dashboardFilter === 'horoshop_issues' || dashboardFilter.startsWith('horo_') || dashboardFilter === 'wh_in_horo_out') {
                             platformFilter = 'horoshop';
-                          } else if (dashboardFilter === 'prom_issues' || dashboardFilter === 'prom_missing' || dashboardFilter === 'prom_disabled_stock') {
+                          } else if (dashboardFilter === 'prom_issues' || dashboardFilter.startsWith('prom_')) {
                             platformFilter = 'prom';
-                          } else if (dashboardFilter === 'mono_issues' || dashboardFilter === 'mono_no_barcode') {
+                          } else if (dashboardFilter === 'mono_issues' || dashboardFilter.startsWith('mono_')) {
                             platformFilter = 'mono';
-                          } else if (dashboardFilter === 'excel_issues' || dashboardFilter === 'excel_missing') {
+                          } else if (dashboardFilter === 'excel_issues' || dashboardFilter.startsWith('excel_')) {
                             platformFilter = 'excel';
                           }
 
@@ -2064,21 +2548,21 @@ export default function App() {
           </div>
 
           {/* Pagination limit control */}
-          {filteredDashboardProducts.length > dashboardLimit && (
+          {sortedDashboardProducts.length > dashboardLimit && (
             <div style={{ textAlign: 'center', marginTop: '1.25rem' }}>
               <button
                 className="btn"
                 style={{ background: '#f3f4f6', color: 'var(--text-main)', border: '1px solid var(--border-color)', fontWeight: 600 }}
                 onClick={() => setDashboardLimit(prev => prev + 200)}
               >
-                Показати ще 200 товарів (залишилось {filteredDashboardProducts.length - dashboardLimit})
+                Показати ще 200 товарів (залишилось {sortedDashboardProducts.length - dashboardLimit})
               </button>
               <button
                 className="btn"
                 style={{ marginLeft: '0.75rem', background: '#fff', color: 'var(--text-main)', border: '1px solid var(--border-color)' }}
-                onClick={() => setDashboardLimit(filteredDashboardProducts.length)}
+                onClick={() => setDashboardLimit(sortedDashboardProducts.length)}
               >
-                Показати всі {filteredDashboardProducts.length}
+                Показати всі {sortedDashboardProducts.length}
               </button>
             </div>
           )}
@@ -2181,6 +2665,39 @@ export default function App() {
     }
   };
 
+  const sortMonoProducts = (list) => {
+    return [...list].sort((a, b) => {
+      if (monoSortBy === 'issues_first') {
+        const aSelected = whitelist.includes(a.vendorCode);
+        const bSelected = whitelist.includes(b.vendorCode);
+        const aNoBarcode = aSelected && !barcodes[a.vendorCode] && !a.barcode;
+        const bNoBarcode = bSelected && !barcodes[b.vendorCode] && !b.barcode;
+        if (aNoBarcode && !bNoBarcode) return -1;
+        if (!aNoBarcode && bNoBarcode) return 1;
+
+        const aName = names[a.vendorCode] !== undefined ? names[a.vendorCode] : (a.name || '');
+        const bName = names[b.vendorCode] !== undefined ? names[b.vendorCode] : (b.name || '');
+        const aOver = aName.length > 50;
+        const bOver = bName.length > 50;
+        if (aOver && !bOver) return -1;
+        if (!aOver && bOver) return 1;
+
+        if (aSelected && !bSelected) return -1;
+        if (!aSelected && bSelected) return 1;
+        return (a.vendorCode || '').localeCompare(b.vendorCode || '');
+      }
+      if (monoSortBy === 'stock_desc') {
+        const aStock = stockOverrides[a.vendorCode] !== undefined ? parseInt(stockOverrides[a.vendorCode], 10) : (a.stock ?? 10);
+        const bStock = stockOverrides[b.vendorCode] !== undefined ? parseInt(stockOverrides[b.vendorCode], 10) : (b.stock ?? 10);
+        return (isNaN(bStock) ? 0 : bStock) - (isNaN(aStock) ? 0 : aStock);
+      }
+      if (monoSortBy === 'sku_asc') return (a.vendorCode || '').localeCompare(b.vendorCode || '');
+      if (monoSortBy === 'name_asc') return (names[a.vendorCode] || a.name || '').localeCompare(names[b.vendorCode] || b.name || '');
+      if (monoSortBy === 'price_desc') return (Number(b.price) || 0) - (Number(a.price) || 0);
+      return 0;
+    });
+  };
+
   // Фільтрація для пошуку (плоский список) та статусу
   const filteredCatalog = useMemo(() => {
     let result = catalog;
@@ -2191,22 +2708,22 @@ export default function App() {
       result = result.filter(p => !barcodes[p.vendorCode] && !p.barcode);
     }
     
-    if (!searchQuery.trim()) return result;
-    
-    const terms = searchQuery.trim().split(/\s+/).filter(Boolean);
-    if (terms.length > 1) {
-      const termsLower = terms.map(t => t.toLowerCase());
-      result = result.filter(p => termsLower.includes(p.vendorCode?.toLowerCase()));
-    } else {
-      const q = terms[0].toLowerCase();
-      result = result.filter(p =>
-        p.name?.toLowerCase().includes(q) ||
-        p.vendorCode?.toLowerCase().includes(q) ||
-        String(p.price).includes(q)
-      );
+    if (searchQuery.trim()) {
+      const terms = searchQuery.trim().split(/\s+/).filter(Boolean);
+      if (terms.length > 1) {
+        const termsLower = terms.map(t => t.toLowerCase());
+        result = result.filter(p => termsLower.includes(p.vendorCode?.toLowerCase()));
+      } else {
+        const q = terms[0].toLowerCase();
+        result = result.filter(p =>
+          p.name?.toLowerCase().includes(q) ||
+          p.vendorCode?.toLowerCase().includes(q) ||
+          String(p.price).includes(q)
+        );
+      }
     }
-    return result;
-  }, [catalog, searchQuery, filterMode, whitelist, barcodes]);
+    return sortMonoProducts(result);
+  }, [catalog, searchQuery, filterMode, whitelist, barcodes, monoSortBy, names, stockOverrides]);
 
   const grouped = useMemo(() => {
     const map = {};
@@ -2221,8 +2738,17 @@ export default function App() {
       if (!map[cat]) map[cat] = [];
       map[cat].push(product);
     }
-    return Object.entries(map).sort(([a], [b]) => a.localeCompare(b, 'uk'));
-  }, [catalog, filterMode, whitelist, barcodes]);
+    return Object.entries(map)
+      .map(([cat, prods]) => [cat, sortMonoProducts(prods)])
+      .sort(([catA, prodsA], [catB, prodsB]) => {
+        if (monoSortBy === 'issues_first') {
+          const aIssues = prodsA.filter(p => whitelist.includes(p.vendorCode) && !barcodes[p.vendorCode] && !p.barcode).length;
+          const bIssues = prodsB.filter(p => whitelist.includes(p.vendorCode) && !barcodes[p.vendorCode] && !p.barcode).length;
+          if (bIssues !== aIssues) return bIssues - aIssues;
+        }
+        return catA.localeCompare(catB, 'uk');
+      });
+  }, [catalog, filterMode, whitelist, barcodes, monoSortBy, names, stockOverrides]);
 
   const getCategoryStats = (products) => {
     const selected = products.filter(p => whitelist.includes(p.vendorCode)).length;
@@ -2513,23 +3039,36 @@ export default function App() {
           </span>
         </td>
         <td style={{ padding: '0.85rem' }}>
-          {!existsOnProm ? (
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#fef3c7', color: '#92400e', fontSize: '0.85rem', fontWeight: 600 }} title="Товар є у фіді Хорошопу, але його артикул не знайдено на Prom.ua">
-              ⚠️ Немає на Prom.ua
-            </span>
-          ) : !isEnabled ? (
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#f3f4f6', color: '#4b5563', fontSize: '0.85rem', fontWeight: 500 }} title="Товар вимкнено для Prom: залишається видимим на сайті, але зі статусом 'Немає в наявності' (0 шт.)">
-              ⚪ Вимкнено (Немає в наявн.)
-            </span>
-          ) : stock > 0 ? (
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#dcfce7', color: '#166534', fontSize: '0.85rem', fontWeight: 600 }}>
-              🟢 В наявності ({stock} шт.)
-            </span>
-          ) : (
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.3rem 0.6rem', borderRadius: '6px', background: '#fee2e2', color: '#991b1b', fontSize: '0.85rem', fontWeight: 500 }}>
-              🔴 Немає в наявності
-            </span>
-          )}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', alignItems: 'flex-start' }}>
+            {!existsOnProm ? (
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.25rem 0.55rem', borderRadius: '6px', background: stock > 0 ? '#fee2e2' : '#fef3c7', color: stock > 0 ? '#b91c1c' : '#92400e', fontSize: '0.8rem', fontWeight: 600 }} title="Товар є у фіді Хорошопу, але його артикул не знайдено на Prom.ua">
+                {stock > 0 ? '🚨 Склад > 0, немає на Prom' : '⚠️ Немає на Prom.ua'}
+              </span>
+            ) : !isEnabled ? (
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.25rem 0.55rem', borderRadius: '6px', background: stock > 0 ? '#ffedd5' : '#f3f4f6', color: stock > 0 ? '#c2410c' : '#4b5563', fontSize: '0.8rem', fontWeight: stock > 0 ? 600 : 500 }} title="Товар вимкнено для Prom: залишається видимим на сайті, але зі статусом 'Немає в наявності' (0 шт.)">
+                {stock > 0 ? '⚪ Є на складі, але вимкнено' : '⚪ Вимкнено (Немає в наявн.)'}
+              </span>
+            ) : stock > 0 ? (
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.25rem 0.55rem', borderRadius: '6px', background: '#dcfce7', color: '#166534', fontSize: '0.8rem', fontWeight: 600 }}>
+                🟢 В наявності ({stock} шт.)
+              </span>
+            ) : (
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', padding: '0.25rem 0.55rem', borderRadius: '6px', background: '#fee2e2', color: '#991b1b', fontSize: '0.8rem', fontWeight: 500 }}>
+                🔴 Немає в наявності
+              </span>
+            )}
+
+            {existsOnProm && stockOverrides[code] === undefined && (
+              <span style={{ fontSize: '0.72rem', color: '#4338ca', background: '#e0e7ff', padding: '0.12rem 0.45rem', borderRadius: '4px', fontWeight: 600 }}>
+                ❓ Немає в Excel-складі
+              </span>
+            )}
+            {existsOnProm && isEnabled && stock > 0 && isHoroshopOutOfStock(product) && (
+              <span style={{ fontSize: '0.72rem', color: '#b91c1c', background: '#fee2e2', padding: '0.12rem 0.45rem', borderRadius: '4px', fontWeight: 600 }}>
+                ⚠️ На сайті Хорошоп: «Немає»
+              </span>
+            )}
+          </div>
         </td>
       </tr>
     );
@@ -3168,6 +3707,19 @@ export default function App() {
             <option value="enabled">🟢 Тільки увімкнені в фід</option>
             <option value="no_barcode">⚠️ Без штрихкоду</option>
           </select>
+          <select
+            className="input-field"
+            style={{ width: '250px', fontSize: '0.95rem', cursor: 'pointer' }}
+            value={monoSortBy}
+            onChange={e => setMonoSortBy(e.target.value)}
+            title="Сортування товарів Мономаркет"
+          >
+            <option value="issues_first">⚡ Спочатку з зауваженнями (без EAN)</option>
+            <option value="stock_desc">📦 Залишок на складі (від більшого)</option>
+            <option value="sku_asc">🔢 Артикул (А-Я / 0-9)</option>
+            <option value="name_asc">🔤 Назва товару (А-Я)</option>
+            <option value="price_desc">💰 Ціна (від більшої)</option>
+          </select>
         </div>
       )}
 
@@ -3478,11 +4030,15 @@ export default function App() {
             </div>
             <select
               className="input-field"
-              style={{ width: '275px', fontSize: '0.95rem', cursor: 'pointer' }}
+              style={{ width: '280px', fontSize: '0.95rem', cursor: 'pointer' }}
               value={promFilterMode}
               onChange={e => setPromFilterMode(e.target.value)}
             >
               <option value="all">👁️ Усі товари ({catalog.length})</option>
+              <option value="prom_missing_in_stock">🚨 Склад &gt; 0, немає на Prom ({dashboardStats.diffPromMissingInStock})</option>
+              <option value="prom_disabled_stock">⚪ Є на складі, але вимкнено ({dashboardStats.diffInStockPromDisabled})</option>
+              <option value="prom_no_excel">❓ Створено на Prom, немає в Excel ({dashboardStats.diffPromNoExcelRecord})</option>
+              <option value="prom_enabled_horo_out">⚠️ На Prom увімкнено, на сайті «Немає» ({dashboardStats.diffPromEnabledHoroOut})</option>
               <option value="no_match">⚠️ Немає збігу артикулу ({promStats.noMatch})</option>
               <option value="out_of_stock_horoshop">⚠️ Немає в наявності на Хорошопі ({promStats.outOfStockHoroshop})</option>
               <option value="enabled">🟣 Увімкнені для Prom ({promStats.enabled})</option>
@@ -3490,6 +4046,21 @@ export default function App() {
               <option value="out_of_stock">🔴 Немає в наявності ({promStats.outOfStock})</option>
               <option value="disabled">⚪ Вимкнені (Немає в наявн.) ({promStats.disabled})</option>
             </select>
+
+            <select
+              className="input-field"
+              style={{ width: '240px', fontSize: '0.95rem', cursor: 'pointer' }}
+              value={promSortBy}
+              onChange={e => setPromSortBy(e.target.value)}
+              title="Сортування товарів Prom.ua"
+            >
+              <option value="issues_first">⚡ Спочатку з помилками / розбіжностями</option>
+              <option value="stock_desc">📦 Залишок на складі (від більшого)</option>
+              <option value="sku_asc">🔢 Артикул (А-Я / 0-9)</option>
+              <option value="name_asc">🔤 Назва товару (А-Я)</option>
+              <option value="price_desc">💰 Ціна (від більшої)</option>
+            </select>
+
             <select
               className="input-field"
               style={{ width: '220px', fontSize: '0.95rem', cursor: 'pointer' }}
@@ -3691,11 +4262,26 @@ export default function App() {
               onChange={e => setHoroshopFilterMode(e.target.value)}
             >
               <option value="all">👁️ Усі товари ({catalog.length})</option>
+              <option value="wh_in_horo_out">🚨 Склад &gt; 0, на сайті немає ({dashboardStats.diffWarehouseInHoroshopOut})</option>
               <option value="out_of_stock_horoshop">⚠️ Немає в наявності на Хорошопі ({horoshopStats.outOfStockHoroshop})</option>
               <option value="active">🟢 Оплата частинами активна ({horoshopStats.active})</option>
               <option value="forced">💜 Тільки "Примусово ОЧ" ({horoshopStats.forced})</option>
               <option value="disabled">🔴 Заборонено вручну ({horoshopStats.disabled})</option>
               <option value="out_of_stock">⚪ Немає на складі ({horoshopStats.outOfStock})</option>
+            </select>
+
+            <select
+              className="input-field"
+              style={{ width: '240px', fontSize: '0.95rem', cursor: 'pointer' }}
+              value={horoshopSortBy}
+              onChange={e => setHoroshopSortBy(e.target.value)}
+              title="Сортування товарів Хорошоп"
+            >
+              <option value="issues_first">⚡ Спочатку з зауваженнями / проблемами</option>
+              <option value="stock_desc">📦 Залишок на складі (від більшого)</option>
+              <option value="sku_asc">🔢 Артикул (А-Я / 0-9)</option>
+              <option value="name_asc">🔤 Назва товару (А-Я)</option>
+              <option value="price_desc">💰 Ціна (від більшої)</option>
             </select>
 
             <select
