@@ -3189,10 +3189,15 @@ export default function App() {
 
   const handleExportExcel = () => {
     const data = catalog.map(p => {
+      const stock = getProductStock(p.vendorCode, p.stock);
+      const stockStatus = stock > 0 ? 'В наявності' : 'Немає в наявності';
+
       return {
         'Артикул': p.vendorCode,
         'Назва': names[p.vendorCode] !== undefined ? names[p.vendorCode] : p.name,
         'Категорія': p.category || 'Без категорії',
+        'Наявність на складі': stockStatus,
+        'Залишок на складі (шт)': stock,
         'Увімкнено для Мономаркету (так/ні)': whitelist.includes(p.vendorCode) ? 'так' : 'ні',
         'Наявність на Мономаркеті (так/ні)': availabilityOverrides[p.vendorCode] !== false ? 'так' : 'ні',
         'Штрихкод': barcodes[p.vendorCode] || ''
@@ -3222,6 +3227,7 @@ export default function App() {
         let newNames = { ...names };
         let newAvailability = { ...availabilityOverrides };
         let newBarcodes = { ...barcodes };
+        let newStock = { ...stockOverrides };
         
         let updatedCount = 0;
 
@@ -3262,6 +3268,18 @@ export default function App() {
              }
           }
 
+          if (row['Залишок на складі (шт)'] !== undefined && row['Залишок на складі (шт)'] !== '') {
+            const parsedStock = parseInt(row['Залишок на складі (шт)'], 10);
+            if (!isNaN(parsedStock)) {
+              newStock[vendorCode] = parsedStock;
+            }
+          } else if (row['Наявність на складі'] !== undefined && row['Наявність на складі'] !== '') {
+            const availText = String(row['Наявність на складі']).toLowerCase();
+            if (availText.includes('немає') || availText === 'ні' || availText === 'no' || availText === '0') {
+              newStock[vendorCode] = 0;
+            }
+          }
+
           if (row['Штрихкод'] !== undefined) {
              if (row['Штрихкод']) {
                  newBarcodes[vendorCode] = String(row['Штрихкод']);
@@ -3275,6 +3293,7 @@ export default function App() {
         setNames(newNames);
         setAvailabilityOverrides(newAvailability);
         setBarcodes(newBarcodes);
+        setStockOverrides(newStock);
 
         showToast(`✅ Успішно оновлено ${updatedCount} товарів з Excel. Не забудьте натиснути "Зберегти зміни".`);
       } catch (err) {
@@ -4068,7 +4087,7 @@ export default function App() {
               <span style={{ fontSize: '1.5rem' }}>📊</span> Експорт та імпорт даних
             </h2>
             <p style={{ color: 'var(--text-muted)', marginBottom: '2rem', lineHeight: '1.5' }}>
-              Ви можете експортувати поточні налаштування товарів (штрихкоди, назви, наявність та статус увімкнення) в Excel файл, масово відредагувати їх та імпортувати назад.
+              Ви можете експортувати поточні налаштування товарів (штрихкоди, назви, наявність на складі, залишки та статус увімкнення) в Excel файл, масово відредагувати їх та імпортувати назад.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
