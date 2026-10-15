@@ -234,5 +234,22 @@
   "CIN122120000": "Інвертор Victron Phoenix Compact 1,2кВА/1кВт 12/1200 12/220В",
   "PMP482657010": "Гібридний інвертор Victron EasySolar-II 48/6k5/100-32 MPPT 250/100 GX 48/230В",
   "PMR803150300": "Промисловий гібридний інвертор Victron Multi HS19 Solar 15k 3-фази 15кВт - 4x8кВт MPPT",
-  "PMR482602030": "Гібридний інвертор Victron Multi RS19 Solar 48/6000/100-450/100 - 6кВА/5,3кВт з MPPT 450В "
+  "PMR482602030": "Гібридний інвертор Victron Multi RS19 Solar 48/6000/100-450/100 - 6кВА/5,3кВт з MPPT 450В ",
+  "BPP900455050": "Сенсорний дисплей Victron Energy GX Touch 50 ",
+  "BPP900455150": "Сенсорний дисплей Victron Energy GX Touch 50 ﬂush",
+  "BPP900460050": "Адаптер Victron GX Touch 50 для встановлення в отвір CCGX ",
+  "BPP900455070": "Сенсорний дисплей Victron Energy GX Touch 70 ",
+  "BPP900455170": "Сенсорний дисплей Victron Energy GX Touch 70 ﬂush",
+  "REC000300010R": "Skylla-i Control GX (90º RJ45) – панель керування зарядними пристроями Victron Energy Skylla-i ",
+  "SDRPCSV": "Механічний перемикач зарядного пристрою Victron Charger Switch",
+  "BPA000100010R": "Індикаційний модуль тривоги Victron Energy Battery Alarm GX",
+  "SDRPSKC": "Панель дистанційного керування Victron Energy Skylla Control ",
+  "ASS030140000": "Інтерфейсний адаптер Victron Energy MK3-USB (VE.Bus to USB) ",
+  "ASS030140030": "Інтерфейсний адаптер Victron Energy MK3-USB С (VE.Bus to USB С)",
+  "ASS030532010": "Інтерфейсний адаптер Victron Energy CANUSB Interface ",
+  "ASS030520200": "Кабель Victron Energy VE.Can to NMEA2000 Micro-C male ",
+  "REL200200100": "Лічильник енергії Victron EM24 Ethernet – 3 фази, до 65A/фаза ",
+  "REL300100000": "Лічильник енергії Victron ET112 – 1 фаза, до 100A/фаза ",
+  "REL200100100": "Лічильник енергії Victron EM540 – 3 фази, до 65A/фаза ",
+  "REL300300000": "Лічильник енергії Victron ET340 – 3 фази, до 65A/фаза "
 }
