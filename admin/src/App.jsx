@@ -405,6 +405,53 @@ export default function App() {
     });
 
     return [...filtered].sort((a, b) => {
+      const aCode = a.vendorCode ? String(a.vendorCode).trim() : '';
+      const bCode = b.vendorCode ? String(b.vendorCode).trim() : '';
+      let aStock = stockOverrides[aCode] !== undefined ? parseInt(stockOverrides[aCode], 10) : 0;
+      if (alwaysAvailable.includes(aCode)) aStock = Math.max(aStock, 10);
+      if (isNaN(aStock) || aStock < 0) aStock = 0;
+      let bStock = stockOverrides[bCode] !== undefined ? parseInt(stockOverrides[bCode], 10) : 0;
+      if (alwaysAvailable.includes(bCode)) bStock = Math.max(bStock, 10);
+      if (isNaN(bStock) || bStock < 0) bStock = 0;
+
+      if (promSortBy === 'err_prom_missing_in_stock') {
+        const aHas = (!promSkusSet.has(aCode) && aStock > 0);
+        const bHas = (!promSkusSet.has(bCode) && bStock > 0);
+        if (aHas && !bHas) return -1;
+        if (!aHas && bHas) return 1;
+        if (bStock !== aStock) return bStock - aStock;
+        return aCode.localeCompare(bCode);
+      }
+      if (promSortBy === 'err_prom_disabled_stock') {
+        const aHas = (promSkusSet.has(aCode) && !promWhitelistSet.has(aCode) && aStock > 0);
+        const bHas = (promSkusSet.has(bCode) && !promWhitelistSet.has(bCode) && bStock > 0);
+        if (aHas && !bHas) return -1;
+        if (!aHas && bHas) return 1;
+        if (bStock !== aStock) return bStock - aStock;
+        return aCode.localeCompare(bCode);
+      }
+      if (promSortBy === 'err_prom_no_excel') {
+        const aHas = (promSkusSet.has(aCode) && stockOverrides[aCode] === undefined);
+        const bHas = (promSkusSet.has(bCode) && stockOverrides[bCode] === undefined);
+        if (aHas && !bHas) return -1;
+        if (!aHas && bHas) return 1;
+        return aCode.localeCompare(bCode);
+      }
+      if (promSortBy === 'err_prom_enabled_horo_out') {
+        const aHas = (promSkusSet.has(aCode) && promWhitelistSet.has(aCode) && isHoroshopOutOfStock(a));
+        const bHas = (promSkusSet.has(bCode) && promWhitelistSet.has(bCode) && isHoroshopOutOfStock(b));
+        if (aHas && !bHas) return -1;
+        if (!aHas && bHas) return 1;
+        return aCode.localeCompare(bCode);
+      }
+      if (promSortBy === 'err_prom_ghosts') {
+        const aHas = Boolean(a.isGhost);
+        const bHas = Boolean(b.isGhost);
+        if (aHas && !bHas) return -1;
+        if (!aHas && bHas) return 1;
+        return aCode.localeCompare(bCode);
+      }
+
       if (promSortBy === 'issues_first') {
         const getPromSev = (p) => {
           const code = p.vendorCode ? String(p.vendorCode).trim() : '';
@@ -699,6 +746,48 @@ export default function App() {
     });
 
     return [...filtered].sort((a, b) => {
+      const aCode = a.vendorCode ? String(a.vendorCode).trim() : '';
+      const bCode = b.vendorCode ? String(b.vendorCode).trim() : '';
+      const aIsAlways = alwaysSet.has(aCode);
+      const bIsAlways = alwaysSet.has(bCode);
+      let aStock = stockOverrides[aCode] !== undefined ? parseInt(stockOverrides[aCode], 10) : 0;
+      if (aIsAlways) aStock = Math.max(aStock, 10);
+      if (isNaN(aStock) || aStock < 0) aStock = 0;
+      let bStock = stockOverrides[bCode] !== undefined ? parseInt(stockOverrides[bCode], 10) : 0;
+      if (bIsAlways) bStock = Math.max(bStock, 10);
+      if (isNaN(bStock) || bStock < 0) bStock = 0;
+
+      if (horoshopSortBy === 'err_wh_in_horo_out') {
+        const aHas = (isHoroshopOutOfStock(a) && aStock > 0);
+        const bHas = (isHoroshopOutOfStock(b) && bStock > 0);
+        if (aHas && !bHas) return -1;
+        if (!aHas && bHas) return 1;
+        if (bStock !== aStock) return bStock - aStock;
+        return aCode.localeCompare(bCode);
+      }
+      if (horoshopSortBy === 'err_horo_installments_disabled') {
+        const aHas = (horoshopDisabledSet.has(aCode) && aStock > 0);
+        const bHas = (horoshopDisabledSet.has(bCode) && bStock > 0);
+        if (aHas && !bHas) return -1;
+        if (!aHas && bHas) return 1;
+        if (bStock !== aStock) return bStock - aStock;
+        return aCode.localeCompare(bCode);
+      }
+      if (horoshopSortBy === 'err_horo_no_price') {
+        const aHas = (!a.price || Number(a.price) <= 0);
+        const bHas = (!b.price || Number(b.price) <= 0);
+        if (aHas && !bHas) return -1;
+        if (!aHas && bHas) return 1;
+        return aCode.localeCompare(bCode);
+      }
+      if (horoshopSortBy === 'err_horo_no_photo') {
+        const aHas = (!a.picture || !a.picture.trim());
+        const bHas = (!b.picture || !b.picture.trim());
+        if (aHas && !bHas) return -1;
+        if (!aHas && bHas) return 1;
+        return aCode.localeCompare(bCode);
+      }
+
       if (horoshopSortBy === 'issues_first') {
         const getHoroSeverity = (p) => {
           const code = p.vendorCode ? String(p.vendorCode).trim() : '';
@@ -1144,6 +1233,41 @@ export default function App() {
 
   const sortedDashboardProducts = useMemo(() => {
     const list = [...filteredDashboardProducts];
+
+    // Helper for boolean issue sort (products with the issue first, tied by stock desc then SKU)
+    const sortByFlag = (flag) => {
+      return list.sort((a, b) => {
+        const aHas = Boolean(a[flag]);
+        const bHas = Boolean(b[flag]);
+        if (aHas && !bHas) return -1;
+        if (!aHas && bHas) return 1;
+        if (b.stock !== a.stock) return b.stock - a.stock;
+        return a.code.localeCompare(b.code);
+      });
+    };
+
+    // Card-based Horoshop error sorting
+    if (dashboardSortBy === 'err_wh_in_horo_out') return sortByFlag('isDiffWarehouseInHoroshopOut');
+    if (dashboardSortBy === 'err_horo_installments_disabled') return sortByFlag('isDiffHoroshopInstallmentsDisabled');
+    if (dashboardSortBy === 'err_horo_no_price') return sortByFlag('isDiffHoroshopNoPrice');
+    if (dashboardSortBy === 'err_horo_no_photo') return sortByFlag('isDiffHoroshopNoPhoto');
+    if (dashboardSortBy === 'card_horoshop') return sortByFlag('isDiffHoroshopIssues');
+
+    // Card-based Prom.ua error sorting
+    if (dashboardSortBy === 'err_prom_missing_in_stock') return sortByFlag('isDiffPromMissingInStock');
+    if (dashboardSortBy === 'err_prom_disabled_stock') return sortByFlag('isDiffInStockPromDisabled');
+    if (dashboardSortBy === 'err_prom_no_excel') return sortByFlag('isDiffPromNoExcelRecord');
+    if (dashboardSortBy === 'err_prom_enabled_horo_out') return sortByFlag('isDiffPromEnabledHoroOut');
+    if (dashboardSortBy === 'err_prom_ghosts') return sortByFlag('isGhostProm');
+    if (dashboardSortBy === 'card_prom') return sortByFlag('isDiffPromIssues');
+
+    // Card-based Mono error sorting
+    if (dashboardSortBy === 'err_mono_no_barcode' || dashboardSortBy === 'card_mono') return sortByFlag('isDiffMonoMissingBarcode');
+
+    // Card-based Excel error sorting
+    if (dashboardSortBy === 'err_excel_missing' || dashboardSortBy === 'card_excel') return sortByFlag('isDiffMissingFromExcel');
+
+    // General issues sorting
     if (dashboardSortBy === 'issues_first') {
       return list.sort((a, b) => {
         if (a.hasAnyIssue && !b.hasAnyIssue) return -1;
@@ -1165,6 +1289,7 @@ export default function App() {
       });
     }
     if (dashboardSortBy === 'stock_desc') return list.sort((a, b) => b.stock - a.stock);
+    if (dashboardSortBy === 'stock_asc') return list.sort((a, b) => a.stock - b.stock);
     if (dashboardSortBy === 'sku_asc') return list.sort((a, b) => a.code.localeCompare(b.code));
     if (dashboardSortBy === 'sku_desc') return list.sort((a, b) => b.code.localeCompare(a.code));
     if (dashboardSortBy === 'name_asc') return list.sort((a, b) => a.name.localeCompare(b.name));
@@ -2288,17 +2413,83 @@ export default function App() {
 
             <select
               className="input-field"
-              style={{ width: 'auto', minWidth: '220px' }}
+              style={{ width: 'auto', minWidth: '270px', fontWeight: 500 }}
               value={dashboardSortBy}
               onChange={e => setDashboardSortBy(e.target.value)}
-              title="Сортування товарів"
+              title="Сортування товарів за помилками з карток"
             >
-              <option value="issues_first">⚡ Спочатку з помилками / розбіжностями</option>
-              <option value="critical_first">🚨 Тільки критичні помилки першими</option>
-              <option value="stock_desc">📦 Залишок на складі (від більшого)</option>
-              <option value="sku_asc">🔢 Артикул (А-Я / 0-9)</option>
-              <option value="name_asc">🔤 Назва товару (А-Я)</option>
-              <option value="price_desc">💰 Ціна (від більшої)</option>
+              {/* Контекстний вивід якщо відкрито розділ конкретної картки */}
+              {(dashboardFilter === 'horoshop_issues' || dashboardFilter.startsWith('horo_') || dashboardFilter === 'wh_in_horo_out') ? (
+                <>
+                  <optgroup label="🔵 Помилки з картки «Хорошоп»">
+                    <option value="card_horoshop">🔵 Всі проблеми Хорошоп ({dashboardStats.diffHoroshopIssues})</option>
+                    <option value="err_wh_in_horo_out">🚨 Склад &gt; 0, на сайті «Немає» ({dashboardStats.diffWarehouseInHoroshopOut})</option>
+                    <option value="err_horo_installments_disabled">🔒 Оплата частинами вимкнена ({dashboardStats.diffHoroshopInstallmentsDisabled})</option>
+                    <option value="err_horo_no_price">💸 Немає ціни на сайті ({dashboardStats.diffHoroshopNoPrice})</option>
+                    <option value="err_horo_no_photo">🖼️ Немає фотографії ({dashboardStats.diffHoroshopNoPhoto})</option>
+                  </optgroup>
+                  <optgroup label="⚡ Інші помилки">
+                    <option value="issues_first">⚡ Будь-які помилки в каталозі ({dashboardStats.totalIssuesCount})</option>
+                    <option value="critical_first">🚨 Тільки критичні помилки</option>
+                    <option value="card_prom">🟣 Проблеми Prom.ua ({dashboardStats.diffPromIssues})</option>
+                    <option value="err_mono_no_barcode">⚫ Моно: без штрихкоду ({dashboardStats.diffMonoMissingBarcode})</option>
+                    <option value="err_excel_missing">📊 Не знайдено в Excel ({dashboardStats.warehouseMissing})</option>
+                  </optgroup>
+                </>
+              ) : (dashboardFilter === 'prom_issues' || dashboardFilter.startsWith('prom_')) ? (
+                <>
+                  <optgroup label="🟣 Помилки з картки «Prom.ua»">
+                    <option value="card_prom">🟣 Всі проблеми Prom.ua ({dashboardStats.diffPromIssues})</option>
+                    <option value="err_prom_missing_in_stock">🚨 Склад &gt; 0, немає на Prom.ua ({dashboardStats.diffPromMissingInStock})</option>
+                    <option value="err_prom_disabled_stock">⚪ Є на складі, але вимкнено для Prom ({dashboardStats.diffInStockPromDisabled})</option>
+                    <option value="err_prom_no_excel">❓ Створено на Prom, немає в Excel ({dashboardStats.diffPromNoExcelRecord})</option>
+                    <option value="err_prom_enabled_horo_out">⚠️ На Prom увімкнено, на сайті «Немає» ({dashboardStats.diffPromEnabledHoroOut})</option>
+                    <option value="err_prom_ghosts">👻 Товари-привиди на Prom ({dashboardStats.diffPromGhosts})</option>
+                  </optgroup>
+                  <optgroup label="⚡ Інші помилки">
+                    <option value="issues_first">⚡ Будь-які помилки в каталозі ({dashboardStats.totalIssuesCount})</option>
+                    <option value="critical_first">🚨 Тільки критичні помилки</option>
+                    <option value="card_horoshop">🔵 Проблеми Хорошоп ({dashboardStats.diffHoroshopIssues})</option>
+                    <option value="err_mono_no_barcode">⚫ Моно: без штрихкоду ({dashboardStats.diffMonoMissingBarcode})</option>
+                    <option value="err_excel_missing">📊 Не знайдено в Excel ({dashboardStats.warehouseMissing})</option>
+                  </optgroup>
+                </>
+              ) : (
+                <>
+                  <optgroup label="⚡ Загальні помилки">
+                    <option value="issues_first">⚡ Спочатку з помилками / розбіжностями ({dashboardStats.totalIssuesCount})</option>
+                    <option value="critical_first">🚨 Тільки критичні помилки першими</option>
+                  </optgroup>
+                  <optgroup label="🔵 Помилки з картки «Хорошоп»">
+                    <option value="err_wh_in_horo_out">🚨 Склад &gt; 0, на сайті «Немає» ({dashboardStats.diffWarehouseInHoroshopOut})</option>
+                    <option value="err_horo_installments_disabled">🔒 Оплата частинами вимкнена ({dashboardStats.diffHoroshopInstallmentsDisabled})</option>
+                    <option value="err_horo_no_price">💸 Немає ціни на сайті ({dashboardStats.diffHoroshopNoPrice})</option>
+                    <option value="err_horo_no_photo">🖼️ Немає фотографії ({dashboardStats.diffHoroshopNoPhoto})</option>
+                    <option value="card_horoshop">🔵 Будь-які проблеми Хорошоп ({dashboardStats.diffHoroshopIssues})</option>
+                  </optgroup>
+                  <optgroup label="🟣 Помилки з картки «Prom.ua»">
+                    <option value="err_prom_missing_in_stock">🚨 Склад &gt; 0, немає на Prom.ua ({dashboardStats.diffPromMissingInStock})</option>
+                    <option value="err_prom_disabled_stock">⚪ Є на складі, але вимкнено для Prom ({dashboardStats.diffInStockPromDisabled})</option>
+                    <option value="err_prom_no_excel">❓ Створено на Prom, немає в Excel ({dashboardStats.diffPromNoExcelRecord})</option>
+                    <option value="err_prom_enabled_horo_out">⚠️ На Prom увімкнено, на сайті «Немає» ({dashboardStats.diffPromEnabledHoroOut})</option>
+                    <option value="err_prom_ghosts">👻 Товари-привиди на Prom ({dashboardStats.diffPromGhosts})</option>
+                    <option value="card_prom">🟣 Будь-які проблеми Prom.ua ({dashboardStats.diffPromIssues})</option>
+                  </optgroup>
+                  <optgroup label="⚫ Помилки з картки «Моно»">
+                    <option value="err_mono_no_barcode">⚫ Моно: без штрихкоду EAN ({dashboardStats.diffMonoMissingBarcode})</option>
+                  </optgroup>
+                  <optgroup label="📊 Помилки з картки «Ексель»">
+                    <option value="err_excel_missing">📊 Не знайдено в Excel-складі ({dashboardStats.warehouseMissing})</option>
+                  </optgroup>
+                </>
+              )}
+              <optgroup label="📦 Загальне сортування">
+                <option value="stock_desc">📦 Залишок на складі (від більшого)</option>
+                <option value="stock_asc">📦 Залишок на складі (від меншого)</option>
+                <option value="sku_asc">🔢 Артикул (А-Я / 0-9)</option>
+                <option value="name_asc">🔤 Назва товару (А-Я)</option>
+                <option value="price_desc">💰 Ціна (від більшої)</option>
+              </optgroup>
             </select>
 
             <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
@@ -2318,7 +2509,19 @@ export default function App() {
                   <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '140px', padding: '0.75rem 0.5rem', color: '#7c3aed' }}>🟣 Prom.ua</th>
                   <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '130px', padding: '0.75rem 0.5rem', color: '#18181b' }}>⚫ Мономаркет</th>
                   <th
-                    onClick={() => setDashboardSortBy(prev => prev === 'issues_first' ? 'stock_desc' : 'issues_first')}
+                    onClick={() => {
+                      if (dashboardFilter === 'horoshop_issues' || dashboardFilter.startsWith('horo_') || dashboardFilter === 'wh_in_horo_out') {
+                        setDashboardSortBy(prev => prev === 'card_horoshop' ? 'stock_desc' : 'card_horoshop');
+                      } else if (dashboardFilter === 'prom_issues' || dashboardFilter.startsWith('prom_')) {
+                        setDashboardSortBy(prev => prev === 'card_prom' ? 'stock_desc' : 'card_prom');
+                      } else if (dashboardFilter === 'mono_issues' || dashboardFilter.startsWith('mono_')) {
+                        setDashboardSortBy(prev => prev === 'err_mono_no_barcode' ? 'stock_desc' : 'err_mono_no_barcode');
+                      } else if (dashboardFilter === 'excel_issues' || dashboardFilter.startsWith('excel_')) {
+                        setDashboardSortBy(prev => prev === 'err_excel_missing' ? 'stock_desc' : 'err_excel_missing');
+                      } else {
+                        setDashboardSortBy(prev => prev === 'issues_first' ? 'stock_desc' : 'issues_first');
+                      }
+                    }}
                     style={{
                       position: 'sticky',
                       top: 0,
@@ -2341,8 +2544,11 @@ export default function App() {
                          dashboardFilter === 'excel_issues' || dashboardFilter.startsWith('excel_') ? '📊 Зауваження Excel' :
                          'Статус / Зауваження'}
                       </span>
-                      <span style={{ fontSize: '0.75rem', color: dashboardSortBy === 'issues_first' || dashboardSortBy === 'critical_first' ? '#ef4444' : '#94a3b8' }}>
-                        {dashboardSortBy === 'issues_first' ? '⚡▼' : dashboardSortBy === 'critical_first' ? '🚨▼' : '⇅'}
+                      <span style={{
+                        fontSize: '0.75rem',
+                        color: (dashboardSortBy.startsWith('err_') || dashboardSortBy.startsWith('card_') || dashboardSortBy === 'issues_first' || dashboardSortBy === 'critical_first') ? '#ef4444' : '#94a3b8'
+                      }}>
+                        {(dashboardSortBy.startsWith('err_') || dashboardSortBy.startsWith('card_') || dashboardSortBy === 'issues_first' || dashboardSortBy === 'critical_first') ? '⚡▼' : '⇅'}
                       </span>
                     </div>
                   </th>
@@ -2667,6 +2873,13 @@ export default function App() {
 
   const sortMonoProducts = (list) => {
     return [...list].sort((a, b) => {
+      if (monoSortBy === 'err_mono_no_barcode') {
+        const aNoBarcode = !barcodes[a.vendorCode] && !a.barcode;
+        const bNoBarcode = !barcodes[b.vendorCode] && !b.barcode;
+        if (aNoBarcode && !bNoBarcode) return -1;
+        if (!aNoBarcode && bNoBarcode) return 1;
+        return (a.vendorCode || '').localeCompare(b.vendorCode || '');
+      }
       if (monoSortBy === 'issues_first') {
         const aSelected = whitelist.includes(a.vendorCode);
         const bSelected = whitelist.includes(b.vendorCode);
@@ -3709,16 +3922,21 @@ export default function App() {
           </select>
           <select
             className="input-field"
-            style={{ width: '250px', fontSize: '0.95rem', cursor: 'pointer' }}
+            style={{ width: 'auto', minWidth: '250px', fontSize: '0.95rem', cursor: 'pointer' }}
             value={monoSortBy}
             onChange={e => setMonoSortBy(e.target.value)}
-            title="Сортування товарів Мономаркет"
+            title="Сортування товарів Мономаркет за помилками"
           >
-            <option value="issues_first">⚡ Спочатку з зауваженнями (без EAN)</option>
-            <option value="stock_desc">📦 Залишок на складі (від більшого)</option>
-            <option value="sku_asc">🔢 Артикул (А-Я / 0-9)</option>
-            <option value="name_asc">🔤 Назва товару (А-Я)</option>
-            <option value="price_desc">💰 Ціна (від більшої)</option>
+            <optgroup label="⚫ Помилки з картки «Мономаркет»">
+              <option value="issues_first">⚡ Спочатку з зауваженнями (без EAN)</option>
+              <option value="err_mono_no_barcode">⚫ Без штрихкоду EAN ({dashboardStats.diffMonoMissingBarcode})</option>
+            </optgroup>
+            <optgroup label="📦 Загальне сортування">
+              <option value="stock_desc">📦 Залишок на складі (від більшого)</option>
+              <option value="sku_asc">🔢 Артикул (А-Я / 0-9)</option>
+              <option value="name_asc">🔤 Назва товару (А-Я)</option>
+              <option value="price_desc">💰 Ціна (від більшої)</option>
+            </optgroup>
           </select>
         </div>
       )}
@@ -4049,16 +4267,25 @@ export default function App() {
 
             <select
               className="input-field"
-              style={{ width: '240px', fontSize: '0.95rem', cursor: 'pointer' }}
+              style={{ width: 'auto', minWidth: '240px', fontSize: '0.95rem', cursor: 'pointer' }}
               value={promSortBy}
               onChange={e => setPromSortBy(e.target.value)}
-              title="Сортування товарів Prom.ua"
+              title="Сортування товарів Prom.ua за помилками"
             >
-              <option value="issues_first">⚡ Спочатку з помилками / розбіжностями</option>
-              <option value="stock_desc">📦 Залишок на складі (від більшого)</option>
-              <option value="sku_asc">🔢 Артикул (А-Я / 0-9)</option>
-              <option value="name_asc">🔤 Назва товару (А-Я)</option>
-              <option value="price_desc">💰 Ціна (від більшої)</option>
+              <optgroup label="🟣 Помилки з картки Prom.ua">
+                <option value="issues_first">⚡ Всі товари з зауваженнями першими</option>
+                <option value="err_prom_missing_in_stock">🚨 Склад &gt; 0, немає на Prom ({dashboardStats.diffPromMissingInStock})</option>
+                <option value="err_prom_disabled_stock">⚪ Є на складі, але вимкнено ({dashboardStats.diffInStockPromDisabled})</option>
+                <option value="err_prom_no_excel">❓ Створено на Prom, немає в Excel ({dashboardStats.diffPromNoExcelRecord})</option>
+                <option value="err_prom_enabled_horo_out">⚠️ На Prom увімкнено, на сайті «Немає» ({dashboardStats.diffPromEnabledHoroOut})</option>
+                <option value="err_prom_ghosts">👻 Товари-привиди на Prom ({dashboardStats.diffPromGhosts})</option>
+              </optgroup>
+              <optgroup label="📦 Загальне сортування">
+                <option value="stock_desc">📦 Залишок на складі (від більшого)</option>
+                <option value="sku_asc">🔢 Артикул (А-Я / 0-9)</option>
+                <option value="name_asc">🔤 Назва товару (А-Я)</option>
+                <option value="price_desc">💰 Ціна (від більшої)</option>
+              </optgroup>
             </select>
 
             <select
@@ -4272,16 +4499,24 @@ export default function App() {
 
             <select
               className="input-field"
-              style={{ width: '240px', fontSize: '0.95rem', cursor: 'pointer' }}
+              style={{ width: 'auto', minWidth: '240px', fontSize: '0.95rem', cursor: 'pointer' }}
               value={horoshopSortBy}
               onChange={e => setHoroshopSortBy(e.target.value)}
-              title="Сортування товарів Хорошоп"
+              title="Сортування товарів Хорошоп за помилками"
             >
-              <option value="issues_first">⚡ Спочатку з зауваженнями / проблемами</option>
-              <option value="stock_desc">📦 Залишок на складі (від більшого)</option>
-              <option value="sku_asc">🔢 Артикул (А-Я / 0-9)</option>
-              <option value="name_asc">🔤 Назва товару (А-Я)</option>
-              <option value="price_desc">💰 Ціна (від більшої)</option>
+              <optgroup label="🔵 Помилки з картки «Хорошоп»">
+                <option value="issues_first">⚡ Всі товари з зауваженнями першими</option>
+                <option value="err_wh_in_horo_out">🚨 Склад &gt; 0, на сайті немає ({dashboardStats.diffWarehouseInHoroshopOut})</option>
+                <option value="err_horo_installments_disabled">🔒 Оплата частинами вимкнена ({dashboardStats.diffHoroshopInstallmentsDisabled})</option>
+                <option value="err_horo_no_price">💸 Немає ціни ({dashboardStats.diffHoroshopNoPrice})</option>
+                <option value="err_horo_no_photo">🖼️ Немає фотографії ({dashboardStats.diffHoroshopNoPhoto})</option>
+              </optgroup>
+              <optgroup label="📦 Загальне сортування">
+                <option value="stock_desc">📦 Залишок на складі (від більшого)</option>
+                <option value="sku_asc">🔢 Артикул (А-Я / 0-9)</option>
+                <option value="name_asc">🔤 Назва товару (А-Я)</option>
+                <option value="price_desc">💰 Ціна (від більшої)</option>
+              </optgroup>
             </select>
 
             <select
