@@ -27,9 +27,28 @@ async function main() {
   // ── 2. Завантаження поточних залишків ──────────────────────────
   let stockOverrides = {};
   try { stockOverrides = JSON.parse(fs.readFileSync('src/stock.json', 'utf8')); } catch (e) { }
+  const previousStock = { ...stockOverrides };
 
   let availabilityOverrides = {};
   try { availabilityOverrides = JSON.parse(fs.readFileSync('src/availability.json', 'utf8')); } catch (e) { }
+
+  let names = {};
+  try { names = JSON.parse(fs.readFileSync('src/names.json', 'utf8')); } catch (e) { }
+
+  let catalogMap = {};
+  try {
+    const rawCatalog = JSON.parse(fs.readFileSync('feeds/catalog.json', 'utf8'));
+    const catList = Array.isArray(rawCatalog) ? rawCatalog : (rawCatalog.data || []);
+    catList.forEach(p => { if (p.vendorCode) catalogMap[p.vendorCode] = p; });
+  } catch (e) { }
+
+  let stockChanges = [];
+  try {
+    stockChanges = JSON.parse(fs.readFileSync('src/stock-changes.json', 'utf8'));
+    if (!Array.isArray(stockChanges)) stockChanges = [];
+  } catch (e) {
+    stockChanges = [];
+  }
 
   const keywords = {
     article: ['артикул', 'артікул', 'vendor code', 'vendor_code'],
@@ -164,7 +183,45 @@ async function main() {
     }
   }
 
-  // ── 4. Збереження результатів ─────────────────────────────────
+  // ── 4. Фіксація змін залишків (Stock Changes Log) ──────────────
+  const detectedChanges = [];
+  const nowIso = new Date().toISOString();
+
+  for (const [code, newQty] of Object.entries(stockOverrides)) {
+    const oldQty = previousStock[code];
+    if (oldQty !== undefined && oldQty !== newQty) {
+      let type = 'changed';
+      if (oldQty > 0 && newQty === 0) type = 'became_zero';
+      else if (oldQty === 0 && newQty > 0) type = 'became_available';
+
+      const prod = catalogMap[code] || {};
+      detectedChanges.push({
+        id: `${code}_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
+        timestamp: nowIso,
+        vendorCode: code,
+        name: names[code] || prod.name || code,
+        category: prod.category || '',
+        price: prod.price || '',
+        oldQty,
+        newQty,
+        diff: newQty - oldQty,
+        type
+      });
+    }
+  }
+
+  if (detectedChanges.length > 0) {
+    console.log(`🔔 Зафіксовано ${detectedChanges.length} змін залишків у таблиці Excel!`);
+    stockChanges = [...detectedChanges, ...stockChanges].slice(0, 500);
+    try {
+      fs.writeFileSync('src/stock-changes.json', JSON.stringify(stockChanges, null, 2), 'utf8');
+      console.log('✅ Оновлено журнал змін: src/stock-changes.json');
+    } catch (e) {
+      console.error('⚠️ Помилка запису stock-changes.json:', e.message);
+    }
+  }
+
+  // ── 5. Збереження результатів ─────────────────────────────────
   try {
     fs.writeFileSync('src/stock.json', JSON.stringify(stockOverrides, null, 2), 'utf8');
     fs.writeFileSync('src/availability.json', JSON.stringify(availabilityOverrides, null, 2), 'utf8');
@@ -177,7 +234,7 @@ async function main() {
 
   try {
     const { execSync } = require('child_process');
-    execSync('git add src/stock.json src/availability.json');
+    execSync('git add src/stock.json src/availability.json src/stock-changes.json');
     console.log('✅ Файли залишків додані до git commit.');
   } catch (err) {
     console.error('⚠️ Не вдалося додати файли до git:', err.message);

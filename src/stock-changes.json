@@ -1,0 +1,26 @@
+[
+  {
+    "id": "PMP482606000_1792064268639_telje",
+    "timestamp": "2026-10-15T11:37:48.638Z",
+    "vendorCode": "PMP482606000",
+    "name": "Інвертор гібридний MultiPlus-II 48/6k5/100-50 GX 6кВт 48/220В",
+    "category": "Інвертори DC-AC",
+    "price": 57449,
+    "oldQty": 0,
+    "newQty": 1,
+    "diff": 1,
+    "type": "became_available"
+  },
+  {
+    "id": "ORI241230022_1792064268639_1rg6b",
+    "timestamp": "2026-10-15T11:37:48.638Z",
+    "vendorCode": "ORI241230022",
+    "name": "Конвертор Victron Energy DC-DC Orion 24/12-30",
+    "category": "Перетворювачі DC-DC",
+    "price": 4511,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  }
+]
