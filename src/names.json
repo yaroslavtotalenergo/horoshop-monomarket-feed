@@ -116,5 +116,11 @@
   "PIN483020000": "Інвертор Victron Energy Phoenix Inverter 48/3000 - 48/220В 3кВА/2,4кВт",
   "PIN485020000": "Інвертор Victron Energy Phoenix Inverter 48/5000 - 48/220В 5кВА/4кВт",
   "BAM010700000 (R)": "Батарейний монітор Victron BMV-700 (У комплекті Шунт Victron 500A/50mV)",
-  "BAM010702000 (R)": "Батарейний монітор Victron BMV-702 (У комплекті Шунт Victron 500A/50mV)"
+  "BAM010702000 (R)": "Батарейний монітор Victron BMV-702 (У комплекті Шунт Victron 500A/50mV)",
+  "ARG080201000 (R)": "Ізолятор акумуляторів Argodiode 80-2AC Victron Energy",
+  "ARG080202000 (R)": "Ізолятор акумуляторів Argodiode 80-2SC Victron Energу",
+  "ARG100201020 (R)": "Ізолятор акумуляторів Victron Energy Argofet 100-2",
+  "ARG100301000R": "Ізолятор акумуляторів Argodiode 100-3AC Victron Energy ",
+  "BAT512120610": "Аккумулятор Victron Energy LiFePO4 Smart Battery 12.8V/200Ah",
+  "BAM010700100": "Батарейний монітор BMV-700H (У комплекті Шунт Victron 500A/50mV)"
 }
