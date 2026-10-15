@@ -722,6 +722,11 @@ export default function App() {
 
     // Discrepancy counters
     let diffWarehouseInHoroshopOut = 0;
+    let diffHoroshopInWarehouseZero = 0;
+    let diffHoroshopNoPrice = 0;
+    let diffHoroshopNoPhoto = 0;
+    let diffHoroshopIssues = 0;
+
     let diffInStockPromDisabled = 0;
     let diffMissingFromProm = 0;
     let diffMonoMissingBarcode = 0;
@@ -780,33 +785,63 @@ export default function App() {
         if (!hasBarcode) monoMissingBarcodeCount++;
       }
 
-      // Discrepancy flags
+      // Discrepancy flags - Horoshop
       const isDiffWarehouseInHoroshopOut = stock > 0 && horoshopOut;
-      const isDiffInStockPromDisabled = existsOnProm && !isPromEnabled && stock > 0;
-      const isDiffMissingFromProm = !existsOnProm;
-      const isDiffMissingFromExcel = !hasExcelRecord;
-      const isDiffMonoMissingBarcode = isMonoSelected && !hasBarcode;
+      const isDiffHoroshopInWarehouseZero = hasExcelRecord && stock === 0 && !horoshopOut && !isAlways;
+      const isDiffHoroshopNoPrice = !p.price || Number(p.price) <= 0;
+      const isDiffHoroshopNoPhoto = !p.picture || !p.picture.trim();
+      const isDiffHoroshopIssues = isDiffWarehouseInHoroshopOut || isDiffHoroshopInWarehouseZero || isDiffHoroshopNoPrice || isDiffHoroshopNoPhoto;
 
       if (isDiffWarehouseInHoroshopOut) diffWarehouseInHoroshopOut++;
+      if (isDiffHoroshopInWarehouseZero) diffHoroshopInWarehouseZero++;
+      if (isDiffHoroshopNoPrice) diffHoroshopNoPrice++;
+      if (isDiffHoroshopNoPhoto) diffHoroshopNoPhoto++;
+      if (isDiffHoroshopIssues) diffHoroshopIssues++;
+
+      // Discrepancy flags - Prom
+      const isDiffInStockPromDisabled = existsOnProm && !isPromEnabled && stock > 0;
+      const isDiffMissingFromProm = !existsOnProm;
       if (isDiffInStockPromDisabled) diffInStockPromDisabled++;
       if (isDiffMissingFromProm) diffMissingFromProm++;
+
+      // Discrepancy flags - Mono
+      const isDiffMonoMissingBarcode = isMonoSelected && !hasBarcode;
       if (isDiffMonoMissingBarcode) diffMonoMissingBarcode++;
 
+      // Discrepancy flags - Excel
+      const isDiffMissingFromExcel = !hasExcelRecord;
+
       const issues = [];
+      // Horoshop issues
       if (isDiffWarehouseInHoroshopOut) {
-        issues.push({ type: 'danger', key: 'wh_in_horo_out', text: '🚨 Склад > 0, але на Хорошопі: Немає' });
+        issues.push({ platform: 'horoshop', type: 'danger', key: 'wh_in_horo_out', text: '🚨 Склад > 0, але на Хорошопі: Немає' });
       }
+      if (isDiffHoroshopInWarehouseZero) {
+        issues.push({ platform: 'horoshop', type: 'danger', key: 'horo_in_wh_zero', text: '⚠️ Склад = 0, але на Хорошопі: В наявності' });
+      }
+      if (isDiffHoroshopNoPrice) {
+        issues.push({ platform: 'horoshop', type: 'danger', key: 'horo_no_price', text: '💸 Немає ціни на сайті' });
+      }
+      if (isDiffHoroshopNoPhoto) {
+        issues.push({ platform: 'horoshop', type: 'warning', key: 'horo_no_photo', text: '🖼️ Немає фотографії' });
+      }
+
+      // Prom issues
       if (isDiffMissingFromProm) {
-        issues.push({ type: 'purple', key: 'prom_missing', text: '🟣 Не знайдено на Prom.ua' });
+        issues.push({ platform: 'prom', type: 'purple', key: 'prom_missing', text: '🟣 Не знайдено на Prom.ua' });
       }
       if (isDiffInStockPromDisabled) {
-        issues.push({ type: 'neutral', key: 'in_stock_prom_disabled', text: '⚪ Є на складі, але вимкнено для Prom' });
+        issues.push({ platform: 'prom', type: 'neutral', key: 'in_stock_prom_disabled', text: '⚪ Є на складі, але вимкнено для Prom' });
       }
+
+      // Excel issues
       if (isDiffMissingFromExcel) {
-        issues.push({ type: 'neutral', key: 'excel_missing', text: '❓ Немає в Excel-таблиці' });
+        issues.push({ platform: 'excel', type: 'neutral', key: 'excel_missing', text: '❓ Немає в Excel-таблиці' });
       }
-      if (isMonoSelected && !hasBarcode) {
-        issues.push({ type: 'mono', key: 'mono_no_barcode', text: '⚫ Моно: без штрихкоду (EAN)' });
+
+      // Mono issues
+      if (isDiffMonoMissingBarcode) {
+        issues.push({ platform: 'mono', type: 'mono', key: 'mono_no_barcode', text: '⚫ Моно: без штрихкоду (EAN)' });
       }
 
       auditedProducts.push({
@@ -827,6 +862,10 @@ export default function App() {
         issues,
         hasAnyIssue: issues.length > 0,
         isDiffWarehouseInHoroshopOut,
+        isDiffHoroshopInWarehouseZero,
+        isDiffHoroshopNoPrice,
+        isDiffHoroshopNoPhoto,
+        isDiffHoroshopIssues,
         isDiffInStockPromDisabled,
         isDiffMissingFromProm,
         isDiffMissingFromExcel,
@@ -850,6 +889,10 @@ export default function App() {
       monoActiveCount,
       monoMissingBarcodeCount,
       diffWarehouseInHoroshopOut,
+      diffHoroshopInWarehouseZero,
+      diffHoroshopNoPrice,
+      diffHoroshopNoPhoto,
+      diffHoroshopIssues,
       diffInStockPromDisabled,
       diffMissingFromProm,
       diffPromIssues,
@@ -870,7 +913,8 @@ export default function App() {
         return false;
       }
       if (dashboardFilter === 'issues') return item.hasAnyIssue;
-      if (dashboardFilter === 'horoshop_issues' || dashboardFilter === 'wh_in_horo_out') return item.isDiffWarehouseInHoroshopOut;
+      if (dashboardFilter === 'horoshop_issues') return item.isDiffHoroshopIssues;
+      if (dashboardFilter === 'wh_in_horo_out') return item.isDiffWarehouseInHoroshopOut;
       if (dashboardFilter === 'prom_issues') return item.isDiffMissingFromProm || item.isDiffInStockPromDisabled;
       if (dashboardFilter === 'prom_missing') return item.isDiffMissingFromProm;
       if (dashboardFilter === 'prom_disabled_stock') return item.isDiffInStockPromDisabled;
@@ -1460,7 +1504,7 @@ export default function App() {
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <span style={{ fontSize: '0.95rem', fontWeight: 700, color: '#0f172a' }}>Проблеми Хорошоп</span>
                     <span style={{ background: '#4360a0', color: '#fff', fontSize: '0.8rem', fontWeight: 700, padding: '0.15rem 0.6rem', borderRadius: '999px' }}>
-                      {dashboardStats.diffWarehouseInHoroshopOut}
+                      {dashboardStats.diffHoroshopIssues}
                     </span>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '1rem', fontSize: '0.775rem', color: isActive ? '#4360a0' : '#94a3b8', fontWeight: 600 }}>
@@ -1598,10 +1642,32 @@ export default function App() {
             }}>
               <div>
                 <div style={{ fontWeight: 700, color: '#4360a0', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <span>🔵</span> Проблеми Хорошоп ({dashboardStats.diffWarehouseInHoroshopOut} товарів)
+                  <span>🔵</span> Проблеми Хорошоп ({dashboardStats.diffHoroshopIssues} товарів)
                 </div>
-                <div style={{ fontSize: '0.825rem', color: '#1e293b', marginTop: '0.25rem', lineHeight: 1.45 }}>
-                  <b>Проблема:</b> Товар є на складі за даними Excel (&gt; 0 шт.), але на сайті Хорошоп стоїть статус <b>«немає в наявності»</b> (товар недоступний для замовлення на сайті).
+                <div style={{ fontSize: '0.825rem', color: '#1e293b', marginTop: '0.35rem', lineHeight: 1.45 }}>
+                  <div style={{ marginBottom: '0.35rem', color: '#475569' }}>
+                    Виявлені невідповідності та зауваження до каталогу сайту Хорошоп:
+                  </div>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+                    <span style={{ background: '#fee2e2', color: '#b91c1c', padding: '0.15rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600 }}>
+                      🚨 Склад &gt; 0, на сайті немає: {dashboardStats.diffWarehouseInHoroshopOut}
+                    </span>
+                    {dashboardStats.diffHoroshopInWarehouseZero > 0 && (
+                      <span style={{ background: '#fee2e2', color: '#b91c1c', padding: '0.15rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600 }}>
+                        ⚠️ Склад = 0, на сайті в наявності: {dashboardStats.diffHoroshopInWarehouseZero}
+                      </span>
+                    )}
+                    {dashboardStats.diffHoroshopNoPrice > 0 && (
+                      <span style={{ background: '#fee2e2', color: '#b91c1c', padding: '0.15rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600 }}>
+                        💸 Немає ціни: {dashboardStats.diffHoroshopNoPrice}
+                      </span>
+                    )}
+                    {dashboardStats.diffHoroshopNoPhoto > 0 && (
+                      <span style={{ background: '#ffedd5', color: '#c2410c', padding: '0.15rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600 }}>
+                        🖼️ Немає фотографії: {dashboardStats.diffHoroshopNoPhoto}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
               <button
@@ -1789,7 +1855,13 @@ export default function App() {
                   <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '140px', padding: '0.75rem 0.5rem', color: '#4360a0' }}>🔵 Хорошоп</th>
                   <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '140px', padding: '0.75rem 0.5rem', color: '#7c3aed' }}>🟣 Prom.ua</th>
                   <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '130px', padding: '0.75rem 0.5rem', color: '#18181b' }}>⚫ Мономаркет</th>
-                  <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '200px', padding: '0.75rem 0.5rem' }}>Статус / Зауваження</th>
+                  <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '220px', padding: '0.75rem 0.5rem' }}>
+                    {dashboardFilter === 'horoshop_issues' || dashboardFilter === 'wh_in_horo_out' ? '🔵 Зауваження Хорошоп' :
+                     dashboardFilter === 'prom_issues' || dashboardFilter === 'prom_missing' || dashboardFilter === 'prom_disabled_stock' ? '🟣 Зауваження Prom' :
+                     dashboardFilter === 'mono_issues' || dashboardFilter === 'mono_no_barcode' ? '⚫ Зауваження Моно' :
+                     dashboardFilter === 'excel_issues' || dashboardFilter === 'excel_missing' ? '📊 Зауваження Excel' :
+                     'Статус / Зауваження'}
+                  </th>
                   <th style={{ position: 'sticky', top: 0, zIndex: 30, background: '#f8fafc', borderBottom: '2px solid var(--border-color)', boxShadow: '0 2px 4px rgba(0,0,0,0.05)', width: '130px', padding: '0.75rem 0.5rem', textAlign: 'center', borderTopRightRadius: '7px' }}>Швидка дія</th>
                 </tr>
               </thead>
@@ -1906,32 +1978,53 @@ export default function App() {
 
                       {/* Status / Discrepancies */}
                       <td style={{ padding: '0.75rem 0.5rem', verticalAlign: 'middle' }}>
-                        {item.issues.length > 0 ? (
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-                            {item.issues.map(iss => (
-                              <span
-                                key={iss.key}
-                                style={{
-                                  display: 'inline-block',
-                                  fontSize: '0.725rem',
-                                  padding: '0.15rem 0.45rem',
-                                  borderRadius: '4px',
-                                  fontWeight: 600,
-                                  background: iss.type === 'danger' ? '#fee2e2' : iss.type === 'warning' ? '#ffedd5' : iss.type === 'purple' ? '#f3e8ff' : iss.type === 'mono' ? '#f4f4f5' : '#f3f4f6',
-                                  color: iss.type === 'danger' ? '#b91c1c' : iss.type === 'warning' ? '#c2410c' : iss.type === 'purple' ? '#6b21a8' : iss.type === 'mono' ? '#18181b' : '#4b5563',
-                                  border: iss.type === 'mono' ? '1px solid #d4d4d8' : 'none',
-                                  width: 'fit-content'
-                                }}
-                              >
-                                {iss.text}
-                              </span>
-                            ))}
-                          </div>
-                        ) : (
-                          <span style={{ fontSize: '0.75rem', color: '#15803d', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '0.2rem' }}>
-                            ✅ Синхронно
-                          </span>
-                        )}
+                        {(() => {
+                          let platformFilter = null;
+                          if (dashboardFilter === 'horoshop_issues' || dashboardFilter === 'wh_in_horo_out') {
+                            platformFilter = 'horoshop';
+                          } else if (dashboardFilter === 'prom_issues' || dashboardFilter === 'prom_missing' || dashboardFilter === 'prom_disabled_stock') {
+                            platformFilter = 'prom';
+                          } else if (dashboardFilter === 'mono_issues' || dashboardFilter === 'mono_no_barcode') {
+                            platformFilter = 'mono';
+                          } else if (dashboardFilter === 'excel_issues' || dashboardFilter === 'excel_missing') {
+                            platformFilter = 'excel';
+                          }
+
+                          const relevantIssues = platformFilter
+                            ? item.issues.filter(iss => iss.platform === platformFilter)
+                            : item.issues;
+
+                          if (relevantIssues.length > 0) {
+                            return (
+                              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                                {relevantIssues.map(iss => (
+                                  <span
+                                    key={iss.key}
+                                    style={{
+                                      display: 'inline-block',
+                                      fontSize: '0.725rem',
+                                      padding: '0.15rem 0.45rem',
+                                      borderRadius: '4px',
+                                      fontWeight: 600,
+                                      background: iss.type === 'danger' ? '#fee2e2' : iss.type === 'warning' ? '#ffedd5' : iss.type === 'purple' ? '#f3e8ff' : iss.type === 'mono' ? '#f4f4f5' : '#f3f4f6',
+                                      color: iss.type === 'danger' ? '#b91c1c' : iss.type === 'warning' ? '#c2410c' : iss.type === 'purple' ? '#6b21a8' : iss.type === 'mono' ? '#18181b' : '#4b5563',
+                                      border: iss.type === 'mono' ? '1px solid #d4d4d8' : 'none',
+                                      width: 'fit-content'
+                                    }}
+                                  >
+                                    {iss.text}
+                                  </span>
+                                ))}
+                              </div>
+                            );
+                          }
+
+                          return (
+                            <span style={{ fontSize: '0.75rem', color: '#15803d', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '0.2rem' }}>
+                              ✅ {platformFilter ? 'Без зауважень' : 'Синхронно'}
+                            </span>
+                          );
+                        })()}
                       </td>
 
                       {/* Quick Navigation Action */}
