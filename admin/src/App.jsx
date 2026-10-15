@@ -835,6 +835,7 @@ export default function App() {
     });
 
     const totalIssuesCount = auditedProducts.filter(item => item.hasAnyIssue).length;
+    const diffPromIssues = diffMissingFromProm + diffInStockPromDisabled;
 
     return {
       warehouseInStock,
@@ -851,6 +852,7 @@ export default function App() {
       diffWarehouseInHoroshopOut,
       diffInStockPromDisabled,
       diffMissingFromProm,
+      diffPromIssues,
       diffMonoMissingBarcode,
       totalIssuesCount,
       auditedProducts
@@ -868,11 +870,12 @@ export default function App() {
         return false;
       }
       if (dashboardFilter === 'issues') return item.hasAnyIssue;
-      if (dashboardFilter === 'wh_in_horo_out') return item.isDiffWarehouseInHoroshopOut;
+      if (dashboardFilter === 'horoshop_issues' || dashboardFilter === 'wh_in_horo_out') return item.isDiffWarehouseInHoroshopOut;
+      if (dashboardFilter === 'prom_issues') return item.isDiffMissingFromProm || item.isDiffInStockPromDisabled;
       if (dashboardFilter === 'prom_missing') return item.isDiffMissingFromProm;
       if (dashboardFilter === 'prom_disabled_stock') return item.isDiffInStockPromDisabled;
-      if (dashboardFilter === 'mono_no_barcode') return item.isDiffMonoMissingBarcode;
-      if (dashboardFilter === 'excel_missing') return item.isDiffMissingFromExcel;
+      if (dashboardFilter === 'mono_issues' || dashboardFilter === 'mono_no_barcode') return item.isDiffMonoMissingBarcode;
+      if (dashboardFilter === 'excel_issues' || dashboardFilter === 'excel_missing') return item.isDiffMissingFromExcel;
       if (dashboardFilter === 'healthy') return !item.hasAnyIssue;
       return true; // 'all'
     });
@@ -1430,189 +1433,319 @@ export default function App() {
             </div>
           </div>
 
-          {/* Quick Filter Cards Grid (Mockup Style with Colored Left Borders) */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
+          {/* Quick Filter Cards Grid - 4 Platforms */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
             
-            {/* Discrepancy Card 1: Wh > 0, Horo: Out */}
-            <div
-              onClick={() => setDashboardFilter(dashboardFilter === 'wh_in_horo_out' ? 'all' : 'wh_in_horo_out')}
-              style={{
-                cursor: 'pointer',
-                padding: '1.1rem 1.25rem',
-                borderRadius: '12px',
-                background: dashboardFilter === 'wh_in_horo_out' ? '#fef2f2' : '#ffffff',
-                border: '1px solid #e2e8f0',
-                borderLeft: '4px solid #ef4444',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                boxShadow: dashboardFilter === 'wh_in_horo_out' ? '0 4px 12px rgba(239, 68, 68, 0.12)' : '0 1px 3px rgba(0,0,0,0.03)',
-                transition: 'all 0.15s ease'
-              }}
-              title="На складі товар є (>0), але на Хорошопі стоїть 'немає в наявності'"
-            >
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
-                  <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#0f172a' }}>Склад &gt; 0, Хорошоп: Немає</span>
-                  <span style={{ background: '#ef4444', color: '#fff', fontSize: '0.75rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '999px' }}>
-                    {dashboardStats.diffWarehouseInHoroshopOut}
-                  </span>
+            {/* Platform Card 1: Horoshop */}
+            {(() => {
+              const isActive = dashboardFilter === 'horoshop_issues' || dashboardFilter === 'wh_in_horo_out';
+              return (
+                <div
+                  onClick={() => setDashboardFilter(isActive ? 'all' : 'horoshop_issues')}
+                  style={{
+                    cursor: 'pointer',
+                    padding: '1.1rem 1.25rem',
+                    borderRadius: '12px',
+                    background: isActive ? '#eef2f9' : '#ffffff',
+                    border: '1px solid #e2e8f0',
+                    borderLeft: '4px solid #4360a0',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    boxShadow: isActive ? '0 4px 12px rgba(67, 96, 160, 0.16)' : '0 1px 3px rgba(0,0,0,0.03)',
+                    transition: 'all 0.15s ease'
+                  }}
+                  title="Переглянути проблеми Хорошоп"
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <span style={{ fontSize: '0.95rem', fontWeight: 700, color: '#0f172a' }}>Проблеми Хорошоп</span>
+                    <span style={{ background: '#4360a0', color: '#fff', fontSize: '0.8rem', fontWeight: 700, padding: '0.15rem 0.6rem', borderRadius: '999px' }}>
+                      {dashboardStats.diffWarehouseInHoroshopOut}
+                    </span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '1rem', fontSize: '0.775rem', color: isActive ? '#4360a0' : '#94a3b8', fontWeight: 600 }}>
+                    <span>{isActive ? '✓ Розділ відкрито (скинути)' : 'Відкрити розділ'}</span>
+                    <span>→</span>
+                  </div>
                 </div>
-                <div style={{ fontSize: '0.775rem', color: '#64748b', lineHeight: 1.35 }}>
-                  Товар є на складі, але недоступний для замовлення на сайті
-                </div>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '0.85rem', fontSize: '0.75rem', color: dashboardFilter === 'wh_in_horo_out' ? '#ef4444' : '#94a3b8', fontWeight: 600 }}>
-                <span>{dashboardFilter === 'wh_in_horo_out' ? 'Фільтр активний (скинути)' : 'Натисніть щоб відфільтрувати'}</span>
-                <span>→</span>
-              </div>
-            </div>
+              );
+            })()}
 
-            {/* Discrepancy Card 2: Prom Missing */}
-            <div
-              onClick={() => setDashboardFilter(dashboardFilter === 'prom_missing' ? 'all' : 'prom_missing')}
-              style={{
-                cursor: 'pointer',
-                padding: '1.1rem 1.25rem',
-                borderRadius: '12px',
-                background: dashboardFilter === 'prom_missing' ? '#faf5ff' : '#ffffff',
-                border: '1px solid #e2e8f0',
-                borderLeft: '4px solid #8b5cf6',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                boxShadow: dashboardFilter === 'prom_missing' ? '0 4px 12px rgba(139, 92, 246, 0.12)' : '0 1px 3px rgba(0,0,0,0.03)',
-                transition: 'all 0.15s ease'
-              }}
-              title="Товар є в Хорошопі, але його артикул не знайдено на Prom.ua"
-            >
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
-                  <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#0f172a' }}>Немає на Prom.ua</span>
-                  <span style={{ background: '#8b5cf6', color: '#fff', fontSize: '0.75rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '999px' }}>
-                    {dashboardStats.diffMissingFromProm}
-                  </span>
+            {/* Platform Card 2: Prom */}
+            {(() => {
+              const isActive = dashboardFilter === 'prom_issues' || dashboardFilter === 'prom_missing' || dashboardFilter === 'prom_disabled_stock';
+              return (
+                <div
+                  onClick={() => setDashboardFilter(isActive ? 'all' : 'prom_issues')}
+                  style={{
+                    cursor: 'pointer',
+                    padding: '1.1rem 1.25rem',
+                    borderRadius: '12px',
+                    background: isActive ? '#faf5ff' : '#ffffff',
+                    border: '1px solid #e2e8f0',
+                    borderLeft: '4px solid #7c3aed',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    boxShadow: isActive ? '0 4px 12px rgba(124, 58, 237, 0.16)' : '0 1px 3px rgba(0,0,0,0.03)',
+                    transition: 'all 0.15s ease'
+                  }}
+                  title="Переглянути проблеми Prom.ua"
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <span style={{ fontSize: '0.95rem', fontWeight: 700, color: '#0f172a' }}>Проблеми Пром</span>
+                    <span style={{ background: '#7c3aed', color: '#fff', fontSize: '0.8rem', fontWeight: 700, padding: '0.15rem 0.6rem', borderRadius: '999px' }}>
+                      {dashboardStats.diffPromIssues}
+                    </span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '1rem', fontSize: '0.775rem', color: isActive ? '#7c3aed' : '#94a3b8', fontWeight: 600 }}>
+                    <span>{isActive ? '✓ Розділ відкрито (скинути)' : 'Відкрити розділ'}</span>
+                    <span>→</span>
+                  </div>
                 </div>
-                <div style={{ fontSize: '0.775rem', color: '#64748b', lineHeight: 1.35 }}>
-                  Артикул не створено на маркетплейсі Prom.ua
-                </div>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '0.85rem', fontSize: '0.75rem', color: dashboardFilter === 'prom_missing' ? '#8b5cf6' : '#94a3b8', fontWeight: 600 }}>
-                <span>{dashboardFilter === 'prom_missing' ? 'Фільтр активний (скинути)' : 'Натисніть щоб відфільтрувати'}</span>
-                <span>→</span>
-              </div>
-            </div>
+              );
+            })()}
 
-            {/* Discrepancy Card 3: Stock > 0, Prom disabled */}
-            <div
-              onClick={() => setDashboardFilter(dashboardFilter === 'prom_disabled_stock' ? 'all' : 'prom_disabled_stock')}
-              style={{
-                cursor: 'pointer',
-                padding: '1.1rem 1.25rem',
-                borderRadius: '12px',
-                background: dashboardFilter === 'prom_disabled_stock' ? '#f8fafc' : '#ffffff',
-                border: '1px solid #e2e8f0',
-                borderLeft: '4px solid #64748b',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                boxShadow: dashboardFilter === 'prom_disabled_stock' ? '0 4px 12px rgba(100, 116, 139, 0.12)' : '0 1px 3px rgba(0,0,0,0.03)',
-                transition: 'all 0.15s ease'
-              }}
-              title="Товар є на складі, але вимкнено для Prom"
-            >
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
-                  <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#0f172a' }}>На складі є, Prom: Вимкн</span>
-                  <span style={{ background: '#64748b', color: '#fff', fontSize: '0.75rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '999px' }}>
-                    {dashboardStats.diffInStockPromDisabled}
-                  </span>
+            {/* Platform Card 3: Mono */}
+            {(() => {
+              const isActive = dashboardFilter === 'mono_issues' || dashboardFilter === 'mono_no_barcode';
+              return (
+                <div
+                  onClick={() => setDashboardFilter(isActive ? 'all' : 'mono_issues')}
+                  style={{
+                    cursor: 'pointer',
+                    padding: '1.1rem 1.25rem',
+                    borderRadius: '12px',
+                    background: isActive ? '#f4f4f5' : '#ffffff',
+                    border: '1px solid #e2e8f0',
+                    borderLeft: '4px solid #18181b',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    boxShadow: isActive ? '0 4px 12px rgba(24, 24, 27, 0.16)' : '0 1px 3px rgba(0,0,0,0.03)',
+                    transition: 'all 0.15s ease'
+                  }}
+                  title="Переглянути проблеми Мономаркет"
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <span style={{ fontSize: '0.95rem', fontWeight: 700, color: '#0f172a' }}>Проблеми Моно</span>
+                    <span style={{ background: '#18181b', color: '#fff', fontSize: '0.8rem', fontWeight: 700, padding: '0.15rem 0.6rem', borderRadius: '999px' }}>
+                      {dashboardStats.diffMonoMissingBarcode}
+                    </span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '1rem', fontSize: '0.775rem', color: isActive ? '#18181b' : '#94a3b8', fontWeight: 600 }}>
+                    <span>{isActive ? '✓ Розділ відкрито (скинути)' : 'Відкрити розділ'}</span>
+                    <span>→</span>
+                  </div>
                 </div>
-                <div style={{ fontSize: '0.775rem', color: '#64748b', lineHeight: 1.35 }}>
-                  Товар в наявності, але знятий з продажу на Prom
-                </div>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '0.85rem', fontSize: '0.75rem', color: dashboardFilter === 'prom_disabled_stock' ? '#64748b' : '#94a3b8', fontWeight: 600 }}>
-                <span>{dashboardFilter === 'prom_disabled_stock' ? 'Фільтр активний (скинути)' : 'Натисніть щоб відфільтрувати'}</span>
-                <span>→</span>
-              </div>
-            </div>
+              );
+            })()}
 
-            {/* Discrepancy Card 4: Mono missing barcode */}
-            <div
-              onClick={() => setDashboardFilter(dashboardFilter === 'mono_no_barcode' ? 'all' : 'mono_no_barcode')}
-              style={{
-                cursor: 'pointer',
-                padding: '1.1rem 1.25rem',
-                borderRadius: '12px',
-                background: dashboardFilter === 'mono_no_barcode' ? '#f4f4f5' : '#ffffff',
-                border: '1px solid #e2e8f0',
-                borderLeft: '4px solid #18181b',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                boxShadow: dashboardFilter === 'mono_no_barcode' ? '0 4px 12px rgba(0, 0, 0, 0.12)' : '0 1px 3px rgba(0,0,0,0.03)',
-                transition: 'all 0.15s ease'
-              }}
-              title="Товари в Мономаркеті без штрихкоду (EAN)"
-            >
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
-                  <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#0f172a' }}>Проблеми Мономаркет</span>
-                  <span style={{ background: '#18181b', color: '#fff', fontSize: '0.75rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '999px' }}>
-                    {dashboardStats.diffMonoMissingBarcode}
-                  </span>
+            {/* Platform Card 4: Excel */}
+            {(() => {
+              const isActive = dashboardFilter === 'excel_issues' || dashboardFilter === 'excel_missing';
+              return (
+                <div
+                  onClick={() => setDashboardFilter(isActive ? 'all' : 'excel_issues')}
+                  style={{
+                    cursor: 'pointer',
+                    padding: '1.1rem 1.25rem',
+                    borderRadius: '12px',
+                    background: isActive ? '#ecfdf5' : '#ffffff',
+                    border: '1px solid #e2e8f0',
+                    borderLeft: '4px solid #059669',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    boxShadow: isActive ? '0 4px 12px rgba(5, 150, 105, 0.16)' : '0 1px 3px rgba(0,0,0,0.03)',
+                    transition: 'all 0.15s ease'
+                  }}
+                  title="Переглянути проблеми Excel"
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <span style={{ fontSize: '0.95rem', fontWeight: 700, color: '#0f172a' }}>Проблеми Ексель</span>
+                    <span style={{ background: '#059669', color: '#fff', fontSize: '0.8rem', fontWeight: 700, padding: '0.15rem 0.6rem', borderRadius: '999px' }}>
+                      {dashboardStats.warehouseMissing}
+                    </span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '1rem', fontSize: '0.775rem', color: isActive ? '#059669' : '#94a3b8', fontWeight: 600 }}>
+                    <span>{isActive ? '✓ Розділ відкрито (скинути)' : 'Відкрити розділ'}</span>
+                    <span>→</span>
+                  </div>
                 </div>
-                <div style={{ fontSize: '0.775rem', color: '#64748b', lineHeight: 1.35 }}>
-                  Немає штрихкоду (EAN) для публікації в Мономаркет
-                </div>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '0.85rem', fontSize: '0.75rem', color: dashboardFilter === 'mono_no_barcode' ? '#18181b' : '#94a3b8', fontWeight: 600 }}>
-                <span>{dashboardFilter === 'mono_no_barcode' ? 'Фільтр активний (скинути)' : 'Натисніть щоб відфільтрувати'}</span>
-                <span>→</span>
-              </div>
-            </div>
-
-            {/* Discrepancy Card 5: Missing from Excel */}
-            <div
-              onClick={() => setDashboardFilter(dashboardFilter === 'excel_missing' ? 'all' : 'excel_missing')}
-              style={{
-                cursor: 'pointer',
-                padding: '1.1rem 1.25rem',
-                borderRadius: '12px',
-                background: dashboardFilter === 'excel_missing' ? '#f0f9ff' : '#ffffff',
-                border: '1px solid #e2e8f0',
-                borderLeft: '4px solid #0ea5e9',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                boxShadow: dashboardFilter === 'excel_missing' ? '0 4px 12px rgba(14, 165, 233, 0.12)' : '0 1px 3px rgba(0,0,0,0.03)',
-                transition: 'all 0.15s ease'
-              }}
-              title="Артикули не знайдено в жодній вкладці складів Excel"
-            >
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
-                  <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#0f172a' }}>Не знайдено в Excel</span>
-                  <span style={{ background: '#0ea5e9', color: '#fff', fontSize: '0.75rem', fontWeight: 700, padding: '0.15rem 0.5rem', borderRadius: '999px' }}>
-                    {dashboardStats.warehouseMissing}
-                  </span>
-                </div>
-                <div style={{ fontSize: '0.775rem', color: '#64748b', lineHeight: 1.35 }}>
-                  Товари з каталогу, артикулів яких немає в таблиці
-                </div>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '0.85rem', fontSize: '0.75rem', color: dashboardFilter === 'excel_missing' ? '#0ea5e9' : '#94a3b8', fontWeight: 600 }}>
-                <span>{dashboardFilter === 'excel_missing' ? 'Фільтр активний (скинути)' : 'Натисніть щоб відфільтрувати'}</span>
-                <span>→</span>
-              </div>
-            </div>
+              );
+            })()}
 
           </div>
         </div>
 
         {/* Master Cross-Platform Audit Table */}
         <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '14px' }}>
+          
+          {/* Active Section Problem Description Banner */}
+          {(dashboardFilter === 'horoshop_issues' || dashboardFilter === 'wh_in_horo_out') && (
+            <div style={{
+              background: '#eef2f9',
+              border: '1px solid #cbd7ee',
+              borderLeft: '5px solid #4360a0',
+              borderRadius: '10px',
+              padding: '0.85rem 1.25rem',
+              marginBottom: '1.25rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '1rem'
+            }}>
+              <div>
+                <div style={{ fontWeight: 700, color: '#4360a0', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span>🔵</span> Проблеми Хорошоп ({dashboardStats.diffWarehouseInHoroshopOut} товарів)
+                </div>
+                <div style={{ fontSize: '0.825rem', color: '#1e293b', marginTop: '0.25rem', lineHeight: 1.45 }}>
+                  <b>Проблема:</b> Товар є на складі за даними Excel (&gt; 0 шт.), але на сайті Хорошоп стоїть статус <b>«немає в наявності»</b> (товар недоступний для замовлення на сайті).
+                </div>
+              </div>
+              <button
+                onClick={() => setDashboardFilter('all')}
+                className="btn"
+                style={{
+                  background: '#ffffff',
+                  border: '1px solid #cbd7ee',
+                  color: '#4360a0',
+                  fontWeight: 600,
+                  fontSize: '0.8rem',
+                  padding: '0.4rem 0.85rem',
+                  borderRadius: '6px',
+                  whiteSpace: 'nowrap',
+                  cursor: 'pointer'
+                }}
+              >
+                ✕ Скинути фільтр
+              </button>
+            </div>
+          )}
+
+          {(dashboardFilter === 'prom_issues' || dashboardFilter === 'prom_missing' || dashboardFilter === 'prom_disabled_stock') && (
+            <div style={{
+              background: '#faf5ff',
+              border: '1px solid #ddd6fe',
+              borderLeft: '5px solid #7c3aed',
+              borderRadius: '10px',
+              padding: '0.85rem 1.25rem',
+              marginBottom: '1.25rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '1rem'
+            }}>
+              <div>
+                <div style={{ fontWeight: 700, color: '#7c3aed', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span>🟣</span> Проблеми Пром ({dashboardStats.diffPromIssues} товарів)
+                </div>
+                <div style={{ fontSize: '0.825rem', color: '#1e293b', marginTop: '0.25rem', lineHeight: 1.45 }}>
+                  <b>Проблема:</b> Товари не опубліковані на Prom.ua: <b>{dashboardStats.diffMissingFromProm}</b> товарів відсутні в каталозі Prom (не створено артикул), а <b>{dashboardStats.diffInStockPromDisabled}</b> товарів є на складі, але вимкнені з продажу на Prom.
+                </div>
+              </div>
+              <button
+                onClick={() => setDashboardFilter('all')}
+                className="btn"
+                style={{
+                  background: '#ffffff',
+                  border: '1px solid #ddd6fe',
+                  color: '#7c3aed',
+                  fontWeight: 600,
+                  fontSize: '0.8rem',
+                  padding: '0.4rem 0.85rem',
+                  borderRadius: '6px',
+                  whiteSpace: 'nowrap',
+                  cursor: 'pointer'
+                }}
+              >
+                ✕ Скинути фільтр
+              </button>
+            </div>
+          )}
+
+          {(dashboardFilter === 'mono_issues' || dashboardFilter === 'mono_no_barcode') && (
+            <div style={{
+              background: '#f4f4f5',
+              border: '1px solid #d4d4d8',
+              borderLeft: '5px solid #18181b',
+              borderRadius: '10px',
+              padding: '0.85rem 1.25rem',
+              marginBottom: '1.25rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '1rem'
+            }}>
+              <div>
+                <div style={{ fontWeight: 700, color: '#18181b', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span>⚫</span> Проблеми Моно ({dashboardStats.diffMonoMissingBarcode} товарів)
+                </div>
+                <div style={{ fontSize: '0.825rem', color: '#1e293b', marginTop: '0.25rem', lineHeight: 1.45 }}>
+                  <b>Проблема:</b> Товари включені у вивантаження Мономаркет, але <b>не мають штрихкоду (EAN)</b>. Мономаркет не приймає товари без штрихкоду.
+                </div>
+              </div>
+              <button
+                onClick={() => setDashboardFilter('all')}
+                className="btn"
+                style={{
+                  background: '#ffffff',
+                  border: '1px solid #d4d4d8',
+                  color: '#18181b',
+                  fontWeight: 600,
+                  fontSize: '0.8rem',
+                  padding: '0.4rem 0.85rem',
+                  borderRadius: '6px',
+                  whiteSpace: 'nowrap',
+                  cursor: 'pointer'
+                }}
+              >
+                ✕ Скинути фільтр
+              </button>
+            </div>
+          )}
+
+          {(dashboardFilter === 'excel_issues' || dashboardFilter === 'excel_missing') && (
+            <div style={{
+              background: '#ecfdf5',
+              border: '1px solid #a7f3d0',
+              borderLeft: '5px solid #059669',
+              borderRadius: '10px',
+              padding: '0.85rem 1.25rem',
+              marginBottom: '1.25rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '1rem'
+            }}>
+              <div>
+                <div style={{ fontWeight: 700, color: '#059669', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span>📊</span> Проблеми Ексель ({dashboardStats.warehouseMissing} товарів)
+                </div>
+                <div style={{ fontSize: '0.825rem', color: '#1e293b', marginTop: '0.25rem', lineHeight: 1.45 }}>
+                  <b>Проблема:</b> Товари є в каталозі Хорошоп, але їхніх артикулів <b>немає в жодній вкладці таблиці залишків Excel</b>. Реальна кількість на складі для них невідома.
+                </div>
+              </div>
+              <button
+                onClick={() => setDashboardFilter('all')}
+                className="btn"
+                style={{
+                  background: '#ffffff',
+                  border: '1px solid #a7f3d0',
+                  color: '#059669',
+                  fontWeight: 600,
+                  fontSize: '0.8rem',
+                  padding: '0.4rem 0.85rem',
+                  borderRadius: '6px',
+                  whiteSpace: 'nowrap',
+                  cursor: 'pointer'
+                }}
+              >
+                ✕ Скинути фільтр
+              </button>
+            </div>
+          )}
           
           {/* Controls Bar */}
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
