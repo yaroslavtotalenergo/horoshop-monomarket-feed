@@ -142,7 +142,6 @@ export default function App() {
   const [promSearchQuery, setPromSearchQuery] = useState('');
   const [promFilterMode, setPromFilterMode] = useState('all');
   const [promCategoryFilter, setPromCategoryFilter] = useState('all');
-  const [promSortBy, setPromSortBy] = useState('stock_desc');
   const [collapsedPromCategories, setCollapsedPromCategories] = useState({});
   
   const [savingHoroshop, setSavingHoroshop] = useState(false);
@@ -150,10 +149,8 @@ export default function App() {
   const [horoshopSearchQuery, setHoroshopSearchQuery] = useState('');
   const [horoshopFilterMode, setHoroshopFilterMode] = useState('all');
   const [horoshopCategoryFilter, setHoroshopCategoryFilter] = useState('all');
-  const [horoshopSortBy, setHoroshopSortBy] = useState('stock_desc');
   const [horoshopDisabled, setHoroshopDisabled] = useState([]);
   const [collapsedHoroshopCategories, setCollapsedHoroshopCategories] = useState({});
-  const [monoSortBy, setMonoSortBy] = useState('stock_desc');
   
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -460,32 +457,8 @@ export default function App() {
       return true;
     });
 
-    return [...filtered].sort((a, b) => {
-      const aCode = a.vendorCode ? String(a.vendorCode).trim() : '';
-      const bCode = b.vendorCode ? String(b.vendorCode).trim() : '';
-      let aStock = stockOverrides[aCode] !== undefined ? parseInt(stockOverrides[aCode], 10) : 0;
-      if (alwaysAvailable.includes(aCode)) aStock = Math.max(aStock, 10);
-      if (isNaN(aStock) || aStock < 0) aStock = 0;
-      let bStock = stockOverrides[bCode] !== undefined ? parseInt(stockOverrides[bCode], 10) : 0;
-      if (alwaysAvailable.includes(bCode)) bStock = Math.max(bStock, 10);
-      if (isNaN(bStock) || bStock < 0) bStock = 0;
-
-      if (promSortBy === 'stock_desc') {
-        const aStockVal = stockOverrides[a.vendorCode] !== undefined ? parseInt(stockOverrides[a.vendorCode], 10) : 0;
-        const bStockVal = stockOverrides[b.vendorCode] !== undefined ? parseInt(stockOverrides[b.vendorCode], 10) : 0;
-        return (isNaN(bStockVal) ? 0 : bStockVal) - (isNaN(aStockVal) ? 0 : aStockVal);
-      }
-      if (promSortBy === 'stock_asc') {
-        const aStockVal = stockOverrides[a.vendorCode] !== undefined ? parseInt(stockOverrides[a.vendorCode], 10) : 0;
-        const bStockVal = stockOverrides[b.vendorCode] !== undefined ? parseInt(stockOverrides[b.vendorCode], 10) : 0;
-        return (isNaN(aStockVal) ? 0 : aStockVal) - (isNaN(bStockVal) ? 0 : bStockVal);
-      }
-      if (promSortBy === 'sku_asc') return (a.vendorCode || '').localeCompare(b.vendorCode || '');
-      if (promSortBy === 'name_asc') return (names[a.vendorCode] || a.name || '').localeCompare(names[b.vendorCode] || b.name || '');
-      if (promSortBy === 'price_desc') return (Number(b.price) || 0) - (Number(a.price) || 0);
-      return 0;
-    });
-  }, [catalog, promSearchQuery, promCategoryFilter, promFilterMode, promSortBy, promWhitelistSet, stockOverrides, alwaysAvailable, promSkusSet, names]);
+    return filtered;
+  }, [catalog, promSearchQuery, promCategoryFilter, promFilterMode, promWhitelistSet, stockOverrides, alwaysAvailable, promSkusSet]);
 
   const promStats = useMemo(() => {
     let enabledCount = 0;
@@ -723,23 +696,8 @@ export default function App() {
       return true;
     });
 
-    return [...filtered].sort((a, b) => {
-      if (horoshopSortBy === 'stock_desc') {
-        const aStock = stockOverrides[a.vendorCode] !== undefined ? parseInt(stockOverrides[a.vendorCode], 10) : 0;
-        const bStock = stockOverrides[b.vendorCode] !== undefined ? parseInt(stockOverrides[b.vendorCode], 10) : 0;
-        return (isNaN(bStock) ? 0 : bStock) - (isNaN(aStock) ? 0 : aStock);
-      }
-      if (horoshopSortBy === 'stock_asc') {
-        const aStock = stockOverrides[a.vendorCode] !== undefined ? parseInt(stockOverrides[a.vendorCode], 10) : 0;
-        const bStock = stockOverrides[b.vendorCode] !== undefined ? parseInt(stockOverrides[b.vendorCode], 10) : 0;
-        return (isNaN(aStock) ? 0 : aStock) - (isNaN(bStock) ? 0 : bStock);
-      }
-      if (horoshopSortBy === 'sku_asc') return (a.vendorCode || '').localeCompare(b.vendorCode || '');
-      if (horoshopSortBy === 'name_asc') return (names[a.vendorCode] || a.name || '').localeCompare(names[b.vendorCode] || b.name || '');
-      if (horoshopSortBy === 'price_desc') return (Number(b.price) || 0) - (Number(a.price) || 0);
-      return 0;
-    });
-  }, [catalog, horoshopSearchQuery, horoshopCategoryFilter, horoshopFilterMode, horoshopSortBy, alwaysAvailable, horoshopDisabledSet, availabilityOverrides, stockOverrides, names]);
+    return filtered;
+  }, [catalog, horoshopSearchQuery, horoshopCategoryFilter, horoshopFilterMode, alwaysAvailable, horoshopDisabledSet, availabilityOverrides, stockOverrides]);
 
   const horoshopGrouped = useMemo(() => {
     const map = {};
@@ -898,29 +856,6 @@ export default function App() {
     return isNaN(fb) || fb < 0 ? 0 : fb;
   };
 
-  const sortMonoProducts = (list) => {
-    return [...list].sort((a, b) => {
-      const aCode = a.vendorCode || '';
-      const bCode = b.vendorCode || '';
-
-      if (monoSortBy === 'stock_desc') {
-        const aStock = getProductStock(aCode, a.stock);
-        const bStock = getProductStock(bCode, b.stock);
-        return bStock - aStock;
-      }
-      if (monoSortBy === 'stock_asc') {
-        const aStock = getProductStock(aCode, a.stock);
-        const bStock = getProductStock(bCode, b.stock);
-        return aStock - bStock;
-      }
-      if (monoSortBy === 'sku_asc') return aCode.localeCompare(bCode);
-      if (monoSortBy === 'name_asc') return (names[aCode] || a.name || '').localeCompare(names[bCode] || b.name || '');
-      if (monoSortBy === 'price_desc') return (Number(b.price) || 0) - (Number(a.price) || 0);
-      return 0;
-    });
-  };
-
-  // Фільтрація для пошуку (плоский список) та статусу
   const filteredStockChanges = useMemo(() => {
     let list = stockChanges || [];
     if (stockLogFilter === 'became_zero') {
@@ -965,8 +900,8 @@ export default function App() {
         );
       }
     }
-    return sortMonoProducts(result);
-  }, [catalog, searchQuery, filterMode, whitelist, barcodes, monoSortBy, names, stockOverrides, alwaysAvailable]);
+    return result;
+  }, [catalog, searchQuery, filterMode, whitelist, barcodes]);
 
   const grouped = useMemo(() => {
     const map = {};
@@ -981,10 +916,8 @@ export default function App() {
       if (!map[cat]) map[cat] = [];
       map[cat].push(product);
     }
-    return Object.entries(map)
-      .map(([cat, prods]) => [cat, sortMonoProducts(prods)])
-      .sort(([catA], [catB]) => catA.localeCompare(catB, 'uk'));
-  }, [catalog, filterMode, whitelist, barcodes, monoSortBy, names, stockOverrides, alwaysAvailable]);
+    return Object.entries(map).sort(([catA], [catB]) => catA.localeCompare(catB, 'uk'));
+  }, [catalog, filterMode, whitelist, barcodes]);
 
   const getCategoryStats = (products) => {
     const selected = products.filter(p => whitelist.includes(p.vendorCode)).length;
@@ -2013,18 +1946,7 @@ export default function App() {
             <option value="enabled">🟢 Тільки увімкнені в фід</option>
             <option value="no_barcode">⚠️ Без штрихкоду</option>
           </select>
-          <select
-            className="input-field"
-            style={{ width: 'auto', minWidth: '220px', fontSize: '0.95rem', cursor: 'pointer' }}
-            value={monoSortBy}
-            onChange={e => setMonoSortBy(e.target.value)}
-          >
-            <option value="stock_desc">📦 Залишок на складі (від більшого)</option>
-            <option value="stock_asc">📦 Залишок на складі (від меншого)</option>
-            <option value="sku_asc">🔢 Артикул (А-Я / 0-9)</option>
-            <option value="name_asc">🔤 Назва товару (А-Я)</option>
-            <option value="price_desc">💰 Ціна (від більшої)</option>
-          </select>
+          
         </div>
       )}
 
@@ -2348,18 +2270,7 @@ export default function App() {
               <option value="disabled">⚪ Вимкнені (Немає в наявн.) ({promStats.disabled})</option>
             </select>
 
-            <select
-              className="input-field"
-              style={{ width: 'auto', minWidth: '220px', fontSize: '0.95rem', cursor: 'pointer' }}
-              value={promSortBy}
-              onChange={e => setPromSortBy(e.target.value)}
-            >
-              <option value="stock_desc">📦 Залишок на складі (від більшого)</option>
-              <option value="stock_asc">📦 Залишок на складі (від меншого)</option>
-              <option value="sku_asc">🔢 Артикул (А-Я / 0-9)</option>
-              <option value="name_asc">🔤 Назва товару (А-Я)</option>
-              <option value="price_desc">💰 Ціна (від більшої)</option>
-            </select>
+            
 
             <select
               className="input-field"
@@ -2569,18 +2480,7 @@ export default function App() {
               <option value="out_of_stock">⚪ Немає на складі ({horoshopStats.outOfStock})</option>
             </select>
 
-            <select
-              className="input-field"
-              style={{ width: 'auto', minWidth: '220px', fontSize: '0.95rem', cursor: 'pointer' }}
-              value={horoshopSortBy}
-              onChange={e => setHoroshopSortBy(e.target.value)}
-            >
-              <option value="stock_desc">📦 Залишок на складі (від більшого)</option>
-              <option value="stock_asc">📦 Залишок на складі (від меншого)</option>
-              <option value="sku_asc">🔢 Артикул (А-Я / 0-9)</option>
-              <option value="name_asc">🔤 Назва товару (А-Я)</option>
-              <option value="price_desc">💰 Ціна (від більшої)</option>
-            </select>
+            
 
             <select
               className="input-field"
