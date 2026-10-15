@@ -138,5 +138,17 @@
   "SHU050150050": "Батарейний монітор Victron SmartShunt 500A ",
   "SHU050210050": "Батарейний монітор Victron SmartShunt 1000A ",
   "BAM030710100": "Батарейний монітор Victron BMV-710H Smart (У комплекті Шунт Victron Energy 500A/50mV) – BAM030710100",
-  "ARG120201020R": "Ізолятор акумуляторів Argodiode 120-2AC Victron – ARG120201020R"
+  "ARG120201020R": "Ізолятор акумуляторів Argodiode 120-2AC Victron – ARG120201020R",
+  "PCH012050001": "Зарядний пристрій Victron Energy Phoenix Charger 12/50(2+1) 120/240V ",
+  "BPC241214006": "Зарядний пристрій Blue Smart IP67 Charger 24/12 (1+Si) Victron",
+  "BPC122514006": "Зарядний пристрій Blue Smart IP67 Charger 12/25 (1+Si) Victron",
+  "PSC123051095": "Зарядний пристрій Victron Phoenix Smart IP43 Charger 12/30 (1+1)",
+  "PSC123053095": "Зарядний пристрій Victron Phoenix Smart IP43 Charger 12/30 (3)",
+  "PSC125051095": "Зарядний пристрій Victron Phoenix Smart IP43 Charger 12/50 (1+1)",
+  "PSC125053095": "Зарядний пристрій Victron Phoenix Smart IP43 Charger 12/50 (3)",
+  "PSC241651095": "Зарядний пристрій Victron Phoenix Smart IP43 Charger 24/16 (1+1)",
+  "PSC242551095": "Зарядний пристрій Victron Phoenix Smart IP43 Charger 24/25 (1+1)",
+  "PSC242553095": "Зарядний пристрій Victron Phoenix Smart IP43 Charger 24/25 (3)",
+  "PSC361550095": "Зарядний пристрій Victron Phoenix Smart IP43 Charger 36/15 (1)",
+  "PSC481350095": "Зарядний пристрій Victron Phoenix Smart IP43 Charger 48/13 (1)"
 }
