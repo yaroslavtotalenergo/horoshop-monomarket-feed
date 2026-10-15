@@ -722,7 +722,7 @@ export default function App() {
 
     // Discrepancy counters
     let diffWarehouseInHoroshopOut = 0;
-    let diffHoroshopInWarehouseZero = 0;
+    let diffHoroshopInstallmentsDisabled = 0;
     let diffHoroshopNoPrice = 0;
     let diffHoroshopNoPhoto = 0;
     let diffHoroshopIssues = 0;
@@ -787,13 +787,13 @@ export default function App() {
 
       // Discrepancy flags - Horoshop
       const isDiffWarehouseInHoroshopOut = stock > 0 && horoshopOut;
-      const isDiffHoroshopInWarehouseZero = hasExcelRecord && stock === 0 && !horoshopOut && !isAlways;
+      const isDiffHoroshopInstallmentsDisabled = isHoroshopDisabled && stock > 0;
       const isDiffHoroshopNoPrice = !p.price || Number(p.price) <= 0;
       const isDiffHoroshopNoPhoto = !p.picture || !p.picture.trim();
-      const isDiffHoroshopIssues = isDiffWarehouseInHoroshopOut || isDiffHoroshopInWarehouseZero || isDiffHoroshopNoPrice || isDiffHoroshopNoPhoto;
+      const isDiffHoroshopIssues = isDiffWarehouseInHoroshopOut || isDiffHoroshopInstallmentsDisabled || isDiffHoroshopNoPrice || isDiffHoroshopNoPhoto;
 
       if (isDiffWarehouseInHoroshopOut) diffWarehouseInHoroshopOut++;
-      if (isDiffHoroshopInWarehouseZero) diffHoroshopInWarehouseZero++;
+      if (isDiffHoroshopInstallmentsDisabled) diffHoroshopInstallmentsDisabled++;
       if (isDiffHoroshopNoPrice) diffHoroshopNoPrice++;
       if (isDiffHoroshopNoPhoto) diffHoroshopNoPhoto++;
       if (isDiffHoroshopIssues) diffHoroshopIssues++;
@@ -816,8 +816,8 @@ export default function App() {
       if (isDiffWarehouseInHoroshopOut) {
         issues.push({ platform: 'horoshop', type: 'danger', key: 'wh_in_horo_out', text: '🚨 Склад > 0, але на Хорошопі: Немає' });
       }
-      if (isDiffHoroshopInWarehouseZero) {
-        issues.push({ platform: 'horoshop', type: 'danger', key: 'horo_in_wh_zero', text: '⚠️ Склад = 0, але на Хорошопі: В наявності' });
+      if (isDiffHoroshopInstallmentsDisabled) {
+        issues.push({ platform: 'horoshop', type: 'warning', key: 'horo_installments_disabled', text: '🔒 Оплата частинами вимкнена для товару в наявності' });
       }
       if (isDiffHoroshopNoPrice) {
         issues.push({ platform: 'horoshop', type: 'danger', key: 'horo_no_price', text: '💸 Немає ціни на сайті' });
@@ -862,7 +862,7 @@ export default function App() {
         issues,
         hasAnyIssue: issues.length > 0,
         isDiffWarehouseInHoroshopOut,
-        isDiffHoroshopInWarehouseZero,
+        isDiffHoroshopInstallmentsDisabled,
         isDiffHoroshopNoPrice,
         isDiffHoroshopNoPhoto,
         isDiffHoroshopIssues,
@@ -889,7 +889,7 @@ export default function App() {
       monoActiveCount,
       monoMissingBarcodeCount,
       diffWarehouseInHoroshopOut,
-      diffHoroshopInWarehouseZero,
+      diffHoroshopInstallmentsDisabled,
       diffHoroshopNoPrice,
       diffHoroshopNoPhoto,
       diffHoroshopIssues,
@@ -1652,9 +1652,9 @@ export default function App() {
                     <span style={{ background: '#fee2e2', color: '#b91c1c', padding: '0.15rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600 }}>
                       🚨 Склад &gt; 0, на сайті немає: {dashboardStats.diffWarehouseInHoroshopOut}
                     </span>
-                    {dashboardStats.diffHoroshopInWarehouseZero > 0 && (
-                      <span style={{ background: '#fee2e2', color: '#b91c1c', padding: '0.15rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600 }}>
-                        ⚠️ Склад = 0, на сайті в наявності: {dashboardStats.diffHoroshopInWarehouseZero}
+                    {dashboardStats.diffHoroshopInstallmentsDisabled > 0 && (
+                      <span style={{ background: '#fef3c7', color: '#b45309', padding: '0.15rem 0.5rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600 }}>
+                        🔒 Оплата частинами вимкнена (в наявності): {dashboardStats.diffHoroshopInstallmentsDisabled}
                       </span>
                     )}
                     {dashboardStats.diffHoroshopNoPrice > 0 && (
