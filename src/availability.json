@@ -97,7 +97,7 @@
   "PMP482505012": true,
   "PMP482506000": true,
   "PMP482605012": true,
-  "PMP482606000": true,
+  "PMP482606000": false,
   "PMR482604000": false,
   "PMR482602030": false,
   "PMP482805000": false,
@@ -248,7 +248,7 @@
   "ORI241215200(R)": true,
   "ORI241220200(R)": false,
   "ORI241225020": false,
-  "ORI241230022": false,
+  "ORI241230022": true,
   "ORI241240021": true,
   "ORI241260020": false,
   "ORI241270030": false,
@@ -757,5 +757,6 @@
   "BPP900400100": false,
   "PYLUS2000CTE": false,
   "PYLUS3000CTE": false,
-  "PYLUS5000TE": false
+  "PYLUS5000TE": false,
+  "REL200320100": false
 }
