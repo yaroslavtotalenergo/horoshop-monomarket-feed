@@ -122,5 +122,21 @@
   "ARG100201020 (R)": "Ізолятор акумуляторів Victron Energy Argofet 100-2",
   "ARG100301000R": "Ізолятор акумуляторів Argodiode 100-3AC Victron Energy ",
   "BAT512120610": "Аккумулятор Victron Energy LiFePO4 Smart Battery 12.8V/200Ah",
-  "BAM010700100": "Батарейний монітор BMV-700H (У комплекті Шунт Victron 500A/50mV)"
+  "BAM010700100": "Батарейний монітор Victron BMV-700H (У комплекті Шунт Victron 500A/50mV)",
+  "BPR000065400": "Захист акумулятора від глибокого розряда BatteryProtect 12/24V 65A Victron",
+  "SHU065150050": "Батарейний монітор Victron Energy SmartShunt 500A IP65 ",
+  "BPR065022000": "Захист акумулятора від глибокого розряду Smart BatteryProtect 12/24V 65A Victron Energy ",
+  "BPR110022000": "Захист акумулятора від глибокого розряду Smart BatteryProtect 12/24V 100A Victron",
+  "BPR122022000": "Захист акумулятора від глибокого розряду Smart BatteryProtect 12/24V 220A Victron",
+  "BPR110048000": "Захист акумулятора від глибокого розряду Smart BatteryProtect 48V 100A Victron",
+  "BPR000100400": "Захист акумулятора від глибокого розряда BatteryProtect 12/24V 100A Victron",
+  "BPR000220400": "Захист акумулятора від глибокого розряда BatteryProtect 12/24V 220A Victron",
+  "BAM010702200 (R)": "Батарейний монітор Victron BMV-702 Black (У комплекті Шунт Victron 500A/50mV)",
+  "BAM030712000 (R)": "Батарейний монітор Victron BMV-712 Smart (У комплекті Шунт Victron Energy 500A/50mV)",
+  "BAM030712200 (R)": "Батарейний монітор Victron BMV-712 Black Smart (У комплекті Шунт Victron 500A/50mV)",
+  "SHU050130050": "Батарейний монітор Victron SmartShunt 300A",
+  "SHU050150050": "Батарейний монітор Victron SmartShunt 500A ",
+  "SHU050210050": "Батарейний монітор Victron SmartShunt 1000A ",
+  "BAM030710100": "Батарейний монітор Victron BMV-710H Smart (У комплекті Шунт Victron Energy 500A/50mV) – BAM030710100",
+  "ARG120201020R": "Ізолятор акумуляторів Argodiode 120-2AC Victron – ARG120201020R"
 }
