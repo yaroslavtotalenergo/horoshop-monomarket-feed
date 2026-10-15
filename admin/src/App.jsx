@@ -856,6 +856,35 @@ export default function App() {
     return isNaN(fb) || fb < 0 ? 0 : fb;
   };
 
+  const isMissingInExcel = (product) => {
+    const code = product?.vendorCode ? String(product.vendorCode).trim() : '';
+    if (!code) return true;
+    return stockOverrides[code] === undefined && stockOverrides[product.vendorCode] === undefined;
+  };
+
+  const monoStats = useMemo(() => {
+    let enabledCount = 0;
+    let noBarcodeCount = 0;
+    let outOfStockHoroshopCount = 0;
+    let noExcelCount = 0;
+
+    catalog.forEach(p => {
+      const code = p.vendorCode ? String(p.vendorCode).trim() : '';
+      if (whitelist.includes(code) || (p.vendorCode && whitelist.includes(p.vendorCode))) enabledCount++;
+      if (!barcodes[code] && !barcodes[p.vendorCode] && !p.barcode) noBarcodeCount++;
+      if (isHoroshopOutOfStock(p)) outOfStockHoroshopCount++;
+      if (!code || (stockOverrides[code] === undefined && stockOverrides[p.vendorCode] === undefined)) noExcelCount++;
+    });
+
+    return {
+      total: catalog.length,
+      enabled: enabledCount,
+      noBarcode: noBarcodeCount,
+      outOfStockHoroshop: outOfStockHoroshopCount,
+      noExcel: noExcelCount
+    };
+  }, [catalog, whitelist, barcodes, stockOverrides]);
+
   const filteredStockChanges = useMemo(() => {
     let list = stockChanges || [];
     if (stockLogFilter === 'became_zero') {
@@ -884,6 +913,10 @@ export default function App() {
       result = result.filter(p => whitelist.includes(p.vendorCode));
     } else if (filterMode === 'no_barcode') {
       result = result.filter(p => !barcodes[p.vendorCode] && !p.barcode);
+    } else if (filterMode === 'out_of_stock_horoshop') {
+      result = result.filter(p => isHoroshopOutOfStock(p));
+    } else if (filterMode === 'no_excel') {
+      result = result.filter(p => isMissingInExcel(p));
     }
     
     if (searchQuery.trim()) {
@@ -901,7 +934,7 @@ export default function App() {
       }
     }
     return result;
-  }, [catalog, searchQuery, filterMode, whitelist, barcodes]);
+  }, [catalog, searchQuery, filterMode, whitelist, barcodes, stockOverrides]);
 
   const grouped = useMemo(() => {
     const map = {};
@@ -910,6 +943,10 @@ export default function App() {
       baseCatalog = catalog.filter(p => whitelist.includes(p.vendorCode));
     } else if (filterMode === 'no_barcode') {
       baseCatalog = catalog.filter(p => !barcodes[p.vendorCode] && !p.barcode);
+    } else if (filterMode === 'out_of_stock_horoshop') {
+      baseCatalog = catalog.filter(p => isHoroshopOutOfStock(p));
+    } else if (filterMode === 'no_excel') {
+      baseCatalog = catalog.filter(p => isMissingInExcel(p));
     }
     for (const product of baseCatalog) {
       const cat = product.category || 'Без категорії';
@@ -917,7 +954,7 @@ export default function App() {
       map[cat].push(product);
     }
     return Object.entries(map).sort(([catA], [catB]) => catA.localeCompare(catB, 'uk'));
-  }, [catalog, filterMode, whitelist, barcodes]);
+  }, [catalog, filterMode, whitelist, barcodes, stockOverrides]);
 
   const getCategoryStats = (products) => {
     const selected = products.filter(p => whitelist.includes(p.vendorCode)).length;
@@ -1941,10 +1978,12 @@ export default function App() {
               >✕</button>
             )}
           </div>
-                    <select className="input-field" style={{ width: 'auto', minWidth: '220px', fontSize: '0.95rem', cursor: 'pointer' }} value={filterMode} onChange={e => setFilterMode(e.target.value)}>
-            <option value="all">👁️ Усі товари</option>
-            <option value="enabled">🟢 Тільки увімкнені в фід</option>
-            <option value="no_barcode">⚠️ Без штрихкоду</option>
+          <select className="input-field" style={{ width: 'auto', minWidth: '260px', fontSize: '0.95rem', cursor: 'pointer' }} value={filterMode} onChange={e => setFilterMode(e.target.value)}>
+            <option value="all">👁️ Усі товари ({catalog.length})</option>
+            <option value="enabled">🟢 Тільки увімкнені в фід ({monoStats.enabled})</option>
+            <option value="no_barcode">⚠️ Без штрихкоду ({monoStats.noBarcode})</option>
+            <option value="out_of_stock_horoshop">⚠️ Немає в наявності на Хорошопі ({monoStats.outOfStockHoroshop})</option>
+            <option value="no_excel">⚠️ Немає артикулу в Excel ({monoStats.noExcel})</option>
           </select>
           
         </div>
@@ -2041,6 +2080,11 @@ export default function App() {
                                       ⚠️ Немає в наявності на Хорошопі
                                     </span>
                                   )}
+                                  {isMissingInExcel(product) && (
+                                    <span style={{ marginLeft: '0.5rem', fontSize: '0.75rem', padding: '0.1rem 0.45rem', borderRadius: '4px', background: '#fef3c7', color: '#92400e', fontWeight: 600 }}>
+                                      ⚠️ Немає артикулу в Excel
+                                    </span>
+                                  )}
                                 </div>
                               </div>
                             </div>
@@ -2099,10 +2143,14 @@ export default function App() {
         <div className="glass-panel" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>
           Немає товарів. Переконайтеся, що ви вказали правильне посилання на фід Хорошопу в налаштуваннях.
         </div>
+      ) : !searchQuery.trim() && grouped.length === 0 ? (
+        <div className="glass-panel" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>
+          🎉 За вибраним фільтром проблемних товарів не знайдено!
+        </div>
       ) : !searchQuery.trim() ? (
         grouped.map(([categoryName, products]) => {
           const { selected, total } = getCategoryStats(products);
-          const isCollapsed = collapsedCategories[categoryName] !== false; // collapsed by default
+          const isCollapsed = filterMode !== 'all' ? collapsedCategories[categoryName] === true : collapsedCategories[categoryName] !== false;
 
           return (
             <div key={categoryName} className="glass-panel" style={{ marginBottom: '1rem', padding: 0, overflow: 'hidden' }}>
@@ -2194,6 +2242,11 @@ export default function App() {
                                       {isHoroshopOutOfStock(product) && (
                                         <span style={{ marginLeft: '0.5rem', fontSize: '0.75rem', padding: '0.1rem 0.45rem', borderRadius: '4px', background: '#fee2e2', color: '#b91c1c', fontWeight: 600 }}>
                                           ⚠️ Немає в наявності на Хорошопі
+                                        </span>
+                                      )}
+                                      {isMissingInExcel(product) && (
+                                        <span style={{ marginLeft: '0.5rem', fontSize: '0.75rem', padding: '0.1rem 0.45rem', borderRadius: '4px', background: '#fef3c7', color: '#92400e', fontWeight: 600 }}>
+                                          ⚠️ Немає артикулу в Excel
                                         </span>
                                       )}
                                     </div>
