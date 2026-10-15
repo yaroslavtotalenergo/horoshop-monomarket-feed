@@ -745,5 +745,14 @@
   "SLSIFP51314A": false,
   "BPC240813006": true,
   "PMP122200010": false,
-  "PCH012030001": false
+  "PCH012030001": false,
+  "PMP482200010": false,
+  "SLSIFP48100A": false,
+  "SSIF2P15S48100C": false,
+  "BAT512050610": false,
+  "BAT512132410": false,
+  "CIP134050020": false,
+  "CIN121220000": false,
+  "CEP121620000": false,
+  "BPP900400100": false
 }
