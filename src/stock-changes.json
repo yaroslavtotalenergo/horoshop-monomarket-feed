@@ -1,1 +1,38 @@
-[]
+[
+  {
+    "id": "PMP122120000_1792151702368_rn61g",
+    "timestamp": "2026-10-16T11:55:02.367Z",
+    "vendorCode": "PMP122120000",
+    "name": "Інвертор гібридний Victron MultiPlus 1кВт 12/1200/50-16 12/220В",
+    "category": "Інвертори DC-AC",
+    "price": 32136,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  },
+  {
+    "id": "BPC123047002_1792151702368_wkoi0",
+    "timestamp": "2026-10-16T11:55:02.367Z",
+    "vendorCode": "BPC123047002",
+    "name": "Зарядний пристрій Blue Smart IP22 Charger 12/30 (1)",
+    "category": "Зарядні пристрої",
+    "price": 10877,
+    "oldQty": 11,
+    "newQty": 10,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
+    "id": "LYN020102010_1792151702368_9w7ok",
+    "timestamp": "2026-10-16T11:55:02.367Z",
+    "vendorCode": "LYN020102010",
+    "name": "Розподільча модульна шина Lynx Power In 1000 (M10) ",
+    "category": "Низьковольтне обладнання",
+    "price": 9270,
+    "oldQty": 2,
+    "newQty": 1,
+    "diff": -1,
+    "type": "changed"
+  }
+]
