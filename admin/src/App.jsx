@@ -39,9 +39,8 @@ async function hashPassword(password) {
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
-// Stored hash of: admin / totalenergoadmin
 const STORED_LOGIN = 'admin';
-const STORED_PASS_HASH = '316bceef33e561601a426930c141ce7dfc6b0f6df2a091d40135b0795cd1d4a9'; // totalenergoadmin
+const STORED_PASS_HASH = '316bceef33e561601a426930c141ce7dfc6b0f6df2a091d40135b0795cd1d4a9';
 
 function isHoroshopOutOfStock(product) {
   if (!product) return false;

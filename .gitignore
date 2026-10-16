@@ -6,7 +6,6 @@
 !/src/
 !/feeds/
 !/.github/
-!/horoshop-monomarket-feed/
 !/test/
 !/package.json
 !/package-lock.json
