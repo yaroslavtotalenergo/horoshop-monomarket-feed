@@ -125,7 +125,6 @@ export default function App() {
   const [stockOverrides, setStockOverrides] = useState({});
   const [names, setNames] = useState({});
   const [videos, setVideos] = useState({});
-  const [googleSheets, setGoogleSheets] = useState([]);
 
   const [collapsedCategories, setCollapsedCategories] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
@@ -238,7 +237,7 @@ export default function App() {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [catalogRes, whitelistRes, barcodesRes, descRes, configRes, availRes, stockRes, namesRes, videosRes, sheetsRes, alwaysAvailRes, promWhitelistRes, promSkusRes, horoshopDisabledRes, stockChangesRes] = await Promise.all([
+      const [catalogRes, whitelistRes, barcodesRes, descRes, configRes, availRes, stockRes, namesRes, videosRes, alwaysAvailRes, promWhitelistRes, promSkusRes, horoshopDisabledRes, stockChangesRes] = await Promise.all([
         api.getFile('feeds/catalog.json'),
         api.getFile('src/whitelist.json'),
         api.getFile('src/barcodes.json'),
@@ -248,7 +247,6 @@ export default function App() {
         api.getFile('src/stock.json'),
         api.getFile('src/names.json'),
         api.getFile('src/videos.json'),
-        api.getFile('src/google-sheets.json'),
         api.getFile('src/always-available.json'),
         api.getFile('src/prom-whitelist.json'),
         api.getFile('src/prom-skus.json'),
@@ -271,10 +269,6 @@ export default function App() {
       if (stockRes.content) setStockOverrides(JSON.parse(stockRes.content) || {});
       if (namesRes.content) setNames(JSON.parse(namesRes.content) || {});
       if (videosRes && videosRes.content) setVideos(JSON.parse(videosRes.content) || {});
-      if (sheetsRes && sheetsRes.content) {
-        const parsed = JSON.parse(sheetsRes.content);
-        setGoogleSheets(parsed.sheets || []);
-      }
       if (configRes.content) setFeedUrl(JSON.parse(configRes.content).horoshopFeedUrl || '');
       
       if (promWhitelistRes && promWhitelistRes.content) {
@@ -1104,121 +1098,6 @@ export default function App() {
       e.target.value = '';
     };
     reader.readAsBinaryString(file);
-  };
-
-  const handleSyncGoogleSheets = async () => {
-    if (!googleSheets || googleSheets.length === 0) {
-      showToast('⚠️ Немає налаштованих Google Таблиць у src/google-sheets.json');
-      return;
-    }
-    setSyncing(true);
-    showToast('🔄 Синхронізація залишків з Google Sheets...');
-    try {
-      const keywords = {
-        article: ['артикул', 'артікул', 'vendor code', 'vendor_code'],
-        warehouses: ['ридомиль', 'в.олександівка 1', 'в.олександівка 2', 'с.борщагівка', 'київ1', 'київ2', 'київ 1', 'київ 2']
-      };
-
-      const newStock = { ...stockOverrides };
-      const newAvail = { ...availabilityOverrides };
-      let updated = 0;
-
-      for (const sheet of googleSheets) {
-        if (!sheet) continue;
-        let url = sheet;
-        let gid = '';
-        const gidMatch = url.match(/gid=([0-9]+)/);
-        if (gidMatch) gid = `&gid=${gidMatch[1]}`;
-        
-        if (url.includes('/edit')) {
-          url = url.replace(/\/edit.*/, `/export?format=csv${gid}`);
-        } else if (url.includes('/export') && !url.includes('gid=') && gid) {
-          url += gid;
-        }
-        
-        const res = await fetch(url);
-        if (!res.ok) throw new Error(`Не вдалося завантажити таблицю`);
-        const text = await res.text();
-        
-        const workbook = XLSX.read(text, { type: 'string', raw: true });
-        const sheetName = workbook.SheetNames[0];
-        const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { header: 1 });
-        
-        let articleIdx = -1;
-        let warehouseIndices = [];
-        
-        for (let i = 0; i < Math.min(20, rows.length); i++) {
-          if (!rows[i]) continue;
-          rows[i].forEach((cell, idx) => {
-            if (!cell) return;
-            const val = String(cell).trim().toLowerCase();
-            if (keywords.article.includes(val)) articleIdx = idx;
-            if (keywords.warehouses.includes(val)) {
-              if (!warehouseIndices.includes(idx)) warehouseIndices.push(idx);
-            }
-          });
-        }
-        
-        if (articleIdx === -1) continue;
-        
-        for (let i = 0; i < rows.length; i++) {
-          const row = rows[i];
-          if (!row) continue;
-          const vendorCode = row[articleIdx] ? String(row[articleIdx]).trim() : null;
-          if (!vendorCode || keywords.article.includes(vendorCode.toLowerCase())) continue;
-          
-          let totalQty = 0;
-          for (const wIdx of warehouseIndices) {
-            const val = row[wIdx] ? String(row[wIdx]).replace(/\s/g, '').replace(',', '.').trim() : '';
-            const qty = parseInt(val, 10);
-            if (!isNaN(qty)) totalQty += qty;
-          }
-          
-          newStock[vendorCode] = totalQty;
-          newAvail[vendorCode] = totalQty > 0;
-          updated++;
-        }
-      }
-      
-      // Check for stock changes
-      const detectedSyncChanges = [];
-      const nowIso = new Date().toISOString();
-      for (const [code, newQty] of Object.entries(newStock)) {
-        const oldQty = stockOverrides[code];
-        if (oldQty !== undefined && oldQty !== newQty) {
-          let type = 'changed';
-          if (oldQty > 0 && newQty === 0) type = 'became_zero';
-          else if (oldQty === 0 && newQty > 0) type = 'became_available';
-
-          const prod = catalog.find(p => p.vendorCode === code) || {};
-          detectedSyncChanges.push({
-            id: `${code}_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
-            timestamp: nowIso,
-            vendorCode: code,
-            name: names[code] || prod.name || code,
-            category: prod.category || '',
-            price: prod.price || '',
-            oldQty,
-            newQty,
-            diff: newQty - oldQty,
-            type
-          });
-        }
-      }
-      if (detectedSyncChanges.length > 0) {
-        const updatedChanges = [...detectedSyncChanges, ...stockChanges].slice(0, 500);
-        setStockChanges(updatedChanges);
-        api.saveFile('src/stock-changes.json', JSON.stringify(updatedChanges, null, 2), shas.stockChanges, 'Оновлено журнал змін з Google Sheets').catch(console.error);
-      }
-
-      setStockOverrides(newStock);
-      setAvailabilityOverrides(newAvail);
-      showToast(`✅ Синхронізовано ${updated} товарів з Google Таблиць. Натисніть "Зберегти зміни" щоб оновити!`);
-    } catch (e) {
-      console.error(e);
-      showToast('❌ Помилка синхронізації з Google Sheets: ' + e.message);
-    }
-    setSyncing(false);
   };
 
   const renderPromProductRow = (product) => {

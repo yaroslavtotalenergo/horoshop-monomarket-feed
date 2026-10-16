@@ -8,17 +8,26 @@ async function main() {
 
   // ── 1. Завантаження конфігурації ──────────────────────────────
   let config = { sheets: [] };
-  try {
-    config = JSON.parse(fs.readFileSync('src/google-sheets.json', 'utf8'));
-  } catch (e) {
-    const msg = 'Файл src/google-sheets.json не знайдено або пошкоджено';
-    console.error('❌ ' + msg);
-    await notifyError('Конфігурацію таблиць не знайдено', msg);
-    return;
+  if (process.env.GOOGLE_SHEETS_URLS) {
+    config = {
+      sheets: process.env.GOOGLE_SHEETS_URLS
+        .split(/[\r\n,]+/)
+        .map(s => s.trim())
+        .filter(Boolean)
+    };
+  } else {
+    try {
+      config = JSON.parse(fs.readFileSync('src/google-sheets.json', 'utf8'));
+    } catch (e) {
+      const msg = 'Файл src/google-sheets.json не знайдено або пошкоджено';
+      console.error('❌ ' + msg);
+      await notifyError('Конфігурацію таблиць не знайдено', msg);
+      return;
+    }
   }
 
   if (!config.sheets || config.sheets.length === 0) {
-    const msg = 'Список таблиць у google-sheets.json порожній';
+    const msg = 'Список таблиць порожній (задайте GOOGLE_SHEETS_URLS у GitHub Secrets або src/google-sheets.json)';
     console.warn('⚠️ ' + msg);
     await notifyError('Таблиці не налаштовані', msg);
     return;
