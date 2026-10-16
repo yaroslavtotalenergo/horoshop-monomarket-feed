@@ -54,9 +54,11 @@ for (const article of alwaysAvailable) {
 }
 
 // ── Налаштування ────────────────────────────────────────────────
+const rawFeedUrl = (process.env.HOROSHOP_FEED_URL || config.horoshopFeedUrl || '').trim().replace(/^["']|["']$/g, '');
+
 const CONFIG = {
-  horoshopFeedUrl: process.env.HOROSHOP_FEED_URL || config.horoshopFeedUrl || '',
-  localFeedPath: process.env.LOCAL_FEED_PATH || '',
+  horoshopFeedUrl: rawFeedUrl,
+  localFeedPath: (process.env.LOCAL_FEED_PATH || '').trim(),
 
   defaults: {
     stock: parseInt(process.env.DEFAULT_STOCK || '10', 10),
@@ -91,14 +93,32 @@ async function fetchHoroshopXml() {
     return fs.readFileSync(CONFIG.localFeedPath, 'utf-8');
   }
   if (!CONFIG.horoshopFeedUrl) {
-    throw new Error('❌ Не вказано HOROSHOP_FEED_URL або LOCAL_FEED_PATH');
+    throw new Error('❌ Не вказано HOROSHOP_FEED_URL або LOCAL_FEED_PATH (додайте HOROSHOP_FEED_URL у GitHub Secrets)');
   }
-  console.log('🌐 Завантажуємо фід Хорошоп...');
-  const response = await axios.get(CONFIG.horoshopFeedUrl, {
-    timeout: 30000,
-    headers: { 'Accept-Encoding': 'gzip' },
-  });
-  return response.data;
+
+  let domain = '';
+  try {
+    domain = new URL(CONFIG.horoshopFeedUrl).origin;
+  } catch (e) { }
+
+  console.log(`🌐 Завантажуємо фід Хорошоп (${domain || 'URL налаштовано'})...`);
+  try {
+    const response = await axios.get(CONFIG.horoshopFeedUrl, {
+      timeout: 30000,
+      headers: {
+        'Accept-Encoding': 'gzip',
+        'User-Agent': 'Mozilla/5.0 (compatible; HoroshopMonoFeed/1.0)'
+      },
+    });
+    return response.data;
+  } catch (err) {
+    if (err.response && err.response.status === 404) {
+      console.error(`\n❌ Помилка 404 (Не знайдено) від сервера: ${domain || 'невідомий хост'}`);
+      console.error('💡 Перевірте секрет HOROSHOP_FEED_URL у GitHub Secrets:');
+      console.error('   Переконайтеся, що в ньому вказано точне посилання на XML-експорт Хорошопу (наприклад https://total-energo.com.ua/content/export/<хеш>.xml)\n');
+    }
+    throw err;
+  }
 }
 
 // ── Парсинг Хорошоп XML ─────────────────────────────────────────
@@ -423,8 +443,8 @@ async function main() {
   console.log('');
 
   try {
-    // 0. Синхронізувати залишки з Google Sheets
-    if (!isTest) {
+    // 0. Синхронізувати залишки з Google Sheets (якщо передано GOOGLE_SHEETS_URLS)
+    if (!isTest && process.env.GOOGLE_SHEETS_URLS) {
       try {
         const syncStock = require('./sync-stock');
         await syncStock();
