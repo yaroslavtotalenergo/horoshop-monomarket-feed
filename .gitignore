@@ -1,4 +1,4 @@
-﻿# Ignore everything in the root by default
+# Ignore everything in the root by default
 /*
 
 # But do not ignore these specific project files and folders
@@ -20,3 +20,4 @@
 node_modules/
 .env
 *.log
+src/prom-config.json

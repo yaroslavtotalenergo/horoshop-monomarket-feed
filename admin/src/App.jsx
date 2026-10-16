@@ -136,7 +136,6 @@ export default function App() {
   
   const [promWhitelist, setPromWhitelist] = useState([]);
   const [promSkus, setPromSkus] = useState([]);
-  const [promToken, setPromToken] = useState('d24092ed4ff1937f177358180846399f62841be0');
   const [syncingProm, setSyncingProm] = useState(false);
   const [savingProm, setSavingProm] = useState(false);
   const [promSearchQuery, setPromSearchQuery] = useState('');
@@ -240,7 +239,7 @@ export default function App() {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [catalogRes, whitelistRes, barcodesRes, descRes, configRes, availRes, stockRes, namesRes, videosRes, sheetsRes, alwaysAvailRes, promWhitelistRes, promConfigRes, promSkusRes, horoshopDisabledRes, stockChangesRes] = await Promise.all([
+      const [catalogRes, whitelistRes, barcodesRes, descRes, configRes, availRes, stockRes, namesRes, videosRes, sheetsRes, alwaysAvailRes, promWhitelistRes, promSkusRes, horoshopDisabledRes, stockChangesRes] = await Promise.all([
         api.getFile('feeds/catalog.json'),
         api.getFile('src/whitelist.json'),
         api.getFile('src/barcodes.json'),
@@ -253,7 +252,6 @@ export default function App() {
         api.getFile('src/google-sheets.json'),
         api.getFile('src/always-available.json'),
         api.getFile('src/prom-whitelist.json'),
-        api.getFile('src/prom-config.json'),
         api.getFile('src/prom-skus.json'),
         api.getFile('src/horoshop-disabled.json'),
         api.getFile('src/stock-changes.json')
@@ -285,12 +283,6 @@ export default function App() {
       }
       if (promSkusRes && promSkusRes.content) {
         try { setPromSkus(JSON.parse(promSkusRes.content) || []); } catch (e) { }
-      }
-      if (promConfigRes && promConfigRes.content) {
-        try {
-          const cfg = JSON.parse(promConfigRes.content);
-          if (cfg.token) setPromToken(cfg.token);
-        } catch (e) { }
       }
       
       if (stockChangesRes && stockChangesRes.content) {
@@ -360,9 +352,6 @@ export default function App() {
     try {
       const confRes = await api.saveFile('src/config.json', JSON.stringify({ horoshopFeedUrl: feedUrl }, null, 2), shas.config, 'Update config via Admin Panel');
       setShas({ ...shas, config: confRes.content.sha });
-      if (promToken) {
-        await api.saveFile('src/prom-config.json', JSON.stringify({ token: promToken }, null, 2), null, 'Update Prom token via Settings');
-      }
       loadData();
     } catch (e) { console.error(e); }
     setSaving(false);
@@ -380,9 +369,6 @@ export default function App() {
     setSavingProm(true);
     try {
       await api.saveFile('src/prom-whitelist.json', JSON.stringify(promWhitelist, null, 2), null, 'Update Prom whitelist via UI');
-      if (promToken) {
-        await api.saveFile('src/prom-config.json', JSON.stringify({ token: promToken }, null, 2), null, 'Update Prom config via UI');
-      }
       showToast('💾 Збережено! Запускаємо передачу на Prom.ua...');
       try {
         await api.triggerWorkflow();
@@ -3186,9 +3172,13 @@ export default function App() {
               <small style={{ color: 'var(--text-muted)' }}>Посилання на ваш фід — всі товари з нього з'являться в таблиці.</small>
             </div>
             <div className="form-group">
-              <label>🟣 Prom.ua API Bearer Token</label>
-              <input type="password" className="input-field" value={promToken} onChange={e => setPromToken(e.target.value)} placeholder="d24092..." />
-              <small style={{ color: 'var(--text-muted)' }}>Токен доступу до REST API Prom.ua (Кабінет компанії → Налаштування → Керування API-токенами).</small>
+              <label>🟣 Prom.ua API Token</label>
+              <div style={{ padding: '0.65rem 0.85rem', background: 'rgba(16, 185, 129, 0.08)', borderRadius: '6px', border: '1px solid rgba(16, 185, 129, 0.25)', fontSize: '0.85rem', color: '#047857' }}>
+                🔒 <strong>Захищено в GitHub Secrets (PROM_API_TOKEN)</strong>
+                <div style={{ color: 'var(--text-muted)', fontSize: '0.78rem', marginTop: '0.25rem', lineHeight: '1.4' }}>
+                  Токен зберігається у зашифрованому вигляді на GitHub та використовується серверною синхронізацією.
+                </div>
+              </div>
             </div>
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', marginTop: '2rem' }}>
               <button className="btn" style={{ background: 'transparent', border: '1px solid var(--border-color)' }} onClick={() => setShowSettings(false)}>Скасувати</button>
