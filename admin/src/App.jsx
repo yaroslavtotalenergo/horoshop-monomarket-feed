@@ -81,8 +81,8 @@ export function LoginGate({ children }) {
       <div className="glass-panel" style={{ width: '100%', maxWidth: '380px', padding: '2.5rem' }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <div style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>⚡</div>
-          <h1 style={{ margin: 0, fontSize: '1.5rem' }}>Total Energo</h1>
-          <p style={{ color: 'var(--text-muted)', margin: '0.25rem 0 0' }}>Monomarket Feed Admin</p>
+          <h1 style={{ margin: 0, fontSize: '1.5rem' }}>CRM PRO</h1>
+          <p style={{ color: 'var(--text-muted)', margin: '0.25rem 0 0' }}>Панель керування</p>
         </div>
         <form onSubmit={handleLogin}>
           <div className="form-group">
@@ -1368,7 +1368,7 @@ export default function App() {
               ⚡
             </div> 
             <span style={{ fontWeight: 800, fontSize: '1.15rem', color: '#0f172a', letterSpacing: '-0.02em' }}>
-              TotalEnergo
+              CRM PRO
             </span>
           </div>
           <span style={{ color: '#94a3b8', fontSize: '0.9rem', cursor: 'pointer' }} title="Згорнути">«</span>
@@ -1428,34 +1428,38 @@ export default function App() {
           </a>
         </div>
 
-        {/* User Card at bottom of Sidebar */}
-        <div style={{ marginTop: 'auto', paddingTop: '1rem', borderTop: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-            <div style={{
-              width: '34px',
-              height: '34px',
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, #1e293b, #334155)',
-              color: '#ffffff',
+        {/* Logout at bottom of Sidebar */}
+        <div style={{ marginTop: 'auto', paddingTop: '1rem', borderTop: '1px solid #e2e8f0' }}>
+          <button
+            onClick={() => { localStorage.removeItem('panel_auth'); window.location.reload(); }}
+            title="Вийти з акаунту"
+            style={{
+              width: '100%',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontWeight: 700,
-              fontSize: '0.85rem'
-            }}>
-              OB
-            </div>
-            <div>
-              <div style={{ fontSize: '0.825rem', fontWeight: 700, color: '#0f172a', lineHeight: 1.2 }}>Oleksii Bondarenko</div>
-              <div style={{ fontSize: '0.725rem', color: '#64748b' }}>Lead Integrator</div>
-            </div>
-          </div>
-          <button
-            onClick={() => { localStorage.removeItem('panel_auth'); window.location.reload(); }}
-            title="Вийти з панелі"
-            style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8', fontSize: '1.1rem', padding: '0.2rem' }}
+              gap: '0.5rem',
+              padding: '0.65rem 0.85rem',
+              fontSize: '0.85rem',
+              fontWeight: 600,
+              color: '#ef4444',
+              background: '#fef2f2',
+              border: '1px solid #fee2e2',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              transition: 'all 0.15s ease'
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.background = '#fee2e2';
+              e.currentTarget.style.borderColor = '#fca5a5';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.background = '#fef2f2';
+              e.currentTarget.style.borderColor = '#fee2e2';
+            }}
           >
-            ↪
+            <span style={{ fontSize: '1.05rem' }}>🚪</span>
+            <span>Вийти з акаунту</span>
           </button>
         </div>
       </div>
