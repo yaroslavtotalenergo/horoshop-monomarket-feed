@@ -22,3 +22,4 @@ node_modules/
 src/prom-config.json
 src/google-sheets.json
 src/warehouses.json
+src/config.json

@@ -341,13 +341,7 @@ export default function App() {
   const handleSaveSettings = async () => {
     localStorage.setItem('gh_token', token);
     setShowSettings(false);
-    setSaving(true);
-    try {
-      const confRes = await api.saveFile('src/config.json', JSON.stringify({ horoshopFeedUrl: feedUrl }, null, 2), shas.config, 'Update config via Admin Panel');
-      setShas({ ...shas, config: confRes.content.sha });
-      loadData();
-    } catch (e) { console.error(e); }
-    setSaving(false);
+    showToast('✅ Налаштування збережено');
   };
 
   const togglePromWhitelist = (vendorCode) => {
@@ -3045,9 +3039,13 @@ export default function App() {
               <small style={{ color: 'var(--text-muted)' }}>Зберігається лише у вашому браузері.</small>
             </div>
             <div className="form-group">
-              <label>URL XML-фіду Хорошопу</label>
-              <input type="url" className="input-field" value={feedUrl} onChange={e => setFeedUrl(e.target.value)} placeholder="https://..." />
-              <small style={{ color: 'var(--text-muted)' }}>Посилання на ваш фід — всі товари з нього з'являться в таблиці.</small>
+              <label>🌐 URL XML-фіду Хорошопу</label>
+              <div style={{ padding: '0.65rem 0.85rem', background: 'rgba(16, 185, 129, 0.08)', borderRadius: '6px', border: '1px solid rgba(16, 185, 129, 0.25)', fontSize: '0.85rem', color: '#047857' }}>
+                🔒 <strong>Захищено в GitHub Secrets (HOROSHOP_FEED_URL)</strong>
+                <div style={{ color: 'var(--text-muted)', fontSize: '0.78rem', marginTop: '0.25rem', lineHeight: '1.4' }}>
+                  Посилання зберігається в зашифрованому вигляді на GitHub та використовується для генерації фіду.
+                </div>
+              </div>
             </div>
             <div className="form-group">
               <label>🟣 Prom.ua API Token</label>

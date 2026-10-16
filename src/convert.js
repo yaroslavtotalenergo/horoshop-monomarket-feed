@@ -55,7 +55,7 @@ for (const article of alwaysAvailable) {
 
 // ── Налаштування ────────────────────────────────────────────────
 const CONFIG = {
-  horoshopFeedUrl: config.horoshopFeedUrl || process.env.HOROSHOP_FEED_URL || '',
+  horoshopFeedUrl: process.env.HOROSHOP_FEED_URL || config.horoshopFeedUrl || '',
   localFeedPath: process.env.LOCAL_FEED_PATH || '',
 
   defaults: {
@@ -93,7 +93,7 @@ async function fetchHoroshopXml() {
   if (!CONFIG.horoshopFeedUrl) {
     throw new Error('❌ Не вказано HOROSHOP_FEED_URL або LOCAL_FEED_PATH');
   }
-  console.log(`🌐 Завантажуємо фід: ${CONFIG.horoshopFeedUrl}`);
+  console.log('🌐 Завантажуємо фід Хорошоп...');
   const response = await axios.get(CONFIG.horoshopFeedUrl, {
     timeout: 30000,
     headers: { 'Accept-Encoding': 'gzip' },
