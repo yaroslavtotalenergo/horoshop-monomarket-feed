@@ -40,7 +40,7 @@ async function hashPassword(password) {
 }
 
 const STORED_LOGIN = 'admin';
-const STORED_PASS_HASH = '316bceef33e561601a426930c141ce7dfc6b0f6df2a091d40135b0795cd1d4a9';
+const STORED_PASS_HASH = 'dfb7ab365bc2e031fb610a44224750dad0646f963a18a96ec213160bc0c26e46';
 
 function isHoroshopOutOfStock(product) {
   if (!product) return false;
