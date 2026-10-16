@@ -21,3 +21,4 @@ node_modules/
 *.log
 src/prom-config.json
 src/google-sheets.json
+src/warehouses.json

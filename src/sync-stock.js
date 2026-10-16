@@ -59,10 +59,29 @@ async function main() {
     stockChanges = [];
   }
 
+  let warehouseList = [];
+  if (process.env.WAREHOUSE_NAMES) {
+    warehouseList = process.env.WAREHOUSE_NAMES
+      .split(/[\r\n,]+/)
+      .map(s => s.trim().toLowerCase())
+      .filter(Boolean);
+  } else if (fs.existsSync('src/warehouses.json')) {
+    try {
+      const parsed = JSON.parse(fs.readFileSync('src/warehouses.json', 'utf8'));
+      warehouseList = (Array.isArray(parsed) ? parsed : (parsed.warehouses || []))
+        .map(s => String(s).trim().toLowerCase())
+        .filter(Boolean);
+    } catch { }
+  }
+
   const keywords = {
     article: ['артикул', 'артікул', 'vendor code', 'vendor_code'],
-    warehouses: ['ридомиль', 'в.олександівка 1', 'в.олександівка 2', 'с.борщагівка', 'київ1', 'київ2', 'київ 1', 'київ 2', 'переміщюється з борщагівки до ридомиль']
+    warehouses: warehouseList
   };
+
+  if (keywords.warehouses.length === 0) {
+    console.warn('⚠️ Не вказано перелік складів (задайте WAREHOUSE_NAMES у GitHub Secrets або файл src/warehouses.json)');
+  }
 
   let updatedCount = 0;
   const warnings = [];
