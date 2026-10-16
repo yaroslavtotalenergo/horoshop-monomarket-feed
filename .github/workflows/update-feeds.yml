@@ -28,6 +28,7 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           PROM_API_TOKEN: ${{ secrets.PROM_API_TOKEN }}
           GOOGLE_SHEETS_URLS: ${{ secrets.GOOGLE_SHEETS_URLS }}
+          WAREHOUSE_NAMES: ${{ secrets.WAREHOUSE_NAMES }}
         run: node src/sync-stock.js
 
 
