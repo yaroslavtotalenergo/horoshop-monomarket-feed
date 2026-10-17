@@ -1,6 +1,7 @@
 const axios = require('axios');
 const { parse } = require('csv-parse/sync');
 const fs = require('fs');
+const path = require('path');
 const { notifyError, notifySuccess } = require('./notify');
 
 const DEFAULT_WAREHOUSES = [
