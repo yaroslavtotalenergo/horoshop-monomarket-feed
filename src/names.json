@@ -252,5 +252,7 @@
   "REL300100000": "Лічильник енергії Victron ET112 – 1 фаза, до 100A/фаза ",
   "REL200100100": "Лічильник енергії Victron EM540 – 3 фази, до 65A/фаза ",
   "REL300300000": "Лічильник енергії Victron ET340 – 3 фази, до 65A/фаза ",
-  "SUNPOW51100": "Акумулятор Sunlight Power ESS 51.2V 100Ah LiFePO4"
+  "SUNPOW51100": "Акумулятор Sunlight Power ESS 51.2V 100Ah LiFePO4",
+  "SHU050220050": "Батарейний монітор Victron Energy SmartShunt 2000A",
+  "SHU065130050": "Батарейний монітор Victron Energy SmartShunt 300A IP65"
 }
