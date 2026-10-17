@@ -33,7 +33,6 @@
   "CIP138225020": "off",
   "CIP138250020": "off",
   "CIP138400020": "off",
-  "CIP138500020": "off",
   "SCC010005000": "off",
   "ASS030550500": "off",
   "BAT512050610": "off",
@@ -252,6 +251,5 @@
   "SUNCOMPAR": "on",
   "SLSIFP48100A": "on",
   "SSIF2P15S48100C": "on",
-  "SHU500050100": "off",
-  "PYLUS5000TE": "off"
+  "SHU500050100": "on"
 }
