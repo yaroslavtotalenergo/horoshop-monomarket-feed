@@ -2753,7 +2753,7 @@ export default function App() {
                 </div>
               ) : (
                 horoshopGrouped.map(([categoryName, products]) => {
-                  const { active, total } = getHoroshopCategoryStats(products);
+                  const { inStock, active, total } = getHoroshopCategoryStats(products);
                   const isCollapsed = collapsedHoroshopCategories[categoryName] !== false;
 
                   return (
