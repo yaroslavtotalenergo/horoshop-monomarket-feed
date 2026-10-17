@@ -2542,26 +2542,6 @@ export default function App() {
 
       {activeTab === 'horoshop' && (
         <div className="glass-panel" style={{ padding: '1.25rem', marginBottom: '1.5rem' }}>
-          {/* Info Banner */}
-          <div style={{ padding: '0.9rem 1.15rem', borderRadius: '8px', background: 'rgba(67, 96, 160, 0.08)', border: '1px solid rgba(67, 96, 160, 0.25)', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem' }}>
-            <div style={{ fontSize: '0.9rem', color: 'var(--text-main)', lineHeight: '1.5', maxWidth: '850px' }}>
-              💡 <strong>Керування Наявністю та Оплатою частинами для Хорошопу:</strong>
-              <div style={{ marginTop: '0.35rem', display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
-                <div>• <strong>Наявність:</strong> <code>🔴 Немає</code> (примусово зняти з продажу) | <code>⚡ Авто</code> (за складом: &gt;0 є, 0 немає) | <code>🟢 Є</code> (примусово в наявності).</div>
-                <div>• <strong>Оплата частинами:</strong> <code>🔴 Заборона</code> (ОЧ вимкнено) | <code>⚡ Авто</code> (ОЧ активна тільки якщо є на складі) | <code>🟣 Примусово</code> (ОЧ увімкнено навіть при 0 на складі).</div>
-                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>🔒 <em>При оновленні передаються тільки статуси наявності та ОЧ — жодні інші дані товару не перезаписуються, і нічого не видаляється.</em></div>
-              </div>
-            </div>
-            <button
-              className="btn"
-              style={{ fontSize: '0.85rem', padding: '0.4rem 0.75rem', background: 'rgba(67, 96, 160, 0.12)', color: '#4360a0', border: '1px solid rgba(67, 96, 160, 0.3)' }}
-              onClick={() => copyToClipboard(FEED_URLS.horoshop)}
-              title="Копіювати URL XML-файлу для імпорту ОЧ в Хорошоп"
-            >
-              📋 Скопіювати XML фід ОЧ
-            </button>
-          </div>
-
           {/* Search, Filter dropdown, Category filter */}
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap', marginBottom: '1rem' }}>
             <div style={{ position: 'relative', flex: 1, minWidth: '260px' }}>
@@ -2609,6 +2589,15 @@ export default function App() {
                 <option key={cat} value={cat}>{cat}</option>
               ))}
             </select>
+
+            <button
+              className="btn"
+              style={{ fontSize: '0.85rem', padding: '0.55rem 0.85rem', background: '#f8fafc', color: '#4360a0', border: '1px solid #cbd5e1', whiteSpace: 'nowrap' }}
+              onClick={() => copyToClipboard(FEED_URLS.horoshop)}
+              title="Копіювати URL XML-файлу для імпорту ОЧ в Хорошоп"
+            >
+              📋 XML фід ОЧ
+            </button>
           </div>
 
           {/* Bulk actions */}
