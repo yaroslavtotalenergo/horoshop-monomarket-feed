@@ -128,6 +128,7 @@ export default function App() {
   const [collapsedCategories, setCollapsedCategories] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
   const [filterMode, setFilterMode] = useState('all');
+  const [monoCategoryFilter, setMonoCategoryFilter] = useState('all');
   const [activeTab, setActiveTab] = useState('catalog');
   const [syncingAll, setSyncingAll] = useState(false);
   const [testingTelegram, setTestingTelegram] = useState(false);
@@ -600,8 +601,17 @@ export default function App() {
     setSyncingHoroshop(false);
   };
 
-  const horoshopCategories = useMemo(() => {
-    return Array.from(new Set(catalog.map(p => p.category || 'Без категорії'))).sort();
+  const allCategories = useMemo(() => {
+    return Array.from(new Set(catalog.map(p => p.category || 'Без категорії'))).sort((a, b) => a.localeCompare(b, 'uk'));
+  }, [catalog]);
+
+  const categoryCounts = useMemo(() => {
+    const counts = {};
+    catalog.forEach(p => {
+      const cat = p.category || 'Без категорії';
+      counts[cat] = (counts[cat] || 0) + 1;
+    });
+    return counts;
   }, [catalog]);
 
 
@@ -858,6 +868,18 @@ export default function App() {
     return { ...prev, [cat]: !isCurrentlyCollapsed };
   });
 
+  const expandAllMono = () => {
+    const next = {};
+    grouped.forEach(([cat]) => { next[cat] = false; });
+    setCollapsedCategories(next);
+  };
+
+  const collapseAllMono = () => {
+    const next = {};
+    grouped.forEach(([cat]) => { next[cat] = true; });
+    setCollapsedCategories(next);
+  };
+
   // handle bulk select/deselect of searched items
   const handleBulkAction = (turnOn) => {
     const codes = filteredCatalog.map(p => p.vendorCode);
@@ -940,6 +962,10 @@ export default function App() {
     } else if (filterMode === 'no_excel') {
       result = result.filter(p => isMissingInExcel(p));
     }
+
+    if (monoCategoryFilter !== 'all') {
+      result = result.filter(p => (p.category || 'Без категорії') === monoCategoryFilter);
+    }
     
     if (searchQuery.trim()) {
       const terms = searchQuery.trim().split(/\s+/).filter(Boolean);
@@ -956,7 +982,7 @@ export default function App() {
       }
     }
     return result;
-  }, [catalog, searchQuery, filterMode, whitelist, barcodes, stockOverrides]);
+  }, [catalog, searchQuery, filterMode, monoCategoryFilter, whitelist, barcodes, stockOverrides]);
 
   const grouped = useMemo(() => {
     const map = {};
@@ -970,13 +996,16 @@ export default function App() {
     } else if (filterMode === 'no_excel') {
       baseCatalog = catalog.filter(p => isMissingInExcel(p));
     }
+    if (monoCategoryFilter !== 'all') {
+      baseCatalog = baseCatalog.filter(p => (p.category || 'Без категорії') === monoCategoryFilter);
+    }
     for (const product of baseCatalog) {
       const cat = product.category || 'Без категорії';
       if (!map[cat]) map[cat] = [];
       map[cat].push(product);
     }
     return Object.entries(map).sort(([catA], [catB]) => catA.localeCompare(catB, 'uk'));
-  }, [catalog, filterMode, whitelist, barcodes, stockOverrides]);
+  }, [catalog, filterMode, monoCategoryFilter, whitelist, barcodes, stockOverrides]);
 
   const getCategoryStats = (products) => {
     const selected = products.filter(p => whitelist.includes(p.vendorCode)).length;
@@ -2048,7 +2077,46 @@ export default function App() {
             <option value="out_of_stock_horoshop">⚠️ Немає в наявності на Хорошопі ({monoStats.outOfStockHoroshop})</option>
             <option value="no_excel">⚠️ Немає артикулу в Excel ({monoStats.noExcel})</option>
           </select>
-          
+
+          <select
+            className="input-field"
+            style={{ width: 'auto', minWidth: '240px', fontSize: '0.95rem', cursor: 'pointer' }}
+            value={monoCategoryFilter}
+            onChange={e => setMonoCategoryFilter(e.target.value)}
+          >
+            <option value="all">📁 Усі категорії ({allCategories.length})</option>
+            {allCategories.map(cat => (
+              <option key={cat} value={cat}>{cat} ({categoryCounts[cat] || 0})</option>
+            ))}
+          </select>
+        </div>
+      )}
+
+      {/* Швидкі дії та лічильник категорій для Мономаркету */}
+      {!searchQuery.trim() && catalog.length > 0 && (
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.75rem' }}>
+          <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+            Знайдено категорій: <strong style={{ color: 'var(--text-main)' }}>{grouped.length}</strong>
+            {monoCategoryFilter !== 'all' && ` (вибрано: ${monoCategoryFilter})`}
+          </div>
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <button
+              className="btn"
+              style={{ background: 'transparent', color: 'var(--text-main)', border: '1px solid var(--border-color)', padding: '0.45rem 0.85rem', fontSize: '0.85rem' }}
+              onClick={expandAllMono}
+              title="Розгорнути всі категорії"
+            >
+              ▼ Розгорнути всі
+            </button>
+            <button
+              className="btn"
+              style={{ background: 'transparent', color: 'var(--text-main)', border: '1px solid var(--border-color)', padding: '0.45rem 0.85rem', fontSize: '0.85rem' }}
+              onClick={collapseAllMono}
+              title="Згорнути всі категорії"
+            >
+              ▶ Згорнути всі
+            </button>
+          </div>
         </div>
       )}
 
@@ -2213,7 +2281,9 @@ export default function App() {
       ) : !searchQuery.trim() ? (
         grouped.map(([categoryName, products]) => {
           const { selected, total } = getCategoryStats(products);
-          const isCollapsed = filterMode !== 'all' ? collapsedCategories[categoryName] === true : collapsedCategories[categoryName] !== false;
+          const isCollapsed = collapsedCategories[categoryName] !== undefined
+            ? collapsedCategories[categoryName]
+            : (monoCategoryFilter === 'all' && filterMode === 'all');
 
           return (
             <div key={categoryName} className="glass-panel" style={{ marginBottom: '1rem', padding: 0, overflow: 'hidden' }}>
@@ -2390,13 +2460,13 @@ export default function App() {
 
             <select
               className="input-field"
-              style={{ width: '220px', fontSize: '0.95rem', cursor: 'pointer' }}
+              style={{ width: '250px', fontSize: '0.95rem', cursor: 'pointer' }}
               value={promCategoryFilter}
               onChange={e => setPromCategoryFilter(e.target.value)}
             >
-              <option value="all">📁 Усі категорії</option>
-              {grouped.map(([catName, prods]) => (
-                <option key={catName} value={catName}>{catName} ({prods.length})</option>
+              <option value="all">📁 Усі категорії ({allCategories.length})</option>
+              {allCategories.map(cat => (
+                <option key={cat} value={cat}>{cat} ({categoryCounts[cat] || 0})</option>
               ))}
             </select>
           </div>
@@ -2485,7 +2555,9 @@ export default function App() {
               ) : (
                 promGrouped.map(([categoryName, products]) => {
                   const { enabled, total } = getPromCategoryStats(products);
-                  const isCollapsed = collapsedPromCategories[categoryName] !== false;
+                  const isCollapsed = collapsedPromCategories[categoryName] !== undefined
+                    ? collapsedPromCategories[categoryName]
+                    : (promCategoryFilter === 'all');
 
                   return (
                     <div key={categoryName} className="glass-panel" style={{ marginBottom: '0.75rem', padding: 0, overflow: 'hidden' }}>
@@ -2580,13 +2652,13 @@ export default function App() {
 
             <select
               className="input-field"
-              style={{ width: '220px', fontSize: '0.95rem', cursor: 'pointer' }}
+              style={{ width: '250px', fontSize: '0.95rem', cursor: 'pointer' }}
               value={horoshopCategoryFilter}
               onChange={e => setHoroshopCategoryFilter(e.target.value)}
             >
-              <option value="all">📁 Всі категорії ({horoshopCategories.length})</option>
-              {horoshopCategories.map(cat => (
-                <option key={cat} value={cat}>{cat}</option>
+              <option value="all">📁 Всі категорії ({allCategories.length})</option>
+              {allCategories.map(cat => (
+                <option key={cat} value={cat}>{cat} ({categoryCounts[cat] || 0})</option>
               ))}
             </select>
 
@@ -2721,7 +2793,9 @@ export default function App() {
               ) : (
                 horoshopGrouped.map(([categoryName, products]) => {
                   const { inStock, active, total } = getHoroshopCategoryStats(products);
-                  const isCollapsed = collapsedHoroshopCategories[categoryName] !== false;
+                  const isCollapsed = collapsedHoroshopCategories[categoryName] !== undefined
+                    ? collapsedHoroshopCategories[categoryName]
+                    : (horoshopCategoryFilter === 'all');
 
                   return (
                     <div key={categoryName} className="glass-panel" style={{ marginBottom: '0.75rem', padding: 0, overflow: 'hidden' }}>

@@ -126,7 +126,7 @@ function parseHoroshopXml(xmlText) {
   const parser = new XMLParser({
     ignoreAttributes: false,
     attributeNamePrefix: '_',
-    isArray: (name) => ['offer', 'picture', 'param'].includes(name),
+    isArray: (name) => ['offer', 'picture', 'param', 'category'].includes(name),
     cdataPropName: '__cdata',
     parseAttributeValue: true,
     parseTagValue: true,
@@ -137,9 +137,51 @@ function parseHoroshopXml(xmlText) {
   const catalog = result.yml_catalog || result.catalog || result;
   const shop = catalog.shop || catalog;
   const offers = shop.offers?.offer || shop.offer || [];
+  const rawCategories = shop.categories?.category || shop.category || [];
 
-  console.log(`✅ Знайдено ${offers.length} товарів у Хорошоп фіді`);
-  return offers;
+  console.log(`✅ Знайдено ${offers.length} товарів та ${rawCategories.length} категорій у Хорошоп фіді`);
+  return { offers, rawCategories };
+}
+
+// ── Побудова мапи ієрархічних шляхів категорій (Parent > Child) ──
+function buildCategoryPathMap(rawCategories) {
+  if (!rawCategories) return {};
+  const list = Array.isArray(rawCategories) ? rawCategories : [rawCategories];
+  const catMap = {};
+  for (const c of list) {
+    if (!c) continue;
+    const id = String(c._id || c.id || '');
+    const parentId = c._parentId ? String(c._parentId) : (c.parentId ? String(c.parentId) : null);
+    let name = extractText(c['#text'] ?? c.__cdata ?? c._name ?? c.name ?? c);
+    catMap[id] = { id, parentId, name };
+  }
+
+  const ignoreRoots = new Set(['Каталог', 'Для партнерів', 'Головна']);
+
+  function getPath(cid, visited = new Set()) {
+    if (!cid || visited.has(cid)) return '';
+    visited.add(cid);
+    const item = catMap[cid];
+    if (!item) return '';
+    const chain = [];
+    let cur = item;
+    while (cur) {
+      if (cur.name && !ignoreRoots.has(cur.name)) {
+        chain.unshift(cur.name);
+      }
+      cur = cur.parentId ? catMap[cur.parentId] : null;
+    }
+    return chain.join(' > ');
+  }
+
+  const pathMap = {};
+  for (const id of Object.keys(catMap)) {
+    const fullPath = getPath(id);
+    if (fullPath) {
+      pathMap[id] = fullPath;
+    }
+  }
+  return pathMap;
 }
 
 // ── Витягнути текст з CDATA або рядку ──────────────────────────
@@ -258,7 +300,7 @@ function cleanDescription(desc) {
 }
 
 // ── Трансформація одного оферу ──────────────────────────────────
-function transformOffer(offer) {
+function transformOffer(offer, categoryPathMap = {}) {
   const id = String(offer._id || '');
   const params = getParams(offer);
   const vendorCode = extractText(offer.vendorCode) || '';
@@ -288,12 +330,13 @@ function transformOffer(offer) {
   }
 
   const categoryId = String(offer._categoryId || offer.categoryId || '');
-  let categoryName = categoryMap[vendorCode] || extractText(offer.category) || categoryId;
-  
-  if (vendorCode === '1270' || id === '1270') {
-    categoryName = 'Трансформатори';
-  } else if (/^\d+$/.test(categoryName) || categoryId === '1229') {
-    categoryName = 'Акумулятори';
+  let categoryName = (categoryPathMap && categoryPathMap[categoryId]) ||
+    categoryMap[vendorCode] ||
+    extractText(offer.category) ||
+    'Без категорії';
+
+  if (/^\d+$/.test(categoryName)) {
+    categoryName = 'Без категорії';
   }
   const description = offer.description?.__cdata || extractText(offer.description) || '';
 
@@ -466,7 +509,29 @@ async function main() {
     const xmlText = await fetchHoroshopXml();
 
     // 2. Парсинг
-    const rawOffers = parseHoroshopXml(xmlText);
+    const { offers: rawOffers, rawCategories } = parseHoroshopXml(xmlText);
+    const categoryPathMap = buildCategoryPathMap(rawCategories);
+
+    // Читаємо попередній catalog.json для збереження товарів, відсутніх у фіді (наприклад, Pylontech)
+    const catalogPath = path.join(FEEDS_DIR, 'catalog.json');
+    let existingCatalog = [];
+    try {
+      if (fs.existsSync(catalogPath)) {
+        existingCatalog = JSON.parse(fs.readFileSync(catalogPath, 'utf-8'));
+      }
+    } catch (e) {
+      console.warn('⚠️ Не вдалося прочитати попередній catalog.json:', e.message);
+    }
+
+    const manualCategoryOverrides = {
+      'PYLUS5000TE': 'Акумуляторні батареї > Акумулятори LiFePO4 48,0 В',
+      'PYLUS3000CTE': 'Акумуляторні батареї > Акумулятори LiFePO4 48,0 В',
+      'PYLUS2000CTE': 'Акумуляторні батареї > Акумулятори LiFePO4 48,0 В',
+      'PYLPELTE': 'Акумуляторні батареї > Акумулятори LiFePO4 48,0 В',
+      'PYLUKIT25': 'Моніторинг та керування > Інформаційні кабелі',
+      'LV-HUB': 'Моніторинг та керування > Центри моніторингу',
+      'FB-L-16-Pro': 'Акумуляторні батареї > Акумулятори LiFePO4 51,2 В',
+    };
 
     // 3. Трансформація
     let rawOffersSlice = rawOffers;
@@ -477,9 +542,15 @@ async function main() {
 
     const catalog = [];
     const validOffers = [];
+    const feedCodes = new Set();
+    const updatedCategoryMap = { ...categoryMap };
 
     for (const raw of rawOffersSlice) {
-      const o = transformOffer(raw);
+      const o = transformOffer(raw, categoryPathMap);
+      if (o.vendorCode) {
+        feedCodes.add(o.vendorCode);
+        updatedCategoryMap[o.vendorCode] = o.category;
+      }
 
       // Зберігаємо товар в загальний каталог для адмін-панелі
       catalog.push({
@@ -502,6 +573,28 @@ async function main() {
       }
 
       validOffers.push(o);
+    }
+
+    // Додаємо збережені товари, яких немає у сирому фіді (наприклад, додані вручну товари)
+    for (const existingItem of existingCatalog) {
+      const code = String(existingItem.vendorCode || existingItem.id || '').trim();
+      if (code && !feedCodes.has(code)) {
+        if (manualCategoryOverrides[code]) {
+          existingItem.category = manualCategoryOverrides[code];
+        } else if (updatedCategoryMap[code]) {
+          existingItem.category = updatedCategoryMap[code];
+        }
+        updatedCategoryMap[code] = existingItem.category;
+        catalog.push(existingItem);
+      }
+    }
+
+    // Зберігаємо оновлену мапу категорій
+    try {
+      fs.writeFileSync('src/categories.json', JSON.stringify(updatedCategoryMap, null, 2), 'utf-8');
+      console.log(`✅ Оновлено src/categories.json (${Object.keys(updatedCategoryMap).length} товарів)`);
+    } catch (e) {
+      console.warn('⚠️ Не вдалося зберегти src/categories.json:', e.message);
     }
 
     const offers = validOffers;
@@ -541,7 +634,6 @@ async function main() {
     // 5. Збереження
     const productsPath = path.join(FEEDS_DIR, 'products.xml');
     const pricesPath = path.join(FEEDS_DIR, 'prices.json');
-    const catalogPath = path.join(FEEDS_DIR, 'catalog.json');
     const monoPath = path.join(FEEDS_DIR, 'horoshop-monobank.xml');
 
     fs.writeFileSync(productsPath, productsXml, 'utf-8');
