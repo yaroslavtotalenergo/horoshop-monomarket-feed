@@ -50,6 +50,56 @@ function isHoroshopOutOfStock(product) {
   return product.available === false || product.available === 'false';
 }
 
+function buildHierarchicalGroups(products) {
+  const map = {};
+  for (const p of products) {
+    const rawCat = p.category || 'Без категорії';
+    const parts = rawCat.split(' > ').map(s => s.trim());
+    const mainCat = parts[0] || 'Без категорії';
+    const subCat = parts.length > 1 ? parts.slice(1).join(' > ') : (parts[0] ? 'Основні товари' : 'Без категорії');
+
+    if (!map[mainCat]) {
+      map[mainCat] = {
+        main: mainCat,
+        products: [],
+        subs: {}
+      };
+    }
+    map[mainCat].products.push(p);
+
+    if (!map[mainCat].subs[subCat]) {
+      map[mainCat].subs[subCat] = {
+        name: subCat,
+        fullPath: rawCat,
+        products: []
+      };
+    }
+    map[mainCat].subs[subCat].products.push(p);
+  }
+
+  return Object.values(map)
+    .sort((a, b) => a.main.localeCompare(b.main, 'uk'))
+    .map(group => ({
+      main: group.main,
+      products: group.products,
+      subs: Object.values(group.subs).sort((a, b) => a.name.localeCompare(b.name, 'uk'))
+    }));
+}
+
+function matchesCategoryFilter(productCategory, filterVal) {
+  if (!filterVal || filterVal === 'all') return true;
+  const pCat = productCategory || 'Без категорії';
+  if (filterVal.startsWith('main:')) {
+    const main = filterVal.slice(5).trim();
+    return pCat.split(' > ')[0].trim() === main;
+  }
+  if (filterVal.startsWith('sub:')) {
+    const sub = filterVal.slice(4).trim();
+    return pCat === sub;
+  }
+  return pCat === filterVal || pCat.split(' > ')[0].trim() === filterVal;
+}
+
 export function LoginGate({ children }) {
   const [authed, setAuthed] = useState(() => localStorage.getItem('panel_auth') === 'ok');
   const [login, setLogin] = useState('');
@@ -126,6 +176,7 @@ export default function App() {
   const [videos, setVideos] = useState({});
 
   const [collapsedCategories, setCollapsedCategories] = useState({});
+  const [collapsedSubCategories, setCollapsedSubCategories] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
   const [filterMode, setFilterMode] = useState('all');
   const [monoCategoryFilter, setMonoCategoryFilter] = useState('all');
@@ -141,6 +192,7 @@ export default function App() {
   const [promFilterMode, setPromFilterMode] = useState('all');
   const [promCategoryFilter, setPromCategoryFilter] = useState('all');
   const [collapsedPromCategories, setCollapsedPromCategories] = useState({});
+  const [collapsedPromSubCategories, setCollapsedPromSubCategories] = useState({});
   
   const [savingHoroshop, setSavingHoroshop] = useState(false);
   const [syncingHoroshop, setSyncingHoroshop] = useState(false);
@@ -150,6 +202,7 @@ export default function App() {
   const [horoshopPresence, setHoroshopPresence] = useState({});
   const [horoshopInstallments, setHoroshopInstallments] = useState({});
   const [collapsedHoroshopCategories, setCollapsedHoroshopCategories] = useState({});
+  const [collapsedHoroshopSubCategories, setCollapsedHoroshopSubCategories] = useState({});
   
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -388,8 +441,8 @@ export default function App() {
   const promSkusSet = useMemo(() => new Set(promSkus.map(s => String(s).trim())), [promSkus]);
   const promWhitelistSet = useMemo(() => new Set(promWhitelist.map(s => String(s).trim())), [promWhitelist]);
 
-  const handleBulkPromToggle = (enable) => {
-    const targetCodes = filteredPromCatalog
+  const handlePromBulkListToggle = (enable, productList = filteredPromCatalog) => {
+    const targetCodes = productList
       .map(p => p.vendorCode ? String(p.vendorCode).trim() : '')
       .filter(code => code && (enable ? promSkusSet.has(code) : true));
     setPromWhitelist(prev => {
@@ -403,6 +456,8 @@ export default function App() {
     showToast(enable ? `🟣 Увімкнено ${targetCodes.length} товарів для Prom` : `⚪ Вимкнено ${targetCodes.length} товарів з Prom`);
   };
 
+  const handleBulkPromToggle = (enable) => handlePromBulkListToggle(enable, filteredPromCatalog);
+
   const filteredPromCatalog = useMemo(() => {
     const q = promSearchQuery.toLowerCase().trim();
 
@@ -413,7 +468,7 @@ export default function App() {
         const matchesQuery = name.toLowerCase().includes(q) || code.toLowerCase().includes(q);
         if (!matchesQuery) return false;
       }
-      if (promCategoryFilter !== 'all' && (p.category || 'Без категорії') !== promCategoryFilter) {
+      if (promCategoryFilter !== 'all' && !matchesCategoryFilter(p.category, promCategoryFilter)) {
         return false;
       }
       const isEnabled = promWhitelistSet.has(code);
@@ -480,13 +535,7 @@ export default function App() {
   }, [catalog, promWhitelistSet, stockOverrides, alwaysAvailable, promSkusSet]);
 
   const promGrouped = useMemo(() => {
-    const map = {};
-    for (const product of filteredPromCatalog) {
-      const cat = product.category || 'Без категорії';
-      if (!map[cat]) map[cat] = [];
-      map[cat].push(product);
-    }
-    return Object.entries(map).sort(([catA], [catB]) => catA.localeCompare(catB, 'uk'));
+    return buildHierarchicalGroups(filteredPromCatalog);
   }, [filteredPromCatalog]);
 
   const getPromCategoryStats = (products) => {
@@ -502,14 +551,26 @@ export default function App() {
     return { ...prev, [cat]: !isCurrentlyCollapsed };
   });
 
+  const togglePromSubCategory = (subPath) => setCollapsedPromSubCategories(prev => ({
+    ...prev,
+    [subPath]: !prev[subPath]
+  }));
+
   const expandAllProm = () => {
-    const next = {};
-    promGrouped.forEach(([cat]) => { next[cat] = false; });
-    setCollapsedPromCategories(next);
+    const nextMain = {};
+    const nextSub = {};
+    promGrouped.forEach(g => {
+      nextMain[g.main] = false;
+      g.subs.forEach(s => { nextSub[s.fullPath] = false; });
+    });
+    setCollapsedPromCategories(nextMain);
+    setCollapsedPromSubCategories(nextSub);
   };
 
   const collapseAllProm = () => {
-    setCollapsedPromCategories({});
+    const nextMain = {};
+    promGrouped.forEach(g => { nextMain[g.main] = true; });
+    setCollapsedPromCategories(nextMain);
   };
 
   const setProductPresenceMode = (vendorCode, mode) => {
@@ -601,17 +662,8 @@ export default function App() {
     setSyncingHoroshop(false);
   };
 
-  const allCategories = useMemo(() => {
-    return Array.from(new Set(catalog.map(p => p.category || 'Без категорії'))).sort((a, b) => a.localeCompare(b, 'uk'));
-  }, [catalog]);
-
-  const categoryCounts = useMemo(() => {
-    const counts = {};
-    catalog.forEach(p => {
-      const cat = p.category || 'Без категорії';
-      counts[cat] = (counts[cat] || 0) + 1;
-    });
-    return counts;
+  const categoryTree = useMemo(() => {
+    return buildHierarchicalGroups(catalog);
   }, [catalog]);
 
 
@@ -696,7 +748,7 @@ export default function App() {
         const matches = name.toLowerCase().includes(q) || code.toLowerCase().includes(q);
         if (!matches) return false;
       }
-      if (horoshopCategoryFilter !== 'all' && (p.category || 'Без категорії') !== horoshopCategoryFilter) {
+      if (horoshopCategoryFilter !== 'all' && !matchesCategoryFilter(p.category, horoshopCategoryFilter)) {
         return false;
       }
 
@@ -715,13 +767,7 @@ export default function App() {
   }, [catalog, horoshopSearchQuery, horoshopCategoryFilter, horoshopFilterMode, horoshopPresence, horoshopInstallments, stockOverrides]);
 
   const horoshopGrouped = useMemo(() => {
-    const map = {};
-    for (const product of filteredHoroshopCatalog) {
-      const cat = product.category || 'Без категорії';
-      if (!map[cat]) map[cat] = [];
-      map[cat].push(product);
-    }
-    return Object.entries(map).sort(([catA], [catB]) => catA.localeCompare(catB, 'uk'));
+    return buildHierarchicalGroups(filteredHoroshopCatalog);
   }, [filteredHoroshopCatalog]);
 
   const getHoroshopCategoryStats = (products) => {
@@ -740,14 +786,26 @@ export default function App() {
     return { ...prev, [cat]: !isCurrentlyCollapsed };
   });
 
+  const toggleHoroshopSubCategory = (subPath) => setCollapsedHoroshopSubCategories(prev => ({
+    ...prev,
+    [subPath]: !prev[subPath]
+  }));
+
   const expandAllHoroshop = () => {
-    const next = {};
-    horoshopGrouped.forEach(([cat]) => { next[cat] = false; });
-    setCollapsedHoroshopCategories(next);
+    const nextMain = {};
+    const nextSub = {};
+    horoshopGrouped.forEach(g => {
+      nextMain[g.main] = false;
+      g.subs.forEach(s => { nextSub[s.fullPath] = false; });
+    });
+    setCollapsedHoroshopCategories(nextMain);
+    setCollapsedHoroshopSubCategories(nextSub);
   };
 
   const collapseAllHoroshop = () => {
-    setCollapsedHoroshopCategories({});
+    const nextMain = {};
+    horoshopGrouped.forEach(g => { nextMain[g.main] = true; });
+    setCollapsedHoroshopCategories(nextMain);
   };
 
   const handleTriggerFullSync = async () => {
@@ -863,21 +921,31 @@ export default function App() {
   };
   const copyToClipboard = (text) => { navigator.clipboard.writeText(text); showToast('📋 Посилання скопійовано!'); };
 
-  const toggleCategory = (cat) => setCollapsedCategories(prev => {
+  const toggleMonoCategory = (cat) => setCollapsedCategories(prev => {
     const isCurrentlyCollapsed = prev[cat] !== false;
     return { ...prev, [cat]: !isCurrentlyCollapsed };
   });
 
+  const toggleMonoSubCategory = (subPath) => setCollapsedSubCategories(prev => ({
+    ...prev,
+    [subPath]: !prev[subPath]
+  }));
+
   const expandAllMono = () => {
-    const next = {};
-    grouped.forEach(([cat]) => { next[cat] = false; });
-    setCollapsedCategories(next);
+    const nextMain = {};
+    const nextSub = {};
+    monoGrouped.forEach(g => {
+      nextMain[g.main] = false;
+      g.subs.forEach(s => { nextSub[s.fullPath] = false; });
+    });
+    setCollapsedCategories(nextMain);
+    setCollapsedSubCategories(nextSub);
   };
 
   const collapseAllMono = () => {
-    const next = {};
-    grouped.forEach(([cat]) => { next[cat] = true; });
-    setCollapsedCategories(next);
+    const nextMain = {};
+    monoGrouped.forEach(g => { nextMain[g.main] = true; });
+    setCollapsedCategories(nextMain);
   };
 
   // handle bulk select/deselect of searched items
@@ -887,6 +955,18 @@ export default function App() {
       setWhitelist(prev => [...new Set([...prev, ...codes])]);
     } else {
       setWhitelist(prev => prev.filter(c => !codes.includes(c)));
+    }
+  };
+
+  const handleBulkCategoryAction = (turnOn, productList = filteredCatalog) => {
+    const codes = productList.map(p => p.vendorCode).filter(Boolean);
+    if (turnOn) {
+      setWhitelist(prev => [...new Set([...prev, ...codes])]);
+      showToast(`✅ Увімкнено ${codes.length} товарів`);
+    } else {
+      const codeSet = new Set(codes);
+      setWhitelist(prev => prev.filter(c => !codeSet.has(c)));
+      showToast(`❌ Вимкнено ${codes.length} товарів`);
     }
   };
 
@@ -964,7 +1044,7 @@ export default function App() {
     }
 
     if (monoCategoryFilter !== 'all') {
-      result = result.filter(p => (p.category || 'Без категорії') === monoCategoryFilter);
+      result = result.filter(p => matchesCategoryFilter(p.category, monoCategoryFilter));
     }
     
     if (searchQuery.trim()) {
@@ -984,28 +1064,11 @@ export default function App() {
     return result;
   }, [catalog, searchQuery, filterMode, monoCategoryFilter, whitelist, barcodes, stockOverrides]);
 
-  const grouped = useMemo(() => {
-    const map = {};
-    let baseCatalog = catalog;
-    if (filterMode === 'enabled') {
-      baseCatalog = catalog.filter(p => whitelist.includes(p.vendorCode));
-    } else if (filterMode === 'no_barcode') {
-      baseCatalog = catalog.filter(p => !barcodes[p.vendorCode] && !p.barcode);
-    } else if (filterMode === 'out_of_stock_horoshop') {
-      baseCatalog = catalog.filter(p => isHoroshopOutOfStock(p));
-    } else if (filterMode === 'no_excel') {
-      baseCatalog = catalog.filter(p => isMissingInExcel(p));
-    }
-    if (monoCategoryFilter !== 'all') {
-      baseCatalog = baseCatalog.filter(p => (p.category || 'Без категорії') === monoCategoryFilter);
-    }
-    for (const product of baseCatalog) {
-      const cat = product.category || 'Без категорії';
-      if (!map[cat]) map[cat] = [];
-      map[cat].push(product);
-    }
-    return Object.entries(map).sort(([catA], [catB]) => catA.localeCompare(catB, 'uk'));
-  }, [catalog, filterMode, monoCategoryFilter, whitelist, barcodes, stockOverrides]);
+  const monoGrouped = useMemo(() => {
+    return buildHierarchicalGroups(filteredCatalog);
+  }, [filteredCatalog]);
+
+  const grouped = monoGrouped;
 
   const getCategoryStats = (products) => {
     const selected = products.filter(p => whitelist.includes(p.vendorCode)).length;
@@ -1577,6 +1640,163 @@ export default function App() {
     );
   };
 
+  const renderMonoProductRow = (product) => {
+    const isSelected = whitelist.includes(product.vendorCode);
+    const isAvailable = availabilityOverrides[product.vendorCode] !== false;
+    const currentName = names[product.vendorCode] !== undefined ? names[product.vendorCode] : product.name;
+    const charCount = currentName.length;
+    const isOverLimit = charCount > 50;
+
+    return (
+      <tr key={product.vendorCode} style={{ opacity: isSelected ? 1 : 0.5, borderBottom: '1px solid var(--border-color)' }}>
+        <td style={{ textAlign: 'center', padding: '0.65rem 0.5rem' }}>
+          <label className="toggle-switch">
+            <input type="checkbox" checked={isSelected} onChange={() => toggleWhitelist(product.vendorCode)} />
+            <span className="slider"></span>
+          </label>
+        </td>
+        <td style={{ textAlign: 'center', padding: '0.65rem 0.5rem' }}>
+          <label className="toggle-switch" style={{ opacity: isSelected ? 1 : 0.4 }}>
+            <input type="checkbox" checked={isAvailable} disabled={!isSelected} onChange={() => toggleAvailability(product.vendorCode)} />
+            <span className="slider" style={{ background: isAvailable ? '#10b981' : '#f87171' }}></span>
+          </label>
+        </td>
+        <td style={{ padding: '0.65rem 0.5rem' }}>
+          <input
+            type="number"
+            min="0"
+            className="input-field"
+            style={{ width: '100%', padding: '0.4rem', textAlign: 'center' }}
+            value={stockOverrides[product.vendorCode] !== undefined ? stockOverrides[product.vendorCode] : (product.stock ?? 10)}
+            onChange={(e) => updateStock(product.vendorCode, e.target.value === '' ? '' : parseInt(e.target.value, 10))}
+            onBlur={(e) => { if (e.target.value === '') updateStock(product.vendorCode, 10); }}
+          />
+        </td>
+        <td style={{ padding: '0.65rem 0.75rem' }}>
+          <div className="flex-center">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%' }}>
+              <div style={{ flex: 1, width: '100%' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', width: '100%' }}>
+                  <input
+                    type="text"
+                    className="input-field"
+                    value={currentName}
+                    onChange={(e) => updateName(product.vendorCode, product.name, e.target.value)}
+                    style={{ borderColor: isOverLimit ? '#f87171' : 'var(--border-color)', width: '100%', padding: '0.4rem' }}
+                    title={product.name}
+                  />
+                  <div style={{ fontSize: '0.75rem', color: isOverLimit ? '#f87171' : 'var(--text-muted)', textAlign: 'right' }}>
+                    {charCount}/50 {isOverLimit && '⚠️'}
+                  </div>
+                </div>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
+                  {product.vendorCode} | {product.oldPrice ? <><span style={{ textDecoration: 'line-through', color: '#f87171' }}>{product.oldPrice}</span> <span style={{ color: '#10b981', fontWeight: 600 }}>{product.price} ₴</span></> : `${product.price} ₴`} | {product.category}
+                  {isHoroshopOutOfStock(product) && (
+                    <span style={{ marginLeft: '0.5rem', fontSize: '0.75rem', padding: '0.1rem 0.45rem', borderRadius: '4px', background: '#fee2e2', color: '#b91c1c', fontWeight: 600 }}>
+                      ⚠️ Немає в наявності на Хорошопі
+                    </span>
+                  )}
+                  {isMissingInExcel(product) && (
+                    <span style={{ marginLeft: '0.5rem', fontSize: '0.75rem', padding: '0.1rem 0.45rem', borderRadius: '4px', background: '#fef3c7', color: '#92400e', fontWeight: 600 }}>
+                      ⚠️ Немає артикулу в Excel
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td style={{ textAlign: 'center', padding: '0.65rem 0.5rem' }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '28px', height: '28px', borderRadius: '6px', background: daysColor + '20', border: '1px solid ' + daysColor + '60', color: daysColor, fontWeight: 700, fontSize: '0.9rem' }}>{daysToDispatch}</span>
+        </td>
+        <td style={{ padding: '0.65rem 0.5rem' }}>
+          <input
+            type="text"
+            className="input-field"
+            placeholder="Ввести..."
+            value={barcodes[product.vendorCode] || ''}
+            onChange={(e) => updateBarcode(product.vendorCode, e.target.value)}
+          />
+        </td>
+        <td style={{ padding: '0.65rem 0.5rem' }}>
+          {descriptions[product.vendorCode] ? (
+            <button className="btn" style={{ padding: '0.4rem 0.75rem', fontSize: '0.85rem', width: '100%', background: 'rgba(16, 185, 129, 0.1)', color: 'var(--success)', border: '1px solid rgba(16, 185, 129, 0.2)' }} onClick={() => setEditingDescriptionProduct(product)}>
+              Опис додано ✏️
+            </button>
+          ) : (
+            <button className="btn" style={{ padding: '0.4rem 0.75rem', fontSize: '0.85rem', width: '100%', background: 'transparent', color: 'var(--text-main)', border: '1px solid var(--border-color)' }} onClick={() => setEditingDescriptionProduct(product)}>
+              ✏️ Редагувати опис
+            </button>
+          )}
+        </td>
+      </tr>
+    );
+  };
+
+  const renderMonoTable = (products) => (
+    <div style={{ overflowX: 'auto' }}>
+      <table style={{ tableLayout: 'fixed', width: '100%', borderCollapse: 'collapse' }}>
+        <thead>
+          <tr style={{ background: '#f8fafc', borderBottom: '1px solid var(--border-color)', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+            <th style={{ width: '60px', textAlign: 'center', padding: '0.75rem 0.5rem' }}>Увімк</th>
+            <th style={{ width: '90px', textAlign: 'center', padding: '0.75rem 0.5rem' }}>Наявність</th>
+            <th style={{ width: '80px', textAlign: 'center', padding: '0.75rem 0.5rem' }}>Залишок</th>
+            <th style={{ padding: '0.75rem' }}>Товар</th>
+            <th style={{ width: '55px', textAlign: 'center', padding: '0.75rem 0.25rem' }}>Дні</th>
+            <th style={{ width: '145px', padding: '0.75rem 0.5rem' }}>Штрихкод</th>
+            <th style={{ width: '155px', padding: '0.75rem 0.5rem' }}>Кастомний опис</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map(product => renderMonoProductRow(product))}
+        </tbody>
+      </table>
+    </div>
+  );
+
+  const renderPromTable = (products) => (
+    <div style={{ overflowX: 'auto' }}>
+      <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.95rem' }}>
+        <thead>
+          <tr style={{ background: '#f8fafc', borderBottom: '1px solid var(--border-color)', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+            <th style={{ padding: '0.85rem 1rem', width: '130px', textAlign: 'center' }}>Продавати на Prom</th>
+            <th style={{ padding: '0.85rem 0.5rem', width: '70px', textAlign: 'center' }}>Фото</th>
+            <th style={{ padding: '0.85rem 0.75rem', width: '160px' }}>Артикул</th>
+            <th style={{ padding: '0.85rem' }}>Назва товару</th>
+            <th style={{ padding: '0.85rem', width: '120px' }}>Ціна</th>
+            <th style={{ padding: '0.85rem', width: '130px', textAlign: 'center' }}>Склад (Excel)</th>
+            <th style={{ padding: '0.85rem', width: '220px' }}>Статус на Prom.ua</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map(product => renderPromProductRow(product))}
+        </tbody>
+      </table>
+    </div>
+  );
+
+  const renderHoroshopTable = (products) => (
+    <div style={{ overflowX: 'auto' }}>
+      <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.95rem' }}>
+        <thead>
+          <tr style={{ background: '#f8fafc', borderBottom: '1px solid var(--border-color)', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+            <th style={{ padding: '0.85rem 0.5rem', width: '155px', textAlign: 'center' }}>Наявність на Хорошоп</th>
+            <th style={{ padding: '0.85rem 0.5rem', width: '165px', textAlign: 'center' }}>Оплата частинами (ОЧ)</th>
+            <th style={{ padding: '0.85rem 0.5rem', width: '60px', textAlign: 'center' }}>Фото</th>
+            <th style={{ padding: '0.85rem 0.5rem', width: '135px' }}>Артикул</th>
+            <th style={{ padding: '0.85rem 0.5rem' }}>Назва товару</th>
+            <th style={{ padding: '0.85rem 0.5rem', width: '95px' }}>Ціна</th>
+            <th style={{ padding: '0.85rem 0.5rem', width: '105px', textAlign: 'center' }}>Склад (Excel)</th>
+            <th style={{ padding: '0.85rem 0.5rem', width: '250px' }}>Підсумковий статус</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map(product => renderHoroshopProductRow(product))}
+        </tbody>
+      </table>
+    </div>
+  );
+
   return (
     <div className="layout-wrapper">
       <div className="sidebar">
@@ -2080,13 +2300,20 @@ export default function App() {
 
           <select
             className="input-field"
-            style={{ width: 'auto', minWidth: '240px', fontSize: '0.95rem', cursor: 'pointer' }}
+            style={{ width: 'auto', minWidth: '260px', fontSize: '0.95rem', cursor: 'pointer' }}
             value={monoCategoryFilter}
             onChange={e => setMonoCategoryFilter(e.target.value)}
           >
-            <option value="all">📁 Усі категорії ({allCategories.length})</option>
-            {allCategories.map(cat => (
-              <option key={cat} value={cat}>{cat} ({categoryCounts[cat] || 0})</option>
+            <option value="all">📁 Усі категорії ({categoryTree.length} груп)</option>
+            {categoryTree.map(group => (
+              <optgroup key={group.main} label={`${group.main} (${group.products.length})`}>
+                <option value={`main:${group.main}`}>↳ Всі «{group.main}» ({group.products.length})</option>
+                {group.subs.length > 1 && group.subs.map(sub => (
+                  <option key={sub.fullPath} value={`sub:${sub.fullPath}`}>
+                    &nbsp;&nbsp;&nbsp;• {sub.name} ({sub.products.length})
+                  </option>
+                ))}
+              </optgroup>
             ))}
           </select>
         </div>
@@ -2096,8 +2323,8 @@ export default function App() {
       {!searchQuery.trim() && catalog.length > 0 && (
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.75rem' }}>
           <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-            Знайдено категорій: <strong style={{ color: 'var(--text-main)' }}>{grouped.length}</strong>
-            {monoCategoryFilter !== 'all' && ` (вибрано: ${monoCategoryFilter})`}
+            Знайдено груп: <strong style={{ color: 'var(--text-main)' }}>{monoGrouped.length}</strong>
+            {monoCategoryFilter !== 'all' && ` (фільтр активний)`}
           </div>
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <button
@@ -2141,117 +2368,12 @@ export default function App() {
           {filteredCatalog.length === 0 ? (
             <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>Нічого не знайдено</div>
           ) : (
-            <div style={{ overflowX: 'auto' }}>
-              <table style={{ tableLayout: 'fixed', width: '100%' }}>
-                <thead>
-                  <tr>
-                    <th style={{ width: '60px' }}>Увімк</th>
-                    <th style={{ width: '90px' }}>Наявність</th>
-                    <th style={{ width: '80px' }}>Залишок</th>
-                    <th>Товар</th>
-                    <th style={{ width: '55px', textAlign: 'center' }}>Дні</th>
-                    <th style={{ width: '145px' }}>Штрихкод</th>
-                    <th style={{ width: '155px' }}>Кастомний опис</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredCatalog.map(product => {
-                    const isSelected = whitelist.includes(product.vendorCode);
-                    const isAvailable = availabilityOverrides[product.vendorCode] !== false;
-                    return (
-                      <tr key={product.vendorCode} style={{ opacity: isSelected ? 1 : 0.5 }}>
-                        <td>
-                          <label className="toggle-switch">
-                            <input type="checkbox" checked={isSelected} onChange={() => toggleWhitelist(product.vendorCode)} />
-                            <span className="slider"></span>
-                          </label>
-                        </td>
-                        <td>
-                          <label className="toggle-switch" style={{ opacity: isSelected ? 1 : 0.4 }}>
-                            <input type="checkbox" checked={isAvailable} disabled={!isSelected} onChange={() => toggleAvailability(product.vendorCode)} />
-                            <span className="slider" style={{ background: isAvailable ? '#10b981' : '#f87171' }}></span>
-                          </label>
-                        </td>
-                        <td>
-                          <input type="number" min="0" className="input-field" 
-                            style={{ width: '100%', padding: '0.4rem', textAlign: 'center' }}
-                            value={stockOverrides[product.vendorCode] !== undefined ? stockOverrides[product.vendorCode] : (product.stock ?? 10)}
-                            onChange={(e) => updateStock(product.vendorCode, e.target.value === '' ? '' : parseInt(e.target.value))}
-                            onBlur={(e) => { if (e.target.value === '') updateStock(product.vendorCode, 10); }}
-                          />
-                        </td>
-                        <td>
-                          <div className="flex-center">
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%' }}>
-                              <div style={{ flex: 1, width: '100%' }}>
-                                {(() => {
-                                  const currentName = names[product.vendorCode] !== undefined ? names[product.vendorCode] : product.name;
-                                  const charCount = currentName.length;
-                                  const isOverLimit = charCount > 50;
-                                  return (
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', width: '100%' }}>
-                                      <input 
-                                        type="text" 
-                                        className="input-field" 
-                                        value={currentName} 
-                                        onChange={(e) => updateName(product.vendorCode, product.name, e.target.value)}
-                                        style={{ borderColor: isOverLimit ? '#f87171' : 'var(--border-color)', width: '100%', padding: '0.4rem' }}
-                                        title={product.name}
-                                      />
-                                      <div style={{ fontSize: '0.75rem', color: isOverLimit ? '#f87171' : 'var(--text-muted)', textAlign: 'right' }}>
-                                        {charCount}/50 {isOverLimit && '⚠️'}
-                                      </div>
-                                    </div>
-                                  );
-                                })()}
-                                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
-                                  {product.vendorCode} | {product.oldPrice ? <><span style={{ textDecoration: 'line-through', color: '#f87171' }}>{product.oldPrice}</span> <span style={{ color: '#10b981', fontWeight: 600 }}>{product.price} ₴</span></> : `${product.price} ₴`} | {product.category}
-                                  {isHoroshopOutOfStock(product) && (
-                                    <span style={{ marginLeft: '0.5rem', fontSize: '0.75rem', padding: '0.1rem 0.45rem', borderRadius: '4px', background: '#fee2e2', color: '#b91c1c', fontWeight: 600 }}>
-                                      ⚠️ Немає в наявності на Хорошопі
-                                    </span>
-                                  )}
-                                  {isMissingInExcel(product) && (
-                                    <span style={{ marginLeft: '0.5rem', fontSize: '0.75rem', padding: '0.1rem 0.45rem', borderRadius: '4px', background: '#fef3c7', color: '#92400e', fontWeight: 600 }}>
-                                      ⚠️ Немає артикулу в Excel
-                                    </span>
-                                  )}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-                        <td style={{ textAlign: 'center' }}>
-                          <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '28px', height: '28px', borderRadius: '6px', background: daysColor + '20', border: '1px solid ' + daysColor + '60', color: daysColor, fontWeight: 700, fontSize: '0.9rem' }}>{daysToDispatch}</span>
-                        </td>
-                        <td>
-                          <input type="text" className="input-field" placeholder="Ввести..."
-                            value={barcodes[product.vendorCode] || ''}
-                            onChange={(e) => updateBarcode(product.vendorCode, e.target.value)}
-                          />
-                        </td>
-                        <td>
-                          {descriptions[product.vendorCode] ? (
-                            <button className="btn" style={{ padding: '0.4rem 0.75rem', fontSize: '0.9rem', width: '100%', background: 'rgba(16, 185, 129, 0.1)', color: 'var(--success)', border: '1px solid rgba(16, 185, 129, 0.2)' }} onClick={() => setEditingDescriptionProduct(product)}>
-                              Опис додано ✏️
-                            </button>
-                          ) : (
-                            <button className="btn" style={{ padding: '0.4rem 0.75rem', fontSize: '0.9rem', width: '100%', background: 'transparent', color: 'var(--text-main)', border: '1px solid var(--border-color)' }} onClick={() => setEditingDescriptionProduct(product)}>
-                              ✏️ Редагувати опис
-                            </button>
-                          )}
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
+            renderMonoTable(filteredCatalog)
           )}
         </div>
       )}
 
-      {/* Категорії - зховані по замовчуванню, приховуються коли пошук не активний */}
+      {/* Загальний перемикач */}
       {!searchQuery.trim() && (
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem', padding: '0.75rem 1rem', background: 'var(--surface-color)', border: '1px solid var(--border-color)', borderRadius: '0.75rem' }}>
           <label className="toggle-switch">
@@ -2274,145 +2396,124 @@ export default function App() {
         <div className="glass-panel" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>
           Немає товарів. Переконайтеся, що ви вказали правильне посилання на фід Хорошопу в налаштуваннях.
         </div>
-      ) : !searchQuery.trim() && grouped.length === 0 ? (
+      ) : !searchQuery.trim() && monoGrouped.length === 0 ? (
         <div className="glass-panel" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>
-          🎉 За вибраним фільтром проблемних товарів не знайдено!
+          🎉 За вибраним фільтром товарів не знайдено!
         </div>
       ) : !searchQuery.trim() ? (
-        grouped.map(([categoryName, products]) => {
-          const { selected, total } = getCategoryStats(products);
-          const isCollapsed = collapsedCategories[categoryName] !== undefined
-            ? collapsedCategories[categoryName]
+        monoGrouped.map(group => {
+          const { selected, total } = getCategoryStats(group.products);
+          const isMainCollapsed = collapsedCategories[group.main] !== undefined
+            ? collapsedCategories[group.main]
             : (monoCategoryFilter === 'all' && filterMode === 'all');
+          const hasMultipleSubs = group.subs.length > 1 || (group.subs[0] && group.subs[0].name !== 'Основні товари' && group.subs[0].name !== group.main);
 
           return (
-            <div key={categoryName} className="glass-panel" style={{ marginBottom: '1rem', padding: 0, overflow: 'hidden' }}>
-              {/* Category header */}
+            <div key={group.main} className="glass-panel" style={{ marginBottom: '1rem', padding: 0, overflow: 'hidden' }}>
+              {/* Primary Category Header */}
               <div
-                onClick={() => toggleCategory(categoryName)}
+                onClick={() => toggleMonoCategory(group.main)}
                 style={{
-                  display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem 1.5rem',
-                  cursor: 'pointer', borderBottom: isCollapsed ? 'none' : '1px solid var(--border-color)',
-                  background: isCollapsed ? '#ffffff' : 'rgba(24, 24, 27, 0.04)',
+                  display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem 1.25rem',
+                  cursor: 'pointer', borderBottom: isMainCollapsed ? 'none' : '1px solid var(--border-color)',
+                  background: isMainCollapsed ? '#ffffff' : 'rgba(24, 24, 27, 0.04)',
                   transition: 'background 0.2s', userSelect: 'none'
                 }}
               >
-                <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <span style={{ fontWeight: 700, fontSize: '1rem' }}>{categoryName}</span>
-                  <span className="badge" style={{ background: selected > 0 ? '#18181b' : '#f3f4f6', color: selected > 0 ? '#ffffff' : '#6b7280' }}>{selected}/{total}</span>
+                <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+                  <span style={{ fontSize: '1.15rem' }}>📁</span>
+                  <span style={{ fontWeight: 800, fontSize: '1.05rem', color: '#0f172a' }}>{group.main}</span>
+                  <span className="badge" style={{ background: selected > 0 ? '#18181b' : '#f3f4f6', color: selected > 0 ? '#ffffff' : '#6b7280', fontSize: '0.85rem', padding: '0.2rem 0.55rem' }}>
+                    {selected}/{total} увімкнено
+                  </span>
+                  {group.subs.length > 1 && (
+                    <span style={{ fontSize: '0.8rem', color: '#64748b', background: '#f1f5f9', padding: '0.15rem 0.5rem', borderRadius: '4px' }}>
+                      {group.subs.length} підкатегорій
+                    </span>
+                  )}
                 </div>
-                <span style={{ color: 'var(--text-muted)', fontSize: '1.2rem' }}>
-                  {isCollapsed ? '▶' : '▼'}
+                <div style={{ display: 'flex', gap: '0.35rem', marginRight: '0.75rem' }} onClick={e => e.stopPropagation()}>
+                  <button
+                    type="button"
+                    className="btn"
+                    style={{ padding: '0.3rem 0.65rem', fontSize: '0.8rem', background: '#18181b', color: '#ffffff' }}
+                    onClick={() => handleBulkCategoryAction(true, group.products)}
+                    title="Увімкнути всі товари цієї категорії"
+                  >
+                    ✅ Всі ({total})
+                  </button>
+                  <button
+                    type="button"
+                    className="btn"
+                    style={{ padding: '0.3rem 0.65rem', fontSize: '0.8rem', background: '#ffffff', color: '#475569', border: '1px solid #cbd5e1' }}
+                    onClick={() => handleBulkCategoryAction(false, group.products)}
+                    title="Вимкнути всі товари цієї категорії"
+                  >
+                    ❌ Зняти
+                  </button>
+                </div>
+                <span style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>
+                  {isMainCollapsed ? '▶' : '▼'}
                 </span>
               </div>
 
-              {/* Products table */}
-              <div style={{ display: isCollapsed ? 'none' : 'block', overflowX: 'auto' }}>
-                <table style={{ tableLayout: 'fixed', width: '100%' }}>
-                    <thead>
-                      <tr>
-                        <th style={{ width: '60px' }}>Увімк</th>
-                        <th style={{ width: '90px' }}>Наявність</th>
-                        <th style={{ width: '80px' }}>Залишок</th>
-                        <th>Товар</th>
-                        <th style={{ width: '55px', textAlign: 'center' }}>Дні</th>
-                        <th style={{ width: '145px' }}>Штрихкод</th>
-                        <th style={{ width: '155px' }}>Кастомний опис</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {products.map(product => {
-                        const isSelected = whitelist.includes(product.vendorCode);
-                        const isAvailable = availabilityOverrides[product.vendorCode] !== false;
-                        return (
-                          <tr key={product.vendorCode} style={{ opacity: isSelected ? 1 : 0.5 }}>
-                            <td>
-                              <label className="toggle-switch">
-                                <input type="checkbox" checked={isSelected} onChange={() => toggleWhitelist(product.vendorCode)} />
-                                <span className="slider"></span>
-                              </label>
-                            </td>
-                            <td>
-                          <label className="toggle-switch" style={{ opacity: isSelected ? 1 : 0.4 }}>
-                            <input type="checkbox" checked={isAvailable} disabled={!isSelected} onChange={() => toggleAvailability(product.vendorCode)} />
-                            <span className="slider" style={{ background: isAvailable ? '#10b981' : '#f87171' }}></span>
-                          </label>
-                        </td>
-                            <td>
-                              <input type="number" min="0" className="input-field" 
-                                style={{ width: '100%', padding: '0.4rem', textAlign: 'center' }}
-                                value={stockOverrides[product.vendorCode] !== undefined ? stockOverrides[product.vendorCode] : (product.stock ?? 10)}
-                                onChange={(e) => updateStock(product.vendorCode, e.target.value === '' ? '' : parseInt(e.target.value))}
-                                onBlur={(e) => { if (e.target.value === '') updateStock(product.vendorCode, 10); }}
-                              />
-                            </td>
-                            <td>
-                              <div className="flex-center">
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%' }}>
-                                  <div style={{ flex: 1, width: '100%' }}>
-                                    {(() => {
-                                      const currentName = names[product.vendorCode] !== undefined ? names[product.vendorCode] : product.name;
-                                      const charCount = currentName.length;
-                                      const isOverLimit = charCount > 50;
-                                      return (
-                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', width: '100%' }}>
-                                          <input 
-                                            type="text" 
-                                            className="input-field" 
-                                            value={currentName} 
-                                            onChange={(e) => updateName(product.vendorCode, product.name, e.target.value)}
-                                            style={{ borderColor: isOverLimit ? '#f87171' : 'var(--border-color)', width: '100%', padding: '0.4rem' }}
-                                            title={product.name}
-                                          />
-                                          <div style={{ fontSize: '0.75rem', color: isOverLimit ? '#f87171' : 'var(--text-muted)', textAlign: 'right' }}>
-                                            {charCount}/50 {isOverLimit && '⚠️'}
-                                          </div>
-                                        </div>
-                                      );
-                                    })()}
-                                    <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
-                                      {product.vendorCode} | {product.oldPrice ? <><span style={{ textDecoration: 'line-through', color: '#f87171' }}>{product.oldPrice}</span> <span style={{ color: '#10b981', fontWeight: 600 }}>{product.price} ₴</span></> : `${product.price} ₴`}
-                                      {isHoroshopOutOfStock(product) && (
-                                        <span style={{ marginLeft: '0.5rem', fontSize: '0.75rem', padding: '0.1rem 0.45rem', borderRadius: '4px', background: '#fee2e2', color: '#b91c1c', fontWeight: 600 }}>
-                                          ⚠️ Немає в наявності на Хорошопі
-                                        </span>
-                                      )}
-                                      {isMissingInExcel(product) && (
-                                        <span style={{ marginLeft: '0.5rem', fontSize: '0.75rem', padding: '0.1rem 0.45rem', borderRadius: '4px', background: '#fef3c7', color: '#92400e', fontWeight: 600 }}>
-                                          ⚠️ Немає артикулу в Excel
-                                        </span>
-                                      )}
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </td>
-                            <td style={{ textAlign: 'center' }}>
-                              <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '28px', height: '28px', borderRadius: '6px', background: daysColor + '20', border: '1px solid ' + daysColor + '60', color: daysColor, fontWeight: 700, fontSize: '0.9rem' }}>{daysToDispatch}</span>
-                            </td>
-                            <td>
-                              <input type="text" className="input-field" placeholder="Ввести..."
-                                value={barcodes[product.vendorCode] || ''}
-                                onChange={(e) => updateBarcode(product.vendorCode, e.target.value)}
-                              />
-                            </td>
-                            <td>
-                              {descriptions[product.vendorCode] ? (
-                                <button className="btn" style={{ padding: '0.4rem 0.75rem', fontSize: '0.9rem', width: '100%', background: 'rgba(16, 185, 129, 0.1)', color: 'var(--success)', border: '1px solid rgba(16, 185, 129, 0.2)' }} onClick={() => setEditingDescriptionProduct(product)}>
-                                  Опис додано ✏️
-                                </button>
-                              ) : (
-                                <button className="btn" style={{ padding: '0.4rem 0.75rem', fontSize: '0.9rem', width: '100%', background: 'transparent', color: 'var(--text-main)', border: '1px solid var(--border-color)' }} onClick={() => setEditingDescriptionProduct(product)}>
-                                  ✏️ Редагувати опис
-                                </button>
-                              )}
-                            </td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                </div>
+              {/* Expanded Main Category Content */}
+              {!isMainCollapsed && (
+                !hasMultipleSubs ? (
+                  renderMonoTable(group.subs[0] ? group.subs[0].products : group.products)
+                ) : (
+                  <div style={{ padding: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.65rem', background: '#f8fafc' }}>
+                    {group.subs.map(sub => {
+                      const subStats = getCategoryStats(sub.products);
+                      const isSubCollapsed = collapsedSubCategories[sub.fullPath] === true;
+
+                      return (
+                        <div key={sub.fullPath} style={{ background: '#ffffff', borderRadius: '8px', border: '1px solid #e2e8f0', overflow: 'hidden' }}>
+                          <div
+                            onClick={() => toggleMonoSubCategory(sub.fullPath)}
+                            style={{
+                              display: 'flex', alignItems: 'center', gap: '0.65rem', padding: '0.65rem 1rem',
+                              cursor: 'pointer', background: isSubCollapsed ? '#ffffff' : '#f1f5f9',
+                              borderBottom: isSubCollapsed ? 'none' : '1px solid #e2e8f0',
+                              transition: 'background 0.15s', userSelect: 'none'
+                            }}
+                          >
+                            <span style={{ color: '#64748b', fontSize: '0.9rem', fontWeight: 700 }}>↳</span>
+                            <span style={{ fontWeight: 700, fontSize: '0.92rem', color: '#1e293b' }}>{sub.name}</span>
+                            <span className="badge" style={{ background: subStats.selected > 0 ? '#18181b' : '#f1f5f9', color: subStats.selected > 0 ? '#ffffff' : '#64748b', fontSize: '0.8rem', padding: '0.15rem 0.45rem' }}>
+                              {subStats.selected}/{subStats.total}
+                            </span>
+                            <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '0.35rem' }} onClick={e => e.stopPropagation()}>
+                              <button
+                                type="button"
+                                className="btn"
+                                style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem', background: '#f8fafc', color: '#1e293b', border: '1px solid #cbd5e1' }}
+                                onClick={() => handleBulkCategoryAction(true, sub.products)}
+                                title="Увімкнути товари підкатегорії"
+                              >
+                                ✅ Всі
+                              </button>
+                              <button
+                                type="button"
+                                className="btn"
+                                style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem', background: '#ffffff', color: '#64748b', border: '1px solid #e2e8f0' }}
+                                onClick={() => handleBulkCategoryAction(false, sub.products)}
+                                title="Вимкнути товари підкатегорії"
+                              >
+                                ❌ Зняти
+                              </button>
+                            </div>
+                            <span style={{ color: 'var(--text-muted)', fontSize: '0.95rem', paddingLeft: '0.35rem' }}>
+                              {isSubCollapsed ? '▶' : '▼'}
+                            </span>
+                          </div>
+                          {!isSubCollapsed && renderMonoTable(sub.products)}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )
+              )}
             </div>
           );
         })
@@ -2460,13 +2561,20 @@ export default function App() {
 
             <select
               className="input-field"
-              style={{ width: '250px', fontSize: '0.95rem', cursor: 'pointer' }}
+              style={{ width: 'auto', minWidth: '260px', fontSize: '0.95rem', cursor: 'pointer' }}
               value={promCategoryFilter}
               onChange={e => setPromCategoryFilter(e.target.value)}
             >
-              <option value="all">📁 Усі категорії ({allCategories.length})</option>
-              {allCategories.map(cat => (
-                <option key={cat} value={cat}>{cat} ({categoryCounts[cat] || 0})</option>
+              <option value="all">📁 Усі категорії ({categoryTree.length} груп)</option>
+              {categoryTree.map(group => (
+                <optgroup key={group.main} label={`${group.main} (${group.products.length})`}>
+                  <option value={`main:${group.main}`}>↳ Всі «{group.main}» ({group.products.length})</option>
+                  {group.subs.length > 1 && group.subs.map(sub => (
+                    <option key={sub.fullPath} value={`sub:${sub.fullPath}`}>
+                      &nbsp;&nbsp;&nbsp;• {sub.name} ({sub.products.length})
+                    </option>
+                  ))}
+                </optgroup>
               ))}
             </select>
           </div>
@@ -2474,7 +2582,7 @@ export default function App() {
           {/* Quick bulk actions */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.75rem' }}>
             <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-              Знайдено: <strong style={{ color: 'var(--text-main)' }}>{filteredPromCatalog.length}</strong> товарів {!promSearchQuery.trim() && `у ${promGrouped.length} категоріях`}
+              Знайдено: <strong style={{ color: 'var(--text-main)' }}>{filteredPromCatalog.length}</strong> товарів {!promSearchQuery.trim() && `у ${promGrouped.length} групах`}
             </div>
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
               <button
@@ -2517,22 +2625,7 @@ export default function App() {
           {/* Prom Products: Flat Table on Search, Accordion on Categories */}
           {promSearchQuery.trim() ? (
             <div className="glass-panel" style={{ padding: 0, overflow: 'hidden' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.95rem' }}>
-                <thead>
-                  <tr style={{ background: '#f8fafc', borderBottom: '1px solid var(--border-color)', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-                    <th style={{ padding: '1rem', width: '130px', textAlign: 'center' }}>Продавати на Prom</th>
-                    <th style={{ padding: '1rem', width: '70px', textAlign: 'center' }}>Фото</th>
-                    <th style={{ padding: '1rem', width: '160px' }}>Артикул</th>
-                    <th style={{ padding: '1rem' }}>Назва товару</th>
-                    <th style={{ padding: '1rem', width: '120px' }}>Ціна</th>
-                    <th style={{ padding: '1rem', width: '140px', textAlign: 'center' }}>Склад (Excel)</th>
-                    <th style={{ padding: '1rem', width: '230px' }}>Статус на Prom.ua</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredPromCatalog.slice(0, 200).map(product => renderPromProductRow(product))}
-                </tbody>
-              </table>
+              {renderPromTable(filteredPromCatalog.slice(0, 200))}
               {filteredPromCatalog.length > 200 && (
                 <div style={{ padding: '1rem', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.9rem', background: '#f8fafc', borderTop: '1px solid var(--border-color)' }}>
                   Показано перші 200 товарів із {filteredPromCatalog.length}.
@@ -2553,55 +2646,118 @@ export default function App() {
                   Товарів не знайдено за вказаними фільтрами
                 </div>
               ) : (
-                promGrouped.map(([categoryName, products]) => {
-                  const { enabled, total } = getPromCategoryStats(products);
-                  const isCollapsed = collapsedPromCategories[categoryName] !== undefined
-                    ? collapsedPromCategories[categoryName]
-                    : (promCategoryFilter === 'all');
+                promGrouped.map(group => {
+                  const { enabled, total } = getPromCategoryStats(group.products);
+                  const isMainCollapsed = collapsedPromCategories[group.main] !== undefined
+                    ? collapsedPromCategories[group.main]
+                    : (promCategoryFilter === 'all' && promFilterMode === 'all');
+                  const hasMultipleSubs = group.subs.length > 1 || (group.subs[0] && group.subs[0].name !== 'Основні товари' && group.subs[0].name !== group.main);
 
                   return (
-                    <div key={categoryName} className="glass-panel" style={{ marginBottom: '0.75rem', padding: 0, overflow: 'hidden' }}>
-                      {/* Category header */}
+                    <div key={group.main} className="glass-panel" style={{ marginBottom: '1rem', padding: 0, overflow: 'hidden' }}>
+                      {/* Primary Category Header */}
                       <div
-                        onClick={() => togglePromCategory(categoryName)}
+                        onClick={() => togglePromCategory(group.main)}
                         style={{
-                          display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.9rem 1.25rem',
-                          cursor: 'pointer', borderBottom: isCollapsed ? 'none' : '1px solid var(--border-color)',
-                          background: isCollapsed ? '#ffffff' : 'rgba(139, 92, 246, 0.05)',
+                          display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem 1.25rem',
+                          cursor: 'pointer', borderBottom: isMainCollapsed ? 'none' : '1px solid var(--border-color)',
+                          background: isMainCollapsed ? '#ffffff' : 'rgba(139, 92, 246, 0.05)',
                           transition: 'background 0.2s', userSelect: 'none'
                         }}
                       >
-                        <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                          <span style={{ fontWeight: 700, fontSize: '0.95rem' }}>{categoryName}</span>
-                          <span className="badge" style={{ background: enabled > 0 ? '#dcfce7' : '#f3f4f6', color: enabled > 0 ? '#15803d' : '#6b7280' }}>
-                            {enabled}/{total}
+                        <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+                          <span style={{ fontSize: '1.15rem' }}>📁</span>
+                          <span style={{ fontWeight: 800, fontSize: '1.05rem', color: '#0f172a' }}>{group.main}</span>
+                          <span className="badge" style={{ background: enabled > 0 ? '#dcfce7' : '#f3f4f6', color: enabled > 0 ? '#15803d' : '#6b7280', fontSize: '0.85rem', padding: '0.2rem 0.55rem' }}>
+                            🟣 {enabled}/{total} для Prom
                           </span>
+                          {group.subs.length > 1 && (
+                            <span style={{ fontSize: '0.8rem', color: '#6b21a8', background: '#f3e8ff', padding: '0.15rem 0.5rem', borderRadius: '4px' }}>
+                              {group.subs.length} підкатегорій
+                            </span>
+                          )}
                         </div>
-                        <span style={{ color: 'var(--text-muted)', fontSize: '1.1rem', padding: '0 0.5rem' }}>
-                          {isCollapsed ? '▶' : '▼'}
+                        <div style={{ display: 'flex', gap: '0.35rem', marginRight: '0.75rem' }} onClick={e => e.stopPropagation()}>
+                          <button
+                            type="button"
+                            className="btn"
+                            style={{ padding: '0.3rem 0.65rem', fontSize: '0.8rem', background: '#8b5cf6', color: '#ffffff' }}
+                            onClick={() => handlePromBulkListToggle(true, group.products)}
+                            title="Увімкнути всі товари цієї категорії для Prom"
+                          >
+                            🟣 Всі ({total})
+                          </button>
+                          <button
+                            type="button"
+                            className="btn"
+                            style={{ padding: '0.3rem 0.65rem', fontSize: '0.8rem', background: '#ffffff', color: '#64748b', border: '1px solid #cbd5e1' }}
+                            onClick={() => handlePromBulkListToggle(false, group.products)}
+                            title="Вимкнути всі товари цієї категорії з Prom"
+                          >
+                            ⚪ Вимкнути
+                          </button>
+                        </div>
+                        <span style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>
+                          {isMainCollapsed ? '▶' : '▼'}
                         </span>
                       </div>
 
-                      {/* Category table */}
-                      {!isCollapsed && (
-                        <div style={{ overflowX: 'auto' }}>
-                          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.95rem' }}>
-                            <thead>
-                              <tr style={{ background: '#f8fafc', borderBottom: '1px solid var(--border-color)', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-                                <th style={{ padding: '0.85rem 1rem', width: '130px', textAlign: 'center' }}>Продавати на Prom</th>
-                                <th style={{ padding: '0.85rem 1rem', width: '70px', textAlign: 'center' }}>Фото</th>
-                                <th style={{ padding: '0.85rem 1rem', width: '160px' }}>Артикул</th>
-                                <th style={{ padding: '0.85rem 1rem' }}>Назва товару</th>
-                                <th style={{ padding: '0.85rem 1rem', width: '120px' }}>Ціна</th>
-                                <th style={{ padding: '0.85rem 1rem', width: '140px', textAlign: 'center' }}>Склад (Excel)</th>
-                                <th style={{ padding: '0.85rem 1rem', width: '230px' }}>Статус на Prom.ua</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {products.map(product => renderPromProductRow(product))}
-                            </tbody>
-                          </table>
-                        </div>
+                      {/* Expanded Main Category Content */}
+                      {!isMainCollapsed && (
+                        !hasMultipleSubs ? (
+                          renderPromTable(group.subs[0] ? group.subs[0].products : group.products)
+                        ) : (
+                          <div style={{ padding: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.65rem', background: '#fdfcfe' }}>
+                            {group.subs.map(sub => {
+                              const subStats = getPromCategoryStats(sub.products);
+                              const isSubCollapsed = collapsedPromSubCategories[sub.fullPath] === true;
+
+                              return (
+                                <div key={sub.fullPath} style={{ background: '#ffffff', borderRadius: '8px', border: '1px solid #e9d5ff', overflow: 'hidden' }}>
+                                  <div
+                                    onClick={() => togglePromSubCategory(sub.fullPath)}
+                                    style={{
+                                      display: 'flex', alignItems: 'center', gap: '0.65rem', padding: '0.65rem 1rem',
+                                      cursor: 'pointer', background: isSubCollapsed ? '#ffffff' : '#faf5ff',
+                                      borderBottom: isSubCollapsed ? 'none' : '1px solid #f3e8ff',
+                                      transition: 'background 0.15s', userSelect: 'none'
+                                    }}
+                                  >
+                                    <span style={{ color: '#8b5cf6', fontSize: '0.9rem', fontWeight: 700 }}>↳</span>
+                                    <span style={{ fontWeight: 700, fontSize: '0.92rem', color: '#1e293b' }}>{sub.name}</span>
+                                    <span className="badge" style={{ background: subStats.enabled > 0 ? '#dcfce7' : '#f3f4f6', color: subStats.enabled > 0 ? '#15803d' : '#6b7280', fontSize: '0.8rem', padding: '0.15rem 0.45rem' }}>
+                                      {subStats.enabled}/{subStats.total}
+                                    </span>
+                                    <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '0.35rem' }} onClick={e => e.stopPropagation()}>
+                                      <button
+                                        type="button"
+                                        className="btn"
+                                        style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem', background: '#f5f3ff', color: '#7c3aed', border: '1px solid #ddd6fe' }}
+                                        onClick={() => handlePromBulkListToggle(true, sub.products)}
+                                        title="Увімкнути товари підкатегорії"
+                                      >
+                                        🟣 Всі
+                                      </button>
+                                      <button
+                                        type="button"
+                                        className="btn"
+                                        style={{ padding: '0.2rem 0.5rem', fontSize: '0.75rem', background: '#ffffff', color: '#64748b', border: '1px solid #e2e8f0' }}
+                                        onClick={() => handlePromBulkListToggle(false, sub.products)}
+                                        title="Вимкнути товари підкатегорії"
+                                      >
+                                        ⚪ Зняти
+                                      </button>
+                                    </div>
+                                    <span style={{ color: 'var(--text-muted)', fontSize: '0.95rem', paddingLeft: '0.35rem' }}>
+                                      {isSubCollapsed ? '▶' : '▼'}
+                                    </span>
+                                  </div>
+                                  {!isSubCollapsed && renderPromTable(sub.products)}
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )
                       )}
                     </div>
                   );
@@ -2652,13 +2808,20 @@ export default function App() {
 
             <select
               className="input-field"
-              style={{ width: '250px', fontSize: '0.95rem', cursor: 'pointer' }}
+              style={{ width: 'auto', minWidth: '260px', fontSize: '0.95rem', cursor: 'pointer' }}
               value={horoshopCategoryFilter}
               onChange={e => setHoroshopCategoryFilter(e.target.value)}
             >
-              <option value="all">📁 Всі категорії ({allCategories.length})</option>
-              {allCategories.map(cat => (
-                <option key={cat} value={cat}>{cat} ({categoryCounts[cat] || 0})</option>
+              <option value="all">📁 Всі категорії ({categoryTree.length} груп)</option>
+              {categoryTree.map(group => (
+                <optgroup key={group.main} label={`${group.main} (${group.products.length})`}>
+                  <option value={`main:${group.main}`}>↳ Всі «{group.main}» ({group.products.length})</option>
+                  {group.subs.length > 1 && group.subs.map(sub => (
+                    <option key={sub.fullPath} value={`sub:${sub.fullPath}`}>
+                      &nbsp;&nbsp;&nbsp;• {sub.name} ({sub.products.length})
+                    </option>
+                  ))}
+                </optgroup>
               ))}
             </select>
 
@@ -2675,7 +2838,7 @@ export default function App() {
           {/* Bulk actions */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', paddingBottom: '0.75rem', borderBottom: '1px solid var(--border-color)', flexWrap: 'wrap', gap: '0.75rem' }}>
             <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-              Знайдено: <strong>{filteredHoroshopCatalog.length}</strong> товарів {!horoshopSearchQuery.trim() && `у ${horoshopGrouped.length} категоріях`}
+              Знайдено: <strong>{filteredHoroshopCatalog.length}</strong> товарів {!horoshopSearchQuery.trim() && `у ${horoshopGrouped.length} групах`}
             </div>
             <div style={{ display: 'flex', gap: '0.45rem', flexWrap: 'wrap' }}>
               <button
@@ -2754,23 +2917,7 @@ export default function App() {
           {/* Horoshop Products: Flat Table on Search, Accordion on Categories */}
           {horoshopSearchQuery.trim() ? (
             <div className="glass-panel" style={{ padding: 0, overflow: 'hidden' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.95rem' }}>
-                <thead>
-                  <tr style={{ background: '#f8fafc', borderBottom: '1px solid var(--border-color)', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-                    <th style={{ padding: '0.85rem 0.5rem', width: '155px', textAlign: 'center' }}>Наявність на Хорошоп</th>
-                    <th style={{ padding: '0.85rem 0.5rem', width: '165px', textAlign: 'center' }}>Оплата частинами (ОЧ)</th>
-                    <th style={{ padding: '0.85rem 0.5rem', width: '60px', textAlign: 'center' }}>Фото</th>
-                    <th style={{ padding: '0.85rem 0.5rem', width: '135px' }}>Артикул</th>
-                    <th style={{ padding: '0.85rem 0.5rem' }}>Назва товару</th>
-                    <th style={{ padding: '0.85rem 0.5rem', width: '95px' }}>Ціна</th>
-                    <th style={{ padding: '0.85rem 0.5rem', width: '105px', textAlign: 'center' }}>Склад (Excel)</th>
-                    <th style={{ padding: '0.85rem 0.5rem', width: '250px' }}>Підсумковий статус</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredHoroshopCatalog.slice(0, 200).map(product => renderHoroshopProductRow(product))}
-                </tbody>
-              </table>
+              {renderHoroshopTable(filteredHoroshopCatalog.slice(0, 200))}
               {filteredHoroshopCatalog.length > 200 && (
                 <div style={{ padding: '1rem', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.9rem', background: '#f8fafc', borderTop: '1px solid var(--border-color)' }}>
                   Показано перші 200 товарів із {filteredHoroshopCatalog.length}. Використовуйте фільтр категорій для точного вибору.
@@ -2791,79 +2938,124 @@ export default function App() {
                   Товарів не знайдено за вказаними фільтрами
                 </div>
               ) : (
-                horoshopGrouped.map(([categoryName, products]) => {
-                  const { inStock, active, total } = getHoroshopCategoryStats(products);
-                  const isCollapsed = collapsedHoroshopCategories[categoryName] !== undefined
-                    ? collapsedHoroshopCategories[categoryName]
-                    : (horoshopCategoryFilter === 'all');
+                horoshopGrouped.map(group => {
+                  const { inStock, active, total } = getHoroshopCategoryStats(group.products);
+                  const isMainCollapsed = collapsedHoroshopCategories[group.main] !== undefined
+                    ? collapsedHoroshopCategories[group.main]
+                    : (horoshopCategoryFilter === 'all' && horoshopFilterMode === 'all');
+                  const hasMultipleSubs = group.subs.length > 1 || (group.subs[0] && group.subs[0].name !== 'Основні товари' && group.subs[0].name !== group.main);
 
                   return (
-                    <div key={categoryName} className="glass-panel" style={{ marginBottom: '0.75rem', padding: 0, overflow: 'hidden' }}>
-                      {/* Category header */}
+                    <div key={group.main} className="glass-panel" style={{ marginBottom: '1rem', padding: 0, overflow: 'hidden' }}>
+                      {/* Primary Category Header */}
                       <div
-                        onClick={() => toggleHoroshopCategory(categoryName)}
+                        onClick={() => toggleHoroshopCategory(group.main)}
                         style={{
-                          display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.9rem 1.25rem',
-                          cursor: 'pointer', borderBottom: isCollapsed ? 'none' : '1px solid var(--border-color)',
-                          background: isCollapsed ? '#ffffff' : 'rgba(67, 96, 160, 0.06)',
+                          display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem 1.25rem',
+                          cursor: 'pointer', borderBottom: isMainCollapsed ? 'none' : '1px solid var(--border-color)',
+                          background: isMainCollapsed ? '#ffffff' : 'rgba(67, 96, 160, 0.06)',
                           transition: 'background 0.2s', userSelect: 'none'
                         }}
                       >
                         <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
-                          <span style={{ fontWeight: 700, fontSize: '0.95rem' }}>{categoryName}</span>
-                          <span className="badge" style={{ background: inStock > 0 ? '#dcfce7' : '#f3f4f6', color: inStock > 0 ? '#166534' : '#6b7280' }}>
+                          <span style={{ fontSize: '1.15rem' }}>📁</span>
+                          <span style={{ fontWeight: 800, fontSize: '1.05rem', color: '#0f172a' }}>{group.main}</span>
+                          <span className="badge" style={{ background: inStock > 0 ? '#dcfce7' : '#f3f4f6', color: inStock > 0 ? '#166534' : '#6b7280', fontSize: '0.85rem', padding: '0.2rem 0.55rem' }}>
                             В наявності: {inStock}/{total}
                           </span>
-                          <span className="badge" style={{ background: active > 0 ? '#f3e8ff' : '#f3f4f6', color: active > 0 ? '#6b21a8' : '#6b7280' }}>
+                          <span className="badge" style={{ background: active > 0 ? '#f3e8ff' : '#f3f4f6', color: active > 0 ? '#6b21a8' : '#6b7280', fontSize: '0.85rem', padding: '0.2rem 0.55rem' }}>
                             ОЧ: {active}/{total}
                           </span>
+                          {group.subs.length > 1 && (
+                            <span style={{ fontSize: '0.8rem', color: '#4360a0', background: '#eef2f9', padding: '0.15rem 0.5rem', borderRadius: '4px' }}>
+                              {group.subs.length} підкатегорій
+                            </span>
+                          )}
                         </div>
                         <div style={{ display: 'flex', gap: '0.35rem', marginRight: '0.75rem' }} onClick={e => e.stopPropagation()}>
                           <button
                             type="button"
                             className="btn"
-                            style={{ fontSize: '0.72rem', padding: '0.2rem 0.5rem', background: '#fee2e2', color: '#b91c1c', border: '1px solid #fecaca' }}
-                            onClick={() => handleBulkPresenceMode('off', products)}
-                            title="Поставити 'Немає в наявності' для всіх товарів цієї категорії"
+                            style={{ fontSize: '0.75rem', padding: '0.25rem 0.55rem', background: '#fee2e2', color: '#b91c1c', border: '1px solid #fecaca' }}
+                            onClick={() => handleBulkPresenceMode('off', group.products)}
+                            title="Поставити 'Немає в наявності' для всієї категорії"
                           >
-                            🔴 Немає всі
+                            🔴 Немає всі ({total})
                           </button>
                           <button
                             type="button"
                             className="btn"
-                            style={{ fontSize: '0.72rem', padding: '0.2rem 0.5rem', background: '#f1f5f9', color: '#475569', border: '1px solid #cbd5e1' }}
-                            onClick={() => handleBulkPresenceMode('auto', products)}
-                            title="Поставити 'Авто' за складом для всіх товарів цієї категорії"
+                            style={{ fontSize: '0.75rem', padding: '0.25rem 0.55rem', background: '#f1f5f9', color: '#475569', border: '1px solid #cbd5e1' }}
+                            onClick={() => handleBulkPresenceMode('auto', group.products)}
+                            title="Поставити 'Авто' за складом для всієї категорії"
                           >
                             ⚡ Авто всі
                           </button>
                         </div>
-                        <span style={{ color: 'var(--text-muted)', fontSize: '1.1rem', padding: '0 0.5rem' }}>
-                          {isCollapsed ? '▶' : '▼'}
+                        <span style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>
+                          {isMainCollapsed ? '▶' : '▼'}
                         </span>
                       </div>
 
-                      {/* Category table */}
-                      {!isCollapsed && (
-                        <div style={{ overflowX: 'auto' }}>
-                          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.95rem' }}>
-                            <thead>
-                              <tr style={{ background: '#f8fafc', borderBottom: '1px solid var(--border-color)', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-                                <th style={{ padding: '0.85rem 0.5rem', width: '155px', textAlign: 'center' }}>Наявність на Хорошоп</th>
-                                <th style={{ padding: '0.85rem 0.5rem', width: '165px', textAlign: 'center' }}>Оплата частинами (ОЧ)</th>
-                                <th style={{ padding: '0.85rem 0.5rem', width: '60px', textAlign: 'center' }}>Фото</th>
-                                <th style={{ padding: '0.85rem 0.5rem', width: '135px' }}>Артикул</th>
-                                <th style={{ padding: '0.85rem 0.5rem' }}>Назва товару</th>
-                                <th style={{ padding: '0.85rem 0.5rem', width: '95px' }}>Ціна</th>
-                                <th style={{ padding: '0.85rem 0.5rem', width: '105px', textAlign: 'center' }}>Склад (Excel)</th>
-                                <th style={{ padding: '0.85rem 0.5rem', width: '250px' }}>Підсумковий статус</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {products.map(product => renderHoroshopProductRow(product))}
-                            </tbody>
-                          </table>
-                        </div>
+                      {/* Expanded Main Category Content */}
+                      {!isMainCollapsed && (
+                        !hasMultipleSubs ? (
+                          renderHoroshopTable(group.subs[0] ? group.subs[0].products : group.products)
+                        ) : (
+                          <div style={{ padding: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.65rem', background: '#f6f8fb' }}>
+                            {group.subs.map(sub => {
+                              const subStats = getHoroshopCategoryStats(sub.products);
+                              const isSubCollapsed = collapsedHoroshopSubCategories[sub.fullPath] === true;
+
+                              return (
+                                <div key={sub.fullPath} style={{ background: '#ffffff', borderRadius: '8px', border: '1px solid #cbd7ee', overflow: 'hidden' }}>
+                                  <div
+                                    onClick={() => toggleHoroshopSubCategory(sub.fullPath)}
+                                    style={{
+                                      display: 'flex', alignItems: 'center', gap: '0.65rem', padding: '0.65rem 1rem',
+                                      cursor: 'pointer', background: isSubCollapsed ? '#ffffff' : '#f1f4f9',
+                                      borderBottom: isSubCollapsed ? 'none' : '1px solid #cbd7ee',
+                                      transition: 'background 0.15s', userSelect: 'none'
+                                    }}
+                                  >
+                                    <span style={{ color: '#4360a0', fontSize: '0.9rem', fontWeight: 700 }}>↳</span>
+                                    <span style={{ fontWeight: 700, fontSize: '0.92rem', color: '#1e293b' }}>{sub.name}</span>
+                                    <span className="badge" style={{ background: subStats.inStock > 0 ? '#dcfce7' : '#f3f4f6', color: subStats.inStock > 0 ? '#166534' : '#6b7280', fontSize: '0.8rem', padding: '0.15rem 0.45rem' }}>
+                                      Наявність: {subStats.inStock}/{subStats.total}
+                                    </span>
+                                    <span className="badge" style={{ background: subStats.active > 0 ? '#f3e8ff' : '#f3f4f6', color: subStats.active > 0 ? '#6b21a8' : '#6b7280', fontSize: '0.8rem', padding: '0.15rem 0.45rem' }}>
+                                      ОЧ: {subStats.active}/{subStats.total}
+                                    </span>
+                                    <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '0.35rem' }} onClick={e => e.stopPropagation()}>
+                                      <button
+                                        type="button"
+                                        className="btn"
+                                        style={{ fontSize: '0.72rem', padding: '0.18rem 0.45rem', background: '#fee2e2', color: '#b91c1c', border: '1px solid #fecaca' }}
+                                        onClick={() => handleBulkPresenceMode('off', sub.products)}
+                                        title="Поставити 'Немає' для підкатегорії"
+                                      >
+                                        🔴 Немає
+                                      </button>
+                                      <button
+                                        type="button"
+                                        className="btn"
+                                        style={{ fontSize: '0.72rem', padding: '0.18rem 0.45rem', background: '#ffffff', color: '#475569', border: '1px solid #cbd5e1' }}
+                                        onClick={() => handleBulkPresenceMode('auto', sub.products)}
+                                        title="Поставити 'Авто' для підкатегорії"
+                                      >
+                                        ⚡ Авто
+                                      </button>
+                                    </div>
+                                    <span style={{ color: 'var(--text-muted)', fontSize: '0.95rem', paddingLeft: '0.35rem' }}>
+                                      {isSubCollapsed ? '▶' : '▼'}
+                                    </span>
+                                  </div>
+                                  {!isSubCollapsed && renderHoroshopTable(sub.products)}
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )
                       )}
                     </div>
                   );
