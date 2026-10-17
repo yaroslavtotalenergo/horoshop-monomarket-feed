@@ -344,7 +344,15 @@ async function main() {
     console.log('🔄 Запуск оновлення наявності та залишків на Prom.ua...');
     const promResult = await syncProm();
     if (promResult && promResult.errors > 0) {
-      await notifyError('Попередження Prom.ua API', `Не вдалося оновити ${promResult.errors} товарів через помилки Prom API.`);
+      const failed = promResult.failedDetails || [];
+      const detailsList = failed.slice(0, 10).map((f, i) => {
+        return `${i + 1}. [ID ${f.id}] Арт: ${f.sku}\n   Назва: ${f.name}\n   Помилка: ${f.reason}`;
+      }).join('\n\n');
+
+      await notifyError(
+        `Prom.ua відхилив ${promResult.errors} товарів`,
+        detailsList || `Не вдалося оновити ${promResult.errors} товарів через помилки Prom API.`
+      );
     }
   } catch (err) {
     console.warn('⚠️ Оновлення Prom.ua помилка:', err.message);

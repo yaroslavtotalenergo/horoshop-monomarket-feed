@@ -160,6 +160,7 @@ async function syncProm() {
       updates.push({
         id: p.id,
         sku: sku,
+        name: p.name || '',
         status: targetStatus,
         presence: targetPresence,
         in_stock: targetInStock,
@@ -185,7 +186,7 @@ async function syncProm() {
 
   if (updates.length === 0) {
     console.log('✨ Всі товари на Prom.ua вже в актуальному стані!');
-    return { total: promProducts.length, updated: 0 };
+    return { total: promProducts.length, updated: 0, errors: 0, failedDetails: [] };
   }
 
   if (isDryRun) {
@@ -194,13 +195,14 @@ async function syncProm() {
       console.log(`   • [ID ${u.id}] SKU: ${u.sku} -> Status: ${u.status}, Presence: ${u.presence}, Qty: ${u.quantity_in_stock} (було: Presence ${u._old.presence}, Qty ${u._old.quantity_in_stock})`);
     });
     console.log('✅ DRY-RUN завершено успішно без внесення змін.');
-    return { total: promProducts.length, wouldUpdate: updates.length };
+    return { total: promProducts.length, wouldUpdate: updates.length, errors: 0, failedDetails: [] };
   }
 
   // 5. Відправка пачками по 100 товарів
   const BATCH_SIZE = 100;
   let totalProcessed = 0;
   let errorsCount = 0;
+  const failedDetails = [];
 
   for (let i = 0; i < updates.length; i += BATCH_SIZE) {
     const chunk = updates.slice(i, i + BATCH_SIZE);
@@ -221,6 +223,30 @@ async function syncProm() {
 
       if (resData.errors && Object.keys(resData.errors).length > 0) {
         console.warn(`   ⚠️ Помилки для деяких товарів:`, JSON.stringify(resData.errors));
+        for (const [errId, errVal] of Object.entries(resData.errors)) {
+          const item = chunk.find(c => String(c.id) === String(errId)) || promProducts.find(p => String(p.id) === String(errId));
+          let reason = '';
+          if (typeof errVal === 'string') {
+            reason = errVal;
+          } else if (errVal && typeof errVal === 'object') {
+            if (errVal._schema && typeof errVal._schema === 'object') {
+              reason = Object.values(errVal._schema).flat().join('; ');
+            } else {
+              reason = Object.entries(errVal).map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join(', ') : v}`).join('; ');
+            }
+          } else {
+            reason = JSON.stringify(errVal);
+          }
+
+          failedDetails.push({
+            id: errId,
+            sku: item?.sku || 'без артикулу',
+            name: item?.name || '',
+            reason: reason
+          });
+
+          console.error(`   ❌ [Помилка Prom] Товар ID ${errId} (Арт: ${item?.sku || 'немає'}, "${item?.name || ''}"): ${reason}`);
+        }
         errorsCount += Object.keys(resData.errors).length;
       }
     } catch (e) {
@@ -230,7 +256,7 @@ async function syncProm() {
   }
 
   console.log(`🎉 Синхронізацію з Prom.ua завершено! Оновлено: ${totalProcessed} товарів. Помилок: ${errorsCount}.`);
-  return { total: promProducts.length, updated: totalProcessed, errors: errorsCount };
+  return { total: promProducts.length, updated: totalProcessed, errors: errorsCount, failedDetails };
 }
 
 module.exports = syncProm;
