@@ -551,10 +551,10 @@ export default function App() {
     return { ...prev, [cat]: !isCurrentlyCollapsed };
   });
 
-  const togglePromSubCategory = (subPath) => setCollapsedPromSubCategories(prev => ({
-    ...prev,
-    [subPath]: !prev[subPath]
-  }));
+  const togglePromSubCategory = (subPath) => setCollapsedPromSubCategories(prev => {
+    const isCurrentlyCollapsed = prev[subPath] !== false;
+    return { ...prev, [subPath]: !isCurrentlyCollapsed };
+  });
 
   const expandAllProm = () => {
     const nextMain = {};
@@ -571,6 +571,7 @@ export default function App() {
     const nextMain = {};
     promGrouped.forEach(g => { nextMain[g.main] = true; });
     setCollapsedPromCategories(nextMain);
+    setCollapsedPromSubCategories({});
   };
 
   const setProductPresenceMode = (vendorCode, mode) => {
@@ -786,10 +787,10 @@ export default function App() {
     return { ...prev, [cat]: !isCurrentlyCollapsed };
   });
 
-  const toggleHoroshopSubCategory = (subPath) => setCollapsedHoroshopSubCategories(prev => ({
-    ...prev,
-    [subPath]: !prev[subPath]
-  }));
+  const toggleHoroshopSubCategory = (subPath) => setCollapsedHoroshopSubCategories(prev => {
+    const isCurrentlyCollapsed = prev[subPath] !== false;
+    return { ...prev, [subPath]: !isCurrentlyCollapsed };
+  });
 
   const expandAllHoroshop = () => {
     const nextMain = {};
@@ -806,6 +807,7 @@ export default function App() {
     const nextMain = {};
     horoshopGrouped.forEach(g => { nextMain[g.main] = true; });
     setCollapsedHoroshopCategories(nextMain);
+    setCollapsedHoroshopSubCategories({});
   };
 
   const handleTriggerFullSync = async () => {
@@ -926,10 +928,10 @@ export default function App() {
     return { ...prev, [cat]: !isCurrentlyCollapsed };
   });
 
-  const toggleMonoSubCategory = (subPath) => setCollapsedSubCategories(prev => ({
-    ...prev,
-    [subPath]: !prev[subPath]
-  }));
+  const toggleMonoSubCategory = (subPath) => setCollapsedSubCategories(prev => {
+    const isCurrentlyCollapsed = prev[subPath] !== false;
+    return { ...prev, [subPath]: !isCurrentlyCollapsed };
+  });
 
   const expandAllMono = () => {
     const nextMain = {};
@@ -946,6 +948,7 @@ export default function App() {
     const nextMain = {};
     monoGrouped.forEach(g => { nextMain[g.main] = true; });
     setCollapsedCategories(nextMain);
+    setCollapsedSubCategories({});
   };
 
   // handle bulk select/deselect of searched items
@@ -2465,7 +2468,10 @@ export default function App() {
                   <div style={{ padding: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.65rem', background: '#f8fafc' }}>
                     {group.subs.map(sub => {
                       const subStats = getCategoryStats(sub.products);
-                      const isSubCollapsed = collapsedSubCategories[sub.fullPath] === true;
+                      const isSubFiltered = monoCategoryFilter === `sub:${sub.fullPath}` || monoCategoryFilter === sub.fullPath;
+                      const isSubCollapsed = isSubFiltered
+                        ? false
+                        : (collapsedSubCategories[sub.fullPath] !== false);
 
                       return (
                         <div key={sub.fullPath} style={{ background: '#ffffff', borderRadius: '8px', border: '1px solid #e2e8f0', overflow: 'hidden' }}>
@@ -2710,7 +2716,10 @@ export default function App() {
                           <div style={{ padding: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.65rem', background: '#fdfcfe' }}>
                             {group.subs.map(sub => {
                               const subStats = getPromCategoryStats(sub.products);
-                              const isSubCollapsed = collapsedPromSubCategories[sub.fullPath] === true;
+                              const isSubFiltered = promCategoryFilter === `sub:${sub.fullPath}` || promCategoryFilter === sub.fullPath;
+                              const isSubCollapsed = isSubFiltered
+                                ? false
+                                : (collapsedPromSubCategories[sub.fullPath] !== false);
 
                               return (
                                 <div key={sub.fullPath} style={{ background: '#ffffff', borderRadius: '8px', border: '1px solid #e9d5ff', overflow: 'hidden' }}>
@@ -3005,7 +3014,10 @@ export default function App() {
                           <div style={{ padding: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.65rem', background: '#f6f8fb' }}>
                             {group.subs.map(sub => {
                               const subStats = getHoroshopCategoryStats(sub.products);
-                              const isSubCollapsed = collapsedHoroshopSubCategories[sub.fullPath] === true;
+                              const isSubFiltered = horoshopCategoryFilter === `sub:${sub.fullPath}` || horoshopCategoryFilter === sub.fullPath;
+                              const isSubCollapsed = isSubFiltered
+                                ? false
+                                : (collapsedHoroshopSubCategories[sub.fullPath] !== false);
 
                               return (
                                 <div key={sub.fullPath} style={{ background: '#ffffff', borderRadius: '8px', border: '1px solid #cbd7ee', overflow: 'hidden' }}>
