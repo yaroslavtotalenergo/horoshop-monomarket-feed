@@ -757,7 +757,7 @@
   "BPP900400100": false,
   "PYLUS2000CTE": false,
   "PYLUS3000CTE": false,
-  "PYLUS5000TE": false,
+  "PYLUS5000TE": true,
   "REL200320100": false,
   "PCH012050001": false,
   "PIN482161000": false,
@@ -774,5 +774,9 @@
   "CIP136175010": false,
   "CIP136225010": false,
   "CIP136250010": false,
-  "CIP136300010": false
+  "CIP136300010": false,
+  "PYLUKIT25": true,
+  "VESS001": true,
+  "PV3025300R": false,
+  "PV3050300R": false
 }

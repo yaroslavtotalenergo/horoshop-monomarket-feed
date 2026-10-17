@@ -716,13 +716,18 @@ export default function App() {
 
   const handleTriggerFullSync = async () => {
     setSyncingAll(true);
+    showToast('🚀 Повну синхронізацію запущено! Зачекайте ~40-50 секунд...');
     try {
       await api.triggerWorkflow();
-      showToast('🚀 Повну синхронізацію запущено! (Excel -> Prom -> Хорошоп -> Мономаркет, ~1-2 хв)');
+      await new Promise(r => setTimeout(r, 45000));
+      await loadData();
+      showToast('✅ Синхронізацію завершено, дані оновлено!');
     } catch (e) {
       showToast('❌ Помилка запуску: ' + (e?.message || ''));
+    } finally {
+      setSyncingAll(false);
+      loadLogs();
     }
-    setSyncingAll(false);
   };
 
   const toggleWhitelist = (vendorCode) => {

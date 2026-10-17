@@ -3,6 +3,43 @@ const { parse } = require('csv-parse/sync');
 const fs = require('fs');
 const { notifyError, notifySuccess } = require('./notify');
 
+const DEFAULT_WAREHOUSES = [
+  'ридомиль',
+  'в.олександівка 1',
+  'в.олександівка 2',
+  'с.борщагівка',
+  'київ1',
+  'київ2',
+  'київ 1',
+  'київ 2',
+  'переміщюється з борщагівки до ридомиль'
+];
+
+function normalizeStr(s) {
+  return String(s || '').toLowerCase().replace(/[\s\-_.,/\\()[\]'"`«»]/g, '');
+}
+
+function parseWarehouseNames(raw) {
+  if (!raw) return DEFAULT_WAREHOUSES;
+  let cleaned = String(raw).trim();
+  if (cleaned.startsWith('[') && cleaned.endsWith(']')) {
+    try {
+      const validJson = cleaned.replace(/'/g, '"');
+      const parsed = JSON.parse(validJson);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed.map(s => String(s).trim().toLowerCase()).filter(Boolean);
+      }
+    } catch (e) { }
+  }
+
+  const list = cleaned
+    .split(/[\r\n,]+/)
+    .map(s => s.replace(/[\[\]'"`]/g, '').trim().toLowerCase())
+    .filter(Boolean);
+
+  return list.length > 0 ? list : DEFAULT_WAREHOUSES;
+}
+
 async function main() {
   console.log('🚀 Синхронізація залишків з Google Sheets...');
 
@@ -61,27 +98,22 @@ async function main() {
 
   let warehouseList = [];
   if (process.env.WAREHOUSE_NAMES) {
-    warehouseList = process.env.WAREHOUSE_NAMES
-      .split(/[\r\n,]+/)
-      .map(s => s.trim().toLowerCase())
-      .filter(Boolean);
+    warehouseList = parseWarehouseNames(process.env.WAREHOUSE_NAMES);
   } else if (fs.existsSync('src/warehouses.json')) {
     try {
       const parsed = JSON.parse(fs.readFileSync('src/warehouses.json', 'utf8'));
-      warehouseList = (Array.isArray(parsed) ? parsed : (parsed.warehouses || []))
-        .map(s => String(s).trim().toLowerCase())
-        .filter(Boolean);
+      const rawList = Array.isArray(parsed) ? parsed : (parsed.warehouses || []);
+      warehouseList = parseWarehouseNames(rawList.join(', '));
     } catch { }
+  }
+  if (warehouseList.length === 0) {
+    warehouseList = DEFAULT_WAREHOUSES;
   }
 
   const keywords = {
     article: ['артикул', 'артікул', 'vendor code', 'vendor_code'],
     warehouses: warehouseList
   };
-
-  if (keywords.warehouses.length === 0) {
-    console.warn('⚠️ Не вказано перелік складів (задайте WAREHOUSE_NAMES у GitHub Secrets або файл src/warehouses.json)');
-  }
 
   let updatedCount = 0;
   const warnings = [];
@@ -146,15 +178,19 @@ async function main() {
         continue;
       }
 
-      // ── 3c. Пошук стовпчика Артикул ───────────────────────────
+      // ── 3c. Пошук стовпчика Артикул та Складів ───────────────────
       let articleIdx = -1;
       let warehouseIndices = [];
 
       for (let i = 0; i < Math.min(20, rows.length); i++) {
         rows[i].forEach((cell, idx) => {
-          const val = cell.trim().toLowerCase();
-          if (keywords.article.includes(val)) articleIdx = idx;
-          if (keywords.warehouses.includes(val)) {
+          const rawVal = cell.trim().toLowerCase();
+          const normVal = normalizeStr(cell);
+
+          if (keywords.article.some(a => rawVal === a || normVal === normalizeStr(a))) {
+            articleIdx = idx;
+          }
+          if (keywords.warehouses.some(w => rawVal === w || normVal === normalizeStr(w))) {
             if (!warehouseIndices.includes(idx)) warehouseIndices.push(idx);
           }
         });
@@ -174,6 +210,7 @@ async function main() {
         console.warn('⚠️ ' + msg);
         warnings.push(`(${sheetLabel}): стовпчики складів не знайдено`);
         await notifyError(`Не знайдено стовпчики складів (${sheetLabel})`, msg);
+        continue; // Не обнуляємо залишки, якщо склади в цій вкладці не знайдено!
       } else {
         console.log(`   ✅ Знайдено складів: ${warehouseIndices.length} шт.`);
       }
@@ -184,7 +221,7 @@ async function main() {
         const row = rows[i];
         const vendorCode = row[articleIdx] ? row[articleIdx].trim() : null;
 
-        if (!vendorCode || keywords.article.includes(vendorCode.toLowerCase())) continue;
+        if (!vendorCode || keywords.article.some(a => vendorCode.toLowerCase() === a || normalizeStr(vendorCode) === normalizeStr(a))) continue;
 
         let totalQty = 0;
         for (const wIdx of warehouseIndices) {
