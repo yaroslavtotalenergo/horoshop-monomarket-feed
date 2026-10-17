@@ -243,7 +243,6 @@
   "BPC920100210": "off",
   "BAT212070084": "off",
   "BAT412015081": "off",
-  "SHU500050100": "off",
   "SCC010005050": "off",
   "SCC010010000": "off",
   "SCC010010050": "off",
@@ -252,5 +251,7 @@
   "SUNCONINV": "on",
   "SUNCOMPAR": "on",
   "SLSIFP48100A": "on",
-  "SSIF2P15S48100C": "on"
+  "SSIF2P15S48100C": "on",
+  "SHU500050100": "off",
+  "PYLUS5000TE": "off"
 }
