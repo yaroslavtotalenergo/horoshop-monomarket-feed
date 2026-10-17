@@ -316,8 +316,32 @@ async function main() {
     console.warn('⚠️ Оновлення Prom.ua пропущено або помилка:', err.message);
   }
 
-  // ── 5. Telegram-сповіщення тільки при помилках ───────────────
-  // Успішне оновлення — без сповіщення
+  // ── 7. Перевірка запиту на тестове сповіщення в Telegram ────────
+  const flagPath = path.join(__dirname, 'test-telegram.flag');
+  if (fs.existsSync(flagPath) || process.env.TEST_TELEGRAM === '1' || process.argv.includes('--test-telegram')) {
+    console.log('📨 Виявлено запит на тестове сповіщення! Надсилаємо в Telegram...');
+    const { sendTelegram } = require('./notify');
+    await sendTelegram(
+      `🧪 <b>Тестове сповіщення від бота CRM PRO</b>\n\n` +
+      `✅ Зв'язок з Telegram успішно перевірено!\n` +
+      `📦 Товарів опрацьовано: <b>${updatedCount}</b>\n` +
+      `⏰ Час: <b>${new Date().toLocaleString('uk-UA', { timeZone: 'Europe/Kyiv' })}</b>\n` +
+      `🚀 Система активна і готова до автоматичної синхронізації.`
+    );
+    if (fs.existsSync(flagPath)) {
+      try {
+        fs.unlinkSync(flagPath);
+        const { execSync } = require('child_process');
+        execSync('git rm -f src/test-telegram.flag 2>/dev/null || true');
+        console.log('🧹 Прапорець тестового сповіщення видалено.');
+      } catch (cleanErr) {
+        console.warn('⚠️ Не вдалося видалити прапорець з git:', cleanErr.message);
+      }
+    }
+  }
+
+  // ── 8. Telegram-сповіщення тільки при помилках ───────────────
+  // Успішне стандартне оновлення — без сповіщення, щоб уникнути спаму
 }
 
 module.exports = main;

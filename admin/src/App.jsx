@@ -131,6 +131,7 @@ export default function App() {
   const [filterMode, setFilterMode] = useState('all');
   const [activeTab, setActiveTab] = useState('catalog');
   const [syncingAll, setSyncingAll] = useState(false);
+  const [testingTelegram, setTestingTelegram] = useState(false);
   
   const [promWhitelist, setPromWhitelist] = useState([]);
   const [promSkus, setPromSkus] = useState([]);
@@ -727,6 +728,24 @@ export default function App() {
     } finally {
       setSyncingAll(false);
       loadLogs();
+    }
+  };
+
+  const handleTestTelegram = async () => {
+    if (!token) {
+      showToast('❌ Потрібен GitHub Token у налаштуваннях');
+      return;
+    }
+    setTestingTelegram(true);
+    showToast('📨 Відправляємо запит на тестове сповіщення в Telegram...');
+    try {
+      await api.saveFile('src/test-telegram.flag', new Date().toISOString(), null, 'trigger: test telegram notification');
+      await api.triggerWorkflow();
+      showToast('🚀 Запит передано! Зачекайте ~30-40 сек — бот надішле сповіщення у ваш Telegram.');
+    } catch (e) {
+      showToast('❌ Помилка: ' + (e?.message || ''));
+    } finally {
+      setTestingTelegram(false);
     }
   };
 
@@ -3062,6 +3081,28 @@ export default function App() {
                 🔒 <strong>Захищено в GitHub Secrets (PROM_API_TOKEN)</strong>
                 <div style={{ color: 'var(--text-muted)', fontSize: '0.78rem', marginTop: '0.25rem', lineHeight: '1.4' }}>
                   Токен зберігається у зашифрованому вигляді на GitHub та використовується серверною синхронізацією.
+                </div>
+              </div>
+            </div>
+            <div className="form-group">
+              <label>🤖 Telegram-бот сповіщень</label>
+              <div style={{ padding: '0.75rem 0.85rem', background: 'rgba(37, 99, 235, 0.05)', borderRadius: '6px', border: '1px solid rgba(37, 99, 235, 0.2)', fontSize: '0.85rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
+                  <div>
+                    🔒 <strong>Захищено в GitHub Secrets (TELEGRAM_BOT_TOKEN / CHAT_ID)</strong>
+                    <div style={{ color: 'var(--text-muted)', fontSize: '0.78rem', marginTop: '0.25rem', lineHeight: '1.4' }}>
+                      Бот надсилає оперативні звіти та сповіщення про помилки при синхронізації залишків.
+                    </div>
+                  </div>
+                  <button
+                    className="btn"
+                    style={{ background: '#2563eb', color: '#fff', fontSize: '0.8rem', padding: '0.45rem 0.85rem', whiteSpace: 'nowrap', flexShrink: 0 }}
+                    onClick={handleTestTelegram}
+                    disabled={testingTelegram || !token}
+                    title="Надіслати тестове повідомлення ботом у Telegram"
+                  >
+                    {testingTelegram ? <span className="loader" style={{ width: '14px', height: '14px' }}></span> : '📨 Тест сповіщення'}
+                  </button>
                 </div>
               </div>
             </div>

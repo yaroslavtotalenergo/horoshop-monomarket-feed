@@ -4,15 +4,22 @@ const TELEGRAM_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
 async function sendTelegram(message) {
-  if (!TELEGRAM_TOKEN || !TELEGRAM_CHAT_ID) return;
+  const token = process.env.TELEGRAM_BOT_TOKEN || TELEGRAM_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID || TELEGRAM_CHAT_ID;
+  if (!token || !chatId) {
+    console.warn('⚠️ Telegram сповіщення пропущено: TELEGRAM_BOT_TOKEN або TELEGRAM_CHAT_ID не задано в env/secrets.');
+    return;
+  }
   try {
-    await axios.post(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
-      chat_id: TELEGRAM_CHAT_ID,
+    const res = await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
+      chat_id: chatId,
       text: message,
       parse_mode: 'HTML'
     });
+    console.log(`✅ Telegram сповіщення успішно надіслано (HTTP ${res.status})`);
+    return res.data;
   } catch (e) {
-    console.error('❌ Не вдалось відправити Telegram-сповіщення:', e.message);
+    console.error('❌ Не вдалось відправити Telegram-сповіщення:', e.response?.data?.description || e.message);
   }
 }
 
