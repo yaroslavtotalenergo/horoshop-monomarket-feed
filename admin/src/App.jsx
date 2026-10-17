@@ -115,7 +115,6 @@ export function LoginGate({ children }) {
 
 export default function App() {
   const [token, setToken] = useState(localStorage.getItem('gh_token') || '');
-  const [feedUrl, setFeedUrl] = useState('');
   const [catalog, setCatalog] = useState([]);
   const [whitelist, setWhitelist] = useState([]);
   const [alwaysAvailable, setAlwaysAvailable] = useState([]);
@@ -149,7 +148,6 @@ export default function App() {
   const [horoshopCategoryFilter, setHoroshopCategoryFilter] = useState('all');
   const [horoshopPresence, setHoroshopPresence] = useState({});
   const [horoshopInstallments, setHoroshopInstallments] = useState({});
-  const [horoshopDisabled, setHoroshopDisabled] = useState([]);
   const [collapsedHoroshopCategories, setCollapsedHoroshopCategories] = useState({});
   
   const [loading, setLoading] = useState(false);
@@ -166,7 +164,7 @@ export default function App() {
   const [stockLogSearch, setStockLogSearch] = useState('');
   const [stockLogFilter, setStockLogFilter] = useState('all'); // 'all', 'became_zero', 'became_available', 'changed'
   const [lastSeenStockTime, setLastSeenStockTime] = useState(() => {
-    try { return localStorage.getItem('last_seen_stock_time') || ''; } catch (e) { return ''; }
+    try { return localStorage.getItem('last_seen_stock_time') || ''; } catch { return ''; }
   });
 
   const unreadStockCount = useMemo(() => {
@@ -180,7 +178,7 @@ export default function App() {
     setShowStockLog(true);
     const now = new Date().toISOString();
     setLastSeenStockTime(now);
-    try { localStorage.setItem('last_seen_stock_time', now); } catch (e) { }
+    try { localStorage.setItem('last_seen_stock_time', now); } catch { }
   };
 
   const navigateToHoroshop = (vendorCode) => {
@@ -217,7 +215,6 @@ export default function App() {
       showToast('❌ Помилка очищення: ' + (e?.message || ''));
     }
   };
-  const [previewProduct, setPreviewProduct] = useState(null);
   const [editingDescriptionProduct, setEditingDescriptionProduct] = useState(null);
 
   const [shas, setShas] = useState({ whitelist: null, barcodes: null, descriptions: null, config: null });
@@ -240,7 +237,7 @@ export default function App() {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [catalogRes, whitelistRes, barcodesRes, descRes, configRes, availRes, stockRes, namesRes, videosRes, alwaysAvailRes, promWhitelistRes, promSkusRes, horoshopDisabledRes, horoshopPresenceRes, horoshopInstallmentsRes, stockChangesRes] = await Promise.all([
+      const [catalogRes, whitelistRes, barcodesRes, descRes, configRes, availRes, stockRes, namesRes, videosRes, alwaysAvailRes, promWhitelistRes, promSkusRes, horoshopPresenceRes, horoshopInstallmentsRes, stockChangesRes] = await Promise.all([
         api.getFile('feeds/catalog.json'),
         api.getFile('src/whitelist.json'),
         api.getFile('src/barcodes.json'),
@@ -253,7 +250,6 @@ export default function App() {
         api.getFile('src/always-available.json'),
         api.getFile('src/prom-whitelist.json'),
         api.getFile('src/prom-skus.json'),
-        api.getFile('src/horoshop-disabled.json'),
         api.getFile('src/horoshop-presence.json'),
         api.getFile('src/horoshop-installments.json'),
         api.getFile('src/stock-changes.json')
@@ -265,14 +261,11 @@ export default function App() {
       }
       if (whitelistRes.content) setWhitelist(JSON.parse(whitelistRes.content) || []);
       if (alwaysAvailRes && alwaysAvailRes.content) setAlwaysAvailable(JSON.parse(alwaysAvailRes.content) || []);
-      if (horoshopDisabledRes && horoshopDisabledRes.content) {
-        try { setHoroshopDisabled(JSON.parse(horoshopDisabledRes.content) || []); } catch (e) { }
-      }
       if (horoshopPresenceRes && horoshopPresenceRes.content) {
-        try { setHoroshopPresence(JSON.parse(horoshopPresenceRes.content) || {}); } catch (e) { }
+        try { setHoroshopPresence(JSON.parse(horoshopPresenceRes.content) || {}); } catch { }
       }
       if (horoshopInstallmentsRes && horoshopInstallmentsRes.content) {
-        try { setHoroshopInstallments(JSON.parse(horoshopInstallmentsRes.content) || {}); } catch (e) { }
+        try { setHoroshopInstallments(JSON.parse(horoshopInstallmentsRes.content) || {}); } catch { }
       }
       if (barcodesRes.content) setBarcodes(JSON.parse(barcodesRes.content) || {});
       if (descRes.content) setDescriptions(JSON.parse(descRes.content) || {});
@@ -280,20 +273,19 @@ export default function App() {
       if (stockRes.content) setStockOverrides(JSON.parse(stockRes.content) || {});
       if (namesRes.content) setNames(JSON.parse(namesRes.content) || {});
       if (videosRes && videosRes.content) setVideos(JSON.parse(videosRes.content) || {});
-      if (configRes.content) setFeedUrl(JSON.parse(configRes.content).horoshopFeedUrl || '');
       
       if (promWhitelistRes && promWhitelistRes.content) {
-        try { setPromWhitelist(JSON.parse(promWhitelistRes.content) || []); } catch (e) { }
+        try { setPromWhitelist(JSON.parse(promWhitelistRes.content) || []); } catch { }
       }
       if (promSkusRes && promSkusRes.content) {
-        try { setPromSkus(JSON.parse(promSkusRes.content) || []); } catch (e) { }
+        try { setPromSkus(JSON.parse(promSkusRes.content) || []); } catch { }
       }
       
       if (stockChangesRes && stockChangesRes.content) {
         try {
           const parsedChanges = JSON.parse(stockChangesRes.content);
           if (Array.isArray(parsedChanges)) setStockChanges(parsedChanges);
-        } catch (e) { }
+        } catch { }
       }
 
       setShas({
@@ -303,7 +295,7 @@ export default function App() {
         stockChanges: stockChangesRes ? stockChangesRes.sha : null,
         config: configRes.sha
       });
-    } catch (e) {
+    } catch {
       showToast('Помилка завантаження! Перевірте токен.');
     }
     setLoading(false);
@@ -371,7 +363,7 @@ export default function App() {
       try {
         await api.triggerWorkflow();
         showToast('✅ Збережено та відправлено на Prom.ua! (~1-2 хв)');
-      } catch (_) {
+      } catch {
         showToast('✅ Збережено! (Оновиться за графіком або натисніть "Синхронізувати")');
       }
     } catch (e) {
@@ -519,14 +511,6 @@ export default function App() {
     setCollapsedPromCategories({});
   };
 
-  const toggleAlwaysAvailable = (vendorCode) => {
-    setAlwaysAvailable(prev =>
-      prev.includes(vendorCode)
-        ? prev.filter(v => v !== vendorCode)
-        : [...prev, vendorCode]
-    );
-  };
-
   const setProductPresenceMode = (vendorCode, mode) => {
     const code = String(vendorCode).trim();
     setHoroshopPresence(prev => {
@@ -590,12 +574,11 @@ export default function App() {
     try {
       await api.saveFile('src/horoshop-presence.json', JSON.stringify(horoshopPresence, null, 2), null, 'Update Horoshop presence settings via UI');
       await api.saveFile('src/horoshop-installments.json', JSON.stringify(horoshopInstallments, null, 2), null, 'Update Horoshop installments settings via UI');
-      await api.saveFile('src/horoshop-disabled.json', JSON.stringify([], null, 2), null, 'Clear legacy horoshop-disabled.json');
       showToast('💾 Налаштування збережено! Запускаємо оновлення в Хорошоп...');
       try {
         await api.triggerWorkflow();
         showToast('✅ Збережено та передається в Хорошоп! (~1-2 хв)');
-      } catch (_) {
+      } catch {
         showToast('✅ Збережено! (Оновиться за розкладом або натисніть "Оновити Хорошоп")');
       }
     } catch (e) {

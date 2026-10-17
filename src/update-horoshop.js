@@ -18,7 +18,6 @@ async function updateHoroshop() {
   let stockOverrides = {};
   let horoshopPresence = {};
   let horoshopInstallments = {};
-  let horoshopDisabled = [];
   let alwaysAvailable = [];
 
   try {
@@ -30,9 +29,6 @@ async function updateHoroshop() {
     }
     if (fs.existsSync('src/horoshop-installments.json')) {
       horoshopInstallments = JSON.parse(fs.readFileSync('src/horoshop-installments.json', 'utf8'));
-    }
-    if (fs.existsSync('src/horoshop-disabled.json')) {
-      horoshopDisabled = JSON.parse(fs.readFileSync('src/horoshop-disabled.json', 'utf8'));
     }
     if (fs.existsSync('src/always-available.json')) {
       alwaysAvailable = JSON.parse(fs.readFileSync('src/always-available.json', 'utf8'));
@@ -70,7 +66,6 @@ async function updateHoroshop() {
   const articleSet = new Set(Object.keys(stockOverrides));
   for (const a of Object.keys(horoshopPresence)) articleSet.add(a);
   for (const a of Object.keys(horoshopInstallments)) articleSet.add(a);
-  for (const a of horoshopDisabled) articleSet.add(a);
   for (const a of alwaysAvailable) articleSet.add(a);
 
   if (fs.existsSync('feeds/catalog.json')) {
