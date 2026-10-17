@@ -1,5 +1,17 @@
 [
   {
+    "id": "SCC110030210_1792263870159_82wv6",
+    "timestamp": "2026-10-17T19:04:30.158Z",
+    "vendorCode": "SCC110030210",
+    "name": "Сонячний контролер SmartSolar (Bluetooth) MPPT 100V/30A",
+    "category": "Сонячні контролери > MPPT",
+    "price": 8467,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  },
+  {
     "id": "ORI122424120_1792263054907_t22es",
     "timestamp": "2026-10-17T18:50:54.906Z",
     "vendorCode": "ORI122424120",
