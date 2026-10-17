@@ -590,6 +590,7 @@ export default function App() {
     try {
       await api.saveFile('src/horoshop-presence.json', JSON.stringify(horoshopPresence, null, 2), null, 'Update Horoshop presence settings via UI');
       await api.saveFile('src/horoshop-installments.json', JSON.stringify(horoshopInstallments, null, 2), null, 'Update Horoshop installments settings via UI');
+      await api.saveFile('src/horoshop-disabled.json', JSON.stringify([], null, 2), null, 'Clear legacy horoshop-disabled.json');
       showToast('💾 Налаштування збережено! Запускаємо оновлення в Хорошоп...');
       try {
         await api.triggerWorkflow();
@@ -620,7 +621,6 @@ export default function App() {
     return Array.from(new Set(catalog.map(p => p.category || 'Без категорії'))).sort();
   }, [catalog]);
 
-  const horoshopDisabledSet = useMemo(() => new Set(horoshopDisabled.map(s => String(s).trim())), [horoshopDisabled]);
 
   const getHoroshopItemData = (p) => {
     const code = p.vendorCode ? String(p.vendorCode).trim() : '';
@@ -639,12 +639,7 @@ export default function App() {
     }
 
     // Installments mode: 'off' | 'auto' | 'on'
-    let installmentsMode = horoshopInstallments[code];
-    if (!installmentsMode) {
-      if (horoshopDisabledSet.has(code)) installmentsMode = 'off';
-      else if (alwaysAvailable.includes(code)) installmentsMode = 'on';
-      else installmentsMode = 'auto';
-    }
+    const installmentsMode = horoshopInstallments[code] || 'auto';
 
     let hasInstallments = false;
     if (presenceMode === 'off') {
@@ -696,7 +691,7 @@ export default function App() {
       forced: forcedInstallments,
       disabled: disabledInstallments
     };
-  }, [catalog, horoshopPresence, horoshopInstallments, horoshopDisabledSet, alwaysAvailable, stockOverrides]);
+  }, [catalog, horoshopPresence, horoshopInstallments, stockOverrides]);
 
   const filteredHoroshopCatalog = useMemo(() => {
     const q = horoshopSearchQuery.toLowerCase().trim();
@@ -724,7 +719,7 @@ export default function App() {
 
       return true;
     });
-  }, [catalog, horoshopSearchQuery, horoshopCategoryFilter, horoshopFilterMode, horoshopPresence, horoshopInstallments, horoshopDisabledSet, alwaysAvailable, stockOverrides]);
+  }, [catalog, horoshopSearchQuery, horoshopCategoryFilter, horoshopFilterMode, horoshopPresence, horoshopInstallments, stockOverrides]);
 
   const horoshopGrouped = useMemo(() => {
     const map = {};
@@ -1549,7 +1544,7 @@ export default function App() {
               </span>
             ) : installmentsMode === 'off' ? (
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem', padding: '0.15rem 0.45rem', borderRadius: '4px', background: '#fee2e2', color: '#b91c1c', fontSize: '0.75rem', fontWeight: 600 }}>
-                🚫 ОЧ заборонено
+                🔴 Заборона ОЧ
               </span>
             ) : installmentsMode === 'on' ? (
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem', padding: '0.15rem 0.45rem', borderRadius: '4px', background: '#f3e8ff', color: '#6b21a8', fontSize: '0.75rem', fontWeight: 600 }}>
@@ -1953,12 +1948,12 @@ export default function App() {
           </div>
           <div
             className="stat-card"
-            style={{ cursor: 'pointer', border: horoshopFilterMode === 'installments_disabled' ? '2px solid var(--text-muted)' : '1px solid var(--border-color)', transition: 'all 0.2s', background: horoshopFilterMode === 'installments_disabled' ? '#f9fafb' : 'transparent' }}
+            style={{ cursor: 'pointer', border: horoshopFilterMode === 'installments_disabled' ? '2px solid #ef4444' : '1px solid var(--border-color)', transition: 'all 0.2s', background: horoshopFilterMode === 'installments_disabled' ? '#fef2f2' : 'transparent' }}
             onClick={() => setHoroshopFilterMode(horoshopFilterMode === 'installments_disabled' ? 'all' : 'installments_disabled')}
-            title="Фільтр: ОЧ заборонено"
+            title="Фільтр: Заборона ОЧ"
           >
-            <div className="stat-label">🚫 ОЧ заборонено вручну</div>
-            <div className="stat-value" style={{ color: 'var(--text-muted)' }}>{horoshopStats.disabled}</div>
+            <div className="stat-label">🔴 Заборона ОЧ</div>
+            <div className="stat-value" style={{ color: '#ef4444' }}>{horoshopStats.disabled}</div>
           </div>
         </div>
       ) : (
@@ -2617,7 +2612,7 @@ export default function App() {
               <option value="presence_on">🟢 Тільки примусово "Є" ({horoshopStats.forcedInStock})</option>
               <option value="installments_active">💳 Оплата частинами активна ({horoshopStats.active})</option>
               <option value="installments_forced">🟣 Примусово ОЧ ({horoshopStats.forced})</option>
-              <option value="installments_disabled">🚫 ОЧ заборонено вручну ({horoshopStats.disabled})</option>
+              <option value="installments_disabled">🔴 Заборона ОЧ ({horoshopStats.disabled})</option>
             </select>
 
             <select

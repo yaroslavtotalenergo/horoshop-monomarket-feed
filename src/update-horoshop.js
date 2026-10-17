@@ -119,16 +119,7 @@ async function updateHoroshop() {
 
     // ── 2. Визначення Оплати частинами (monobank_installments_payment) ──
     // Режими: 'off' (заборонено), 'on' (примусово), 'auto' (якщо в наявності та stock > 0)
-    let installmentsMode = horoshopInstallments[article];
-    if (!installmentsMode) {
-      if (horoshopDisabled.includes(article)) {
-        installmentsMode = 'off';
-      } else if (alwaysAvailable.includes(article)) {
-        installmentsMode = 'on';
-      } else {
-        installmentsMode = 'auto';
-      }
-    }
+    const installmentsMode = horoshopInstallments[article] || 'auto';
 
     let monoInstallmentsId = 1; // 1 = вимкнено
     if (presenceMode === 'off') {
