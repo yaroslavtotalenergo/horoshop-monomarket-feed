@@ -670,6 +670,10 @@ async function main() {
     }
   } catch (err) {
     console.error('❌ Помилка:', err.message);
+    try {
+      const { notifyError } = require('./notify');
+      await notifyError('Збій генерації фідів (convert.js)', err.message);
+    } catch (_) { }
     process.exit(1);
   }
 }

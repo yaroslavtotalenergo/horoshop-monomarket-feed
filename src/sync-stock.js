@@ -44,6 +44,16 @@ function parseWarehouseNames(raw) {
 async function main() {
   console.log('🚀 Синхронізація залишків з Google Sheets...');
 
+  // Зберігаємо Telegram облікові дані для наступних кроків workflow (convert, horoshop API)
+  if (process.env.TELEGRAM_BOT_TOKEN && process.env.TELEGRAM_CHAT_ID) {
+    try {
+      fs.writeFileSync(path.join(__dirname, '..', '.tg-runtime.json'), JSON.stringify({
+        token: process.env.TELEGRAM_BOT_TOKEN,
+        chatId: process.env.TELEGRAM_CHAT_ID
+      }), 'utf8');
+    } catch (_) { }
+  }
+
   // ── 1. Завантаження конфігурації ──────────────────────────────
   let config = { sheets: [] };
   if (process.env.GOOGLE_SHEETS_URLS) {
@@ -287,6 +297,26 @@ async function main() {
     }
   }
 
+  // Перевірка на аномальне масове обнулення товарів (сповіщення без зупинки синхронізації)
+  const prevPositiveCount = Object.values(previousStock).filter(v => Number(v) > 0).length;
+  const newPositiveCount = Object.values(stockOverrides).filter(v => Number(v) > 0).length;
+  const zeroedItems = detectedChanges.filter(c => c.type === 'became_zero');
+  const zeroedCount = zeroedItems.length;
+
+  if (prevPositiveCount >= 10 && (zeroedCount >= 30 || (zeroedCount >= 15 && zeroedCount >= prevPositiveCount * 0.35))) {
+    console.warn(`⚠️ Увага: аномальне обнулення ${zeroedCount} товарів! Надсилаємо сповіщення в Telegram...`);
+    const sampleProducts = zeroedItems.slice(0, 5).map(item => `• ${item.name} (арт. <code>${item.vendorCode}</code>)`).join('\n');
+    const alertMsg = `⚠️ <b>Увага: аномальне обнулення залишків!</b>\n\n` +
+      `📉 Раптово обнулилося: <b>${zeroedCount} товарів</b>\n` +
+      `📦 Було в наявності: <b>${prevPositiveCount}</b> → Залишилось: <b>${newPositiveCount}</b>\n\n` +
+      `📋 <b>Приклади товарів, які стали 0:</b>\n${sampleProducts}` +
+      (zeroedCount > 5 ? `\n<i>...та ще ${zeroedCount - 5} товарів</i>\n\n` : '\n\n') +
+      `ℹ️ <i>Синхронізацію не призупинено, зміни застосовано. Якщо це не планова зміна, терміново перевірте Google Таблиці (колонки залишків/складів)!</i>`;
+
+    const { sendTelegram } = require('./notify');
+    await sendTelegram(alertMsg);
+  }
+
   // ── 5. Збереження результатів ─────────────────────────────────
   try {
     fs.writeFileSync('src/stock.json', JSON.stringify(stockOverrides, null, 2), 'utf8');
@@ -312,9 +342,13 @@ async function main() {
   try {
     const syncProm = require('./sync-prom');
     console.log('🔄 Запуск оновлення наявності та залишків на Prom.ua...');
-    await syncProm();
+    const promResult = await syncProm();
+    if (promResult && promResult.errors > 0) {
+      await notifyError('Попередження Prom.ua API', `Не вдалося оновити ${promResult.errors} товарів через помилки Prom API.`);
+    }
   } catch (err) {
-    console.warn('⚠️ Оновлення Prom.ua пропущено або помилка:', err.message);
+    console.warn('⚠️ Оновлення Prom.ua помилка:', err.message);
+    await notifyError('Збій синхронізації з Prom.ua API', err.message);
   }
 
   // ── 7. Перевірка запиту на тестове сповіщення в Telegram ────────

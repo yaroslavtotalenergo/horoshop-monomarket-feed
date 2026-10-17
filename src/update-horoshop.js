@@ -51,14 +51,19 @@ async function updateHoroshop() {
     });
 
     if (authRes.data.status !== 'OK') {
-      console.error('❌ Помилка авторизації:', authRes.data);
+      const errDetail = authRes.data.response?.message || authRes.data.message || JSON.stringify(authRes.data);
+      console.error('❌ Помилка авторизації:', errDetail);
+      const { notifyError } = require('./notify');
+      await notifyError('Помилка авторизації Хорошоп API', errDetail);
       return;
     }
     token = authRes.data.response.token;
     console.log('✅ Авторизація успішна, отримано токен.');
   } catch (e) {
-    console.error('❌ Помилка запиту авторизації:', e.message);
-    if (e.response) console.error(e.response.data);
+    const errMsg = e.response?.data?.response?.message || e.response?.data?.message || e.message;
+    console.error('❌ Помилка запиту авторизації:', errMsg);
+    const { notifyError } = require('./notify');
+    await notifyError('Помилка запиту авторизації Хорошоп API', errMsg);
     return;
   }
 
@@ -158,6 +163,7 @@ async function updateHoroshop() {
   console.log(`📦 Підготовлено ${products.length} товарів (${totalBatches} пачок)...`);
 
   let totalUpdated = 0;
+  const importErrors = [];
   const importUrl = `https://${DOMAIN}/api/catalog/import/`;
 
   for (let i = 0; i < products.length; i += CHUNK_SIZE) {
@@ -182,18 +188,32 @@ async function updateHoroshop() {
         totalUpdated += chunk.length;
         console.warn(`   ⚠️ Пачка ${batchNum}/${totalBatches} імпортована з попередженнями.`);
       } else {
-        console.error(`   ❌ Помилка імпорту пачки ${batchNum}:`, data);
+        const batchErrMsg = `Пачка ${batchNum}: ${data.response?.message || data.message || JSON.stringify(data)}`;
+        console.error(`   ❌ Помилка імпорту:`, batchErrMsg);
+        importErrors.push(batchErrMsg);
       }
     } catch (e) {
-      console.error(`   ❌ Помилка запиту для пачки ${batchNum}:`, e.response?.data || e.message);
+      const reqErrMsg = `Пачка ${batchNum}: ${e.response?.data?.message || e.message}`;
+      console.error(`   ❌ Помилка запиту для пачки ${batchNum}:`, reqErrMsg);
+      importErrors.push(reqErrMsg);
     }
+  }
+
+  if (importErrors.length > 0) {
+    const { notifyError } = require('./notify');
+    await notifyError('Помилка оновлення товарів у Хорошоп API', importErrors.slice(0, 3).join('\n'));
   }
 
   console.log(`🎉 Оновлення Хорошопу завершено! Оброблено: ${totalUpdated} товарів.`);
 }
 
 if (require.main === module) {
-  updateHoroshop();
+  updateHoroshop().catch(async (e) => {
+    console.error('💥 Критична помилка Хорошоп API:', e.message);
+    const { notifyError } = require('./notify');
+    await notifyError('Критична помилка оновлення Хорошоп', e.message);
+    process.exit(1);
+  });
 }
 
 module.exports = updateHoroshop;
