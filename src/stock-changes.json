@@ -1,5 +1,29 @@
 [
   {
+    "id": "CIP138150020_1792332271721_p1ont",
+    "timestamp": "2026-10-18T14:04:31.720Z",
+    "vendorCode": "CIP138150020",
+    "name": "Запобіжник Victron Energy MEGA-fuse 150A/80V - CIP138150020",
+    "category": "Низьковольтне обладнання > Запобіжники",
+    "price": 474,
+    "oldQty": 28,
+    "newQty": 23,
+    "diff": -5,
+    "type": "changed"
+  },
+  {
+    "id": "ASS030530010_1792332271721_yhbx7",
+    "timestamp": "2026-10-18T14:04:31.720Z",
+    "vendorCode": "ASS030530010",
+    "name": "Адаптер Victron Energy VE.Direct to USB – ASS030530010",
+    "category": "Моніторинг та керування > Інформаційні кабелі",
+    "price": 1854,
+    "oldQty": 0,
+    "newQty": 4,
+    "diff": 4,
+    "type": "became_available"
+  },
+  {
     "id": "ORI122436140_1792323204781_e2bka",
     "timestamp": "2026-10-18T11:33:24.781Z",
     "vendorCode": "ORI122436140",
