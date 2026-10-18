@@ -1,5 +1,53 @@
 [
   {
+    "id": "BPC121532064R_1792337606168_44dy0",
+    "timestamp": "2026-10-18T15:33:26.167Z",
+    "vendorCode": "BPC121532064R",
+    "name": "BPC121532064R",
+    "category": "",
+    "price": "",
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  },
+  {
+    "id": "BPC121531064R_1792337606168_id2r3",
+    "timestamp": "2026-10-18T15:33:26.167Z",
+    "vendorCode": "BPC121531064R",
+    "name": "Зарядний пристрій Blue Smart IP65 Charger 12/15 + DC connector",
+    "category": "Зарядні пристрої > Зарядні пристрої 12В",
+    "price": 8158,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  },
+  {
+    "id": "LYN020102010_1792337606168_9cdln",
+    "timestamp": "2026-10-18T15:33:26.167Z",
+    "vendorCode": "LYN020102010",
+    "name": "Розподільча модульна шина Lynx Power In 1000 (M10) ",
+    "category": "Низьковольтне обладнання > Запобіжники",
+    "price": 9270,
+    "oldQty": 1,
+    "newQty": 10,
+    "diff": 9,
+    "type": "changed"
+  },
+  {
+    "id": "CIP138125020_1792337606168_m6sjo",
+    "timestamp": "2026-10-18T15:33:26.167Z",
+    "vendorCode": "CIP138125020",
+    "name": "Запобіжник Victron Energy MEGA-fuse 125A/80V - CIP138125020",
+    "category": "Низьковольтне обладнання > Запобіжники",
+    "price": 474,
+    "oldQty": 4,
+    "newQty": 0,
+    "diff": -4,
+    "type": "became_zero"
+  },
+  {
     "id": "ORI241230022_1792334006103_mfa1w",
     "timestamp": "2026-10-18T14:33:26.102Z",
     "vendorCode": "ORI241230022",
