@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "id": "ORI122436140_1792323204781_e2bka",
+    "timestamp": "2026-10-18T11:33:24.781Z",
+    "vendorCode": "ORI122436140",
+    "name": "Зарядний пристрій Orion-Tr Smart 12/24-15A Non-isolated DC-DC",
+    "category": "Перетворювачі DC-DC > З зарядом акумулятора",
+    "price": 14214,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  },
+  {
+    "id": "ORI121222120_1792323204781_p3c6f",
+    "timestamp": "2026-10-18T11:33:24.781Z",
+    "vendorCode": "ORI121222120",
+    "name": "Зарядний пристрій Orion-Tr Smart 12/12-18A Isolated DC-DC",
+    "category": "Перетворювачі DC-DC > З зарядом акумулятора",
+    "price": 10568,
+    "oldQty": 2,
+    "newQty": 0,
+    "diff": -2,
+    "type": "became_zero"
+  },
+  {
+    "id": "ASS030530218_1792323204781_raulv",
+    "timestamp": "2026-10-18T11:33:24.781Z",
+    "vendorCode": "ASS030530218",
+    "name": "Спеціалізований кабель Victron Energy VE.Direct Cable 1,8 м - ASS030530218",
+    "category": "Моніторинг та керування > Інформаційні кабелі",
+    "price": 927,
+    "oldQty": 6,
+    "newQty": 4,
+    "diff": -2,
+    "type": "changed"
+  },
+  {
+    "id": "ASS030536011_1792323204782_xbbbz",
+    "timestamp": "2026-10-18T11:33:24.781Z",
+    "vendorCode": "ASS030536011",
+    "name": "Бездротовий адаптер Victron Energy VE.Direct Bluetooth Smart dongle – ASS030536011",
+    "category": "Моніторинг та керування > Центри моніторингу",
+    "price": 2596,
+    "oldQty": 2,
+    "newQty": 0,
+    "diff": -2,
+    "type": "became_zero"
+  }
+]
