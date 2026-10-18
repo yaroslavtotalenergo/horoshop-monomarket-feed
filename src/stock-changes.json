@@ -1,5 +1,53 @@
 [
   {
+    "id": "ORI241230022_1792334006103_mfa1w",
+    "timestamp": "2026-10-18T14:33:26.102Z",
+    "vendorCode": "ORI241230022",
+    "name": "Конвертор Victron Energy DC-DC Orion 24/12-30",
+    "category": "Перетворювачі DC-DC",
+    "price": 4511,
+    "oldQty": 0,
+    "newQty": 1,
+    "diff": 1,
+    "type": "became_available"
+  },
+  {
+    "id": "ORI122436140_1792334006103_muvj6",
+    "timestamp": "2026-10-18T14:33:26.102Z",
+    "vendorCode": "ORI122436140",
+    "name": "Зарядний пристрій Orion-Tr Smart 12/24-15A Non-isolated DC-DC",
+    "category": "Перетворювачі DC-DC > З зарядом акумулятора",
+    "price": 14214,
+    "oldQty": 0,
+    "newQty": 1,
+    "diff": 1,
+    "type": "became_available"
+  },
+  {
+    "id": "ORI242440140_1792334006103_ezbkt",
+    "timestamp": "2026-10-18T14:33:26.102Z",
+    "vendorCode": "ORI242440140",
+    "name": "Зарядний пристрій Orion-Tr Smart 24/24-17A Non-isolated DC-DC",
+    "category": "Перетворювачі DC-DC > З зарядом акумулятора",
+    "price": 14214,
+    "oldQty": 0,
+    "newQty": 2,
+    "diff": 2,
+    "type": "became_available"
+  },
+  {
+    "id": "ORI121222120_1792334006103_y4md5",
+    "timestamp": "2026-10-18T14:33:26.102Z",
+    "vendorCode": "ORI121222120",
+    "name": "Зарядний пристрій Orion-Tr Smart 12/12-18A Isolated DC-DC",
+    "category": "Перетворювачі DC-DC > З зарядом акумулятора",
+    "price": 10568,
+    "oldQty": 0,
+    "newQty": 1,
+    "diff": 1,
+    "type": "became_available"
+  },
+  {
     "id": "CIP138150020_1792332271721_p1ont",
     "timestamp": "2026-10-18T14:04:31.720Z",
     "vendorCode": "CIP138150020",
