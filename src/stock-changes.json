@@ -1,5 +1,41 @@
 [
   {
+    "id": "BPC241647002_1792404271944_tfasq",
+    "timestamp": "2026-10-19T10:04:31.943Z",
+    "vendorCode": "BPC241647002",
+    "name": "Зарядний пристрій Blue Smart IP22 Charger 24/16 (1)",
+    "category": "Зарядні пристрої > Зарядні пристрої 24В",
+    "price": 10568,
+    "oldQty": 5,
+    "newQty": 4,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
+    "id": "ASS030530218_1792404271944_isqge",
+    "timestamp": "2026-10-19T10:04:31.943Z",
+    "vendorCode": "ASS030530218",
+    "name": "Спеціалізований кабель Victron Energy VE.Direct Cable 1,8 м - ASS030530218",
+    "category": "Моніторинг та керування > Інформаційні кабелі",
+    "price": 927,
+    "oldQty": 4,
+    "newQty": 3,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
+    "id": "BPR000065400_1792404271944_idqdu",
+    "timestamp": "2026-10-19T10:04:31.943Z",
+    "vendorCode": "BPR000065400",
+    "name": "Захист акумулятора від глибокого розряда BatteryProtect 12/24V 65A Victron",
+    "category": "Компоненти акумуляторних систем > Захист акумуляторів",
+    "price": 2410,
+    "oldQty": 16,
+    "newQty": 15,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
     "id": "BPC121532064R_1792398808428_f92ui",
     "timestamp": "2026-10-19T08:33:28.428Z",
     "vendorCode": "BPC121532064R",
