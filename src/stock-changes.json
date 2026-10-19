@@ -1,5 +1,41 @@
 [
   {
+    "id": "BPC121532064R_1792398808428_f92ui",
+    "timestamp": "2026-10-19T08:33:28.428Z",
+    "vendorCode": "BPC121532064R",
+    "name": "BPC121532064R",
+    "category": "",
+    "price": "",
+    "oldQty": 0,
+    "newQty": 10,
+    "diff": 10,
+    "type": "became_available"
+  },
+  {
+    "id": "BPC121531064R_1792398808428_sq3ts",
+    "timestamp": "2026-10-19T08:33:28.428Z",
+    "vendorCode": "BPC121531064R",
+    "name": "Зарядний пристрій Blue Smart IP65 Charger 12/15 + DC connector",
+    "category": "Зарядні пристрої > Зарядні пристрої 12В",
+    "price": 8158,
+    "oldQty": 0,
+    "newQty": 10,
+    "diff": 10,
+    "type": "became_available"
+  },
+  {
+    "id": "SCC125110412_1792398808428_914lt",
+    "timestamp": "2026-10-19T08:33:28.428Z",
+    "vendorCode": "SCC125110412",
+    "name": "Сонячний контролер SmartSolar (Bluetooth) MPPT 250V/100A-Tr VE.Can",
+    "category": "Сонячні контролери > MPPT",
+    "price": 40417,
+    "oldQty": 10,
+    "newQty": 0,
+    "diff": -10,
+    "type": "became_zero"
+  },
+  {
     "id": "BPC121532064R_1792337606168_44dy0",
     "timestamp": "2026-10-18T15:33:26.167Z",
     "vendorCode": "BPC121532064R",

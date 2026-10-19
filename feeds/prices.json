@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-19T08:04:58.713Z",
+  "updatedAt": "2026-10-19T08:33:46.731Z",
   "total": 252,
   "data": [
     {
@@ -241,9 +241,14 @@
       "code": "BPC121531064R",
       "price": 8158,
       "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
+      "availability": true,
+      "stock": 10,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 10
+        }
+      ],
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -2844,14 +2849,9 @@
       "code": "SCC125110412",
       "price": 40417,
       "old_price": null,
-      "availability": true,
-      "stock": 10,
-      "warehouses": [
-        {
-          "id": "stock01te",
-          "stock": 10
-        }
-      ],
+      "availability": false,
+      "stock": 0,
+      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
