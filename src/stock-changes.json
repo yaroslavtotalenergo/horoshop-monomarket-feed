@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": "PMP482406000_1792503209564_r7tlu",
+    "timestamp": "2026-10-20T13:33:29.563Z",
+    "vendorCode": "PMP482406000",
+    "name": "Інвертор гібридний Victron MultiPlus-II 4кВт 48/4k5/55-32 GX 48/220В",
+    "category": "Інвертори DC-AC > Гібридні",
+    "price": 55929,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  }
+]
