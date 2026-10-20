@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-20T14:41:16.756Z",
+  "updatedAt": "2026-10-20T15:01:51.668Z",
   "total": 255,
   "data": [
     {
@@ -3333,7 +3333,7 @@
     },
     {
       "code": "SUNPOW51100",
-      "price": 56290,
+      "price": 63139,
       "old_price": null,
       "availability": true,
       "stock": 10,
