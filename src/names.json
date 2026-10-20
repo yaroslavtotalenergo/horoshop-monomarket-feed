@@ -256,5 +256,12 @@
   "SHU050220050": "Батарейний монітор Victron Energy SmartShunt 2000A",
   "SHU065130050": "Батарейний монітор Victron Energy SmartShunt 300A IP65",
   "BBA000100100": "Балансир батарей Victron Energy Battery Balancer",
-  "SHU065210050": "Батарейний монітор Victron Energy SmartShunt 1000A IP65 "
+  "SHU065210050": "Батарейний монітор Victron Energy SmartShunt 1000A IP65 ",
+  "VE48040248PT": "Комплект безперебійного живлення Victron MultiPlus 4 кВт з АКБ Pylontech 9,6 кВт-г з WiFi",
+  "VE48040148PT": "Комплект безперебійного живлення Victron MultiPlus 4 кВт з АКБ Pylontech 4,8 кВт-г з WiFi",
+  "VE48240148PT": "Комплект безперебійного живлення Victron MultiPlus 2,4 кВт з АКБ Pylontech 4,8 кВт-г з WiFi",
+  "VE480602512SS": "Комплект безперебійного живлення Victron MultiPlus 6 кВт з АКБ Sacred Sun 10,24 кВт-г з WiFi",
+  "VE480402512SS": "Комплект безперебійного живлення Victron MultiPlus 4 кВт з АКБ Sacred Sun 10,24 кВт-г з WiFi",
+  "VE480401512SS": "Комплект безперебійного живлення Victron MultiPlus 4 кВт з АКБ Sacred Sun 5,12 кВт-г з WiFi",
+  "VE482401512SS": "Комплект безперебійного живлення Victron MultiPlus 2,4 кВт з АКБ Sacred Sun 5,12 кВт-г з WiFi"
 }
