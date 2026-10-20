@@ -1,5 +1,41 @@
 [
   {
+    "id": "SCC075015060R_1792523071244_c6a1c",
+    "timestamp": "2026-10-20T19:04:31.243Z",
+    "vendorCode": "SCC075015060R",
+    "name": "Сонячний контролер SmartSolar (Bluetooth) MPPT 75V/15A",
+    "category": "Сонячні контролери > MPPT",
+    "price": 4202,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  },
+  {
+    "id": "SCC110020160R_1792523071244_4cgf3",
+    "timestamp": "2026-10-20T19:04:31.243Z",
+    "vendorCode": "SCC110020160R",
+    "name": "Сонячний контролер SmartSolar (Bluetooth) MPPT 100V/20A",
+    "category": "Сонячні контролери > MPPT",
+    "price": 5933,
+    "oldQty": 3,
+    "newQty": 2,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
+    "id": "SCC110050210_1792523071244_77x6t",
+    "timestamp": "2026-10-20T19:04:31.243Z",
+    "vendorCode": "SCC110050210",
+    "name": "Сонячний контролер SmartSolar (Bluetooth) MPPT 100V/50A",
+    "category": "Сонячні контролери > MPPT",
+    "price": 12175,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  },
+  {
     "id": "CTR110000550_1792521205983_4kme4",
     "timestamp": "2026-10-20T18:33:25.983Z",
     "vendorCode": "CTR110000550",

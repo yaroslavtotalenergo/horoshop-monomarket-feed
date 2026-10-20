@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-20T18:33:40.094Z",
+  "updatedAt": "2026-10-20T19:04:48.794Z",
   "total": 255,
   "data": [
     {
@@ -2694,14 +2694,9 @@
       "code": "SCC075015060R",
       "price": 4202,
       "old_price": null,
-      "availability": true,
-      "stock": 1,
-      "warehouses": [
-        {
-          "id": "stock01te",
-          "stock": 1
-        }
-      ],
+      "availability": false,
+      "stock": 0,
+      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -2726,11 +2721,11 @@
       "price": 5933,
       "old_price": null,
       "availability": true,
-      "stock": 3,
+      "stock": 2,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 3
+          "stock": 2
         }
       ],
       "warranty_type": "manufacturer",
@@ -2756,14 +2751,9 @@
       "code": "SCC110050210",
       "price": 12175,
       "old_price": null,
-      "availability": true,
-      "stock": 1,
-      "warehouses": [
-        {
-          "id": "stock01te",
-          "stock": 1
-        }
-      ],
+      "availability": false,
+      "stock": 0,
+      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
