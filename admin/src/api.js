@@ -31,7 +31,8 @@ export class GitHubApi {
       let content = '';
       if (data.encoding === 'none' && data.git_url) {
         // File is too large (>1MB) for inline content, fetch via Git Database API
-        const blobRes = await fetch(data.git_url, { headers: this.getHeaders() });
+        const blobUrl = `${data.git_url}${data.git_url.includes('?') ? '&' : '?'}t=${Date.now()}`;
+        const blobRes = await fetch(blobUrl, { headers: this.getHeaders() });
         const blobData = await blobRes.json();
         content = decodeURIComponent(escape(atob(blobData.content)));
       } else if (data.content) {

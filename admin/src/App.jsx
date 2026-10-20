@@ -885,13 +885,25 @@ export default function App() {
 
   const handleSync = async () => {
     setSyncing(true);
-    showToast('⏳ Запущено оновлення з Хорошопу. Це займе ~30-40 секунд...');
+    showToast('⏳ Запущено оновлення з Хорошопу. Очікуємо завершення генерації...');
     try {
+      const startTime = Date.now();
       await api.triggerWorkflow();
-      // Wait for 35 seconds to allow GitHub Actions to finish
-      await new Promise(r => setTimeout(r, 35000));
+
+      // Опитуємо статус виконання GitHub Actions (кожні 4 сек, до 90 сек)
+      for (let i = 0; i < 22; i++) {
+        await new Promise(r => setTimeout(r, 4000));
+        try {
+          const runs = await api.getWorkflowRuns(5);
+          const currentRun = runs.find(r => r.name === 'Update Monomarket Feeds' && new Date(r.created_at).getTime() >= startTime - 15000);
+          if (currentRun && currentRun.status === 'completed') {
+            break;
+          }
+        } catch { }
+      }
+
       await loadData();
-      showToast('✅ Дані успішно оновлено!');
+      showToast('✅ Дані успішно оновлено з Хорошопу!');
     } catch (e) {
       console.error(e);
       showToast('❌ Помилка оновлення. Спробуйте пізніше.');
