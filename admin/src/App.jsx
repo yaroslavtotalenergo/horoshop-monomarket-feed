@@ -1969,6 +1969,26 @@ export default function App() {
           <button
             className="btn"
             style={{
+              background: '#4360a0',
+              color: '#ffffff',
+              fontWeight: 600,
+              padding: '0.55rem 1.15rem',
+              borderRadius: '8px',
+              fontSize: '0.85rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.45rem',
+              boxShadow: '0 1px 3px rgba(67, 96, 160, 0.3)'
+            }}
+            onClick={handleSync}
+            disabled={syncing || loading || saving || !token}
+            title="Запустити оновлення товарів та залишків з Хорошопу через GitHub Actions"
+          >
+            {syncing ? <span className="loader" style={{ width: '16px', height: '16px' }}></span> : '🔄 Оновити з Хорошопу'}
+          </button>
+          <button
+            className="btn"
+            style={{
               background: '#2563eb',
               color: '#ffffff',
               fontWeight: 600,
@@ -2085,9 +2105,6 @@ export default function App() {
             <p style={{ color: 'var(--text-muted)', margin: 0 }}>Товарний фід та налаштування для маркетплейсу monobank</p>
           </div>
           <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-            <button className="btn" style={{ background: '#4360a0', color: '#fff' }} onClick={handleSync} disabled={syncing || loading || saving || !token} title="Оновити залишки та товари з Хорошопу">
-              {syncing ? <span className="loader"></span> : '🔄 Оновити з Хорошопу'}
-            </button>
             <button className="btn" style={{ background: '#18181b', color: '#ffffff', boxShadow: '0 2px 4px rgba(0,0,0,0.2)' }} onClick={handleTriggerFeed} disabled={syncing || loading || saving || !token} title="Запустити генерацію фіду без збереження">
               {syncing ? <span className="loader"></span> : `⚡ Запустити фід (${daysToDispatch}д)`}
             </button>
