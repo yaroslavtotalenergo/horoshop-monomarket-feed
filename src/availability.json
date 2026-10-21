@@ -780,5 +780,10 @@
   "PV3025300R": false,
   "PV3050300R": false,
   "LV-HUB": false,
-  "SUNPOW51100": false
+  "SUNPOW51100": false,
+  "SCC040010050": false,
+  "SCC040020020": false,
+  "SCC040030020": false,
+  "SCC145120510": false,
+  "SCC145110510": false
 }
