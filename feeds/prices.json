@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-21T11:05:01.634Z",
-  "total": 255,
+  "updatedAt": "2026-10-21T11:14:21.560Z",
+  "total": 258,
   "data": [
     {
       "code": "BPC123047002",
@@ -3046,6 +3046,50 @@
           "stock": 1
         }
       ],
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "PYLUS5000TE",
+      "price": 57525,
+      "old_price": null,
+      "availability": true,
+      "stock": 14,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 14
+        }
+      ],
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "PYLUS3000CTE",
+      "price": 50622,
+      "old_price": null,
+      "availability": false,
+      "stock": 0,
+      "warehouses": null,
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "PYLUS2000CTE",
+      "price": 43719,
+      "old_price": null,
+      "availability": false,
+      "stock": 0,
+      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
