@@ -1,5 +1,29 @@
 [
   {
+    "id": "PMP482306000_1792613073000_t467l",
+    "timestamp": "2026-10-21T20:04:32.999Z",
+    "vendorCode": "PMP482306000",
+    "name": "Інвертор гібридний Victron MultiPlus-II 48/3000/35-32 GX 2,4кВт 48/220В",
+    "category": "Інвертори DC-AC > Гібридні",
+    "price": 43940,
+    "oldQty": 33,
+    "newQty": 31,
+    "diff": -2,
+    "type": "changed"
+  },
+  {
+    "id": "CIP000100001_1792613073000_o30n6",
+    "timestamp": "2026-10-21T20:04:32.999Z",
+    "vendorCode": "CIP000100001",
+    "name": "Тримач запобіжника Victron Energy Fuse holder for MEGA-fuse - CIP000100001",
+    "category": "Низьковольтне обладнання > Запобіжники",
+    "price": 742,
+    "oldQty": 25,
+    "newQty": 18,
+    "diff": -7,
+    "type": "changed"
+  },
+  {
     "id": "SCIFP24200_1792611211330_pofzm",
     "timestamp": "2026-10-21T19:33:31.330Z",
     "vendorCode": "SCIFP24200",
