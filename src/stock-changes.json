@@ -1,5 +1,17 @@
 [
   {
+    "id": "ASS030140030_1792589608320_azru5",
+    "timestamp": "2026-10-21T13:33:28.319Z",
+    "vendorCode": "ASS030140030",
+    "name": "Інтерфейсний адаптер Victron Energy MK3-USB С (VE.Bus to USB С)",
+    "category": "Моніторинг та керування > Інформаційні кабелі",
+    "price": 3955,
+    "oldQty": 6,
+    "newQty": 0,
+    "diff": -6,
+    "type": "became_zero"
+  },
+  {
     "id": "SCIFP24100_1792582952656_f35kj",
     "timestamp": "2026-10-21T11:42:32.654Z",
     "vendorCode": "SCIFP24100",
