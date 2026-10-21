@@ -263,5 +263,8 @@
   "VE480602512SS": "Комплект безперебійного живлення Victron MultiPlus 6 кВт з АКБ Sacred Sun 10,24 кВт-г з WiFi",
   "VE480402512SS": "Комплект безперебійного живлення Victron MultiPlus 4 кВт з АКБ Sacred Sun 10,24 кВт-г з WiFi",
   "VE480401512SS": "Комплект безперебійного живлення Victron MultiPlus 4 кВт з АКБ Sacred Sun 5,12 кВт-г з WiFi",
-  "VE482401512SS": "Комплект безперебійного живлення Victron MultiPlus 2,4 кВт з АКБ Sacred Sun 5,12 кВт-г з WiFi"
+  "VE482401512SS": "Комплект безперебійного живлення Victron MultiPlus 2,4 кВт з АКБ Sacred Sun 5,12 кВт-г з WiFi",
+  "PYLUS5000TE": "Акумулятор Pylontech US5000 LiFePO4 48В 100Аг 4,8 кВт·год ",
+  "PYLUS3000CTE": "Акумулятор Pylontech US3000C LiFePO4 48В 74Аг 3,5 кВт·год ",
+  "PYLUS2000CTE": "Акумулятор Pylontech US2000C LiFePO4 48В 50Аг 2,4 кВт·год "
 }
