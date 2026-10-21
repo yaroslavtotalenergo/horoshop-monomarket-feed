@@ -475,7 +475,6 @@ export default function App() {
       const existsOnProm = promSkusSet.has(code);
       const hasExcel = stockOverrides[code] !== undefined;
       let stock = hasExcel ? parseInt(stockOverrides[code], 10) : 0;
-      if (alwaysAvailable.includes(code)) stock = Math.max(stock, 10);
       if (isNaN(stock) || stock < 0) stock = 0;
       const horoOut = isHoroshopOutOfStock(p);
 
@@ -490,7 +489,7 @@ export default function App() {
     });
 
     return filtered;
-  }, [catalog, promSearchQuery, promCategoryFilter, promFilterMode, promWhitelistSet, stockOverrides, alwaysAvailable, promSkusSet]);
+  }, [catalog, promSearchQuery, promCategoryFilter, promFilterMode, promWhitelistSet, stockOverrides, promSkusSet]);
 
   const promStats = useMemo(() => {
     let enabledCount = 0;
@@ -505,7 +504,6 @@ export default function App() {
       const isEnabled = promWhitelistSet.has(code);
       const existsOnProm = promSkusSet.has(code);
       let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : 0;
-      if (alwaysAvailable.includes(code)) stock = Math.max(stock, 10);
       if (isNaN(stock) || stock < 0) stock = 0;
 
       if (isHoroshopOutOfStock(p)) {
@@ -532,7 +530,7 @@ export default function App() {
       noMatch: noMatchCount,
       outOfStockHoroshop: outOfStockHoroshopCount
     };
-  }, [catalog, promWhitelistSet, stockOverrides, alwaysAvailable, promSkusSet]);
+  }, [catalog, promWhitelistSet, stockOverrides, promSkusSet]);
 
   const promGrouped = useMemo(() => {
     return buildHierarchicalGroups(filteredPromCatalog);
@@ -990,7 +988,6 @@ export default function App() {
       const parsed = parseInt(stockOverrides[code], 10);
       return isNaN(parsed) || parsed < 0 ? 0 : parsed;
     }
-    if (alwaysAvailable.includes(code)) return 10;
     const fb = fallbackStock !== undefined ? fallbackStock : 0;
     return isNaN(fb) || fb < 0 ? 0 : fb;
   };
@@ -1255,7 +1252,6 @@ export default function App() {
     const isEnabled = promWhitelistSet.has(code);
     const existsOnProm = promSkusSet.has(code);
     let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : 0;
-    if (alwaysAvailable.includes(code)) stock = Math.max(stock, 10);
     if (isNaN(stock) || stock < 0) stock = 0;
 
     return (

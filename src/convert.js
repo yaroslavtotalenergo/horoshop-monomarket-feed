@@ -44,14 +44,7 @@ try { availabilityOverrides = JSON.parse(fs.readFileSync('src/availability.json'
 let stockOverrides = {};
 try { stockOverrides = JSON.parse(fs.readFileSync('src/stock.json', 'utf8')); } catch (e) { }
 
-let alwaysAvailable = [];
-try { alwaysAvailable = JSON.parse(fs.readFileSync('src/always-available.json', 'utf8')); } catch (e) { }
 
-// Apply always available logic to overrides immediately so convert logic picks it up
-for (const article of alwaysAvailable) {
-  availabilityOverrides[article] = true;
-  stockOverrides[article] = 10;
-}
 
 // ── Налаштування ────────────────────────────────────────────────
 const rawFeedUrl = (process.env.HOROSHOP_FEED_URL || config.horoshopFeedUrl || '').trim().replace(/^["']|["']$/g, '');
@@ -495,11 +488,7 @@ async function main() {
         availabilityOverrides = JSON.parse(fs.readFileSync('src/availability.json', 'utf8'));
         stockOverrides = JSON.parse(fs.readFileSync('src/stock.json', 'utf8'));
         
-        // Знову застосувати "Завжди 10", бо дані перезаписалися
-        for (const article of alwaysAvailable) {
-          availabilityOverrides[article] = true;
-          stockOverrides[article] = 10;
-        }
+
       } catch (e) {
         console.error('⚠️ Не вдалося синхронізувати залишки:', e.message);
       }

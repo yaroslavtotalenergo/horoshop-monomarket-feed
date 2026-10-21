@@ -60,11 +60,7 @@ async function syncProm() {
   }
   const whitelistSet = new Set(promWhitelist.map(s => String(s).trim()));
 
-  let alwaysAvailable = [];
-  try {
-    alwaysAvailable = JSON.parse(fs.readFileSync(path.join(__dirname, 'always-available.json'), 'utf8'));
-  } catch (e) { }
-  const alwaysAvailableSet = new Set(alwaysAvailable.map(s => String(s).trim()));
+
 
 
 
@@ -119,9 +115,7 @@ async function syncProm() {
       stockQty = parseInt(stockOverrides[sku], 10);
       if (isNaN(stockQty) || stockQty < 0) stockQty = 0;
     }
-    if (alwaysAvailableSet.has(sku)) {
-      stockQty = Math.max(stockQty, 10);
-    }
+
 
     let targetStatus, targetPresence, targetInStock, targetQuantity;
 
