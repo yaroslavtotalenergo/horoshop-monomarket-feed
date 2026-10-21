@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": "SCIFP24200_1792611211330_pofzm",
+    "timestamp": "2026-10-21T19:33:31.330Z",
+    "vendorCode": "SCIFP24200",
+    "name": "Акумулятор LiFePO4 Sacred Sun SCIFP24200 25.6В 200Аг (5.12 кВт·г) з BMS та Bluetooth моніторингом",
+    "category": "Акумуляторні батареї > Акумулятори LiFePO4 25,6 В",
+    "price": 52361,
+    "oldQty": 3,
+    "newQty": 2,
+    "diff": -1,
+    "type": "changed"
+  }
+]
