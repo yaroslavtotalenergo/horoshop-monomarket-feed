@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<yml_catalog date="2026-10-21 12:33">
+<yml_catalog date="2026-10-21 12:36">
   <shop>
     <offers>
       <offer>
@@ -1474,8 +1474,8 @@
       </offer>
       <offer>
         <vendorCode>VBS127010010</vendorCode>
-        <param name="«Покупка частями» от monobank">Выкл</param>
-        <param name="«Покупка частинами» від monobank"></param>
+        <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>VBB115021020</vendorCode>
@@ -1944,8 +1944,8 @@
       </offer>
       <offer>
         <vendorCode>ASS030537010</vendorCode>
-        <param name="«Покупка частями» от monobank">Выкл</param>
-        <param name="«Покупка частинами» від monobank"></param>
+        <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>SHU050130050</vendorCode>
@@ -2259,8 +2259,8 @@
       </offer>
       <offer>
         <vendorCode>SCC125110512</vendorCode>
-        <param name="«Покупка частями» от monobank">Выкл</param>
-        <param name="«Покупка частинами» від monobank"></param>
+        <param name="«Покупка частями» от monobank">6</param>
+        <param name="«Покупка частинами» від monobank">Так</param>
       </offer>
       <offer>
         <vendorCode>SCC125085511</vendorCode>
