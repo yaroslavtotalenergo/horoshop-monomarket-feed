@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "id": "SCIFP24100_1792582952656_f35kj",
+    "timestamp": "2026-10-21T11:42:32.654Z",
+    "vendorCode": "SCIFP24100",
+    "name": "Акумулятор LiFePO4 Sacred Sun SCIFP24100 25.6В 100Аг (2.56 кВт·г) з BMS та Bluetooth моніторингом",
+    "category": "Акумуляторні батареї > Акумулятори LiFePO4 25,6 В",
+    "price": 31140,
+    "oldQty": 3,
+    "newQty": 1,
+    "diff": -2,
+    "type": "changed"
+  },
+  {
+    "id": "SCIFP12200_1792582952656_caqqu",
+    "timestamp": "2026-10-21T11:42:32.654Z",
+    "vendorCode": "SCIFP12200",
+    "name": "Акумулятор LiFePO4 Sacred Sun SCIFP12200 12В 200Аг (2.56 кВт·г) з BMS та Bluetooth моніторингом",
+    "category": "Акумуляторні батареї > Акумулятори LiFePO4 12,8 В",
+    "price": 30220,
+    "oldQty": 10,
+    "newQty": 14,
+    "diff": 4,
+    "type": "changed"
+  },
+  {
+    "id": "SCIFP24200_1792582952656_0zqio",
+    "timestamp": "2026-10-21T11:42:32.654Z",
+    "vendorCode": "SCIFP24200",
+    "name": "Акумулятор LiFePO4 Sacred Sun SCIFP24200 25.6В 200Аг (5.12 кВт·г) з BMS та Bluetooth моніторингом",
+    "category": "Акумуляторні батареї > Акумулятори LiFePO4 25,6 В",
+    "price": 52361,
+    "oldQty": 2,
+    "newQty": 3,
+    "diff": 1,
+    "type": "changed"
+  },
+  {
+    "id": "SCIFP12150_1792582952656_tp4wa",
+    "timestamp": "2026-10-21T11:42:32.654Z",
+    "vendorCode": "SCIFP12150",
+    "name": "Акумулятор LiFePO4 Sacred Sun SCIFP12150 12В 150Аг (1.92 кВт·г) з BMS та Bluetooth моніторингом",
+    "category": "Акумуляторні батареї > Акумулятори LiFePO4 12,8 В",
+    "price": 23470,
+    "oldQty": 4,
+    "newQty": 0,
+    "diff": -4,
+    "type": "became_zero"
+  }
+]

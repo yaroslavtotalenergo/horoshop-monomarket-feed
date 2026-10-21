@@ -55,24 +55,37 @@ async function main() {
   }
 
   // ── 1. Завантаження конфігурації ──────────────────────────────
-  let config = { sheets: [] };
-  if (process.env.GOOGLE_SHEETS_URLS) {
-    config = {
-      sheets: process.env.GOOGLE_SHEETS_URLS
-        .split(/[\r\n,]+/)
-        .map(s => s.trim())
-        .filter(Boolean)
-    };
-  } else {
-    try {
-      config = JSON.parse(fs.readFileSync('src/google-sheets.json', 'utf8'));
-    } catch (e) {
-      const msg = 'Файл src/google-sheets.json не знайдено або пошкоджено';
-      console.error('❌ ' + msg);
-      await notifyError('Конфігурацію таблиць не знайдено', msg);
-      return;
+  let localSheets = [];
+  try {
+    if (fs.existsSync('src/google-sheets.json')) {
+      const localCfg = JSON.parse(fs.readFileSync('src/google-sheets.json', 'utf8'));
+      if (Array.isArray(localCfg.sheets)) {
+        localSheets = localCfg.sheets.map(s => s.trim()).filter(Boolean);
+      }
     }
+  } catch (e) { }
+
+  let envSheets = [];
+  if (process.env.GOOGLE_SHEETS_URLS) {
+    envSheets = process.env.GOOGLE_SHEETS_URLS
+      .split(/[\r\n,]+/)
+      .map(s => s.trim())
+      .filter(Boolean);
   }
+
+  // Об'єднуємо таблиці з env та src/google-sheets.json
+  const combinedSheets = Array.from(new Set([...envSheets, ...localSheets]));
+
+  // Якщо вказано основну таблицю, але забули додати другу вкладку АКБ (gid=1397929498) — додаємо її автоматично!
+  const SPREADSHEET_ID = '1DaqQ7oYzRxgdW5S70Agf8s8dRD7cjjKEBnhDT-njQD4';
+  const hasProdSheet = combinedSheets.some(s => s.includes(SPREADSHEET_ID));
+  const hasAkbTab = combinedSheets.some(s => s.includes(SPREADSHEET_ID) && s.includes('1397929498'));
+  if (hasProdSheet && !hasAkbTab) {
+    console.log('📌 Автоматично додано другу вкладку АКБ Sacred Sun / Pylontech (gid=1397929498)');
+    combinedSheets.push(`https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/edit?gid=1397929498#gid=1397929498`);
+  }
+
+  const config = { sheets: combinedSheets };
 
   if (!config.sheets || config.sheets.length === 0) {
     const msg = 'Список таблиць порожній (задайте GOOGLE_SHEETS_URLS у GitHub Secrets або src/google-sheets.json)';
