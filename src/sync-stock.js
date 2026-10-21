@@ -129,6 +129,7 @@ async function main() {
   let updatedCount = 0;
   const warnings = [];
   let hasAnyFatalError = false;
+  const seenInCurrentRun = new Set();
 
   // ── 3. Обробка кожної таблиці ──────────────────────────────────
   for (const sheetUrl of config.sheets) {
@@ -243,8 +244,15 @@ async function main() {
           }
         }
 
-        stockOverrides[vendorCode] = totalQty;
-        availabilityOverrides[vendorCode] = totalQty > 0;
+        if (!seenInCurrentRun.has(vendorCode)) {
+          stockOverrides[vendorCode] = totalQty;
+          seenInCurrentRun.add(vendorCode);
+        } else {
+          // Якщо товар зустрічається в таблиці декілька разів — фіксуємо максимум,
+          // щоб порожній дубль з іншої категорії не затер рядок з реальним залишком
+          stockOverrides[vendorCode] = Math.max(stockOverrides[vendorCode] || 0, totalQty);
+        }
+        availabilityOverrides[vendorCode] = stockOverrides[vendorCode] > 0;
         updatedCount++;
         sheetCount++;
       }
