@@ -1,5 +1,17 @@
 [
   {
+    "id": "ORI241215200(R)_1792697609514_nq1pn",
+    "timestamp": "2026-10-22T19:33:29.514Z",
+    "vendorCode": "ORI241215200(R)",
+    "name": "Конвертор Victron Energy DC-DC Orion-Tr 24/12-15 (180W) - ORI241215200(R)",
+    "category": "Перетворювачі DC-DC",
+    "price": 2472,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  },
+  {
     "id": "BPC123047002_1792695873730_142hf",
     "timestamp": "2026-10-22T19:04:33.729Z",
     "vendorCode": "BPC123047002",
