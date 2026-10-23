@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-23T06:33:42.973Z",
+  "updatedAt": "2026-10-23T07:04:47.421Z",
   "total": 343,
   "data": [
     {
@@ -7,11 +7,11 @@
       "price": 10877,
       "old_price": null,
       "availability": true,
-      "stock": 9,
+      "stock": 8,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 9
+          "stock": 8
         }
       ],
       "warranty_type": "manufacturer",
@@ -103,11 +103,11 @@
       "price": 9332,
       "old_price": null,
       "availability": true,
-      "stock": 15,
+      "stock": 14,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 15
+          "stock": 14
         }
       ],
       "warranty_type": "manufacturer",
@@ -2132,11 +2132,11 @@
       "price": 9270,
       "old_price": null,
       "availability": true,
-      "stock": 10,
+      "stock": 9,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 10
+          "stock": 9
         }
       ],
       "warranty_type": "manufacturer",
@@ -2168,11 +2168,11 @@
       "price": 2287,
       "old_price": null,
       "availability": true,
-      "stock": 10,
+      "stock": 6,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 10
+          "stock": 6
         }
       ],
       "warranty_type": "manufacturer",
@@ -3161,11 +3161,11 @@
       "price": 5933,
       "old_price": null,
       "availability": true,
-      "stock": 2,
+      "stock": 1,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 2
+          "stock": 1
         }
       ],
       "warranty_type": "manufacturer",
