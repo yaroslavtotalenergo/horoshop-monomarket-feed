@@ -1,5 +1,29 @@
 [
   {
+    "id": "CIP138125020_1792740804246_rhm09",
+    "timestamp": "2026-10-23T07:33:24.245Z",
+    "vendorCode": "CIP138125020",
+    "name": "Запобіжник Victron Energy MEGA-fuse 125A/80V - CIP138125020",
+    "category": "Низьковольтне обладнання > Запобіжники",
+    "price": 474,
+    "oldQty": 0,
+    "newQty": 3,
+    "diff": 3,
+    "type": "became_available"
+  },
+  {
+    "id": "CIP138225020_1792740804246_gr1se",
+    "timestamp": "2026-10-23T07:33:24.245Z",
+    "vendorCode": "CIP138225020",
+    "name": "Запобіжник Victron Energy MEGA-fuse 225A/80V - CIP138225020",
+    "category": "Низьковольтне обладнання > Запобіжники",
+    "price": 474,
+    "oldQty": 30,
+    "newQty": 29,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
     "id": "BPC123047002_1792739071737_62k7e",
     "timestamp": "2026-10-23T07:04:31.737Z",
     "vendorCode": "BPC123047002",
