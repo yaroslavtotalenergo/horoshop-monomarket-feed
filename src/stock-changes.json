@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": "ASS030530230_1793001872412_r39rr",
+    "timestamp": "2026-10-26T08:04:32.411Z",
+    "vendorCode": "ASS030530230",
+    "name": "Спеціалізований кабель Victron Energy VE.Direct Cable 3 м - ASS030530230",
+    "category": "Моніторинг та керування > Інформаційні кабелі",
+    "price": 989,
+    "oldQty": 0,
+    "newQty": 3,
+    "diff": 3,
+    "type": "became_available"
+  }
+]
