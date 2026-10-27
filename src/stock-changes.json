@@ -1,5 +1,17 @@
 [
   {
+    "id": "ORI242417040_1793093610504_8yzgg",
+    "timestamp": "2026-10-27T09:33:30.504Z",
+    "vendorCode": "ORI242417040",
+    "name": "Зарядний пристрій Orion XS 1400W DC-DC",
+    "category": "Перетворювачі DC-DC > З зарядом акумулятора",
+    "price": 23484,
+    "oldQty": 3,
+    "newQty": 2,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
     "id": "SCIFP24100_1793091188344_w8f1j",
     "timestamp": "2026-10-27T08:53:08.343Z",
     "vendorCode": "SCIFP24100",
