@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-27T08:33:45.736Z",
+  "updatedAt": "2026-10-27T08:53:24.490Z",
   "total": 343,
   "data": [
     {
@@ -2584,14 +2584,9 @@
       "code": "SHU050130050",
       "price": 4697,
       "old_price": null,
-      "availability": true,
-      "stock": 1,
-      "warehouses": [
-        {
-          "id": "stock01te",
-          "stock": 1
-        }
-      ],
+      "availability": false,
+      "stock": 0,
+      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -3544,9 +3539,14 @@
       "code": "BBA000100100",
       "price": 3214,
       "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
+      "availability": true,
+      "stock": 1,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 1
+        }
+      ],
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -4351,11 +4351,11 @@
       "price": 23484,
       "old_price": null,
       "availability": true,
-      "stock": 1,
+      "stock": 3,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 1
+          "stock": 3
         }
       ],
       "warranty_type": "manufacturer",
@@ -4596,14 +4596,9 @@
       "code": "SCIFP24100",
       "price": 31140,
       "old_price": null,
-      "availability": true,
-      "stock": 1,
-      "warehouses": [
-        {
-          "id": "stock01te",
-          "stock": 1
-        }
-      ],
+      "availability": false,
+      "stock": 0,
+      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
