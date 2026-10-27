@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": "SLSIFP51100AH_1793116879277_b8j8w",
+    "timestamp": "2026-10-27T16:01:19.276Z",
+    "vendorCode": "SLSIFP51100AH",
+    "name": "Літій-залізо-фосфатний акумулятор LiFePO4 Sacred Sun SLSIFP51100AH 51.2В 100Аг (5.12 кВт·год)",
+    "category": "Акумуляторні батареї > Акумулятори LiFePO4 51,2 В",
+    "price": 52831,
+    "oldQty": 47,
+    "newQty": 46,
+    "diff": -1,
+    "type": "changed"
+  }
+]
