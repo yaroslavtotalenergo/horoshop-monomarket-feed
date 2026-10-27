@@ -738,7 +738,7 @@
   "SCIFP12100": false,
   "SCIFP12150": false,
   "SCIFP12200": true,
-  "SCIFP24100": true,
+  "SCIFP24100": false,
   "SCIFP24200": true,
   "SLSIFP51100A": true,
   "SLSIFP51100AH": true,
