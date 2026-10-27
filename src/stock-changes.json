@@ -1,1 +1,110 @@
-[]
+[
+  {
+    "id": "PMP482606000_1793090008747_eupbe",
+    "timestamp": "2026-10-27T08:33:28.746Z",
+    "vendorCode": "PMP482606000",
+    "name": "Інвертор гібридний Victron MultiPlus-II 6кВт 48/6k5/100-50 GX 48/220В",
+    "category": "Інвертори DC-AC > Гібридні",
+    "price": 71812,
+    "oldQty": 24,
+    "newQty": 22,
+    "diff": -2,
+    "type": "changed"
+  },
+  {
+    "id": "BPC122547006_1793090008747_62esl",
+    "timestamp": "2026-10-27T08:33:28.746Z",
+    "vendorCode": "BPC122547006",
+    "name": "Зарядний пристрій Blue Smart IP67 Charger 12/25 (1)",
+    "category": "Зарядні пристрої > Зарядні пристрої 12В",
+    "price": 10568,
+    "oldQty": 3,
+    "newQty": 2,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
+    "id": "BPC900400014_1793090008747_8xiov",
+    "timestamp": "2026-10-27T08:33:28.746Z",
+    "vendorCode": "BPC900400014",
+    "name": "Затискач “Крокодил” Clamp Connector (30A ATO fuse) - BPC900400014",
+    "category": "Зарядні пристрої",
+    "price": 803,
+    "oldQty": 6,
+    "newQty": 5,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
+    "id": "LYN020102010_1793090008747_4jiz9",
+    "timestamp": "2026-10-27T08:33:28.746Z",
+    "vendorCode": "LYN020102010",
+    "name": "Розподільча модульна шина Lynx Power In 1000 (M10) ",
+    "category": "Низьковольтне обладнання > Запобіжники",
+    "price": 9270,
+    "oldQty": 8,
+    "newQty": 6,
+    "diff": -2,
+    "type": "changed"
+  },
+  {
+    "id": "VBS127010010_1793090008747_rx5j1",
+    "timestamp": "2026-10-27T08:33:28.746Z",
+    "vendorCode": "VBS127010010",
+    "name": "Вимикач акумулятора Battery Switch ON/OFF 275A – VBS127010010",
+    "category": "Низьковольтне обладнання > Вимикачі",
+    "price": 2287,
+    "oldQty": 5,
+    "newQty": 3,
+    "diff": -2,
+    "type": "changed"
+  },
+  {
+    "id": "CIP138125020_1793090008747_bqshj",
+    "timestamp": "2026-10-27T08:33:28.746Z",
+    "vendorCode": "CIP138125020",
+    "name": "Запобіжник Victron Energy MEGA-fuse 125A/80V - CIP138125020",
+    "category": "Низьковольтне обладнання > Запобіжники",
+    "price": 474,
+    "oldQty": 3,
+    "newQty": 2,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
+    "id": "CIP138150020_1793090008747_zd7rz",
+    "timestamp": "2026-10-27T08:33:28.746Z",
+    "vendorCode": "CIP138150020",
+    "name": "Запобіжник Victron Energy MEGA-fuse 150A/80V - CIP138150020",
+    "category": "Низьковольтне обладнання > Запобіжники",
+    "price": 474,
+    "oldQty": 8,
+    "newQty": 7,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
+    "id": "CIP138200020_1793090008747_xtkj8",
+    "timestamp": "2026-10-27T08:33:28.746Z",
+    "vendorCode": "CIP138200020",
+    "name": "Запобіжник Victron Energy MEGA-fuse 200A/80V - CIP138200020",
+    "category": "Низьковольтне обладнання > Запобіжники",
+    "price": 474,
+    "oldQty": 11,
+    "newQty": 1,
+    "diff": -10,
+    "type": "changed"
+  },
+  {
+    "id": "CIP000100001_1793090008747_hakcp",
+    "timestamp": "2026-10-27T08:33:28.746Z",
+    "vendorCode": "CIP000100001",
+    "name": "Тримач запобіжника Victron Energy Fuse holder for MEGA-fuse - CIP000100001",
+    "category": "Низьковольтне обладнання > Запобіжники",
+    "price": 742,
+    "oldQty": 5,
+    "newQty": 1,
+    "diff": -4,
+    "type": "changed"
+  }
+]
