@@ -1,5 +1,17 @@
 [
   {
+    "id": "BBA000100100_1793198009994_6eza8",
+    "timestamp": "2026-10-28T14:33:29.993Z",
+    "vendorCode": "BBA000100100",
+    "name": "Балансир батарей Victron Energy Battery Balancer",
+    "category": "Компоненти акумуляторних систем > Балансир акумуляторів",
+    "price": 3214,
+    "oldQty": 0,
+    "newQty": 1,
+    "diff": 1,
+    "type": "became_available"
+  },
+  {
     "id": "BPC121713006_1793192670039_ajw4n",
     "timestamp": "2026-10-28T13:04:30.038Z",
     "vendorCode": "BPC121713006",
