@@ -1,5 +1,53 @@
 [
   {
+    "id": "BPC121713006_1793192670039_ajw4n",
+    "timestamp": "2026-10-28T13:04:30.038Z",
+    "vendorCode": "BPC121713006",
+    "name": "Зарядний пристрій Blue Smart IP67 Charger 12/17 (1)",
+    "category": "Зарядні пристрої > Зарядні пристрої 12В",
+    "price": 9085,
+    "oldQty": 2,
+    "newQty": 0,
+    "diff": -2,
+    "type": "became_zero"
+  },
+  {
+    "id": "ORI241230022_1793192670039_xv6yp",
+    "timestamp": "2026-10-28T13:04:30.038Z",
+    "vendorCode": "ORI241230022",
+    "name": "Конвертор Victron Energy DC-DC Orion 24/12-30",
+    "category": "Перетворювачі DC-DC",
+    "price": 4511,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  },
+  {
+    "id": "ASS030140000_1793192670039_fawt9",
+    "timestamp": "2026-10-28T13:04:30.038Z",
+    "vendorCode": "ASS030140000",
+    "name": "Інтерфейсний адаптер Victron Energy MK3-USB (VE.Bus to USB) ",
+    "category": "Моніторинг та керування > Інформаційні кабелі",
+    "price": 4511,
+    "oldQty": 7,
+    "newQty": 6,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
+    "id": "BBA000100100_1793192670039_leq4e",
+    "timestamp": "2026-10-28T13:04:30.038Z",
+    "vendorCode": "BBA000100100",
+    "name": "Балансир батарей Victron Energy Battery Balancer",
+    "category": "Компоненти акумуляторних систем > Балансир акумуляторів",
+    "price": 3214,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  },
+  {
     "id": "LYN020102010_1793187210619_a88yh",
     "timestamp": "2026-10-28T11:33:30.619Z",
     "vendorCode": "LYN020102010",
