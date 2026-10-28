@@ -1,5 +1,53 @@
 [
   {
+    "id": "LYN020102010_1793187210619_a88yh",
+    "timestamp": "2026-10-28T11:33:30.619Z",
+    "vendorCode": "LYN020102010",
+    "name": "Розподільча модульна шина Lynx Power In 1000 (M10) ",
+    "category": "Низьковольтне обладнання > Запобіжники",
+    "price": 9270,
+    "oldQty": 6,
+    "newQty": 5,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
+    "id": "CIP138125020_1793187210619_xd6pt",
+    "timestamp": "2026-10-28T11:33:30.619Z",
+    "vendorCode": "CIP138125020",
+    "name": "Запобіжник Victron Energy MEGA-fuse 125A/80V - CIP138125020",
+    "category": "Низьковольтне обладнання > Запобіжники",
+    "price": 474,
+    "oldQty": 27,
+    "newQty": 25,
+    "diff": -2,
+    "type": "changed"
+  },
+  {
+    "id": "CIP138225020_1793187210619_xznux",
+    "timestamp": "2026-10-28T11:33:30.619Z",
+    "vendorCode": "CIP138225020",
+    "name": "Запобіжник Victron Energy MEGA-fuse 225A/80V - CIP138225020",
+    "category": "Низьковольтне обладнання > Запобіжники",
+    "price": 474,
+    "oldQty": 29,
+    "newQty": 28,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
+    "id": "ASS030530010_1793187210619_w78fo",
+    "timestamp": "2026-10-28T11:33:30.619Z",
+    "vendorCode": "ASS030530010",
+    "name": "Адаптер Victron Energy VE.Direct to USB – ASS030530010",
+    "category": "Моніторинг та керування > Інформаційні кабелі",
+    "price": 1854,
+    "oldQty": 9,
+    "newQty": 8,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
     "id": "SLSIFP51100AH_1793116879277_b8j8w",
     "timestamp": "2026-10-27T16:01:19.276Z",
     "vendorCode": "SLSIFP51100AH",
