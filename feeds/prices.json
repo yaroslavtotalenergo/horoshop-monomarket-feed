@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-29T14:04:46.927Z",
+  "updatedAt": "2026-10-29T14:33:40.655Z",
   "total": 343,
   "data": [
     {
@@ -326,14 +326,9 @@
       "code": "BPC122547006",
       "price": 10568,
       "old_price": null,
-      "availability": true,
-      "stock": 2,
-      "warehouses": [
-        {
-          "id": "stock01te",
-          "stock": 2
-        }
-      ],
+      "availability": false,
+      "stock": 0,
+      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
