@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "id": "BPR000100400_1793266407967_yio7b",
+    "timestamp": "2026-10-29T09:33:27.966Z",
+    "vendorCode": "BPR000100400",
+    "name": "Захист акумулятора від глибокого розряда BatteryProtect 12/24V 100A Victron",
+    "category": "Компоненти акумуляторних систем > Захист акумуляторів",
+    "price": 3523,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  },
+  {
+    "id": "BPR110022000_1793266407967_k32st",
+    "timestamp": "2026-10-29T09:33:27.966Z",
+    "vendorCode": "BPR110022000",
+    "name": "Захист акумулятора від глибокого розряду Smart BatteryProtect 12/24V 100A Victron",
+    "category": "Компоненти акумуляторних систем > Захист акумуляторів",
+    "price": 4697,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  }
+]
