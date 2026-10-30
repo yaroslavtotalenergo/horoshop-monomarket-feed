@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": "ASS030140000_1793369069675_g0t8n",
+    "timestamp": "2026-10-30T14:04:29.675Z",
+    "vendorCode": "ASS030140000",
+    "name": "Інтерфейсний адаптер Victron Energy MK3-USB (VE.Bus to USB) ",
+    "category": "Моніторинг та керування > Інформаційні кабелі",
+    "price": 4511,
+    "oldQty": 6,
+    "newQty": 5,
+    "diff": -1,
+    "type": "changed"
+  }
+]
