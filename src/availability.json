@@ -536,7 +536,7 @@
   "CYR020400000": false,
   "BCD000402000": false,
   "BCD000802000": false,
-  "BBA000100100": true,
+  "BBA000100100": false,
   "BPR000065400": true,
   "BPR000100400": false,
   "BPR000220400": true,

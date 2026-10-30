@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-30T09:33:44.630Z",
+  "updatedAt": "2026-10-30T10:04:44.178Z",
   "total": 343,
   "data": [
     {
@@ -3524,14 +3524,9 @@
       "code": "BBA000100100",
       "price": 3214,
       "old_price": null,
-      "availability": true,
-      "stock": 1,
-      "warehouses": [
-        {
-          "id": "stock01te",
-          "stock": 1
-        }
-      ],
+      "availability": false,
+      "stock": 0,
+      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
