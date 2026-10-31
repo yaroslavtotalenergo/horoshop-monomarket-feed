@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<yml_catalog date="2026-10-31 07:33">
+<yml_catalog date="2026-10-31 08:04">
   <shop>
     <offers>
       <offer>
@@ -699,8 +699,8 @@
       </offer>
       <offer>
         <vendorCode>PMP485021010</vendorCode>
-        <param name="«Покупка частями» от monobank">6</param>
-        <param name="«Покупка частинами» від monobank">Так</param>
+        <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>QUA483150000</vendorCode>
@@ -874,8 +874,8 @@
       </offer>
       <offer>
         <vendorCode>PMP482506000</vendorCode>
-        <param name="«Покупка частями» от monobank">6</param>
-        <param name="«Покупка частинами» від monobank">Так</param>
+        <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>PIN482601000</vendorCode>
