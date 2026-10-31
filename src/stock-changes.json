@@ -1,5 +1,17 @@
 [
   {
+    "id": "VBS127010010_1793432005661_mgxfl",
+    "timestamp": "2026-10-31T07:33:25.660Z",
+    "vendorCode": "VBS127010010",
+    "name": "Вимикач акумулятора Battery Switch ON/OFF 275A – VBS127010010",
+    "category": "Низьковольтне обладнання > Вимикачі",
+    "price": 2287,
+    "oldQty": 3,
+    "newQty": 2,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
     "id": "BPC900200014_1793385204335_h4dph",
     "timestamp": "2026-10-30T18:33:24.334Z",
     "vendorCode": "BPC900200014",
