@@ -1,5 +1,17 @@
 [
   {
+    "id": "QUA488024000_1793621071806_rm3ie",
+    "timestamp": "2026-11-02T12:04:31.805Z",
+    "vendorCode": "QUA488024000",
+    "name": "Інвертор гібридний Victron Quattro 6,5кВт 48/8000/110-100/100 48/220В",
+    "category": "Інвертори DC-AC > Гібридні",
+    "price": 123353,
+    "oldQty": 13,
+    "newQty": 0,
+    "diff": -13,
+    "type": "became_zero"
+  },
+  {
     "id": "PMP482805000_1793610273961_gtbkr",
     "timestamp": "2026-11-02T09:04:33.960Z",
     "vendorCode": "PMP482805000",
