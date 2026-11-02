@@ -1,5 +1,17 @@
 [
   {
+    "id": "ORI121236120_1793651615973_xtzwm",
+    "timestamp": "2026-11-02T20:33:35.972Z",
+    "vendorCode": "ORI121236120",
+    "name": "Зарядний пристрій Orion-Tr Smart 12/12-30A Isolated DC-DC",
+    "category": "Перетворювачі DC-DC > З зарядом акумулятора",
+    "price": 16130,
+    "oldQty": 2,
+    "newQty": 1,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
     "id": "ORI241236120_1793649872285_6wxr9",
     "timestamp": "2026-11-02T20:04:32.284Z",
     "vendorCode": "ORI241236120",
