@@ -1,5 +1,29 @@
 [
   {
+    "id": "PMP482805000_1793610273961_gtbkr",
+    "timestamp": "2026-11-02T09:04:33.960Z",
+    "vendorCode": "PMP482805000",
+    "name": "Інвертор гібридний Victron MultiPlus-II 6.4кВт 48/8000/110-100 48/220В",
+    "category": "Інвертори DC-AC > Гібридні",
+    "price": 95852,
+    "oldQty": 2,
+    "newQty": 0,
+    "diff": -2,
+    "type": "became_zero"
+  },
+  {
+    "id": "PMP483150000_1793610273961_vuk1i",
+    "timestamp": "2026-11-02T09:04:33.960Z",
+    "vendorCode": "PMP483150000",
+    "name": "Інвертор гібридний Victron MultiPlus-II 12кВт 48/15000/200-100 48/220В",
+    "category": "Інвертори DC-AC > Гібридні",
+    "price": 159753,
+    "oldQty": 2,
+    "newQty": 0,
+    "diff": -2,
+    "type": "became_zero"
+  },
+  {
     "id": "SCIFP12200_1793464406379_tmr5s",
     "timestamp": "2026-10-31T16:33:26.378Z",
     "vendorCode": "SCIFP12200",
