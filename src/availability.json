@@ -787,5 +787,7 @@
   "SCC040030020": false,
   "SCC145120510": false,
   "SCC145110510": false,
-  "FB-L-16-Pro": true
+  "FB-L-16-Pro": true,
+  "PIN121251210": false,
+  "PIN121801210": true
 }
