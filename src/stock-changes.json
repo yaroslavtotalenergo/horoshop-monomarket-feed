@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": "SCC075010060R_1793817206771_5n0nk",
+    "timestamp": "2026-11-04T18:33:26.770Z",
+    "vendorCode": "SCC075010060R",
+    "name": "Сонячний контролер SmartSolar (Bluetooth) MPPT 75V/10A Victron Energy",
+    "category": "Сонячні контролери > MPPT",
+    "price": 3893,
+    "oldQty": 2,
+    "newQty": 1,
+    "diff": -1,
+    "type": "changed"
+  }
+]
