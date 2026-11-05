@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-05T14:19:06.131Z",
-  "total": 618,
+  "updatedAt": "2026-11-05T14:30:25.587Z",
+  "total": 583,
   "skus": [
     "BPC240832064R",
     "ORI481260020",
@@ -26,11 +26,9 @@
     "SCIFP12100",
     "SCIFP1250",
     "SLSIFP51100AH",
-    "SPP042802000",
     "SPM043657203",
     "SPM043456803",
     "SPM041501200",
-    "SPM040953003",
     "SPM040553603",
     "SPM040303603",
     "CYR010230412",
@@ -48,7 +46,6 @@
     "BMS300200000",
     "SCC125110441",
     "REL200100100",
-    "ASS030520115",
     "SUNPOW51100",
     "ORI484838120",
     "ORI482438120",
@@ -175,10 +172,8 @@
     "BMS400100000",
     "BMS300200200",
     "BAT524110610",
-    "BAT512050610",
     "ASS000001000",
     "BPP900400100",
-    "BPP010300100R",
     "BPP900465070",
     "BPP900465050",
     "BPP900460050",
@@ -187,8 +182,6 @@
     "BPP900455070",
     "BPP900455050",
     "REC030001210",
-    "LYN060102000",
-    "LYN040102100",
     "VBB413020010",
     "VBB115021020",
     "VBB115022020",
@@ -243,18 +236,12 @@
     "SIN121251100",
     "SCC115070511",
     "SCC125070521",
-    "SPP042702000",
     "SPP041151202",
     "SPP040901200",
     "SPP040601200",
     "SPP040201200",
-    "SPM043602402",
-    "SPM043052002",
-    "SPM040301200",
-    "SPM040901200",
     "SPM040551200",
     "SPM040401200",
-    "SPM040201200",
     "BPC940100200",
     "SHU050220050",
     "SHU065210050",
@@ -262,9 +249,6 @@
     "SHU050150050",
     "PMP482200000",
     "DMC000200010R",
-    "CIP137250010",
-    "CIP137200010",
-    "BPP900450100",
     "CIP106100000",
     "CIP143300020",
     "CIP143500020",
@@ -279,21 +263,12 @@
     "CIP133080010",
     "CIP133060010",
     "CIP132200010",
-    "CIP132150010",
     "CIP132125010",
     "CIP132100010",
-    "CIP132080010",
-    "CIP132060010",
     "CIP000050001",
     "CIP000100001",
     "CIP136500010",
     "CIP136400010",
-    "CIP136300010",
-    "CIP136250010",
-    "CIP136225010",
-    "CIP136175010",
-    "CIP136100010",
-    "CIP136080010",
     "CIP136060010",
     "SCC115045212",
     "SCC115045222",
@@ -329,14 +304,11 @@
     "SCC010005010",
     "SCC040030050",
     "SCC040020050",
-    "SCC040010050",
     "SCC010030050",
     "SCC010020060",
     "SCC010020050",
     "SCC010010050",
     "SCC010005050",
-    "SCC040030020",
-    "SCC040020020",
     "SCC010030020",
     "SCC010020020",
     "SCC010010000",
@@ -416,14 +388,12 @@
     "GDI000064000",
     "GDI000032000",
     "GDI000016000",
-    "ITR050362041",
     "SDFI0000000",
     "BAT524050705",
     "BAT512120705",
     "BAT512060705",
     "BAT512020705",
     "BAT524120610",
-    "BAT512132410",
     "BAT512120610",
     "BAT512110610",
     "CEP242161010",
@@ -452,7 +422,6 @@
     "CMP122200000",
     "CMP242160000",
     "CMP122160000",
-    "CMP242120000",
     "CMP122120000",
     "CMP121800000",
     "PMP482160000",
@@ -490,7 +459,6 @@
     "PIN122300000",
     "PIN482201000",
     "PIN242201000",
-    "PIN482161000",
     "PIN242161000",
     "PIN122161000",
     "PIN485020000",
@@ -548,7 +516,6 @@
     "ORI122420020",
     "ORI122410020",
     "ORI122408020",
-    "ORI241270020",
     "ORI241240021",
     "ORI241225020",
     "ORI241220200(R)",
@@ -584,8 +551,6 @@
     "SKI024100000",
     "SKI024080002",
     "PCH024016001",
-    "PCH012050001",
-    "PCH012030001",
     "CCH024060000",
     "CCH024040000",
     "CCH024030000",
@@ -862,16 +827,6 @@
       "price": 1200,
       "quantity": 46
     },
-    "SPP042802000": {
-      "id": 3009294454,
-      "name": "Солнечная панель BlueSolar 280W-20V Poly Victron Energy - SPP042802000",
-      "main_image": "https://images.prom.ua/3925455827_w200_h200_solnechnaya-panel-bluesolar.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 157.2,
-      "quantity": 0
-    },
     "SPM043657203": {
       "id": 2998198658,
       "name": "Солнечная панель BlueSolar 365W-24V Mono Victron Energy - SPM043657203",
@@ -900,16 +855,6 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 130.8,
-      "quantity": 0
-    },
-    "SPM040953003": {
-      "id": 3009196296,
-      "name": "Солнечная панель BlueSolar 95W Mono Victron Energy - SPM040953003",
-      "main_image": "https://images.prom.ua/7284750673_w200_h200_solnechnaya-panel-bluesolar.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 103.2,
       "quantity": 0
     },
     "SPM040553603": {
@@ -1080,16 +1025,6 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 134.4,
-      "quantity": 0
-    },
-    "ASS030520115": {
-      "id": 3000556167,
-      "name": "Интерфейс Victron VE.Bus to VE.Can – ASS030520115",
-      "main_image": "https://images.prom.ua/7261323909_w200_h200_interfejs-victron-vebus.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 181.2,
       "quantity": 0
     },
     "SUNPOW51100": {
@@ -2352,16 +2287,6 @@
       "price": 1411.2,
       "quantity": 0
     },
-    "BAT512050610": {
-      "id": 1705876710,
-      "name": "Аккумулятор LiFePO4 battery 12,8V/50Ah - Smart BAT512050610 Victron Energy",
-      "main_image": "https://images.prom.ua/4064092093_w200_h200_akkumulyator-lifepo4-battery.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 532.8,
-      "quantity": 0
-    },
     "ASS000001000": {
       "id": 1705119132,
       "name": "Температурный датчик для VENUS PMP Quattro ASS000001000 Victron Energy",
@@ -2380,16 +2305,6 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 228,
-      "quantity": 0
-    },
-    "BPP010300100R": {
-      "id": 1705022824,
-      "name": "Системный контроллер Color Control GX BPP010300100R Victron Energy",
-      "main_image": "https://images.prom.ua/4066937650_w200_h200_sistemnyj-kontroller-color.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 554.4,
       "quantity": 0
     },
     "BPP900465070": {
@@ -2470,26 +2385,6 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 111.6,
-      "quantity": 0
-    },
-    "LYN060102000": {
-      "id": 1703562084,
-      "name": "Распределитель Lynx Distributor M8 LYN060102000 Victron Energy",
-      "main_image": "https://images.prom.ua/4062647415_w200_h200_raspredelitel-lynx-distributor.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 258,
-      "quantity": 0
-    },
-    "LYN040102100": {
-      "id": 1703429749,
-      "name": "Шунт Lynx Shunt VE.Can M8 LYN040102100 Victron Energy",
-      "main_image": "https://images.prom.ua/4062272502_w200_h200_shunt-lynx-shunt.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 454.8,
       "quantity": 0
     },
     "VBB413020010": {
@@ -3032,16 +2927,6 @@
       "price": 654,
       "quantity": 0
     },
-    "SPP042702000": {
-      "id": 1662389077,
-      "name": "Солнечная батарея / панель BlueSolar 270W-20V Poly 1640x992x35mm SPP042702000 Victron Energy 270Вт 20В",
-      "main_image": "https://images.prom.ua/3925455827_w200_h200_solnechnaya-batareya-.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 183.6,
-      "quantity": 0
-    },
     "SPP041151202": {
       "id": 1662368140,
       "name": "Солнечная батарея / панель BlueSolar 115W-12V Poly 1030x668x30mm SPP041151202 Victron Energy 115Вт 12В",
@@ -3082,46 +2967,6 @@
       "price": 33.6,
       "quantity": 0
     },
-    "SPM043602402": {
-      "id": 1662208359,
-      "name": "Солнечная батарея / панель BlueSolar 360W-24V Mono 1980x1002x40mm SPM043602402 Victron Energy 360Вт 24В",
-      "main_image": "https://images.prom.ua/3922358212_w200_h200_solnechnaya-batareya-.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 254.4,
-      "quantity": 0
-    },
-    "SPM043052002": {
-      "id": 1661893947,
-      "name": "Солнечная батарея / панель BlueSolar 305W-20V Mono 1658x1002x35mm SPM043052002 Victron Energy 305Вт 20В",
-      "main_image": "https://images.prom.ua/3922358212_w200_h200_solnechnaya-batareya-.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 265.2,
-      "quantity": 0
-    },
-    "SPM040301200": {
-      "id": 1661889048,
-      "name": "Солнечная батарея / панель BlueSolar 30W-12V Mono 560×350×25mm SPM040301200 Victron Energy 30Вт 12В",
-      "main_image": "https://images.prom.ua/3922358212_w200_h200_solnechnaya-batareya-.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 40.8,
-      "quantity": 0
-    },
-    "SPM040901200": {
-      "id": 1661819641,
-      "name": "Солнечная батарея / панель BlueSolar 90W-12V Mono 780×668×30mm SPM040901200 Victron Energy 90Вт 12В",
-      "main_image": "https://images.prom.ua/3927997228_w200_h200_solnechnaya-batareya-.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 103.2,
-      "quantity": 0
-    },
     "SPM040551200": {
       "id": 1661801419,
       "name": "Солнечная батарея / солнечная панель BlueSolar 55W-12V Mono 545×668×25mm SPM040551200 Victron Energy 55Вт 12В",
@@ -3140,16 +2985,6 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 51.6,
-      "quantity": 0
-    },
-    "SPM040201200": {
-      "id": 1660950107,
-      "name": "Солнечная батарея / панель BlueSolar 20W-12V Mono 440×350×25mm SPM040201200 Victron Energy 20Вт 12В",
-      "main_image": "https://images.prom.ua/3922358206_w200_h200_solnechnaya-batareya-.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 34.8,
       "quantity": 0
     },
     "BPC940100200": {
@@ -3220,36 +3055,6 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 150,
-      "quantity": 0
-    },
-    "CIP137250010": {
-      "id": 1532680256,
-      "name": "Плавкий предохранитель MEGA-fuse 250A/58V CIP137250010 Victron Energy 250А 58В для систем до 48В",
-      "main_image": "https://images.prom.ua/3399044546_w200_h200_plavkij-predohranitel-mega-fuse.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 4.4,
-      "quantity": 0
-    },
-    "CIP137200010": {
-      "id": 1532610928,
-      "name": "Плавкий предохранитель MEGA-fuse 200A/58V CIP137200010 Victron Energy 200А 58В для систем до 48В",
-      "main_image": "https://images.prom.ua/3399044546_w200_h200_plavkij-predohranitel-mega-fuse.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 4.4,
-      "quantity": 0
-    },
-    "BPP900450100": {
-      "id": 1514210428,
-      "name": "Контроллер и мониторинг Cerbo GX BPP900450100 Victron Energy",
-      "main_image": "https://images.prom.ua/3449213455_w200_h200_kontroller-i-monitoring.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 318,
       "quantity": 0
     },
     "CIP106100000": {
@@ -3392,16 +3197,6 @@
       "price": 2.4,
       "quantity": 0
     },
-    "CIP132150010": {
-      "id": 1498692672,
-      "name": "Плавкий предохранитель MIDI-fuse 150A/32V CIP132150010 Victron Energy 150А 32В",
-      "main_image": "https://images.prom.ua/3399151978_w200_h200_plavkij-predohranitel-midi-fuse.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 4,
-      "quantity": 0
-    },
     "CIP132125010": {
       "id": 1498690772,
       "name": "Плавкий предохранитель MIDI-fuse 125A/32V CIP132125010 Victron Energy 125А 32В",
@@ -3420,26 +3215,6 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 2.4,
-      "quantity": 0
-    },
-    "CIP132080010": {
-      "id": 1498687156,
-      "name": "Плавкий предохранитель MIDI-fuse 80A/32V CIP132080010 Victron Energy 80А 32В",
-      "main_image": "https://images.prom.ua/3399130837_w200_h200_plavkij-predohranitel-midi-fuse.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 2.4,
-      "quantity": 0
-    },
-    "CIP132060010": {
-      "id": 1498660433,
-      "name": "Плавкий предохранитель MIDI-fuse 60A/32V CIP132060010 Victron Energy 60А 32В",
-      "main_image": "https://images.prom.ua/3399115457_w200_h200_plavkij-predohranitel-midi-fuse.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 3.2,
       "quantity": 0
     },
     "CIP000050001": {
@@ -3475,66 +3250,6 @@
     "CIP136400010": {
       "id": 1498538232,
       "name": "Плавкий предохранитель MEGA-fuse 400A/32V CIP136400010 Victron Energy 400А 32В",
-      "main_image": "https://images.prom.ua/3399044546_w200_h200_plavkij-predohranitel-mega-fuse.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 4.4,
-      "quantity": 0
-    },
-    "CIP136300010": {
-      "id": 1498536853,
-      "name": "Плавкий предохранитель MEGA-fuse 300A/32V CIP136300010 Victron Energy 300А 32В",
-      "main_image": "https://images.prom.ua/3399044546_w200_h200_plavkij-predohranitel-mega-fuse.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 4.4,
-      "quantity": 0
-    },
-    "CIP136250010": {
-      "id": 1498536123,
-      "name": "Плавкий предохранитель MEGA-fuse 250A/32V CIP136250010 Victron Energy 250А 32В",
-      "main_image": "https://images.prom.ua/3399044546_w200_h200_plavkij-predohranitel-mega-fuse.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 4.4,
-      "quantity": 0
-    },
-    "CIP136225010": {
-      "id": 1498535200,
-      "name": "Плавкий предохранитель MEGA-fuse 225A/32V CIP136225010 Victron Energy 225А 32В",
-      "main_image": "https://images.prom.ua/3399044546_w200_h200_plavkij-predohranitel-mega-fuse.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 4.4,
-      "quantity": 0
-    },
-    "CIP136175010": {
-      "id": 1498526928,
-      "name": "Плавкий предохранитель MEGA-fuse 175A/32V CIP136175010 Victron Energy 175А 32В",
-      "main_image": "https://images.prom.ua/3399044546_w200_h200_plavkij-predohranitel-mega-fuse.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 4.4,
-      "quantity": 0
-    },
-    "CIP136100010": {
-      "id": 1498523919,
-      "name": "Плавкий предохранитель MEGA-fuse 100A/32V CIP136100010 Victron Energy 100А 32В",
-      "main_image": "https://images.prom.ua/3399044546_w200_h200_plavkij-predohranitel-mega-fuse.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 4.4,
-      "quantity": 0
-    },
-    "CIP136080010": {
-      "id": 1498514177,
-      "name": "Плавкий предохранитель MEGA-fuse 80A/32V CIP136080010 Victron Energy 80А 32В",
       "main_image": "https://images.prom.ua/3399044546_w200_h200_plavkij-predohranitel-mega-fuse.jpg",
       "status": "on_display",
       "presence": "not_available",
@@ -3892,16 +3607,6 @@
       "price": 46.8,
       "quantity": 0
     },
-    "SCC040010050": {
-      "id": 1370126606,
-      "name": "Солнечный контроллер заряда без Bluetooth BlueSolar PWM-LCD&USB 48V-10A SCC040010050 Victron Energy 48В 10А",
-      "main_image": "https://images.prom.ua/5987344485_w200_h200_solnechnyj-kontroller-zaryada.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 39.6,
-      "quantity": 0
-    },
     "SCC010030050": {
       "id": 1370126605,
       "name": "Солнечный контроллер заряда без Bluetooth BlueSolar PWM-LCD&USB 12/24V-30A SCC010030050 Victron Energy 12-24В 30А",
@@ -3950,26 +3655,6 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 31.2,
-      "quantity": 0
-    },
-    "SCC040030020": {
-      "id": 1370126600,
-      "name": "Солнечный контроллер заряда BlueSolar PWM-Light 48V-30A SCC040030020 Victron Energy 48В 30А",
-      "main_image": "https://images.prom.ua/2974554086_w200_h200_solnechnyj-kontroller-zaryada.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 79.2,
-      "quantity": 0
-    },
-    "SCC040020020": {
-      "id": 1370126599,
-      "name": "Солнечный контроллер заряда BlueSolar PWM-Light 48V-20A SCC040020020 Victron Energy 48В 20А",
-      "main_image": "https://images.prom.ua/2974554086_w200_h200_solnechnyj-kontroller-zaryada.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 68.4,
       "quantity": 0
     },
     "SCC010030020": {
@@ -4762,16 +4447,6 @@
       "price": 140.4,
       "quantity": 0
     },
-    "ITR050362041": {
-      "id": 1025490306,
-      "name": "Изолирующий трансформатор Isolation Trans. 3600W Auto 230V ITR050362041 Victron Energy",
-      "main_image": "https://images.prom.ua/1934925363_w200_h200_izoliruyuschij-transformator-isolation.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 808.8,
-      "quantity": 0
-    },
     "SDFI0000000": {
       "id": 1025433675,
       "name": "Устройство включения резерва Filax-2 230V/50Hz-240V/60Hz SDFI0000000 Victron Energy",
@@ -4830,16 +4505,6 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 2451.6,
-      "quantity": 0
-    },
-    "BAT512132410": {
-      "id": 1024854271,
-      "name": "Аккумулятор LiFePO4 Battery 12,8V/330Ah - Smart BAT512132410 Victron Energy 12,8В 330Ач",
-      "main_image": "https://images.prom.ua/1933417184_w200_h200_akkumulyator-lifepo4-battery.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 2223.6,
       "quantity": 0
     },
     "BAT512120610": {
@@ -5120,16 +4785,6 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 909.6,
-      "quantity": 0
-    },
-    "CMP242120000": {
-      "id": 1024852178,
-      "name": "Гибридный инвертор Victron Energy MultiPlus Compact 24/1200/25-16 (24В, 1200ВА, 25А) чистая синусоида CMP242120000",
-      "main_image": "https://images.prom.ua/6973845410_w200_h200_gibridnyj-invertor-victron.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 854.4,
       "quantity": 0
     },
     "CMP122120000": {
@@ -5500,16 +5155,6 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 780,
-      "quantity": 0
-    },
-    "PIN482161000": {
-      "id": 1024161224,
-      "name": "Инвертор Victron Energy Phoenix Smart 48/1600 (48В, 1600ВА) чистая синусоида PIN482161000",
-      "main_image": "https://images.prom.ua/1931399085_w200_h200_invertor-victron-energy.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 620.4,
       "quantity": 0
     },
     "PIN242161000": {
@@ -6082,16 +5727,6 @@
       "price": 68.4,
       "quantity": 1
     },
-    "ORI241270020": {
-      "id": 1017085619,
-      "name": "Конвертор Orion 24/12-70 ORI241270020 Victron Energy 24-12В 70А 840Вт",
-      "main_image": "https://images.prom.ua/1913443774_w200_h200_konvertor-orion-2412-70.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 159,
-      "quantity": 0
-    },
     "ORI241240021": {
       "id": 1017085618,
       "name": "Конвертор Orion 24/12-40 ORI241240021 Victron Energy 24-12В 40А 480Вт",
@@ -6440,26 +6075,6 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 434.4,
-      "quantity": 0
-    },
-    "PCH012050001": {
-      "id": 1013171034,
-      "name": "Зарядное устройство Victron Energy Phoenix Charger 12/50 (12В, 50А) PCH012050001",
-      "main_image": "https://images.prom.ua/1896256153_w200_h200_zaryadnoe-ustrojstvo-victron.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 795.6,
-      "quantity": 0
-    },
-    "PCH012030001": {
-      "id": 1013171033,
-      "name": "Зарядное устройство Victron Energy Phoenix Charger 12/30 (12В, 30А) PCH012030001",
-      "main_image": "https://images.prom.ua/1896256153_w200_h200_zaryadnoe-ustrojstvo-victron.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 596.4,
       "quantity": 0
     },
     "CCH024060000": {
