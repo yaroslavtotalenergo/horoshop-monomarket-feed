@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T12:36:32.873Z",
+  "updatedAt": "2026-11-05T12:47:56.347Z",
   "total": 618,
   "skus": [
     "BPC240832064R",
@@ -4490,7 +4490,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 154.8,
-      "quantity": null
+      "quantity": 0
     },
     "CYR010120011 (R)": {
       "id": 1025539673,
@@ -4500,7 +4500,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 62.4,
-      "quantity": null
+      "quantity": 0
     },
     "ARG200301020 (R)": {
       "id": 1025539672,
@@ -6050,7 +6050,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 81.6,
-      "quantity": null
+      "quantity": 0
     },
     "ORI122420020": {
       "id": 1017085622,
@@ -6130,7 +6130,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 48,
-      "quantity": null
+      "quantity": 0
     },
     "ORI241210200(R)": {
       "id": 1017085614,
@@ -6140,7 +6140,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 42,
-      "quantity": null
+      "quantity": 0
     },
     "ORI241205200(R)": {
       "id": 1017085613,
