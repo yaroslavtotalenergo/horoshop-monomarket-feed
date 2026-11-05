@@ -84,3 +84,29 @@ export function getDaysToDispatch() {
   return 1;               // All other days
 }
 
+export function isAllowedPromBrand(product) {
+  if (!product) return false;
+
+  const vendorCode = String(product.vendorCode || product.sku || '').trim();
+  const name = String(product.name || '').toLowerCase();
+  const desc = String(product.description || '').toLowerCase();
+  const cat = String(product.category || '').toLowerCase();
+  const fullText = `${name} ${desc} ${cat} ${vendorCode.toLowerCase()}`;
+
+  // 1. Victron Energy
+  if (fullText.includes('victron')) return true;
+  if (/^(BPC|ORI|PMR|BPP|SPM|SCA|CIP|ASS|VEC|BAT|PIN|SCC|CYR|SHU|DMC|MSP|BMP|REC|REL|CSE|BAM|CDP|SBS|VE\.|MPP|QUA|PMP|TMS|BBS|BOX|CAL|COP|COS|DIP|ECE|GRI|INP|ISO|OUT|PAN|PLA|PLU|POT|POW|RPR|SDR|SKY|SPA|STR|TEM|VE48|ADA|ARG|BBA|BCD|BMS|BPA|BPR|CCH|CEP|CIN|CMP|CTR|EVC|FB|GDI|ITR|LV|LYN|PCH|PMC|PPP|PSC|PYLP|PYLU|RCD|SDFI|SDRP|SDTG|SHP|SIN|SKI|SPP|STG|SUNC|TQS|VBB|VBS|VPN)[0-9]/i.test(vendorCode)) {
+    return true;
+  }
+
+  // 2. Sunlight
+  if (fullText.includes('sunlight') || /^SUNP/i.test(vendorCode)) return true;
+
+  // 3. Sacred Sun (including 'sucred' typo)
+  if (/s[au]cred\s*sun/i.test(fullText) || fullText.includes('sacred') || fullText.includes('sucred')) return true;
+  if (/^(SCIFP|SLSIFP|SSIF|SLS)/i.test(vendorCode)) return true;
+
+  return false;
+}
+
+

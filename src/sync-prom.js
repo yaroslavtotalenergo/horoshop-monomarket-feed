@@ -17,6 +17,32 @@ const path = require('path');
 
 const isDryRun = process.argv.includes('--dry-run');
 
+// Перевірка дозволених брендів для Prom: Victron Energy, Sunlight, Sacred Sun
+function isAllowedPromBrand(product) {
+  if (!product) return false;
+
+  const vendorCode = String(product.vendorCode || product.sku || '').trim();
+  const name = String(product.name || '').toLowerCase();
+  const desc = String(product.description || '').toLowerCase();
+  const cat = String(product.category || '').toLowerCase();
+  const fullText = `${name} ${desc} ${cat} ${vendorCode.toLowerCase()}`;
+
+  // 1. Victron Energy
+  if (fullText.includes('victron')) return true;
+  if (/^(BPC|ORI|PMR|BPP|SPM|SCA|CIP|ASS|VEC|BAT|PIN|SCC|CYR|SHU|DMC|MSP|BMP|REC|REL|CSE|BAM|CDP|SBS|VE\.|MPP|QUA|PMP|TMS|BBS|BOX|CAL|COP|COS|DIP|ECE|GRI|INP|ISO|OUT|PAN|PLA|PLU|POT|POW|RPR|SDR|SKY|SPA|STR|TEM|VE48|ADA|ARG|BBA|BCD|BMS|BPA|BPR|CCH|CEP|CIN|CMP|CTR|EVC|FB|GDI|ITR|LV|LYN|PCH|PMC|PPP|PSC|PYLP|PYLU|RCD|SDFI|SDRP|SDTG|SHP|SIN|SKI|SPP|STG|SUNC|TQS|VBB|VBS|VPN)[0-9]/i.test(vendorCode)) {
+    return true;
+  }
+
+  // 2. Sunlight
+  if (fullText.includes('sunlight') || /^SUNP/i.test(vendorCode)) return true;
+
+  // 3. Sacred Sun (including 'sucred' typo)
+  if (/s[au]cred\s*sun/i.test(fullText) || fullText.includes('sacred') || fullText.includes('sucred')) return true;
+  if (/^(SCIFP|SLSIFP|SSIF|SLS)/i.test(vendorCode)) return true;
+
+  return false;
+}
+
 async function syncProm() {
   console.log(`🚀 Початок синхронізації з Prom.ua${isDryRun ? ' [РЕЖИМ ТЕСТУ / DRY-RUN]' : ''}...`);
 
@@ -81,24 +107,23 @@ async function syncProm() {
 
   console.log(`✅ Отримано з Prom.ua: ${promProducts.length} товарів.`);
 
-  // Збереження списку існуючих на Prom артикулів та їх поточних статусів для адмінки
+  // Збереження списку існуючих на Prom артикулів дозволених брендів (Victron Energy, Sunlight, Sacred Sun) для адмінки
   try {
-    const allSkus = Array.from(new Set(promProducts.map(p => p.sku ? String(p.sku).trim() : null).filter(Boolean)));
+    const allowedProducts = promProducts.filter(p => p.sku && isAllowedPromBrand({ vendorCode: p.sku, name: p.name }));
+    const allSkus = Array.from(new Set(allowedProducts.map(p => String(p.sku).trim())));
     const skuMap = {};
-    for (const p of promProducts) {
-      if (p.sku) {
-        const s = String(p.sku).trim();
-        skuMap[s] = {
-          id: p.id,
-          name: p.name || '',
-          main_image: p.main_image || null,
-          status: p.status,
-          presence: p.presence,
-          presenceTitle: p.presence_title || (p.presence === 'available' ? 'В наявності' : 'Немає в наявності'),
-          price: p.price,
-          quantity: p.quantity_in_stock
-        };
-      }
+    for (const p of allowedProducts) {
+      const s = String(p.sku).trim();
+      skuMap[s] = {
+        id: p.id,
+        name: p.name || '',
+        main_image: p.main_image || null,
+        status: p.status,
+        presence: p.presence,
+        presenceTitle: p.presence_title || (p.presence === 'available' ? 'В наявності' : 'Немає в наявності'),
+        price: p.price,
+        quantity: p.quantity_in_stock
+      };
     }
     const dataToSave = {
       updatedAt: new Date().toISOString(),
@@ -121,11 +146,18 @@ async function syncProm() {
   let enabledOutOfStockCount = 0;
   let disabledCount = 0;
   let skippedNoSku = 0;
+  let skippedOtherBrand = 0;
 
   for (const p of promProducts) {
     const sku = p.sku ? String(p.sku).trim() : null;
     if (!sku) {
       skippedNoSku++;
+      continue;
+    }
+
+    // Синхронізуємо тільки дозволені бренди: Victron Energy, Sunlight, Sacred Sun
+    if (!isAllowedPromBrand({ vendorCode: sku, name: p.name })) {
+      skippedOtherBrand++;
       continue;
     }
 
@@ -199,6 +231,7 @@ async function syncProm() {
   console.log(`   🔴 Немає в наявності: ${enabledOutOfStockCount}`);
   console.log(`   ⚪ Вимкнено для Prom: ${disabledCount}`);
   console.log(`   ⚠️ Без артикулу (пропущено): ${skippedNoSku}`);
+  console.log(`   ⏩ Інші бренди (пропущено): ${skippedOtherBrand}`);
   console.log(`   🔄 Потребують оновлення на Prom: ${updates.length}`);
   console.log('────────────────────────────────────────');
 

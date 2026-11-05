@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { isHoroshopOutOfStock, buildHierarchicalGroups, matchesCategoryFilter } from '../utils/helpers';
+import { isHoroshopOutOfStock, buildHierarchicalGroups, matchesCategoryFilter, isAllowedPromBrand } from '../utils/helpers';
 
 export default function PromTab({
   catalog = [],
@@ -40,16 +40,18 @@ export default function PromTab({
   const promWhitelistSet = useMemo(() => new Set(promWhitelist.map(s => String(s).trim())), [promWhitelist]);
 
   const fullPromCatalog = useMemo(() => {
-    const list = [...catalog];
+    // Only include catalog items belonging to Victron Energy, Sunlight, or Sacred Sun
+    const list = catalog.filter(p => isAllowedPromBrand(p));
     const catalogCodes = new Set(
-      catalog.map(p => (p.vendorCode ? String(p.vendorCode).trim() : ''))
+      list.map(p => (p.vendorCode ? String(p.vendorCode).trim() : ''))
     );
 
+    // Only include Prom-only items belonging to Victron Energy, Sunlight, or Sacred Sun
     promSkusList.forEach(sku => {
       const code = String(sku).trim();
       if (code && !catalogCodes.has(code)) {
         const item = promItemsMap[code];
-        list.push({
+        const promProduct = {
           id: item ? `prom-${item.id}` : `prom-${code}`,
           vendorCode: code,
           name: (item && item.name) || names[code] || `Товар ${code}`,
@@ -61,7 +63,10 @@ export default function PromTab({
           horoshopAvailable: false,
           onlyOnProm: true,
           promItem: item
-        });
+        };
+        if (isAllowedPromBrand(promProduct)) {
+          list.push(promProduct);
+        }
       }
     });
 
@@ -818,3 +823,4 @@ export default function PromTab({
     </div>
   );
 }
+
