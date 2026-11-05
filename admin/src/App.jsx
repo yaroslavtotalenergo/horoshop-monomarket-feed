@@ -427,18 +427,77 @@ export default function App() {
     setSavingProm(false);
   };
 
-  const handleTriggerPromSync = async () => {
+  const handleRefreshProm = async () => {
     setSyncingProm(true);
+    showToast('⏳ Опитуємо Prom.ua та оновлюємо список артикулів...');
     try {
+      const startTime = Date.now();
       await api.triggerWorkflow();
-      showToast('✅ Синхронізацію з Prom.ua запущено (~1-2 хв)');
+
+      // Опитуємо статус виконання GitHub Actions (кожні 4 сек, до 120 сек)
+      for (let i = 0; i < 30; i++) {
+        await new Promise(r => setTimeout(r, 4000));
+        try {
+          const runs = await api.getWorkflowRuns(5);
+          const currentRun = runs.find(r => r.name === 'Update Monomarket Feeds' && new Date(r.created_at).getTime() >= startTime - 15000);
+          if (currentRun && currentRun.status === 'completed') {
+            break;
+          }
+        } catch { }
+      }
+
+      await loadData();
+      showToast('✅ Список товарів та артикулів з Prom.ua успішно оновлено!');
     } catch (e) {
-      showToast('❌ Помилка запуску: ' + (e?.message || ''));
+      console.error(e);
+      showToast('❌ Помилка оновлення з Prom.ua: ' + (e?.message || ''));
+    } finally {
+      setSyncingProm(false);
+      loadLogs();
     }
-    setSyncingProm(false);
   };
 
-  const promSkusSet = useMemo(() => new Set(promSkus.map(s => String(s).trim())), [promSkus]);
+  const handlePushStockToProm = async () => {
+    setSyncingProm(true);
+    showToast('⏳ Передаємо залишки та наявність на Prom.ua...');
+    try {
+      const startTime = Date.now();
+      await api.triggerWorkflow();
+
+      for (let i = 0; i < 30; i++) {
+        await new Promise(r => setTimeout(r, 4000));
+        try {
+          const runs = await api.getWorkflowRuns(5);
+          const currentRun = runs.find(r => r.name === 'Update Monomarket Feeds' && new Date(r.created_at).getTime() >= startTime - 15000);
+          if (currentRun && currentRun.status === 'completed') {
+            break;
+          }
+        } catch { }
+      }
+
+      await loadData();
+      showToast('✅ Залишки та наявність успішно відправлено на Prom.ua!');
+    } catch (e) {
+      console.error(e);
+      showToast('❌ Помилка синхронізації: ' + (e?.message || ''));
+    } finally {
+      setSyncingProm(false);
+      loadLogs();
+    }
+  };
+
+  const promSkusList = useMemo(() => {
+    if (Array.isArray(promSkus)) return promSkus;
+    if (promSkus && Array.isArray(promSkus.skus)) return promSkus.skus;
+    return [];
+  }, [promSkus]);
+
+  const promItemsMap = useMemo(() => {
+    if (promSkus && promSkus.items && typeof promSkus.items === 'object') return promSkus.items;
+    return {};
+  }, [promSkus]);
+
+  const promSkusSet = useMemo(() => new Set(promSkusList.map(s => String(s).trim())), [promSkusList]);
   const promWhitelistSet = useMemo(() => new Set(promWhitelist.map(s => String(s).trim())), [promWhitelist]);
 
   const handlePromBulkListToggle = (enable, productList = filteredPromCatalog) => {
@@ -1355,6 +1414,12 @@ export default function App() {
               </span>
             )}
 
+            {promItemsMap[code] && (
+              <span style={{ fontSize: '0.73rem', color: '#6d28d9', background: '#f5f3ff', border: '1px solid #ddd6fe', padding: '0.12rem 0.45rem', borderRadius: '4px', fontWeight: 600 }} title={`ID товару в системі Prom: ${promItemsMap[code].id}`}>
+                Пром: {promItemsMap[code].presenceTitle || (promItemsMap[code].presence === 'available' ? 'В наявності' : 'Немає')} ({promItemsMap[code].quantity ?? 0} шт.)
+              </span>
+            )}
+
             {existsOnProm && stockOverrides[code] === undefined && (
               <span style={{ fontSize: '0.72rem', color: '#4338ca', background: '#e0e7ff', padding: '0.12rem 0.45rem', borderRadius: '4px', fontWeight: 600 }}>
                 ❓ Немає в Excel-складі
@@ -2047,19 +2112,29 @@ export default function App() {
           <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
             <button
               className="btn"
-              style={{ background: '#8b5cf6', color: '#fff' }}
-              onClick={handleTriggerPromSync}
+              style={{ background: '#6366f1', color: '#fff', boxShadow: '0 1px 3px rgba(99, 102, 241, 0.3)' }}
+              onClick={handleRefreshProm}
               disabled={syncingProm || loading || savingProm || !token}
-              title="Запустити синхронізацію з Prom.ua через GitHub Actions"
+              title="Підтягнути актуальний список товарів, нові артикули та статуси з Prom.ua"
             >
-              {syncingProm ? <span className="loader"></span> : '⚡ Синхронізувати з Prom.ua'}
+              {syncingProm ? <span className="loader" style={{ width: '16px', height: '16px' }}></span> : '🔄 Оновити з Prom.ua'}
+            </button>
+            <button
+              className="btn"
+              style={{ background: '#8b5cf6', color: '#fff', boxShadow: '0 1px 3px rgba(139, 92, 246, 0.3)' }}
+              onClick={handlePushStockToProm}
+              disabled={syncingProm || loading || savingProm || !token}
+              title="Передати поточні залишки зі складу на Prom.ua (переводить товари в 'В наявності' або 'Немає')"
+            >
+              {syncingProm ? <span className="loader" style={{ width: '16px', height: '16px' }}></span> : '⚡ Передати залишки на Prom'}
             </button>
             <button
               className="btn success"
               onClick={handleSaveProm}
               disabled={savingProm || syncingProm || loading || !token}
+              title="Зберегти позначені галочками товари для Prom.ua"
             >
-              {savingProm ? <span className="loader"></span> : '💾 Зберегти зміни Prom'}
+              {savingProm ? <span className="loader" style={{ width: '16px', height: '16px' }}></span> : '💾 Зберегти вибір Prom'}
             </button>
           </div>
         </div>

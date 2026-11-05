@@ -81,15 +81,37 @@ async function syncProm() {
 
   console.log(`✅ Отримано з Prom.ua: ${promProducts.length} товарів.`);
 
-  // Збереження списку існуючих на Prom артикулів для фільтрації в адмінці
+  // Збереження списку існуючих на Prom артикулів та їх поточних статусів для адмінки
   try {
     const allSkus = Array.from(new Set(promProducts.map(p => p.sku ? String(p.sku).trim() : null).filter(Boolean)));
-    fs.writeFileSync(path.join(__dirname, 'prom-skus.json'), JSON.stringify(allSkus, null, 2), 'utf8');
+    const skuMap = {};
+    for (const p of promProducts) {
+      if (p.sku) {
+        const s = String(p.sku).trim();
+        skuMap[s] = {
+          id: p.id,
+          status: p.status,
+          presence: p.presence,
+          presenceTitle: p.presence_title || (p.presence === 'available' ? 'В наявності' : 'Немає в наявності'),
+          price: p.price,
+          quantity: p.quantity_in_stock
+        };
+      }
+    }
+    const dataToSave = {
+      updatedAt: new Date().toISOString(),
+      total: allSkus.length,
+      skus: allSkus,
+      items: skuMap
+    };
+    fs.writeFileSync(path.join(__dirname, 'prom-skus.json'), JSON.stringify(dataToSave, null, 2), 'utf8');
     try {
       const { execSync } = require('child_process');
       execSync('git add src/prom-skus.json');
     } catch (_) { }
-  } catch (e) { }
+  } catch (e) {
+    console.warn('⚠️ Не вдалося зберегти src/prom-skus.json:', e.message);
+  }
 
   // 4. Аналіз та формування оновлень
   const updates = [];
