@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T18:54:34.179Z",
+  "updatedAt": "2026-11-05T19:04:42.028Z",
   "total": 583,
   "skus": [
     "BPC240832064R",
@@ -2972,10 +2972,10 @@
       "name": "Солнечная батарея / солнечная панель BlueSolar 55W-12V Mono 545×668×25mm SPM040551200 Victron Energy 55Вт 12В",
       "main_image": "https://images.prom.ua/3922358212_w200_h200_solnechnaya-batareya-.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 75.6,
-      "quantity": 0
+      "quantity": 46
     },
     "SPM040401200": {
       "id": 1661781296,
@@ -4122,10 +4122,10 @@
       "name": "Зарядное устройство Victron Energy Blue Smart IP65 12/25 (12В, 25А, Bluetooth) BPC122535064",
       "main_image": "https://images.prom.ua/4931532534_w200_h200_zaryadnoe-ustrojstvo-victron.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 222,
-      "quantity": 0
+      "quantity": 4
     },
     "BCD000802000": {
       "id": 1025539678,
@@ -5332,10 +5332,10 @@
       "name": "Инвертор Victron Energy Phoenix 12/800 VE.Direct Schuko (12В, 800ВА) чистая синусоида PIN121801210",
       "main_image": "https://images.prom.ua/1931398645_w200_h200_invertor-victron-energy.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 277.2,
-      "quantity": 0
+      "quantity": 1
     },
     "PIN481501200": {
       "id": 1024161204,
@@ -5382,10 +5382,10 @@
       "name": "Инвертор Victron Energy Phoenix 24/375 VE.Direct Schuko (24В, 375ВА) чистая синусоида PIN241371210",
       "main_image": "https://images.prom.ua/1931398630_w200_h200_invertor-victron-energy.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 144,
-      "quantity": 0
+      "quantity": 1
     },
     "PIN121371200": {
       "id": 1024161199,
@@ -6342,20 +6342,20 @@
       "name": "Зарядное устройство Victron Energy Blue Smart IP65s 12/5 (12В, 5А, Bluetooth) BPC120535064R",
       "main_image": "https://images.prom.ua/1883239550_w200_h200_zaryadnoe-ustrojstvo-victron.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 108,
-      "quantity": 0
+      "quantity": 3
     },
     "BPC120435064R": {
       "id": 1004678883,
       "name": "Зарядное устройство Victron Energy Blue Smart IP65s 12/4 (12В, 4А, Bluetooth) BPC120435064R",
       "main_image": "https://images.prom.ua/1881231857_w200_h200_zaryadnoe-ustrojstvo-victron.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 97.2,
-      "quantity": 0
+      "quantity": 1
     },
     "BPC241647002": {
       "id": 1004379176,
