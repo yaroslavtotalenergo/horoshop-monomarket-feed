@@ -541,27 +541,7 @@ async function main() {
     // 2. Парсинг
     const { offers: rawOffers, rawCategories } = parseHoroshopXml(xmlText);
     const categoryPathMap = buildCategoryPathMap(rawCategories);
-
-    // Читаємо попередній catalog.json для збереження товарів, відсутніх у фіді (наприклад, Pylontech)
     const catalogPath = path.join(FEEDS_DIR, 'catalog.json');
-    let existingCatalog = [];
-    try {
-      if (fs.existsSync(catalogPath)) {
-        existingCatalog = JSON.parse(fs.readFileSync(catalogPath, 'utf-8'));
-      }
-    } catch (e) {
-      console.warn('⚠️ Не вдалося прочитати попередній catalog.json:', e.message);
-    }
-
-    const manualCategoryOverrides = {
-      'PYLUS5000TE': 'Акумуляторні батареї > Акумулятори LiFePO4 48,0 В',
-      'PYLUS3000CTE': 'Акумуляторні батареї > Акумулятори LiFePO4 48,0 В',
-      'PYLUS2000CTE': 'Акумуляторні батареї > Акумулятори LiFePO4 48,0 В',
-      'PYLPELTE': 'Акумуляторні батареї > Акумулятори LiFePO4 48,0 В',
-      'PYLUKIT25': 'Моніторинг та керування > Інформаційні кабелі',
-      'LV-HUB': 'Моніторинг та керування > Центри моніторингу',
-      'FB-L-16-Pro': 'Акумуляторні батареї > Акумулятори LiFePO4 51,2 В',
-    };
 
     // 3. Трансформація
     let rawOffersSlice = rawOffers;
@@ -603,16 +583,6 @@ async function main() {
       }
 
       validOffers.push(o);
-    }
-
-    // Додаємо збережені товари, яких немає у сирому фіді (ТІЛЬКИ якщо вони вказані у manualCategoryOverrides, наприклад Pylontech)
-    for (const existingItem of existingCatalog) {
-      const code = String(existingItem.vendorCode || existingItem.id || '').trim();
-      if (code && !feedCodes.has(code) && manualCategoryOverrides[code]) {
-        existingItem.category = manualCategoryOverrides[code];
-        updatedCategoryMap[code] = existingItem.category;
-        catalog.push(existingItem);
-      }
     }
 
     // Зберігаємо оновлену мапу категорій
