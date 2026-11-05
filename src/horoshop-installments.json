@@ -201,7 +201,6 @@
   "SCC010010000": "off",
   "SCC010010050": "off",
   "SCC010020020": "off",
-  "SUNPOW51100": "on",
   "SUNCONINV": "on",
   "SUNCOMPAR": "on",
   "TMS4801001003": "on",
@@ -279,5 +278,7 @@
   "CIP138400020": "off",
   "CIP138500020": "off",
   "CIP143500020": "off",
-  "CIP140325000": "off"
+  "CIP140325000": "off",
+  "FB-L-16-Pro": "off",
+  "SUNPOW51100": "on"
 }
