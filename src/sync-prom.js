@@ -90,6 +90,8 @@ async function syncProm() {
         const s = String(p.sku).trim();
         skuMap[s] = {
           id: p.id,
+          name: p.name || '',
+          main_image: p.main_image || null,
           status: p.status,
           presence: p.presence,
           presenceTitle: p.presence_title || (p.presence === 'available' ? 'В наявності' : 'Немає в наявності'),

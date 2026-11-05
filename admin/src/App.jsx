@@ -500,6 +500,39 @@ export default function App() {
   const promSkusSet = useMemo(() => new Set(promSkusList.map(s => String(s).trim())), [promSkusList]);
   const promWhitelistSet = useMemo(() => new Set(promWhitelist.map(s => String(s).trim())), [promWhitelist]);
 
+  const fullPromCatalog = useMemo(() => {
+    const list = [...catalog];
+    const catalogCodes = new Set(
+      catalog.map(p => (p.vendorCode ? String(p.vendorCode).trim() : ''))
+    );
+
+    promSkusList.forEach(sku => {
+      const code = String(sku).trim();
+      if (code && !catalogCodes.has(code)) {
+        const item = promItemsMap[code];
+        list.push({
+          id: item ? `prom-${item.id}` : `prom-${code}`,
+          vendorCode: code,
+          name: (item && item.name) || names[code] || `Товар ${code}`,
+          price: (item && item.price) || 0,
+          category: 'Тільки на Prom.ua',
+          picture: (item && item.main_image) || null,
+          stock: stockOverrides[code] !== undefined ? stockOverrides[code] : 0,
+          available: false,
+          horoshopAvailable: false,
+          onlyOnProm: true,
+          promItem: item
+        });
+      }
+    });
+
+    return list;
+  }, [catalog, promSkusList, promItemsMap, names, stockOverrides]);
+
+  const promCategoryTree = useMemo(() => {
+    return buildHierarchicalGroups(fullPromCatalog);
+  }, [fullPromCatalog]);
+
   const handlePromBulkListToggle = (enable, productList = filteredPromCatalog) => {
     const targetCodes = productList
       .map(p => p.vendorCode ? String(p.vendorCode).trim() : '')
@@ -520,7 +553,7 @@ export default function App() {
   const filteredPromCatalog = useMemo(() => {
     const q = promSearchQuery.toLowerCase().trim();
 
-    const filtered = catalog.filter(p => {
+    const filtered = fullPromCatalog.filter(p => {
       const code = p.vendorCode ? String(p.vendorCode).trim() : '';
       const name = p.name || '';
       if (q) {
@@ -537,8 +570,9 @@ export default function App() {
       if (isNaN(stock) || stock < 0) stock = 0;
       const horoOut = isHoroshopOutOfStock(p);
 
+      if (promFilterMode === 'only_on_prom') return !!p.onlyOnProm;
       if (promFilterMode === 'no_match') return !existsOnProm;
-      if (promFilterMode === 'out_of_stock_horoshop') return horoOut;
+      if (promFilterMode === 'out_of_stock_horoshop') return horoOut && !p.onlyOnProm;
       if (promFilterMode === 'enabled') return isEnabled && existsOnProm;
       if (promFilterMode === 'disabled') return !isEnabled && existsOnProm;
       if (promFilterMode === 'in_stock') return isEnabled && existsOnProm && stock > 0;
@@ -548,7 +582,7 @@ export default function App() {
     });
 
     return filtered;
-  }, [catalog, promSearchQuery, promCategoryFilter, promFilterMode, promWhitelistSet, stockOverrides, promSkusSet]);
+  }, [fullPromCatalog, promSearchQuery, promCategoryFilter, promFilterMode, promWhitelistSet, stockOverrides, promSkusSet]);
 
   const promStats = useMemo(() => {
     let enabledCount = 0;
@@ -557,15 +591,18 @@ export default function App() {
     let disabledCount = 0;
     let noMatchCount = 0;
     let outOfStockHoroshopCount = 0;
+    let onlyOnPromCount = 0;
 
-    catalog.forEach(p => {
+    fullPromCatalog.forEach(p => {
       const code = p.vendorCode ? String(p.vendorCode).trim() : '';
       const isEnabled = promWhitelistSet.has(code);
       const existsOnProm = promSkusSet.has(code);
       let stock = stockOverrides[code] !== undefined ? parseInt(stockOverrides[code], 10) : 0;
       if (isNaN(stock) || stock < 0) stock = 0;
 
-      if (isHoroshopOutOfStock(p)) {
+      if (p.onlyOnProm) {
+        onlyOnPromCount++;
+      } else if (isHoroshopOutOfStock(p)) {
         outOfStockHoroshopCount++;
       }
 
@@ -581,15 +618,16 @@ export default function App() {
     });
 
     return {
-      total: catalog.length,
+      total: fullPromCatalog.length,
       enabled: enabledCount,
       inStock: inStockCount,
       outOfStock: outOfStockCount,
       disabled: disabledCount,
       noMatch: noMatchCount,
-      outOfStockHoroshop: outOfStockHoroshopCount
+      outOfStockHoroshop: outOfStockHoroshopCount,
+      onlyOnProm: onlyOnPromCount
     };
-  }, [catalog, promWhitelistSet, stockOverrides, promSkusSet]);
+  }, [fullPromCatalog, promWhitelistSet, stockOverrides, promSkusSet]);
 
   const promGrouped = useMemo(() => {
     return buildHierarchicalGroups(filteredPromCatalog);
@@ -1354,7 +1392,25 @@ export default function App() {
         <td style={{ padding: '0.85rem' }}>
           <div style={{ fontWeight: 600, color: 'var(--text-main)', marginBottom: '0.2rem', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '0.4rem' }}>
             <span>{names[code] || product.name}</span>
-            {isHoroshopOutOfStock(product) && (
+            {product.onlyOnProm ? (
+              <span
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.25rem',
+                  fontSize: '0.75rem',
+                  padding: '0.15rem 0.5rem',
+                  borderRadius: '4px',
+                  background: '#ede9fe',
+                  color: '#6d28d9',
+                  fontWeight: 600,
+                  whiteSpace: 'nowrap'
+                }}
+                title="Товар є на Prom.ua, але відсутній у вивантаженні Хорошопу"
+              >
+                🟣 Тільки на Prom.ua
+              </span>
+            ) : isHoroshopOutOfStock(product) ? (
               <span
                 style={{
                   display: 'inline-flex',
@@ -1372,7 +1428,7 @@ export default function App() {
               >
                 ⚠️ Немає в наявності на Хорошопі
               </span>
-            )}
+            ) : null}
           </div>
           <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
             {product.category || 'Без категорії'}
@@ -1425,7 +1481,7 @@ export default function App() {
                 ❓ Немає в Excel-складі
               </span>
             )}
-            {existsOnProm && isEnabled && stock > 0 && isHoroshopOutOfStock(product) && (
+            {existsOnProm && isEnabled && stock > 0 && !product.onlyOnProm && isHoroshopOutOfStock(product) && (
               <span style={{ fontSize: '0.72rem', color: '#b91c1c', background: '#fee2e2', padding: '0.12rem 0.45rem', borderRadius: '4px', fontWeight: 600 }}>
                 ⚠️ На сайті Хорошоп: «Немає»
               </span>
@@ -2199,6 +2255,15 @@ export default function App() {
           </div>
           <div
             className="stat-card"
+            style={{ cursor: 'pointer', border: promFilterMode === 'only_on_prom' ? '2px solid #9333ea' : '1px solid var(--border-color)', transition: 'all 0.2s', background: promFilterMode === 'only_on_prom' ? '#faf5ff' : 'transparent' }}
+            onClick={() => setPromFilterMode(promFilterMode === 'only_on_prom' ? 'all' : 'only_on_prom')}
+            title="Фільтр: товари, які є на Prom.ua, але відсутні у вивантаженні Хорошопу"
+          >
+            <div className="stat-label">📦 Тільки на Prom.ua</div>
+            <div className="stat-value" style={{ color: '#9333ea' }}>{promStats.onlyOnProm}</div>
+          </div>
+          <div
+            className="stat-card"
             style={{ cursor: 'pointer', border: promFilterMode === 'enabled' ? '2px solid #8b5cf6' : '1px solid var(--border-color)', transition: 'all 0.2s', background: promFilterMode === 'enabled' ? '#f5f3ff' : 'transparent' }}
             onClick={() => setPromFilterMode(promFilterMode === 'enabled' ? 'all' : 'enabled')}
             title="Фільтр: увімкнені для Prom.ua"
@@ -2654,7 +2719,8 @@ export default function App() {
               value={promFilterMode}
               onChange={e => setPromFilterMode(e.target.value)}
             >
-              <option value="all">👁️ Усі товари ({catalog.length})</option>
+              <option value="all">👁️ Усі товари ({promStats.total})</option>
+              <option value="only_on_prom">📦 Тільки на Prom.ua ({promStats.onlyOnProm})</option>
               <option value="no_match">⚠️ Немає збігу артикулу ({promStats.noMatch})</option>
               <option value="out_of_stock_horoshop">⚠️ Немає в наявності на Хорошопі ({promStats.outOfStockHoroshop})</option>
               <option value="enabled">🟣 Увімкнені для Prom ({promStats.enabled})</option>
@@ -2663,16 +2729,14 @@ export default function App() {
               <option value="disabled">⚪ Вимкнені (Немає в наявн.) ({promStats.disabled})</option>
             </select>
 
-            
-
             <select
               className="input-field"
               style={{ width: 'auto', minWidth: '260px', fontSize: '0.95rem', cursor: 'pointer' }}
               value={promCategoryFilter}
               onChange={e => setPromCategoryFilter(e.target.value)}
             >
-              <option value="all">📁 Усі категорії ({categoryTree.length} груп)</option>
-              {categoryTree.map(group => (
+              <option value="all">📁 Усі категорії ({promCategoryTree.length} груп)</option>
+              {promCategoryTree.map(group => (
                 <optgroup key={group.main} label={`${group.main} (${group.products.length})`}>
                   <option value={`main:${group.main}`}>↳ Всі «{group.main}» ({group.products.length})</option>
                   {group.subs.length > 1 && group.subs.map(sub => (
