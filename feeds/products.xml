@@ -17627,6 +17627,83 @@
       </tags>
     </offer>
     <offer>
+      <id>VE48060148PT</id>
+      <code>VE48060148PT</code>
+      <vendor_code>VE48060148PT</vendor_code>
+      <title><![CDATA[Комплект безперебійного живлення Victron MultiPlus 6 кВт з АКБ Pylontech 9,6 кВт-г з WiFi]]></title>
+      <barcode>VE48060148PT </barcode>
+      <category>Комплекти безперебійного живлення</category>
+      <brand>Victron Energy</brand>
+      <availability>Є в наявності</availability>
+      <description><![CDATA[<h1>Комплект резервного живлення Victron Energy + Pylontech — 6 кВт / 9,6 кВт·год</h1>
+
+<p><strong>Надійне живлення для дому або офісу в умовах частих вимкнень електроенергії.</strong> Комплект поєднує інвертор <strong>Victron MultiPlus-II GX</strong> та літієву батарею <strong>Pylontech</strong>: автоматично переходить на резерв і заряджає акумулятор після відновлення електропостачання.</p>
+
+<h2>Переваги комплекту</h2>
+
+<p>Push-сповіщення на телефон та повідомлення на електронну пошту допомагають вчасно реагувати без постійної перевірки застосунку.</p>
+<p>Для налаштування й діагностики сумісного обладнання також доступний VictronConnect&nbsp;для Android, iOS/iPadOS, Windows, macOS та Linux (AppImage).</p>
+
+<h3>Простий і зрозумілий монтаж із підтримкою</h3>
+<p>Підготовлені кабелі та схема підключення у PDF, розроблена проєктувальником, роблять підключення дуже простим та зрозумілим. Під час установлення надаємо віддалену технічну підтримку. Налаштування системи виконує висококваліфікований інженер із сертифікатом Victron Energy — з урахуванням вашого навантаження та умов електропостачання.</p>
+<ul>
+  <li>Гарантія — 5 років.</li>
+  <li>Сервісна підтримка — щонайменше 15 років.</li>
+</ul>
+
+<h2>До комплекту входять</h2>
+<ul>
+  <li>1 шт. × Інвертор-зарядний пристрій MultiPlus-II 48/6k5/100-50 GX (Артикул: PMP482606000)</li>
+  <li>2 × Акумулятор Pylontech US5000 LiFePO4 48В 100Аг 4,8 кВт·год (Артикул: PYLUS5000TE)</li>
+  <li>Pylontech Power Cable Kit – комплект силових та комунікаційних кабелів (Артикул: PYLUKIT25)</li>
+  <li>1 шт. × Запобіжник MEGA-fuse 250 А / 80 В (Артикул: CIP138250020)</li>
+  <li>1 шт. × Тримач запобіжника MEGA-fuse (Артикул: CIP000100001)</li>
+  <li>1 шт. × Кабель Victron Energy VE.Can to CAN-bus BMS type A, 1.8 м (Артикул: ASS030710118)</li>
+  <li>1 шт. × Червона перемичка 50 мм², M8–M8, 300 мм для з’єднання запобіжника з інвертором</li>
+  <li>1 послуга × Схема підключення у PDF, розроблена проєктувальником</li>
+  <li>1 послуга × Віддалене налаштування інженером із сертифікатом Victron Energy</li>
+</ul>
+
+<p><strong>Технічні параметри:</strong> Безперервна потужність інвертора — <strong>6500 Вт</strong> за температури 25 °C. Енергоємність АКБ <strong>9,6 кВт·год</strong> є номінальною.</p>]]></description>
+      <image_link>
+        <picture>https://total-energo.com.ua/content/images/30/komplekt-bezperebiinoho-zhyvlennia-victron-multiplus-6-kvt-z-akb-pylontech-96-kvt-h-z-wifi-86931748877689_+8c8163f998.png</picture>
+      </image_link>
+      <tags>
+        <param name="Вхідна напруга, В">230</param>
+        <param name="Ємність АКБ, Аг">200</param>
+        <param name="Напруга АКБ, В">48</param>
+        <param name="Струм зарядного пристрою, А">100</param>
+        <param name="Запас енергії у АКБ 100%, кВт*г">9.6</param>
+        <param name="Ресурс АКБ, років">15</param>
+        <param name="Час перезаряду 20-100%, годин">1.6</param>
+        <param name="Потужність вихідна від АКБ, кВт">6.5</param>
+        <param name="Потужність вихідна від АКБ, кВА">6.5</param>
+        <param name="Потужність вихідна від мережі, кВт">11</param>
+        <param name="Потужнісь вихідна пікова від АКБ, кВт">11</param>
+        <param name="Час автономії при 1кВт 230В, годин">8.7</param>
+        <param name="Час автономії при 2кВт 230В, годин">4.3</param>
+        <param name="Час автономії при 3кВт 230В, годин">2.9</param>
+        <param name="Час автономії при 4кВт 230В, годин">2.1</param>
+        <param name="Час автономії при 5кВт 230В, годин">1.8</param>
+        <param name="Максимальна температура заряду, °С">55</param>
+        <param name="Мінімальна температура заряду, °С">5</param>
+        <param name="Максимальна температура розряду, °С">55</param>
+        <param name="Мінімальна температура розряду, °С">–20</param>
+        <param name="Додавання потужності до мережі">Так</param>
+        <param name="ККД системи, %">96</param>
+        <param name="Модернізація у сонячну станцію">Так</param>
+        <param name="Можливість збільшення АКБ">Так</param>
+        <param name="Форма вихідного сигналу">Синусоїда</param>
+        <param name="Контроль через WiFi / WEB">Так</param>
+        <param name="Контроль через Ethernet / WEB">Так</param>
+        <param name="Контроль через Bluetooth">Так</param>
+        <param name="Підтримка СЦ через інтернет">Так</param>
+        <param name="Підтримує роботу від генератора">Через АВР</param>
+        <param name="Ресурс АКБ, циклів">6000</param>
+        <param name="Мережа">однофазна</param>
+      </tags>
+    </offer>
+    <offer>
       <id>PIN121801210</id>
       <code>PIN121801210</code>
       <vendor_code>PIN121801210</vendor_code>
