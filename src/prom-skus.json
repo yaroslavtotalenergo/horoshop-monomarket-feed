@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T14:05:01.121Z",
+  "updatedAt": "2026-11-05T14:19:06.131Z",
   "total": 618,
   "skus": [
     "BPC240832064R",
@@ -6700,7 +6700,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 158.4,
-      "quantity": 11
+      "quantity": 10
     },
     "BPC121031064R": {
       "id": 1005518473,
