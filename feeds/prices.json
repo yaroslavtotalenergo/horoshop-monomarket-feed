@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T21:33:37.107Z",
+  "updatedAt": "2026-11-05T22:04:46.169Z",
   "total": 343,
   "data": [
     {
@@ -17,7 +17,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -30,7 +30,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -43,7 +43,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -56,7 +56,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -69,7 +69,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -82,7 +82,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -95,7 +95,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -113,7 +113,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -131,7 +131,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -149,7 +149,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -162,7 +162,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -180,7 +180,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -198,7 +198,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -216,7 +216,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -234,7 +234,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -252,7 +252,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -270,7 +270,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -288,7 +288,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -301,7 +301,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -319,7 +319,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -337,7 +337,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -350,7 +350,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -363,7 +363,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -381,7 +381,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -399,7 +399,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -417,7 +417,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -430,7 +430,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -443,7 +443,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -456,7 +456,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -469,7 +469,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -482,7 +482,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -495,7 +495,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -508,7 +508,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -521,7 +521,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -534,7 +534,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -547,7 +547,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -560,7 +560,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -573,7 +573,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -586,7 +586,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -599,7 +599,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -612,7 +612,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -625,7 +625,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -638,7 +638,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -651,7 +651,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -664,7 +664,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -677,7 +677,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -695,7 +695,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -708,7 +708,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -721,7 +721,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -734,7 +734,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -747,7 +747,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -760,7 +760,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -773,7 +773,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -786,7 +786,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -799,7 +799,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -812,7 +812,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -825,7 +825,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -838,7 +838,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -851,7 +851,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -864,7 +864,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -877,7 +877,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -895,7 +895,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -908,7 +908,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -921,7 +921,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -934,7 +934,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -952,7 +952,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -965,7 +965,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -978,7 +978,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -991,7 +991,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1004,7 +1004,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1017,7 +1017,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1035,7 +1035,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1048,7 +1048,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1061,7 +1061,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1074,7 +1074,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1087,7 +1087,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1100,7 +1100,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1113,7 +1113,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1126,7 +1126,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1139,7 +1139,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1157,7 +1157,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1170,7 +1170,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1183,7 +1183,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1196,7 +1196,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1209,7 +1209,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1222,7 +1222,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1235,7 +1235,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1248,7 +1248,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1261,7 +1261,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1274,7 +1274,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1287,7 +1287,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1300,7 +1300,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1313,7 +1313,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1326,7 +1326,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1339,7 +1339,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1352,7 +1352,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1365,7 +1365,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1378,7 +1378,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1391,7 +1391,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1404,7 +1404,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1417,7 +1417,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1430,7 +1430,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1448,7 +1448,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1461,7 +1461,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1474,7 +1474,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1487,7 +1487,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1500,7 +1500,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1513,7 +1513,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1526,7 +1526,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1539,7 +1539,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1552,7 +1552,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1565,7 +1565,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1578,7 +1578,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1591,7 +1591,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1604,7 +1604,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1617,7 +1617,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1630,7 +1630,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1648,7 +1648,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1666,7 +1666,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1684,7 +1684,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1697,7 +1697,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1710,7 +1710,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1728,7 +1728,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1746,7 +1746,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1764,7 +1764,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1777,7 +1777,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1790,7 +1790,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1808,7 +1808,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1821,7 +1821,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1834,7 +1834,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1852,7 +1852,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1870,7 +1870,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1888,7 +1888,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1906,7 +1906,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1924,7 +1924,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1942,7 +1942,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1960,7 +1960,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1978,7 +1978,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -1996,7 +1996,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2009,7 +2009,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2027,7 +2027,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2040,7 +2040,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2053,7 +2053,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2066,7 +2066,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2079,7 +2079,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2092,7 +2092,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2105,7 +2105,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2118,7 +2118,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2136,7 +2136,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2149,7 +2149,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2162,7 +2162,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2175,7 +2175,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2188,7 +2188,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2201,7 +2201,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2214,7 +2214,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2227,7 +2227,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2240,7 +2240,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2258,7 +2258,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2276,7 +2276,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2289,7 +2289,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2302,7 +2302,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2315,7 +2315,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2333,7 +2333,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2346,7 +2346,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2364,7 +2364,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2382,7 +2382,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2395,7 +2395,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2413,7 +2413,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2426,7 +2426,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2439,7 +2439,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2457,7 +2457,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2475,7 +2475,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2488,7 +2488,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2501,7 +2501,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2514,7 +2514,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2527,7 +2527,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2540,7 +2540,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2553,7 +2553,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2566,7 +2566,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2579,7 +2579,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2592,7 +2592,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2605,7 +2605,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2618,7 +2618,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2631,7 +2631,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2644,7 +2644,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2657,7 +2657,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2670,7 +2670,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2683,7 +2683,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2696,7 +2696,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2709,7 +2709,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2722,7 +2722,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2735,7 +2735,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2748,7 +2748,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2766,7 +2766,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2779,7 +2779,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2792,7 +2792,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2805,7 +2805,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2818,7 +2818,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2831,7 +2831,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2844,7 +2844,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2857,7 +2857,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2870,7 +2870,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2883,7 +2883,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2896,7 +2896,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2909,7 +2909,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2927,7 +2927,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2940,7 +2940,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2953,7 +2953,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2971,7 +2971,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2984,7 +2984,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -2997,7 +2997,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3015,7 +3015,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3028,7 +3028,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3041,7 +3041,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3054,7 +3054,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3067,7 +3067,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3080,7 +3080,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3093,7 +3093,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3106,7 +3106,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3119,7 +3119,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3132,7 +3132,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3145,7 +3145,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3158,7 +3158,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3171,7 +3171,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3184,7 +3184,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3202,7 +3202,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3215,7 +3215,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3233,7 +3233,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3246,7 +3246,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3259,7 +3259,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3272,7 +3272,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3285,7 +3285,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3298,7 +3298,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3311,7 +3311,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3324,7 +3324,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3337,7 +3337,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3350,7 +3350,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3368,7 +3368,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3381,7 +3381,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3399,7 +3399,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3417,7 +3417,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3435,7 +3435,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3448,7 +3448,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3466,7 +3466,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3479,7 +3479,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3492,7 +3492,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3510,7 +3510,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3523,7 +3523,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3536,7 +3536,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3549,7 +3549,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3562,7 +3562,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3575,7 +3575,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3588,7 +3588,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3601,7 +3601,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3614,7 +3614,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3627,7 +3627,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3640,7 +3640,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3658,7 +3658,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3676,7 +3676,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3694,7 +3694,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3707,7 +3707,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3720,7 +3720,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3733,7 +3733,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3746,7 +3746,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3759,7 +3759,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3772,7 +3772,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3785,7 +3785,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3798,7 +3798,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3816,7 +3816,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3834,7 +3834,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3847,7 +3847,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3860,7 +3860,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3873,7 +3873,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3886,7 +3886,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3899,7 +3899,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3912,7 +3912,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3925,7 +3925,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3938,7 +3938,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3951,7 +3951,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3964,7 +3964,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3977,7 +3977,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -3990,7 +3990,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4003,7 +4003,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4016,7 +4016,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4029,7 +4029,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4042,7 +4042,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4055,7 +4055,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4068,7 +4068,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4081,7 +4081,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4094,7 +4094,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4107,7 +4107,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4120,7 +4120,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4133,7 +4133,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4151,7 +4151,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4164,7 +4164,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4177,7 +4177,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4190,7 +4190,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4203,7 +4203,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4216,7 +4216,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4229,7 +4229,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4247,7 +4247,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4260,7 +4260,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4273,7 +4273,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4286,7 +4286,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4299,7 +4299,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4312,7 +4312,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4330,7 +4330,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4343,7 +4343,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4356,7 +4356,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4369,7 +4369,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4382,7 +4382,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4395,7 +4395,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4413,7 +4413,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4431,7 +4431,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4444,7 +4444,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4457,7 +4457,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4470,7 +4470,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4483,7 +4483,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4496,7 +4496,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4514,7 +4514,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4527,7 +4527,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4540,7 +4540,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4553,7 +4553,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4566,7 +4566,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4579,7 +4579,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4592,7 +4592,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4605,7 +4605,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4618,7 +4618,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4631,7 +4631,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4644,7 +4644,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4657,7 +4657,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4670,7 +4670,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4683,7 +4683,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4845,7 +4845,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     },
     {
@@ -4863,7 +4863,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 3,
       "manufacture": null
     }
   ]
