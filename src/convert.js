@@ -573,7 +573,7 @@ async function main() {
     const catalog = [];
     const validOffers = [];
     const feedCodes = new Set();
-    const updatedCategoryMap = { ...categoryMap };
+    const updatedCategoryMap = {};
 
     for (const raw of rawOffersSlice) {
       const o = transformOffer(raw, categoryPathMap);
@@ -605,15 +605,11 @@ async function main() {
       validOffers.push(o);
     }
 
-    // Додаємо збережені товари, яких немає у сирому фіді (наприклад, додані вручну товари)
+    // Додаємо збережені товари, яких немає у сирому фіді (ТІЛЬКИ якщо вони вказані у manualCategoryOverrides, наприклад Pylontech)
     for (const existingItem of existingCatalog) {
       const code = String(existingItem.vendorCode || existingItem.id || '').trim();
-      if (code && !feedCodes.has(code)) {
-        if (manualCategoryOverrides[code]) {
-          existingItem.category = manualCategoryOverrides[code];
-        } else if (updatedCategoryMap[code]) {
-          existingItem.category = updatedCategoryMap[code];
-        }
+      if (code && !feedCodes.has(code) && manualCategoryOverrides[code]) {
+        existingItem.category = manualCategoryOverrides[code];
         updatedCategoryMap[code] = existingItem.category;
         catalog.push(existingItem);
       }
