@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-05T11:55:48.986Z",
-  "total": 342,
+  "updatedAt": "2026-11-05T12:00:31.976Z",
+  "total": 346,
   "data": [
     {
       "code": "BPC123047002",
@@ -121,11 +121,11 @@
       "price": 10720,
       "old_price": null,
       "availability": true,
-      "stock": 4,
+      "stock": 3,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 4
+          "stock": 3
         }
       ],
       "warranty_type": "manufacturer",
@@ -175,6 +175,42 @@
         {
           "id": "stock01te",
           "stock": 2
+        }
+      ],
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "BPC120435064R",
+      "price": 5078,
+      "old_price": null,
+      "availability": true,
+      "stock": 1,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 1
+        }
+      ],
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "BPC120535064R",
+      "price": 5642,
+      "old_price": null,
+      "availability": true,
+      "stock": 3,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 3
         }
       ],
       "warranty_type": "manufacturer",
@@ -4830,6 +4866,42 @@
         {
           "id": "stock01te",
           "stock": 10
+        }
+      ],
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "PIN121801210",
+      "price": 14481,
+      "old_price": null,
+      "availability": true,
+      "stock": 1,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 1
+        }
+      ],
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
+      "code": "PIN241371210",
+      "price": 7523,
+      "old_price": null,
+      "availability": true,
+      "stock": 1,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 1
         }
       ],
       "warranty_type": "manufacturer",
