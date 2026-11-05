@@ -37,8 +37,13 @@ export default function MonoTab({
   const [collapsedCategories, setCollapsedCategories] = useState({});
   const [collapsedSubCategories, setCollapsedSubCategories] = useState({});
 
-  const daysToDispatch = getDaysToDispatch();
-  const daysColor = daysToDispatch === 3 ? '#f59e0b' : daysToDispatch === 2 ? '#0ea5e9' : '#10b981';
+  const defaultDaysToDispatch = getDaysToDispatch();
+  const getDaysColor = (days) => {
+    if (days === 5) return '#8b5cf6';
+    if (days === 3) return '#f59e0b';
+    if (days === 2) return '#0ea5e9';
+    return '#10b981';
+  };
 
   const toggleWhitelist = (vendorCode) => {
     setWhitelist(prev => prev.includes(vendorCode) ? prev.filter(v => v !== vendorCode) : [...prev, vendorCode]);
@@ -204,6 +209,8 @@ export default function MonoTab({
     const currentName = names[product.vendorCode] !== undefined ? names[product.vendorCode] : product.name;
     const charCount = currentName.length;
     const isOverLimit = charCount > 50;
+    const productDays = getDaysToDispatch(product.category);
+    const prodDaysColor = getDaysColor(productDays);
 
     return (
       <tr key={product.vendorCode} style={{ opacity: isSelected ? 1 : 0.5, borderBottom: '1px solid var(--border-color)' }}>
@@ -265,7 +272,24 @@ export default function MonoTab({
           </div>
         </td>
         <td style={{ textAlign: 'center', padding: '0.65rem 0.5rem' }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '28px', height: '28px', borderRadius: '6px', background: daysColor + '20', border: '1px solid ' + daysColor + '60', color: daysColor, fontWeight: 700, fontSize: '0.9rem' }}>{daysToDispatch}</span>
+          <span
+            title={productDays === 5 ? 'Комплекти: термін відправки завжди 5 днів' : `Термін відправки: ${productDays} дн.`}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '28px',
+              height: '28px',
+              borderRadius: '6px',
+              background: prodDaysColor + '20',
+              border: '1px solid ' + prodDaysColor + '60',
+              color: prodDaysColor,
+              fontWeight: 700,
+              fontSize: '0.9rem'
+            }}
+          >
+            {productDays}
+          </span>
         </td>
         <td style={{ padding: '0.65rem 0.5rem' }}>
           <input
@@ -325,7 +349,7 @@ export default function MonoTab({
         </div>
         <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
           <button className="btn" style={{ background: '#18181b', color: '#ffffff', boxShadow: '0 2px 4px rgba(0,0,0,0.2)' }} onClick={handleTriggerFeed} disabled={syncing || loading || saving || !token} title="Запустити генерацію фіду без збереження">
-            {syncing ? <span className="loader"></span> : `⚡ Запустити фід (${daysToDispatch}д)`}
+            {syncing ? <span className="loader"></span> : `⚡ Запустити фід (${defaultDaysToDispatch}д)`}
           </button>
           <button className="btn success" onClick={handleSaveAll} disabled={saving || syncing || loading || !token}>
             {saving ? <span className="loader"></span> : '💾 Зберегти зміни'}

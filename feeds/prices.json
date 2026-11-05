@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-05T18:54:41.703Z",
-  "total": 343,
+  "updatedAt": "2026-11-05T18:55:31.501Z",
+  "total": 340,
   "data": [
     {
       "code": "BPC123047002",
@@ -3496,50 +3496,6 @@
       "manufacture": null
     },
     {
-      "code": "PYLUS5000TE",
-      "price": 60593,
-      "old_price": null,
-      "availability": true,
-      "stock": 14,
-      "warehouses": [
-        {
-          "id": "stock01te",
-          "stock": 14
-        }
-      ],
-      "warranty_type": "manufacturer",
-      "warranty_period": 60,
-      "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
-      "manufacture": null
-    },
-    {
-      "code": "PYLUS3000CTE",
-      "price": 51271,
-      "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
-      "warranty_type": "manufacturer",
-      "warranty_period": 60,
-      "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
-      "manufacture": null
-    },
-    {
-      "code": "PYLUS2000CTE",
-      "price": 44280,
-      "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
-      "warranty_type": "manufacturer",
-      "warranty_period": 60,
-      "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
-      "manufacture": null
-    },
-    {
       "code": "BMS400100300",
       "price": 5391,
       "old_price": null,
@@ -4701,7 +4657,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 5,
       "manufacture": null
     },
     {
@@ -4719,7 +4675,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 5,
       "manufacture": null
     },
     {
@@ -4737,7 +4693,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 5,
       "manufacture": null
     },
     {
@@ -4755,7 +4711,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 5,
       "manufacture": null
     },
     {
@@ -4773,7 +4729,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 5,
       "manufacture": null
     },
     {
@@ -4791,7 +4747,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 5,
       "manufacture": null
     },
     {
@@ -4809,7 +4765,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 5,
       "manufacture": null
     },
     {
@@ -4827,7 +4783,7 @@
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
+      "days_to_dispatch": 5,
       "manufacture": null
     },
     {

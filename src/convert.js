@@ -482,21 +482,27 @@ function generatePricesJson(offers) {
 
   // Включаємо ВСІ товари в прайс — навіть недоступні (availability: false)
   // Якщо товару немає в прайсі — Мономаркет автоматично вимикає його
-  const data = offers.map((o) => ({
-    code: o.code,
-    price: o.price,
-    old_price: o.oldPrice,
-    availability: o.available,
-    stock: o.stock,
-    warehouses: o.available || o.stock > 0
-      ? [{ id: d.warehouseId, stock: o.stock }]
-      : null,
-    warranty_type: d.warrantyType,
-    warranty_period: d.warrantyPeriod,
-    max_pay_in_parts: d.maxPayInParts,
-    days_to_dispatch: d.daysToDispatch,
-    manufacture: null,
-  }));
+  const data = offers.map((o) => {
+    // Для розділу "Комплекти безперебійного живлення" термін відправки ЗАВЖДИ 5 днів
+    const isKit = o.category && String(o.category).toLowerCase().includes('комплекти безперебійного живлення');
+    const daysToDispatch = isKit ? 5 : d.daysToDispatch;
+
+    return {
+      code: o.code,
+      price: o.price,
+      old_price: o.oldPrice,
+      availability: o.available,
+      stock: o.stock,
+      warehouses: o.available || o.stock > 0
+        ? [{ id: d.warehouseId, stock: o.stock }]
+        : null,
+      warranty_type: d.warrantyType,
+      warranty_period: d.warrantyPeriod,
+      max_pay_in_parts: d.maxPayInParts,
+      days_to_dispatch: daysToDispatch,
+      manufacture: null,
+    };
+  });
 
   return JSON.stringify(
     {

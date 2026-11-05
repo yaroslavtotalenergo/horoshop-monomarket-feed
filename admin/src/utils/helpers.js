@@ -76,7 +76,10 @@ export function matchesCategoryFilter(productCategory, filterVal) {
   return pCat === filterVal || pCat.split(' > ')[0].trim() === filterVal;
 }
 
-export function getDaysToDispatch() {
+export function getDaysToDispatch(category) {
+  if (category && String(category).toLowerCase().includes('комплекти безперебійного живлення')) {
+    return 5;
+  }
   const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Kyiv' }));
   const day = now.getDay();
   if (day === 5) return 3; // Friday
