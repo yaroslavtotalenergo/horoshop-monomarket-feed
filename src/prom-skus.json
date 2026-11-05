@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T12:33:34.549Z",
+  "updatedAt": "2026-11-05T12:36:32.873Z",
   "total": 618,
   "skus": [
     "BPC240832064R",
@@ -388,8 +388,8 @@
     "BCD000402000",
     "CYR020400000",
     "CYR010400000",
-    "CYR010230010(R)",
-    "CYR010120011(R)",
+    "CYR010230010 (R)",
+    "CYR010120011 (R)",
     "ARG200301020 (R)",
     "ARG200201020 (R)",
     "ARG100301020 (R)",
@@ -544,7 +544,7 @@
     "ORI242410110(R)",
     "ORI241210110(R)",
     "ORI122410110",
-    "ORI121210110 (R)",
+    "ORI121210110(R)",
     "ORI122420020",
     "ORI122410020",
     "ORI122408020",
@@ -552,8 +552,8 @@
     "ORI241240021",
     "ORI241225020",
     "ORI241220200(R)",
-    "ORI241215200 (R)",
-    "ORI241210200 (R)",
+    "ORI241215200(R)",
+    "ORI241210200(R)",
     "ORI241205200(R)",
     "ORI303100000",
     "ORI303050000",
@@ -4482,7 +4482,7 @@
       "price": 330,
       "quantity": 0
     },
-    "CYR010230010(R)": {
+    "CYR010230010 (R)": {
       "id": 1025539674,
       "name": "Батарейный сумматор Cyrix-ct 12/24V-230A intelligent combiner CYR010230010(R) Victron Energy 12-24В 230А",
       "main_image": "https://images.prom.ua/1934936849_w200_h200_batarejnyj-summator-cyrix-ct.jpg",
@@ -4490,9 +4490,9 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 154.8,
-      "quantity": 0
+      "quantity": null
     },
-    "CYR010120011(R)": {
+    "CYR010120011 (R)": {
       "id": 1025539673,
       "name": "Батарейный сумматор Cyrix-ct 12/24V-120A intelligent combiner CYR010120011(R) Victron Energy 12-24В 120А",
       "main_image": "https://images.prom.ua/1934936848_w200_h200_batarejnyj-summator-cyrix-ct.jpg",
@@ -4500,7 +4500,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 62.4,
-      "quantity": 0
+      "quantity": null
     },
     "ARG200301020 (R)": {
       "id": 1025539672,
@@ -6042,7 +6042,7 @@
       "price": 81.6,
       "quantity": 0
     },
-    "ORI121210110 (R)": {
+    "ORI121210110(R)": {
       "id": 1017085623,
       "name": "Конвертор Orion-Tr 12/12-9A (110W) Isolated ORI121210110 (R) Victron Energy 12-12В 9А 110Вт",
       "main_image": "https://images.prom.ua/1913315761_w200_h200_konvertor-orion-tr-1212-9a.jpg",
@@ -6050,7 +6050,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 81.6,
-      "quantity": 0
+      "quantity": null
     },
     "ORI122420020": {
       "id": 1017085622,
@@ -6122,7 +6122,7 @@
       "price": 54,
       "quantity": 0
     },
-    "ORI241215200 (R)": {
+    "ORI241215200(R)": {
       "id": 1017085615,
       "name": "Конвертор Orion-Tr 24/12-15 (180W) ORI241215200 (R) Victron Energy 24-12В 15А 180Вт",
       "main_image": "https://images.prom.ua/1913306900_w200_h200_konvertor-orion-tr-2412-15.jpg",
@@ -6130,9 +6130,9 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 48,
-      "quantity": 0
+      "quantity": null
     },
-    "ORI241210200 (R)": {
+    "ORI241210200(R)": {
       "id": 1017085614,
       "name": "Конвертор Orion-Tr 24/12-10 (120W) ORI241210200 (R) Victron Energy 24-12В 10А 120Вт",
       "main_image": "https://images.prom.ua/1913306899_w200_h200_konvertor-orion-tr-2412-10.jpg",
@@ -6140,7 +6140,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 42,
-      "quantity": 0
+      "quantity": null
     },
     "ORI241205200(R)": {
       "id": 1017085613,
