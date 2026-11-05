@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-05T12:04:46.659Z",
-  "total": 346,
+  "updatedAt": "2026-11-05T12:30:56.558Z",
+  "total": 340,
   "data": [
     {
       "code": "BPC123047002",
@@ -634,19 +634,6 @@
       "manufacture": null
     },
     {
-      "code": "PIN121251200",
-      "price": 5830,
-      "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
-      "warranty_type": "manufacturer",
-      "warranty_period": 60,
-      "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
-      "manufacture": null
-    },
-    {
       "code": "PIN121371200",
       "price": 7084,
       "old_price": null,
@@ -673,24 +660,6 @@
       "manufacture": null
     },
     {
-      "code": "PIN121801200",
-      "price": 14481,
-      "old_price": null,
-      "availability": true,
-      "stock": 1,
-      "warehouses": [
-        {
-          "id": "stock01te",
-          "stock": 1
-        }
-      ],
-      "warranty_type": "manufacturer",
-      "warranty_period": 60,
-      "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
-      "manufacture": null
-    },
-    {
       "code": "PIN122121210",
       "price": 17051,
       "old_price": null,
@@ -710,24 +679,6 @@
       "availability": false,
       "stock": 0,
       "warehouses": null,
-      "warranty_type": "manufacturer",
-      "warranty_period": 60,
-      "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
-      "manufacture": null
-    },
-    {
-      "code": "PIN241371200",
-      "price": 7523,
-      "old_price": null,
-      "availability": true,
-      "stock": 1,
-      "warehouses": [
-        {
-          "id": "stock01te",
-          "stock": 1
-        }
-      ],
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -1488,19 +1439,6 @@
       "manufacture": null
     },
     {
-      "code": "PMP482305010",
-      "price": 39117,
-      "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
-      "warranty_type": "manufacturer",
-      "warranty_period": 60,
-      "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
-      "manufacture": null
-    },
-    {
       "code": "PMP122305010",
       "price": 70023,
       "old_price": null,
@@ -1586,32 +1524,6 @@
     {
       "code": "PMP483150000",
       "price": 162048,
-      "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
-      "warranty_type": "manufacturer",
-      "warranty_period": 60,
-      "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
-      "manufacture": null
-    },
-    {
-      "code": "PMP242306000",
-      "price": 60807,
-      "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
-      "warranty_type": "manufacturer",
-      "warranty_period": 60,
-      "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
-      "manufacture": null
-    },
-    {
-      "code": "PMP482506000",
-      "price": 65258,
       "old_price": null,
       "availability": false,
       "stock": 0,
