@@ -90,18 +90,25 @@ async function fetchHoroshopXml() {
   }
 
   let domain = '';
+  let requestUrl = CONFIG.horoshopFeedUrl;
   try {
-    domain = new URL(CONFIG.horoshopFeedUrl).origin;
+    const parsed = new URL(CONFIG.horoshopFeedUrl);
+    domain = parsed.origin;
+    parsed.searchParams.set('_cb', Date.now());
+    requestUrl = parsed.toString();
   } catch (e) { }
 
   console.log(`🌐 Завантажуємо фід Хорошоп (${domain || 'URL налаштовано'})...`);
   try {
-    const response = await axios.get(CONFIG.horoshopFeedUrl, {
-      timeout: 30000,
+    const response = await axios.get(requestUrl, {
+      timeout: 60000,
       headers: {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
         'Accept-Encoding': 'gzip',
         'User-Agent': 'Mozilla/5.0 (compatible; HoroshopMonoFeed/1.0)'
       },
+      maxContentLength: 50 * 1024 * 1024,
     });
     return response.data;
   } catch (err) {
@@ -184,6 +191,40 @@ function extractText(val) {
   if (val.__cdata) return val.__cdata.trim();
   if (Array.isArray(val)) return extractText(val[0]);
   return String(val).trim();
+}
+
+// ── Парсинг ціни (захист від крапок, ком, пробілів у тисячах) ──────
+function parsePrice(val) {
+  if (val === null || val === undefined || val === '') return null;
+  if (typeof val === 'number') return isNaN(val) ? 0 : Math.round(val);
+
+  let s = String(val).trim().replace(/[^\d.,]/g, '');
+  if (!s) return 0;
+
+  if (s.includes('.') && s.includes(',')) {
+    const lastDot = s.lastIndexOf('.');
+    const lastComma = s.lastIndexOf(',');
+    if (lastComma > lastDot) {
+      s = s.replace(/\./g, '').replace(',', '.');
+    } else {
+      s = s.replace(/,/g, '');
+    }
+  } else if (s.includes(',')) {
+    const parts = s.split(',');
+    if (parts.length === 2 && parts[1].length === 3) {
+      s = s.replace(',', '');
+    } else {
+      s = s.replace(',', '.');
+    }
+  } else if (s.includes('.')) {
+    const parts = s.split('.');
+    if (parts.length === 2 && parts[1].length === 3 && parts[0].length >= 1 && parts[0].length <= 3) {
+      s = s.replace('.', '');
+    }
+  }
+
+  const num = parseFloat(s);
+  return isNaN(num) ? 0 : Math.round(num);
 }
 
 // ── Знайти param за назвою ──────────────────────────────────────
@@ -353,9 +394,9 @@ function transformOffer(offer, categoryPathMap = {}) {
     available,
     horoshopAvailable,
     stock,
-    price: Math.round(parseFloat(offer.price) || 0),
+    price: parsePrice(offer.price) ?? 0,
     oldPrice: (offer.oldprice || offer.old_price || offer.price_old)
-      ? Math.round(parseFloat(offer.oldprice || offer.old_price || offer.price_old))
+      ? parsePrice(offer.oldprice || offer.old_price || offer.price_old)
       : null,
 
     // Фізичні параметри (якщо є в XML)
