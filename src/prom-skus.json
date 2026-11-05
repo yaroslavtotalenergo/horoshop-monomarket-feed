@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-05T13:33:38.732Z",
+  "updatedAt": "2026-11-05T14:05:01.121Z",
   "total": 618,
   "skus": [
     "BPC240832064R",
@@ -4440,7 +4440,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 222,
-      "quantity": null
+      "quantity": 0
     },
     "BCD000802000": {
       "id": 1025539678,
@@ -6700,7 +6700,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 158.4,
-      "quantity": 10
+      "quantity": 11
     },
     "BPC121031064R": {
       "id": 1005518473,
@@ -6730,7 +6730,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 108,
-      "quantity": null
+      "quantity": 0
     },
     "BPC120435064R": {
       "id": 1004678883,
@@ -6740,7 +6740,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 97.2,
-      "quantity": null
+      "quantity": 0
     },
     "BPC241647002": {
       "id": 1004379176,
