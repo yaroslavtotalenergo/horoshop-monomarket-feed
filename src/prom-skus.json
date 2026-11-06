@@ -1,7 +1,8 @@
 {
-  "updatedAt": "2026-11-06T11:04:42.482Z",
-  "total": 590,
+  "updatedAt": "2026-11-06T11:24:13.147Z",
+  "total": 591,
   "skus": [
+    "PIN482161200",
     "PIN242161200",
     "SLSIFP51100A",
     "PIN122251000",
@@ -594,6 +595,16 @@
     "BPC121542002"
   ],
   "items": {
+    "PIN482161200": {
+      "id": 3266074598,
+      "name": "Инвертор Phoenix 48/1600 VE.Direct Schuko* Victron Energy - PIN482161200",
+      "main_image": "https://images.prom.ua/7867504740_w200_h200_invertor-phoenix-481600.jpg",
+      "status": "on_display",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
+      "price": 408,
+      "quantity": null
+    },
     "PIN242161200": {
       "id": 3266061978,
       "name": "Инвертор Phoenix 24/1600 VE.Direct Schuko* Victron Energy - PIN242161200",
@@ -602,7 +613,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 408,
-      "quantity": 0
+      "quantity": null
     },
     "SLSIFP51100A": {
       "id": 3266046143,
