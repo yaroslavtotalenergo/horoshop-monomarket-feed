@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-06T08:33:40.809Z",
+  "updatedAt": "2026-11-06T09:04:44.963Z",
   "total": 584,
   "skus": [
     "PIN242251000",
@@ -4136,7 +4136,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 222,
-      "quantity": 3
+      "quantity": 4
     },
     "BCD000802000": {
       "id": 1025539678,
