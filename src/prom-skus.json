@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-06T12:33:37.921Z",
+  "updatedAt": "2026-11-06T12:35:21.280Z",
   "total": 592,
   "skus": [
     "PIN122400000",
@@ -604,7 +604,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 1050,
-      "quantity": null
+      "quantity": 0
     },
     "PIN482161200": {
       "id": 3266074598,
@@ -644,7 +644,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 740.4,
-      "quantity": null
+      "quantity": 0
     },
     "PIN242251000": {
       "id": 3265994678,
@@ -654,7 +654,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 820.8,
-      "quantity": null
+      "quantity": 0
     },
     "BPC240832064R": {
       "id": 3264860895,
