@@ -17,7 +17,7 @@ const path = require('path');
 
 const isDryRun = process.argv.includes('--dry-run');
 
-// Перевірка дозволених брендів для Prom: Victron Energy, Sunlight, Sacred Sun
+// Перевірка дозволених брендів для Prom: Victron Energy, Sunlight, Sacred Sun, Pylontech
 function isAllowedPromBrand(product) {
   if (!product) return false;
 
@@ -39,6 +39,9 @@ function isAllowedPromBrand(product) {
   // 3. Sacred Sun (including 'sucred' typo)
   if (/s[au]cred\s*sun/i.test(fullText) || fullText.includes('sacred') || fullText.includes('sucred')) return true;
   if (/^(SCIFP|SLSIFP|SSIF|SLS)/i.test(vendorCode)) return true;
+
+  // 4. Pylontech
+  if (fullText.includes('pylontech') || fullText.includes('pylon') || /^PYL/i.test(vendorCode)) return true;
 
   return false;
 }

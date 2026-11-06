@@ -109,6 +109,9 @@ export function isAllowedPromBrand(product) {
   if (/s[au]cred\s*sun/i.test(fullText) || fullText.includes('sacred') || fullText.includes('sucred')) return true;
   if (/^(SCIFP|SLSIFP|SSIF|SLS)/i.test(vendorCode)) return true;
 
+  // 4. Pylontech
+  if (fullText.includes('pylontech') || fullText.includes('pylon') || /^PYL/i.test(vendorCode)) return true;
+
   return false;
 }
 
