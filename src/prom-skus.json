@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-06T11:24:13.147Z",
+  "updatedAt": "2026-11-06T11:31:25.960Z",
   "total": 591,
   "skus": [
     "PIN482161200",
@@ -603,7 +603,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 408,
-      "quantity": null
+      "quantity": 0
     },
     "PIN242161200": {
       "id": 3266061978,
@@ -613,7 +613,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 408,
-      "quantity": null
+      "quantity": 0
     },
     "SLSIFP51100A": {
       "id": 3266046143,
