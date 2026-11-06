@@ -1,7 +1,10 @@
 {
-  "updatedAt": "2026-11-05T18:54:34.179Z",
-  "total": 586,
+  "updatedAt": "2026-11-06T10:33:47.799Z",
+  "total": 589,
   "skus": [
+    "PIN122251000",
+    "SLSIFP51100A",
+    "PIN242251000",
     "BPC240832064R",
     "ORI481260020",
     "PMR803150300",
@@ -242,6 +245,9 @@
     "SPP040201200",
     "SPM040551200",
     "SPM040401200",
+    "PYLUS5000TE",
+    "PYLUS3000CTE",
+    "PYLUS2000CTE",
     "BPC940100200",
     "SHU050220050",
     "SHU065210050",
@@ -584,12 +590,39 @@
     "BPC240842002",
     "BPC123047002",
     "BPC122042002",
-    "BPC121542002",
-    "PYLUS5000TE",
-    "PYLUS3000CTE",
-    "PYLUS2000CTE"
+    "BPC121542002"
   ],
   "items": {
+    "PIN122251000": {
+      "id": 3266018470,
+      "name": "Инвертор Victron Energy Phoenix Inverter 12/2k5 Smart – 12/220В 2.5кВА/2.4кВт – PIN122251000",
+      "main_image": "https://images.prom.ua/7867247617_w200_h200_invertor-victron-energy.jpg",
+      "status": "on_display",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
+      "price": 740.4,
+      "quantity": 0
+    },
+    "SLSIFP51100A": {
+      "id": 3266046143,
+      "name": "Аккумулятор LiFePO4 Sacred Sun SLSIFP51100A 51.2В 100Ач (5.12 кВт·ч) с встроенным BMS",
+      "main_image": "https://images.prom.ua/7298782247_w200_h200_akkumulyator-lifepo4-sacred.jpg",
+      "status": "on_display",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
+      "price": 1180,
+      "quantity": 0
+    },
+    "PIN242251000": {
+      "id": 3265994678,
+      "name": "Инвертор Victron Energy Phoenix Inverter 24/2k5 Smart - 24/220В 2.5кВА/2.4кВт - PIN242251000",
+      "main_image": "https://images.prom.ua/7867247617_w200_h200_invertor-victron-energy.jpg",
+      "status": "on_display",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
+      "price": 820.8,
+      "quantity": 0
+    },
     "BPC240832064R": {
       "id": 3264860895,
       "name": "Зарядное устройство Blue Smart IP65 Charger 24/8 + DC connector Victron Energy - BPC240832064R",
@@ -2975,10 +3008,10 @@
       "name": "Солнечная батарея / солнечная панель BlueSolar 55W-12V Mono 545×668×25mm SPM040551200 Victron Energy 55Вт 12В",
       "main_image": "https://images.prom.ua/3922358212_w200_h200_solnechnaya-batareya-.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 75.6,
-      "quantity": 0
+      "quantity": 46
     },
     "SPM040401200": {
       "id": 1661781296,
@@ -2988,6 +3021,36 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 51.6,
+      "quantity": 0
+    },
+    "PYLUS5000TE": {
+      "id": 1634631861,
+      "name": "Аккумуляторная батарея Pylontech US5000 48В 100Ач LiFePO4 4.8 кВт*ч PYLUS5000TE",
+      "main_image": "https://images.prom.ua/3840050557_w200_h200_akkumulyatornaya-batareya-pylontech.jpg",
+      "status": "on_display",
+      "presence": "available",
+      "presenceTitle": "В наявності",
+      "price": 1350,
+      "quantity": 14
+    },
+    "PYLUS3000CTE": {
+      "id": 1634616615,
+      "name": "Аккумуляторная батарея Pylontech US3000C 48В 74Ач LiFePO4 3.5 кВт*ч PILOUS3000C литиевая",
+      "main_image": "https://images.prom.ua/3839924972_w200_h200_akkumulyatornaya-batareya-pylontech.jpg",
+      "status": "on_display",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
+      "price": 1200,
+      "quantity": 0
+    },
+    "PYLUS2000CTE": {
+      "id": 1633954752,
+      "name": "Литиевый аккумулятор Pylontech US2000C 48В 50Ач 2.4 кВтч",
+      "main_image": "https://images.prom.ua/3838144413_w200_h200_litievyj-akkumulyator-pylontech.jpg",
+      "status": "on_display",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
+      "price": 1150,
       "quantity": 0
     },
     "BPC940100200": {
@@ -4125,10 +4188,10 @@
       "name": "Зарядное устройство Victron Energy Blue Smart IP65 12/25 (12В, 25А, Bluetooth) BPC122535064",
       "main_image": "https://images.prom.ua/4931532534_w200_h200_zaryadnoe-ustrojstvo-victron.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 222,
-      "quantity": 0
+      "quantity": 4
     },
     "BCD000802000": {
       "id": 1025539678,
@@ -5335,10 +5398,10 @@
       "name": "Инвертор Victron Energy Phoenix 12/800 VE.Direct Schuko (12В, 800ВА) чистая синусоида PIN121801210",
       "main_image": "https://images.prom.ua/1931398645_w200_h200_invertor-victron-energy.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 277.2,
-      "quantity": 0
+      "quantity": 1
     },
     "PIN481501200": {
       "id": 1024161204,
@@ -5385,10 +5448,10 @@
       "name": "Инвертор Victron Energy Phoenix 24/375 VE.Direct Schuko (24В, 375ВА) чистая синусоида PIN241371210",
       "main_image": "https://images.prom.ua/1931398630_w200_h200_invertor-victron-energy.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 144,
-      "quantity": 0
+      "quantity": 1
     },
     "PIN121371200": {
       "id": 1024161199,
@@ -6345,20 +6408,20 @@
       "name": "Зарядное устройство Victron Energy Blue Smart IP65s 12/5 (12В, 5А, Bluetooth) BPC120535064R",
       "main_image": "https://images.prom.ua/1883239550_w200_h200_zaryadnoe-ustrojstvo-victron.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 108,
-      "quantity": 0
+      "quantity": 3
     },
     "BPC120435064R": {
       "id": 1004678883,
       "name": "Зарядное устройство Victron Energy Blue Smart IP65s 12/4 (12В, 4А, Bluetooth) BPC120435064R",
       "main_image": "https://images.prom.ua/1881231857_w200_h200_zaryadnoe-ustrojstvo-victron.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 97.2,
-      "quantity": 0
+      "quantity": 1
     },
     "BPC241647002": {
       "id": 1004379176,
@@ -6418,36 +6481,6 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 162,
-      "quantity": 0
-    },
-    "PYLUS5000TE": {
-      "id": 1634631861,
-      "name": "Аккумуляторная батарея Pylontech US5000 48В 100Ач LiFePO4 4.8 кВт*ч PILOUS5000 литиевая",
-      "main_image": "https://images.prom.ua/3840050557_w200_h200_akkumulyatornaya-batareya-pylontech.jpg",
-      "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
-      "price": 1350,
-      "quantity": 14
-    },
-    "PYLUS3000CTE": {
-      "id": 1634616615,
-      "name": "Аккумуляторная батарея Pylontech US3000C 48В 74Ач LiFePO4 3.5 кВт*ч PILOUS3000C литиевая",
-      "main_image": "https://images.prom.ua/3839924972_w200_h200_akkumulyatornaya-batareya-pylontech.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 1200,
-      "quantity": 0
-    },
-    "PYLUS2000CTE": {
-      "id": 1633954752,
-      "name": "Литиевый аккумулятор Pylontech US2000C 48В 50Ач 2.4 кВтч",
-      "main_image": "https://images.prom.ua/3838144413_w200_h200_litievyj-akkumulyator-pylontech.jpg",
-      "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
-      "price": 1150,
       "quantity": 0
     }
   }
