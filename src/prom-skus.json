@@ -1,9 +1,10 @@
 {
-  "updatedAt": "2026-11-06T10:33:47.799Z",
-  "total": 589,
+  "updatedAt": "2026-11-06T10:45:51.857Z",
+  "total": 590,
   "skus": [
-    "PIN122251000",
+    "PIN242161200",
     "SLSIFP51100A",
+    "PIN122251000",
     "PIN242251000",
     "BPC240832064R",
     "ORI481260020",
@@ -593,15 +594,15 @@
     "BPC121542002"
   ],
   "items": {
-    "PIN122251000": {
-      "id": 3266018470,
-      "name": "Инвертор Victron Energy Phoenix Inverter 12/2k5 Smart – 12/220В 2.5кВА/2.4кВт – PIN122251000",
-      "main_image": "https://images.prom.ua/7867247617_w200_h200_invertor-victron-energy.jpg",
+    "PIN242161200": {
+      "id": 3266061978,
+      "name": "Инвертор Phoenix 24/1600 VE.Direct Schuko* Victron Energy - PIN242161200",
+      "main_image": "https://images.prom.ua/7867504740_w200_h200_invertor-phoenix-241600.jpg",
       "status": "on_display",
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
-      "price": 740.4,
-      "quantity": 0
+      "price": 408,
+      "quantity": null
     },
     "SLSIFP51100A": {
       "id": 3266046143,
@@ -613,6 +614,16 @@
       "price": 1180,
       "quantity": 0
     },
+    "PIN122251000": {
+      "id": 3266018470,
+      "name": "Инвертор Victron Energy Phoenix Inverter 12/2k5 Smart – 12/220В 2.5кВА/2.4кВт – PIN122251000",
+      "main_image": "https://images.prom.ua/7867247617_w200_h200_invertor-victron-energy.jpg",
+      "status": "on_display",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
+      "price": 740.4,
+      "quantity": null
+    },
     "PIN242251000": {
       "id": 3265994678,
       "name": "Инвертор Victron Energy Phoenix Inverter 24/2k5 Smart - 24/220В 2.5кВА/2.4кВт - PIN242251000",
@@ -621,7 +632,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 820.8,
-      "quantity": 0
+      "quantity": null
     },
     "BPC240832064R": {
       "id": 3264860895,
