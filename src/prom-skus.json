@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-06T10:45:51.857Z",
+  "updatedAt": "2026-11-06T10:47:54.092Z",
   "total": 590,
   "skus": [
     "PIN242161200",
@@ -602,7 +602,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 408,
-      "quantity": null
+      "quantity": 0
     },
     "SLSIFP51100A": {
       "id": 3266046143,
@@ -622,7 +622,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 740.4,
-      "quantity": null
+      "quantity": 0
     },
     "PIN242251000": {
       "id": 3265994678,
@@ -632,7 +632,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 820.8,
-      "quantity": null
+      "quantity": 0
     },
     "BPC240832064R": {
       "id": 3264860895,
