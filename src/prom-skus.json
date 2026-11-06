@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-06T10:47:54.092Z",
+  "updatedAt": "2026-11-06T11:00:39.448Z",
   "total": 590,
   "skus": [
     "PIN242161200",
@@ -602,17 +602,17 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 408,
-      "quantity": 0
+      "quantity": null
     },
     "SLSIFP51100A": {
       "id": 3266046143,
       "name": "Аккумулятор LiFePO4 Sacred Sun SLSIFP51100A 51.2В 100Ач (5.12 кВт·ч) с встроенным BMS",
       "main_image": "https://images.prom.ua/7298782247_w200_h200_akkumulyator-lifepo4-sacred.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 1180,
-      "quantity": 0
+      "quantity": 21
     },
     "PIN122251000": {
       "id": 3266018470,
@@ -622,7 +622,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 740.4,
-      "quantity": 0
+      "quantity": null
     },
     "PIN242251000": {
       "id": 3265994678,
@@ -632,7 +632,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 820.8,
-      "quantity": 0
+      "quantity": null
     },
     "BPC240832064R": {
       "id": 3264860895,
