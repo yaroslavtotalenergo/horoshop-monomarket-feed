@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-06T19:33:36.783Z",
+  "updatedAt": "2026-11-06T20:04:44.822Z",
   "total": 592,
   "skus": [
     "PIN122400000",
@@ -1471,10 +1471,10 @@
       "name": "Альтернатор – Зарядное устройство от генератора Orion XS 12/12-50A DC/DC ORI121217050 Victron Energy",
       "main_image": "https://images.prom.ua/6448323670_w200_h200_alternator---zaryadnoe.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 398.4,
-      "quantity": 1
+      "quantity": 0
     },
     "SHU065150050": {
       "id": 2462768849,
@@ -1841,10 +1841,10 @@
       "name": "Шина Lynx Power In M10 LYN020102010 Victron Energy",
       "main_image": "https://images.prom.ua/6011071760_w200_h200_shina-lynx-power.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 180,
-      "quantity": 2
+      "quantity": 0
     },
     "PMP122505012": {
       "id": 2263172401,
@@ -2424,7 +2424,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 91.2,
-      "quantity": 2
+      "quantity": 1
     },
     "BPP900455070": {
       "id": 1704074342,
@@ -3131,10 +3131,10 @@
       "name": "Батарейный монитор Smartshunt 500A/50mV SHU050150050 Victron Energy 500А 50мВ",
       "main_image": "https://images.prom.ua/3613743268_w200_h200_batarejnyj-monitor-smartshunt.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 128.4,
-      "quantity": 2
+      "quantity": 0
     },
     "PMP482200000": {
       "id": 1559618577,
@@ -4441,10 +4441,10 @@
       "name": "Защита аккумулятора от глубокого разряда Smart BatteryProtect 48В 100A BPR110048000 Victron Energy",
       "main_image": "https://images.prom.ua/1934937156_w200_h200_zaschita-akkumulyatora-ot.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 176.4,
-      "quantity": 1
+      "quantity": 0
     },
     "BPR122022000": {
       "id": 1025506323,
@@ -4994,7 +4994,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 484.8,
-      "quantity": 2
+      "quantity": 1
     },
     "PMP481500000": {
       "id": 1024852165,
@@ -6494,7 +6494,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 211.2,
-      "quantity": 8
+      "quantity": 7
     },
     "BPC122042002": {
       "id": 1004379168,
