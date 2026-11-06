@@ -1,7 +1,8 @@
 {
-  "updatedAt": "2026-11-06T08:04:41.208Z",
-  "total": 583,
+  "updatedAt": "2026-11-06T08:33:40.809Z",
+  "total": 584,
   "skus": [
+    "PIN242251000",
     "BPC240832064R",
     "ORI481260020",
     "PMR803150300",
@@ -587,6 +588,16 @@
     "BPC121542002"
   ],
   "items": {
+    "PIN242251000": {
+      "id": 3265994678,
+      "name": "Инвертор Victron Energy Phoenix Inverter 24/2k5 Smart - 24/220В 2.5кВА/2.4кВт - PIN242251000",
+      "main_image": "https://images.prom.ua/7867247617_w200_h200_invertor-victron-energy.jpg",
+      "status": "on_display",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
+      "price": 820.8,
+      "quantity": null
+    },
     "BPC240832064R": {
       "id": 3264860895,
       "name": "Зарядное устройство Blue Smart IP65 Charger 24/8 + DC connector Victron Energy - BPC240832064R",
@@ -4125,7 +4136,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 222,
-      "quantity": 4
+      "quantity": 3
     },
     "BCD000802000": {
       "id": 1025539678,
