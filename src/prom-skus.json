@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-06T10:04:41.472Z",
+  "updatedAt": "2026-11-06T10:06:22.130Z",
   "total": 586,
   "skus": [
     "SLSIFP51100A",
@@ -597,7 +597,7 @@
       "status": "on_display",
       "presence": "available",
       "presenceTitle": "В наявності",
-      "price": 1350,
+      "price": 1180,
       "quantity": 14
     },
     "PIN122251000": {
