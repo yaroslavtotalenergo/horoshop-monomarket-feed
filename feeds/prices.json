@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-06T19:04:42.051Z",
+  "updatedAt": "2026-11-06T19:33:39.514Z",
   "total": 343,
   "data": [
     {
@@ -7,11 +7,11 @@
       "price": 11033,
       "old_price": null,
       "availability": true,
-      "stock": 8,
+      "stock": 7,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 8
+          "stock": 7
         }
       ],
       "warranty_type": "manufacturer",
@@ -942,11 +942,11 @@
       "price": 25326,
       "old_price": null,
       "availability": true,
-      "stock": 2,
+      "stock": 1,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 2
+          "stock": 1
         }
       ],
       "warranty_type": "manufacturer",
@@ -1949,14 +1949,9 @@
       "code": "LYN020102010",
       "price": 9403,
       "old_price": null,
-      "availability": true,
-      "stock": 2,
-      "warehouses": [
-        {
-          "id": "stock01te",
-          "stock": 2
-        }
-      ],
+      "availability": false,
+      "stock": 0,
+      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -2402,14 +2397,9 @@
       "code": "SHU050150050",
       "price": 6708,
       "old_price": null,
-      "availability": true,
-      "stock": 2,
-      "warehouses": [
-        {
-          "id": "stock01te",
-          "stock": 2
-        }
-      ],
+      "availability": false,
+      "stock": 0,
+      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -2447,11 +2437,11 @@
       "price": 4764,
       "old_price": null,
       "availability": true,
-      "stock": 2,
+      "stock": 1,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 2
+          "stock": 1
         }
       ],
       "warranty_type": "manufacturer",
@@ -3406,14 +3396,9 @@
       "code": "BPR110048000",
       "price": 9215,
       "old_price": null,
-      "availability": true,
-      "stock": 1,
-      "warehouses": [
-        {
-          "id": "stock01te",
-          "stock": 1
-        }
-      ],
+      "availability": false,
+      "stock": 0,
+      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -3823,14 +3808,9 @@
       "code": "ORI121217050",
       "price": 20812,
       "old_price": null,
-      "availability": true,
-      "stock": 1,
-      "warehouses": [
-        {
-          "id": "stock01te",
-          "stock": 1
-        }
-      ],
+      "availability": false,
+      "stock": 0,
+      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,

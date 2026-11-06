@@ -1,1 +1,98 @@
-[]
+[
+  {
+    "id": "BPC123047002_1793993605849_dgv3h",
+    "timestamp": "2026-11-06T19:33:25.848Z",
+    "vendorCode": "BPC123047002",
+    "name": "Зарядний пристрій Blue Smart IP22 Charger 12/30 (1)",
+    "category": "Зарядні пристрої > Зарядні пристрої 12В",
+    "price": 11033,
+    "oldQty": 8,
+    "newQty": 7,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
+    "id": "PMP121800000_1793993605849_svrl6",
+    "timestamp": "2026-11-06T19:33:25.848Z",
+    "vendorCode": "PMP121800000",
+    "name": "Інвертор гібридний Victron MultiPlus 700Вт 12/800/35-16 12/220В",
+    "category": "Інвертори DC-AC > Гібридні",
+    "price": 25326,
+    "oldQty": 2,
+    "newQty": 1,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
+    "id": "BPC122531064_1793993605849_xi8ca",
+    "timestamp": "2026-11-06T19:33:25.848Z",
+    "vendorCode": "BPC122531064",
+    "name": "Зарядний пристрій Blue Smart IP65 Charger 12/25 + DC connector",
+    "category": "",
+    "price": "",
+    "oldQty": 4,
+    "newQty": 3,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
+    "id": "ORI121217050_1793993605849_2wdvf",
+    "timestamp": "2026-11-06T19:33:25.848Z",
+    "vendorCode": "ORI121217050",
+    "name": "Зарядний пристрій Orion XS 12/12-50A DC-DC",
+    "category": "Перетворювачі DC-DC > З зарядом акумулятора",
+    "price": 20812,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  },
+  {
+    "id": "LYN020102010_1793993605849_y5lgq",
+    "timestamp": "2026-11-06T19:33:25.848Z",
+    "vendorCode": "LYN020102010",
+    "name": "Розподільча модульна шина Lynx Power In 1000 (M10) ",
+    "category": "Низьковольтне обладнання > Розподільчі блоки",
+    "price": 9403,
+    "oldQty": 2,
+    "newQty": 0,
+    "diff": -2,
+    "type": "became_zero"
+  },
+  {
+    "id": "SHU050150050_1793993605849_k6inu",
+    "timestamp": "2026-11-06T19:33:25.848Z",
+    "vendorCode": "SHU050150050",
+    "name": "Батарейний монітор Victron SmartShunt 500A ",
+    "category": "Компоненти акумуляторних систем > Батарейні монітори",
+    "price": 6708,
+    "oldQty": 2,
+    "newQty": 0,
+    "diff": -2,
+    "type": "became_zero"
+  },
+  {
+    "id": "SHU065130050_1793993605849_dgvdz",
+    "timestamp": "2026-11-06T19:33:25.848Z",
+    "vendorCode": "SHU065130050",
+    "name": "Батарейний монітор Victron Energy SmartShunt 300A IP65",
+    "category": "Компоненти акумуляторних систем > Батарейні монітори",
+    "price": 4764,
+    "oldQty": 2,
+    "newQty": 1,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
+    "id": "BPR110048000_1793993605849_fzykt",
+    "timestamp": "2026-11-06T19:33:25.848Z",
+    "vendorCode": "BPR110048000",
+    "name": "Захист акумулятора від глибокого розряду Smart BatteryProtect 48V 100A Victron",
+    "category": "Компоненти акумуляторних систем > Захист акумуляторів",
+    "price": 9215,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  }
+]
