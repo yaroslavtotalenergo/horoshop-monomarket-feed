@@ -1,7 +1,8 @@
 {
-  "updatedAt": "2026-11-06T09:33:38.886Z",
-  "total": 585,
+  "updatedAt": "2026-11-06T10:04:41.472Z",
+  "total": 586,
   "skus": [
+    "SLSIFP51100A",
     "PIN122251000",
     "PIN242251000",
     "BPC240832064R",
@@ -589,6 +590,16 @@
     "BPC121542002"
   ],
   "items": {
+    "SLSIFP51100A": {
+      "id": 3266046143,
+      "name": "Аккумулятор LiFePO4 Sacred Sun SLSIFP51100A 51.2В 100Ач (5.12 кВт·ч) с встроенным BMS",
+      "main_image": "https://images.prom.ua/7298782247_w200_h200_akkumulyator-lifepo4-sacred.jpg",
+      "status": "on_display",
+      "presence": "available",
+      "presenceTitle": "В наявності",
+      "price": 1350,
+      "quantity": 14
+    },
     "PIN122251000": {
       "id": 3266018470,
       "name": "Инвертор Victron Energy Phoenix Inverter 12/2k5 Smart – 12/220В 2.5кВА/2.4кВт – PIN122251000",
@@ -597,7 +608,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 740.4,
-      "quantity": null
+      "quantity": 0
     },
     "PIN242251000": {
       "id": 3265994678,
@@ -607,7 +618,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 820.8,
-      "quantity": null
+      "quantity": 0
     },
     "BPC240832064R": {
       "id": 3264860895,
@@ -4364,10 +4375,10 @@
       "name": "Защита аккумулятора от глубокого разряда Smart BatteryProtect 48В 100A BPR110048000 Victron Energy",
       "main_image": "https://images.prom.ua/1934937156_w200_h200_zaschita-akkumulyatora-ot.jpg",
       "status": "on_display",
-      "presence": "order",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 176.4,
-      "quantity": 0
+      "quantity": 1
     },
     "BPR122022000": {
       "id": 1025506323,
