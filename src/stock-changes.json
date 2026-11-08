@@ -1,5 +1,17 @@
 [
   {
+    "id": "BPR065022000_1794153870699_utkax",
+    "timestamp": "2026-11-08T16:04:30.699Z",
+    "vendorCode": "BPR065022000",
+    "name": "Захист акумулятора від глибокого розряду Smart BatteryProtect 12/24V 65A Victron Energy ",
+    "category": "Компоненти акумуляторних систем > Захист акумуляторів",
+    "price": 3636,
+    "oldQty": 2,
+    "newQty": 1,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
     "id": "BPC241247006_1794137606025_9erln",
     "timestamp": "2026-11-08T11:33:26.024Z",
     "vendorCode": "BPC241247006",
