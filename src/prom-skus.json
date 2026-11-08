@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-08T11:33:36.694Z",
+  "updatedAt": "2026-11-08T12:04:44.765Z",
   "total": 592,
   "skus": [
     "PIN122400000",
@@ -2154,7 +2154,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 87.6,
-      "quantity": 5
+      "quantity": 7
     },
     "ASS030530010": {
       "id": 1709025500,
@@ -3214,7 +3214,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 44.4,
-      "quantity": 1
+      "quantity": 11
     },
     "VBB125040010": {
       "id": 1498838108,
@@ -4224,7 +4224,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 222,
-      "quantity": 4
+      "quantity": 3
     },
     "BCD000802000": {
       "id": 1025539678,
@@ -4401,10 +4401,10 @@
       "name": "Батарейный монитор Battery Monitor BMV-712 Smart 9 - 90В BAM030712000 (R) Victron Energy",
       "main_image": "https://images.prom.ua/1934937181_w200_h200_batarejnyj-monitor-battery.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 182.4,
-      "quantity": 1
+      "quantity": 0
     },
     "BAM010702200 (R)": {
       "id": 1025506327,
@@ -6324,7 +6324,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 205.2,
-      "quantity": 6
+      "quantity": 5
     },
     "BPC240813006": {
       "id": 1006376121,
