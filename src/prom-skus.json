@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-08T21:04:41.910Z",
+  "updatedAt": "2026-11-08T21:33:47.334Z",
   "total": 592,
   "skus": [
     "PIN122400000",
@@ -3131,10 +3131,10 @@
       "name": "Батарейный монитор Smartshunt 500A/50mV SHU050150050 Victron Energy 500А 50мВ",
       "main_image": "https://images.prom.ua/3613743268_w200_h200_batarejnyj-monitor-smartshunt.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 128.4,
-      "quantity": 0
+      "quantity": 2
     },
     "PMP482200000": {
       "id": 1559618577,
@@ -4651,10 +4651,10 @@
       "name": "Гибридный инвертор Victron Energy Quattro 48/15000/200-100/100 (48В, 15000ВА, 200А) чистая синусоида QUA483150000",
       "main_image": "https://images.prom.ua/1933317109_w200_h200_gibridnyj-invertor-victron.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 3759.6,
-      "quantity": 5
+      "quantity": 0
     },
     "QUA481030010": {
       "id": 1024852201,
@@ -4671,10 +4671,10 @@
       "name": "Гибридный инвертор Victron Energy Quattro 48/8000/110-100/100 (48В, 8000ВА, 110А) чистая синусоида QUA488024000",
       "main_image": "https://images.prom.ua/1933317101_w200_h200_gibridnyj-invertor-victron.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 2395.2,
-      "quantity": 0
+      "quantity": 5
     },
     "QUA248020010": {
       "id": 1024852199,
@@ -6414,7 +6414,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 158.4,
-      "quantity": 10
+      "quantity": 6
     },
     "BPC121031064R": {
       "id": 1005518473,
@@ -6464,7 +6464,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 205.2,
-      "quantity": 3
+      "quantity": 2
     },
     "BPC241242002": {
       "id": 1004379175,
@@ -6494,7 +6494,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 211.2,
-      "quantity": 7
+      "quantity": 4
     },
     "BPC122042002": {
       "id": 1004379168,
