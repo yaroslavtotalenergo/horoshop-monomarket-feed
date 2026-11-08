@@ -1,5 +1,77 @@
 [
   {
+    "id": "BPC123047002_1794171871185_y4pe1",
+    "timestamp": "2026-11-08T21:04:31.185Z",
+    "vendorCode": "BPC123047002",
+    "name": "Зарядний пристрій Blue Smart IP22 Charger 12/30 (1)",
+    "category": "Зарядні пристрої > Зарядні пристрої 12В",
+    "price": 11033,
+    "oldQty": 7,
+    "newQty": 4,
+    "diff": -3,
+    "type": "changed"
+  },
+  {
+    "id": "QUA488024000_1794171871185_yl8jj",
+    "timestamp": "2026-11-08T21:04:31.185Z",
+    "vendorCode": "QUA488024000",
+    "name": "Інвертор гібридний Victron Quattro 6,5кВт 48/8000/110-100/100 48/220В",
+    "category": "Інвертори DC-AC > Гібридні",
+    "price": 125125,
+    "oldQty": 0,
+    "newQty": 5,
+    "diff": 5,
+    "type": "became_available"
+  },
+  {
+    "id": "QUA483150000_1794171871185_9soak",
+    "timestamp": "2026-11-08T21:04:31.185Z",
+    "vendorCode": "QUA483150000",
+    "name": "Інвертор гібридний Victron Quattro 12кВт 48/15000/200-100/100 48/220В",
+    "category": "Інвертори DC-AC > Гібридні",
+    "price": 196402,
+    "oldQty": 5,
+    "newQty": 0,
+    "diff": -5,
+    "type": "became_zero"
+  },
+  {
+    "id": "BPC241647002_1794171871185_luq0l",
+    "timestamp": "2026-11-08T21:04:31.185Z",
+    "vendorCode": "BPC241647002",
+    "name": "Зарядний пристрій Blue Smart IP22 Charger 24/16 (1)",
+    "category": "Зарядні пристрої > Зарядні пристрої 24В",
+    "price": 10720,
+    "oldQty": 3,
+    "newQty": 2,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
+    "id": "BPC121531064R_1794171871185_6hwwb",
+    "timestamp": "2026-11-08T21:04:31.185Z",
+    "vendorCode": "BPC121531064R",
+    "name": "Зарядний пристрій Blue Smart IP65 Charger 12/15 + DC connector",
+    "category": "Зарядні пристрої > Зарядні пристрої 12В",
+    "price": 8275,
+    "oldQty": 10,
+    "newQty": 6,
+    "diff": -4,
+    "type": "changed"
+  },
+  {
+    "id": "SHU050150050_1794171871186_0l4ee",
+    "timestamp": "2026-11-08T21:04:31.185Z",
+    "vendorCode": "SHU050150050",
+    "name": "Батарейний монітор Victron SmartShunt 500A ",
+    "category": "Компоненти акумуляторних систем > Батарейні монітори",
+    "price": 6708,
+    "oldQty": 0,
+    "newQty": 2,
+    "diff": 2,
+    "type": "became_available"
+  },
+  {
     "id": "BPR065022000_1794153870699_utkax",
     "timestamp": "2026-11-08T16:04:30.699Z",
     "vendorCode": "BPR065022000",
