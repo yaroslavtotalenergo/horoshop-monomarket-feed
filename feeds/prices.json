@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-09T07:33:53.434Z",
+  "updatedAt": "2026-11-09T08:05:28.972Z",
   "total": 343,
   "data": [
     {
@@ -1771,9 +1771,14 @@
       "code": "ORI122436120",
       "price": 16362,
       "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
+      "availability": true,
+      "stock": 3,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 3
+        }
+      ],
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,

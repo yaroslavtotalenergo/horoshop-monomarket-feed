@@ -1,5 +1,29 @@
 [
   {
+    "id": "ORI122436120_1794211509979_aqi7l",
+    "timestamp": "2026-11-09T08:05:09.979Z",
+    "vendorCode": "ORI122436120",
+    "name": "Зарядний пристрій Orion-Tr Smart 12/24-15A Isolated DC-DC",
+    "category": "Перетворювачі DC-DC > З зарядом акумулятора",
+    "price": 16362,
+    "oldQty": 0,
+    "newQty": 3,
+    "diff": 3,
+    "type": "became_available"
+  },
+  {
+    "id": "ASS030530218_1794211509979_z1404",
+    "timestamp": "2026-11-09T08:05:09.979Z",
+    "vendorCode": "ASS030530218",
+    "name": "Спеціалізований кабель Victron Energy VE.Direct Cable 1,8 м - ASS030530218",
+    "category": "Моніторинг та керування > Інформаційні кабелі",
+    "price": 940,
+    "oldQty": 13,
+    "newQty": 12,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
     "id": "BPC123047002_1794171871185_y4pe1",
     "timestamp": "2026-11-08T21:04:31.185Z",
     "vendorCode": "BPC123047002",
