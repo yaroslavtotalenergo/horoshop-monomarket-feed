@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T09:33:41.473Z",
+  "updatedAt": "2026-11-10T10:04:55.090Z",
   "total": 592,
   "skus": [
     "PIN122400000",
@@ -2424,7 +2424,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 91.2,
-      "quantity": 2
+      "quantity": 1
     },
     "BPP900455070": {
       "id": 1704074342,
@@ -3564,7 +3564,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 9.6,
-      "quantity": 6
+      "quantity": 5
     },
     "BPC900100014": {
       "id": 1435110061,
@@ -6494,7 +6494,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 211.2,
-      "quantity": 4
+      "quantity": 3
     },
     "BPC122042002": {
       "id": 1004379168,
