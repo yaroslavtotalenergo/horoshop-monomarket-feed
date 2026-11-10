@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T09:04:42.705Z",
+  "updatedAt": "2026-11-10T09:33:41.473Z",
   "total": 592,
   "skus": [
     "PIN122400000",
@@ -2424,7 +2424,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 91.2,
-      "quantity": 1
+      "quantity": 2
     },
     "BPP900455070": {
       "id": 1704074342,
@@ -3391,10 +3391,10 @@
       "name": "Гибридный инвертор Victron Energy MultiPlus-II 48/10000/140-100 (48В, 10000ВА, 140А) чистая синусоида PMP483105000",
       "main_image": "https://images.prom.ua/7664898865_w200_h200_gibridnyj-invertor-victron.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 2223.6,
-      "quantity": 0
+      "quantity": 5
     },
     "PMP482805000": {
       "id": 1447209402,
@@ -4101,10 +4101,10 @@
       "name": "Гибридный инвертор Victron Energy MultiPlus-II 48/5000/70-50 GX (48В, 5000ВА, 70А) чистая синусоида PMP482506020",
       "main_image": "https://images.prom.ua/2890146332_w200_h200_gibridnyj-invertor-victron.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 1249.2,
-      "quantity": 0
+      "quantity": 5
     },
     "PMP242305010": {
       "id": 1344842621,
