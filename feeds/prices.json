@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T08:33:40.059Z",
+  "updatedAt": "2026-11-10T09:04:44.725Z",
   "total": 343,
   "data": [
     {
@@ -1494,9 +1494,14 @@
       "code": "PMP483105000",
       "price": 116161,
       "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
+      "availability": true,
+      "stock": 5,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 5
+        }
+      ],
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
