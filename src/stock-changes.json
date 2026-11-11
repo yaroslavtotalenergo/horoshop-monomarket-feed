@@ -1,5 +1,17 @@
 [
   {
+    "id": "PMP121800000_1794425607352_bmm0u",
+    "timestamp": "2026-11-11T19:33:27.352Z",
+    "vendorCode": "PMP121800000",
+    "name": "Інвертор гібридний Victron MultiPlus 700Вт 12/800/35-16 12/220В",
+    "category": "Інвертори DC-AC > Гібридні",
+    "price": 25326,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  },
+  {
     "id": "CIP138250020_1794391473276_fa49i",
     "timestamp": "2026-11-11T10:04:33.275Z",
     "vendorCode": "CIP138250020",
