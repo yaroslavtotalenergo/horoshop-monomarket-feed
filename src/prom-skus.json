@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-11T21:04:46.293Z",
+  "updatedAt": "2026-11-11T21:33:40.225Z",
   "total": 592,
   "skus": [
     "PIN122400000",
@@ -2154,7 +2154,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 87.6,
-      "quantity": 7
+      "quantity": 5
     },
     "ASS030530010": {
       "id": 1709025500,
@@ -4021,10 +4021,10 @@
       "name": "Альтернатор – Зарядное устройство от генератора DC-DC Orion-Tr Smart 12/12-30A (360W) Isolated ORI121236120",
       "main_image": "https://images.prom.ua/2903601622_w200_h200_alternator---zaryadnoe.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 313.2,
-      "quantity": 1
+      "quantity": 0
     },
     "ORI121222120": {
       "id": 1348961289,
