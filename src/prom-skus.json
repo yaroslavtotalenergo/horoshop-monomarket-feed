@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-11T19:33:38.734Z",
+  "updatedAt": "2026-11-11T20:04:42.454Z",
   "total": 592,
   "skus": [
     "PIN122400000",
@@ -4991,10 +4991,10 @@
       "name": "Гибридный инвертор Victron Energy MultiPlus 12/800/35-16 (12В, 800ВА, 35А) чистая синусоида PMP121800000",
       "main_image": "https://images.prom.ua/1933313387_w200_h200_gibridnyj-invertor-victron.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 484.8,
-      "quantity": 1
+      "quantity": 0
     },
     "PMP481500000": {
       "id": 1024852165,

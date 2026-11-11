@@ -1,5 +1,29 @@
 [
   {
+    "id": "BPC241647002_1794427470647_mgm9e",
+    "timestamp": "2026-11-11T20:04:30.646Z",
+    "vendorCode": "BPC241647002",
+    "name": "Зарядний пристрій Blue Smart IP22 Charger 24/16 (1)",
+    "category": "Зарядні пристрої > Зарядні пристрої 24В",
+    "price": 10720,
+    "oldQty": 2,
+    "newQty": 1,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
+    "id": "BPC120731064R_1794427470647_dl42i",
+    "timestamp": "2026-11-11T20:04:30.646Z",
+    "vendorCode": "BPC120731064R",
+    "name": "Зарядний пристрій Blue Smart IP65 Charger 12/7 + DC connector",
+    "category": "Зарядні пристрої > Зарядні пристрої 12В",
+    "price": 6708,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  },
+  {
     "id": "PMP121800000_1794425607352_bmm0u",
     "timestamp": "2026-11-11T19:33:27.352Z",
     "vendorCode": "PMP121800000",
