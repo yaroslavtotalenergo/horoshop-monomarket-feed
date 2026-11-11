@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-11T20:04:42.454Z",
+  "updatedAt": "2026-11-11T21:04:46.293Z",
   "total": 592,
   "skus": [
     "PIN122400000",
@@ -6431,10 +6431,10 @@
       "name": "Зарядное устройство Victron Energy Blue Smart IP65 12/7 (12В, 7А, Bluetooth) BPC120731064R",
       "main_image": "https://images.prom.ua/1883239560_w200_h200_zaryadnoe-ustrojstvo-victron.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 128.4,
-      "quantity": 1
+      "quantity": 0
     },
     "BPC120535064R": {
       "id": 1005518471,
@@ -6464,7 +6464,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 205.2,
-      "quantity": 2
+      "quantity": 1
     },
     "BPC241242002": {
       "id": 1004379175,

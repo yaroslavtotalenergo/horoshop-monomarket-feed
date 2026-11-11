@@ -1,5 +1,29 @@
 [
   {
+    "id": "ORI121236120_1794431074098_z59cg",
+    "timestamp": "2026-11-11T21:04:34.098Z",
+    "vendorCode": "ORI121236120",
+    "name": "Зарядний пристрій Orion-Tr Smart 12/12-30A Isolated DC-DC",
+    "category": "Перетворювачі DC-DC > З зарядом акумулятора",
+    "price": 16362,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  },
+  {
+    "id": "ASS030140000_1794431074098_zun1v",
+    "timestamp": "2026-11-11T21:04:34.098Z",
+    "vendorCode": "ASS030140000",
+    "name": "Інтерфейсний адаптер Victron Energy MK3-USB (VE.Bus to USB) ",
+    "category": "Моніторинг та керування > Інформаційні кабелі",
+    "price": 4576,
+    "oldQty": 7,
+    "newQty": 5,
+    "diff": -2,
+    "type": "changed"
+  },
+  {
     "id": "BPC241647002_1794427470647_mgm9e",
     "timestamp": "2026-11-11T20:04:30.646Z",
     "vendorCode": "BPC241647002",
