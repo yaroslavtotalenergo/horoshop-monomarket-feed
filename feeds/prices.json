@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-11T01:33:40.695Z",
+  "updatedAt": "2026-11-11T02:04:42.379Z",
   "total": 343,
   "data": [
     {
@@ -100,8 +100,8 @@
     },
     {
       "code": "BPC241242002",
-      "price": 9466,
-      "old_price": null,
+      "price": 8519,
+      "old_price": 9466,
       "availability": true,
       "stock": 14,
       "warehouses": [
@@ -306,8 +306,8 @@
     },
     {
       "code": "BPC121313006",
-      "price": 8338,
-      "old_price": null,
+      "price": 7504,
+      "old_price": 8338,
       "availability": true,
       "stock": 9,
       "warehouses": [
@@ -1144,8 +1144,8 @@
     },
     {
       "code": "QUA483150000",
-      "price": 196402,
-      "old_price": null,
+      "price": 157121,
+      "old_price": 196402,
       "availability": false,
       "stock": 0,
       "warehouses": null,
@@ -1157,8 +1157,8 @@
     },
     {
       "code": "QUA481030010",
-      "price": 149511,
-      "old_price": null,
+      "price": 119609,
+      "old_price": 149511,
       "availability": false,
       "stock": 0,
       "warehouses": null,
@@ -1492,8 +1492,8 @@
     },
     {
       "code": "PMP483105000",
-      "price": 116161,
-      "old_price": null,
+      "price": 92929,
+      "old_price": 116161,
       "availability": true,
       "stock": 5,
       "warehouses": [
@@ -3176,8 +3176,8 @@
     },
     {
       "code": "SCC125110412",
-      "price": 40998,
-      "old_price": null,
+      "price": 34848,
+      "old_price": 40998,
       "availability": false,
       "stock": 0,
       "warehouses": null,
@@ -3220,8 +3220,8 @@
     },
     {
       "code": "SCC125085411",
-      "price": 36735,
-      "old_price": null,
+      "price": 31225,
+      "old_price": 36735,
       "availability": true,
       "stock": 5,
       "warehouses": [
@@ -3238,8 +3238,8 @@
     },
     {
       "code": "SCC125070421",
-      "price": 34165,
-      "old_price": null,
+      "price": 29040,
+      "old_price": 34165,
       "availability": false,
       "stock": 0,
       "warehouses": null,
@@ -3798,8 +3798,8 @@
     },
     {
       "code": "PMP482605012",
-      "price": 61246,
-      "old_price": null,
+      "price": 48997,
+      "old_price": 61246,
       "availability": true,
       "stock": 11,
       "warehouses": [
@@ -4211,8 +4211,8 @@
     },
     {
       "code": "PMP482406000",
-      "price": 56733,
-      "old_price": null,
+      "price": 45386,
+      "old_price": 56733,
       "availability": false,
       "stock": 0,
       "warehouses": null,
@@ -4224,8 +4224,8 @@
     },
     {
       "code": "PMP482606000",
-      "price": 72843,
-      "old_price": null,
+      "price": 58275,
+      "old_price": 72843,
       "availability": true,
       "stock": 21,
       "warehouses": [
@@ -4307,8 +4307,8 @@
     },
     {
       "code": "PMP482505012",
-      "price": 52909,
-      "old_price": null,
+      "price": 42327,
+      "old_price": 52909,
       "availability": true,
       "stock": 31,
       "warehouses": [
@@ -4491,8 +4491,8 @@
     },
     {
       "code": "PSC481350095",
-      "price": 31344,
-      "old_price": null,
+      "price": 28210,
+      "old_price": 31344,
       "availability": true,
       "stock": 1,
       "warehouses": [
