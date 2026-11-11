@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-11T21:33:40.225Z",
+  "updatedAt": "2026-11-11T22:04:41.500Z",
   "total": 592,
   "skus": [
     "PIN122400000",
@@ -1491,10 +1491,10 @@
       "name": "Батарейный монитор Smartshunt 300A/50mV SHU050130050 Victron Energy 300А 50мВ",
       "main_image": "https://images.prom.ua/6439538409_w200_h200_batarejnyj-monitor-smartshunt.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 91.2,
-      "quantity": 0
+      "quantity": 2
     },
     "REL200300100": {
       "id": 2442999482,
@@ -1881,10 +1881,10 @@
       "name": "Интерфейс MK3-USB-C (VE.Bus to USB-C) ASS030140030 Victron Energy",
       "main_image": "https://images.prom.ua/5942010605_w200_h200_interfejs-mk3-usb-c-vebus.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 76.8,
-      "quantity": 0
+      "quantity": 1
     },
     "ASS030530030": {
       "id": 2243980998,
@@ -1921,10 +1921,10 @@
       "name": "Зарядное устройство Victron Energy Blue Smart IP22 12/30 (3) (12В, 30А, 3 выхода) BPC123048002",
       "main_image": "https://images.prom.ua/6086867373_w200_h200_zaryadnoe-ustrojstvo-victron.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 225.6,
-      "quantity": 0
+      "quantity": 1
     },
     "BPC121544002": {
       "id": 2223766611,
@@ -3201,10 +3201,10 @@
       "name": "Датчик Smart Battery Sense для зарядных устройств Blue Smart SBS050150200 Victron Energy",
       "main_image": "https://images.prom.ua/3400015122_w200_h200_datchik-smart-battery.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 50.4,
-      "quantity": 0
+      "quantity": 1
     },
     "VBS127010010": {
       "id": 1498858512,
@@ -4011,10 +4011,10 @@
       "name": "Альтернатор – Зарядное устройство от генератора DC-DC Orion-Tr Smart 12/24-10A (240W) Isolated ORI122424120",
       "main_image": "https://images.prom.ua/2903601626_w200_h200_alternator---zaryadnoe.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 205.2,
-      "quantity": 0
+      "quantity": 1
     },
     "ORI121236120": {
       "id": 1348961290,
@@ -4031,10 +4031,10 @@
       "name": "Альтернатор – Зарядное устройство от генератора DC-DC Orion-Tr Smart 12/12-18A (220W) Isolated ORI121222120",
       "main_image": "https://images.prom.ua/2903601622_w200_h200_alternator---zaryadnoe.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 205.2,
-      "quantity": 0
+      "quantity": 2
     },
     "ORI242440140": {
       "id": 1348961288,
@@ -4281,10 +4281,10 @@
       "name": "Батарейный сумматор Cyrix-ct 12/24V-120A intelligent combiner CYR010120011(R) Victron Energy 12-24В 120А",
       "main_image": "https://images.prom.ua/1934936848_w200_h200_batarejnyj-summator-cyrix-ct.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 62.4,
-      "quantity": 0
+      "quantity": 1
     },
     "ARG200301020 (R)": {
       "id": 1025539672,
@@ -5171,10 +5171,10 @@
       "name": "Солнечный контроллер заряда SmartSolar MPPT 100/30 Bluetooth SCC110030210 Victron Energy 100В 30А",
       "main_image": "https://images.prom.ua/1933269360_w200_h200_solnechnyj-kontroller-zaryada.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 164.4,
-      "quantity": 0
+      "quantity": 1
     },
     "SCC110020160R": {
       "id": 1024821128,
@@ -5184,7 +5184,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 115.2,
-      "quantity": 1
+      "quantity": 3
     },
     "SCC110015060R": {
       "id": 1024821126,
@@ -5201,10 +5201,10 @@
       "name": "Солнечный контроллер заряда SmartSolar MPPT 75/15 Bluetooth SCC075015060R Victron Energy 75В 15А",
       "main_image": "https://images.prom.ua/1933269328_w200_h200_solnechnyj-kontroller-zaryada.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 81.6,
-      "quantity": 0
+      "quantity": 2
     },
     "PIN482300000": {
       "id": 1024161230,
