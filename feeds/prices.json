@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-12T09:33:47.127Z",
+  "updatedAt": "2026-11-12T10:04:46.435Z",
   "total": 343,
   "data": [
     {
@@ -7,11 +7,11 @@
       "price": 11033,
       "old_price": null,
       "availability": true,
-      "stock": 4,
+      "stock": 2,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 4
+          "stock": 2
         }
       ],
       "warranty_type": "manufacturer",
@@ -175,11 +175,11 @@
       "price": 7961,
       "old_price": null,
       "availability": true,
-      "stock": 2,
+      "stock": 1,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 2
+          "stock": 1
         }
       ],
       "warranty_type": "manufacturer",
@@ -228,9 +228,14 @@
       "code": "BPC120731064R",
       "price": 6708,
       "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
+      "availability": true,
+      "stock": 2,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 2
+        }
+      ],
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -327,11 +332,11 @@
       "price": 6269,
       "old_price": null,
       "availability": true,
-      "stock": 7,
+      "stock": 5,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 7
+          "stock": 5
         }
       ],
       "warranty_type": "manufacturer",
@@ -407,11 +412,11 @@
       "price": 10720,
       "old_price": null,
       "availability": true,
-      "stock": 5,
+      "stock": 4,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 5
+          "stock": 4
         }
       ],
       "warranty_type": "manufacturer",
