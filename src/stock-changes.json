@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": "BPC121031064R_1794512009208_xnsm2",
+    "timestamp": "2026-11-12T19:33:29.208Z",
+    "vendorCode": "BPC121031064R",
+    "name": "Зарядний пристрій Blue Smart IP65 Charger 12/10 + DC connector",
+    "category": "Зарядні пристрої > Зарядні пристрої 12В",
+    "price": 7961,
+    "oldQty": 1,
+    "newQty": 5,
+    "diff": 4,
+    "type": "changed"
+  }
+]
