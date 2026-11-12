@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-12T10:04:44.092Z",
+  "updatedAt": "2026-11-12T10:33:42.287Z",
   "total": 592,
   "skus": [
     "PIN122400000",
@@ -3461,10 +3461,10 @@
       "name": "Кейс Victron Energy для зарядного устройства Blue Smart IP65 и аксессуаров BPC940100100",
       "main_image": "https://images.prom.ua/3185156222_w200_h200_kejs-victron-energy.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 34.8,
-      "quantity": 1
+      "quantity": 0
     },
     "BPC920100200": {
       "id": 1435110071,
@@ -6324,7 +6324,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 205.2,
-      "quantity": 5
+      "quantity": 4
     },
     "BPC240813006": {
       "id": 1006376121,
@@ -6394,7 +6394,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 120,
-      "quantity": 7
+      "quantity": 5
     },
     "BPC240531064R": {
       "id": 1005518475,
@@ -6424,17 +6424,17 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 152.4,
-      "quantity": 2
+      "quantity": 1
     },
     "BPC120731064R": {
       "id": 1005518472,
       "name": "Зарядное устройство Victron Energy Blue Smart IP65 12/7 (12В, 7А, Bluetooth) BPC120731064R",
       "main_image": "https://images.prom.ua/1883239560_w200_h200_zaryadnoe-ustrojstvo-victron.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 128.4,
-      "quantity": 0
+      "quantity": 2
     },
     "BPC120535064R": {
       "id": 1005518471,
@@ -6494,7 +6494,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 211.2,
-      "quantity": 4
+      "quantity": 2
     },
     "BPC122042002": {
       "id": 1004379168,
