@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-13T20:04:47.617Z",
+  "updatedAt": "2026-11-13T20:33:37.317Z",
   "total": 593,
   "skus": [
     "BPP900451130",
@@ -1912,10 +1912,10 @@
       "name": "Зарядное устройство Victron Energy Blue Smart IP22 24/16 (3) (24В, 16А, 3 выхода) BPC241648002",
       "main_image": "https://images.prom.ua/1882059297_w200_h200_zaryadnoe-ustrojstvo-victron.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "order",
+      "presenceTitle": "Немає в наявності",
       "price": 232.8,
-      "quantity": 1
+      "quantity": 0
     },
     "BPC122044002": {
       "id": 2223844310,
