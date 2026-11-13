@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-13T14:04:45.297Z",
+  "updatedAt": "2026-11-13T14:33:40.041Z",
   "total": 593,
   "skus": [
     "BPP900451130",
@@ -605,7 +605,7 @@
       "presence": "not_available",
       "presenceTitle": "Немає в наявності",
       "price": 388.8,
-      "quantity": null
+      "quantity": 0
     },
     "PIN122400000": {
       "id": 3266151046,
