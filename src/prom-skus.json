@@ -1,7 +1,8 @@
 {
-  "updatedAt": "2026-11-13T13:33:41.601Z",
-  "total": 592,
+  "updatedAt": "2026-11-13T14:04:45.297Z",
+  "total": 593,
   "skus": [
+    "BPP900451130",
     "PIN122400000",
     "PIN482161200",
     "PIN242161200",
@@ -596,6 +597,16 @@
     "BPC121542002"
   ],
   "items": {
+    "BPP900451130": {
+      "id": 3275074911,
+      "name": "Коммуникационный центр Cerbo GX MK3 Victron Energy - BPP900451130",
+      "main_image": "https://images.prom.ua/3449213455_w200_h200_kommunikatsionnyj-tsentr-cerbo.jpg",
+      "status": "on_display",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
+      "price": 388.8,
+      "quantity": null
+    },
     "PIN122400000": {
       "id": 3266151046,
       "name": "Инвертор Victron Energy Phoenix Inverter 12/4k Smart – 12/220В 4кВА/3.7кВт – PIN122400000",
