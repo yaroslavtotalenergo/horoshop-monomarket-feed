@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": "BPC241647002_1794558804948_mji6r",
+    "timestamp": "2026-11-13T08:33:24.948Z",
+    "vendorCode": "BPC241647002",
+    "name": "Зарядний пристрій Blue Smart IP22 Charger 24/16 (1)",
+    "category": "Зарядні пристрої > Зарядні пристрої 24В",
+    "price": 10720,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  }
+]

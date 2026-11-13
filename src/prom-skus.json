@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-13T08:04:45.893Z",
+  "updatedAt": "2026-11-13T08:33:36.175Z",
   "total": 592,
   "skus": [
     "PIN122400000",
@@ -6424,7 +6424,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 152.4,
-      "quantity": 4
+      "quantity": 5
     },
     "BPC120731064R": {
       "id": 1005518472,
