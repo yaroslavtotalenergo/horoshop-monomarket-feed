@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-14T19:33:32.993Z",
+  "updatedAt": "2026-11-14T20:04:40.350Z",
   "total": 593,
   "skus": [
     "BPP900451130",
@@ -645,7 +645,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 1180,
-      "quantity": 21
+      "quantity": 20
     },
     "PIN122251000": {
       "id": 3266018470,
@@ -895,7 +895,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 230,
-      "quantity": 2
+      "quantity": 1
     },
     "SLSIFP51100AH": {
       "id": 3014539989,
@@ -1892,10 +1892,10 @@
       "name": "Интерфейс MK3-USB-C (VE.Bus to USB-C) ASS030140030 Victron Energy",
       "main_image": "https://images.prom.ua/5942010605_w200_h200_interfejs-mk3-usb-c-vebus.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 76.8,
-      "quantity": 1
+      "quantity": 0
     },
     "ASS030530030": {
       "id": 2243980998,
@@ -3525,7 +3525,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 15.6,
-      "quantity": 5
+      "quantity": 4
     },
     "BPC900300014": {
       "id": 1435110066,
@@ -4235,7 +4235,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 222,
-      "quantity": 3
+      "quantity": 2
     },
     "BCD000802000": {
       "id": 1025539678,
@@ -5035,7 +5035,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 375.6,
-      "quantity": 2
+      "quantity": 1
     },
     "SCC010070200": {
       "id": 1024821151,
@@ -6395,7 +6395,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 159.6,
-      "quantity": 9
+      "quantity": 8
     },
     "BPC120713006": {
       "id": 1005897823,
