@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-14T19:10:01.054Z",
+  "updatedAt": "2026-11-14T19:33:34.867Z",
   "total": 343,
   "data": [
     {
@@ -309,11 +309,11 @@
       "price": 7504,
       "old_price": 8338,
       "availability": true,
-      "stock": 9,
+      "stock": 8,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 9
+          "stock": 8
         }
       ],
       "warranty_type": "manufacturer",
@@ -885,11 +885,11 @@
       "price": 19621,
       "old_price": null,
       "availability": true,
-      "stock": 2,
+      "stock": 1,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 2
+          "stock": 1
         }
       ],
       "warranty_type": "manufacturer",
@@ -2148,14 +2148,9 @@
       "code": "ASS030140030",
       "price": 4012,
       "old_price": null,
-      "availability": true,
-      "stock": 1,
-      "warehouses": [
-        {
-          "id": "stock01te",
-          "stock": 1
-        }
-      ],
+      "availability": false,
+      "stock": 0,
+      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -3668,11 +3663,11 @@
       "price": 10047,
       "old_price": null,
       "availability": true,
-      "stock": 2,
+      "stock": 1,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 2
+          "stock": 1
         }
       ],
       "warranty_type": "manufacturer",
@@ -3686,11 +3681,11 @@
       "price": 52157,
       "old_price": null,
       "availability": true,
-      "stock": 21,
+      "stock": 20,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 21
+          "stock": 20
         }
       ],
       "warranty_type": "manufacturer",
