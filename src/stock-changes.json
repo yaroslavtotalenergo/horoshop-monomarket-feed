@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": "CIP138175020_1794825209147_a6b9z",
+    "timestamp": "2026-11-16T10:33:29.146Z",
+    "vendorCode": "CIP138175020",
+    "name": "Запобіжник Victron Energy MEGA-fuse 175A/80V - CIP138175020",
+    "category": "Низьковольтне обладнання > Запобіжники",
+    "price": 481,
+    "oldQty": 10,
+    "newQty": 0,
+    "diff": -10,
+    "type": "became_zero"
+  }
+]
