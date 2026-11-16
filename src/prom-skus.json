@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-16T08:33:39.036Z",
+  "updatedAt": "2026-11-16T09:04:43.091Z",
   "total": 593,
   "skus": [
     "BPP900451130",
@@ -2335,7 +2335,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 50.4,
-      "quantity": 2
+      "quantity": 1
     },
     "BMS400100000": {
       "id": 1705897225,
