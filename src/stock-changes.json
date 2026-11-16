@@ -1,5 +1,29 @@
 [
   {
+    "id": "ASS030536011_1794861208957_qs2k4",
+    "timestamp": "2026-11-16T20:33:28.956Z",
+    "vendorCode": "ASS030536011",
+    "name": "Бездротовий адаптер Victron Energy VE.Direct Bluetooth Smart dongle – ASS030536011",
+    "category": "Моніторинг та керування > Центри моніторингу",
+    "price": 2633,
+    "oldQty": 2,
+    "newQty": 1,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
+    "id": "BPC122535064_1794861208957_75o63",
+    "timestamp": "2026-11-16T20:33:28.956Z",
+    "vendorCode": "BPC122535064",
+    "name": "Зарядний пристрій Blue Smart IP65 Charger 12/25 + DC connector Victron Energy - BPC122535064",
+    "category": "Зарядні пристрої > Зарядні пристрої 12В",
+    "price": 11597,
+    "oldQty": 2,
+    "newQty": 1,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
     "id": "BPC123047002_1794859480721_m4sel",
     "timestamp": "2026-11-16T20:04:40.721Z",
     "vendorCode": "BPC123047002",
