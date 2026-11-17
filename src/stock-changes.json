@@ -1,5 +1,17 @@
 [
   {
+    "id": "SCC110020160R_1794926011212_bkhdn",
+    "timestamp": "2026-11-17T14:33:31.212Z",
+    "vendorCode": "SCC110020160R",
+    "name": "Сонячний контролер SmartSolar (Bluetooth) MPPT 100V/20A Victron Energy",
+    "category": "Сонячні контролери > MPPT",
+    "price": 6018,
+    "oldQty": 3,
+    "newQty": 0,
+    "diff": -3,
+    "type": "became_zero"
+  },
+  {
     "id": "ASS030536011_1794861208957_qs2k4",
     "timestamp": "2026-11-16T20:33:28.956Z",
     "vendorCode": "ASS030536011",

@@ -531,7 +531,7 @@
   "SCC075010060R": true,
   "SCC075015060R": true,
   "SCC110015060R": false,
-  "SCC110020160R": true,
+  "SCC110020160R": false,
   "SCC110030210": true,
   "SCC110050210": false,
   "SCC115035210": true,
