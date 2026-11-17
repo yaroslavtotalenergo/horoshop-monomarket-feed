@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-17T14:33:44.215Z",
+  "updatedAt": "2026-11-17T15:04:49.600Z",
   "total": 593,
   "skus": [
     "BPP900451130",
@@ -5192,10 +5192,10 @@
       "name": "Солнечный контроллер заряда SmartSolar MPPT 100/20 (до 48V) Bluetooth SCC110020160R Victron Energy 100В 20А",
       "main_image": "https://images.prom.ua/1933269346_w200_h200_solnechnyj-kontroller-zaryada.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 115.2,
-      "quantity": 3
+      "quantity": 0
     },
     "SCC110015060R": {
       "id": 1024821126,
