@@ -1,5 +1,17 @@
 [
   {
+    "id": "SHU050130050_1794942271888_1fqoh",
+    "timestamp": "2026-11-17T19:04:31.887Z",
+    "vendorCode": "SHU050130050",
+    "name": "Батарейний монітор Victron SmartShunt 300A",
+    "category": "Компоненти акумуляторних систем > Батарейні монітори",
+    "price": 4764,
+    "oldQty": 2,
+    "newQty": 1,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
     "id": "SCC110020160R_1794926011212_bkhdn",
     "timestamp": "2026-11-17T14:33:31.212Z",
     "vendorCode": "SCC110020160R",
