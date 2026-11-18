@@ -1,5 +1,41 @@
 [
   {
+    "id": "ORI242417040_1795017873430_00eab",
+    "timestamp": "2026-11-18T16:04:33.430Z",
+    "vendorCode": "ORI242417040",
+    "name": "Зарядний пристрій Orion XS 1400W DC-DC",
+    "category": "Перетворювачі DC-DC > З зарядом акумулятора",
+    "price": 23821,
+    "oldQty": 2,
+    "newQty": 0,
+    "diff": -2,
+    "type": "became_zero"
+  },
+  {
+    "id": "CYR010120011 (R)_1795017873430_wwhsl",
+    "timestamp": "2026-11-18T16:04:33.430Z",
+    "vendorCode": "CYR010120011 (R)",
+    "name": "Інтелектуальний з’єднувач батарей Cyrix-ct 12/24V-120A Victron",
+    "category": "Компоненти акумуляторних систем > Ізолятори та суматори",
+    "price": 3260,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  },
+  {
+    "id": "BPR122022000_1795017873430_angfu",
+    "timestamp": "2026-11-18T16:04:33.430Z",
+    "vendorCode": "BPR122022000",
+    "name": "Захист акумулятора від глибокого розряду Smart BatteryProtect 12/24V 220A Victron",
+    "category": "Компоненти акумуляторних систем > Захист акумуляторів",
+    "price": 7084,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  },
+  {
     "id": "BPC241242002_1795016009341_fvyhf",
     "timestamp": "2026-11-18T15:33:29.341Z",
     "vendorCode": "BPC241242002",

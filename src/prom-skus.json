@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-18T15:33:38.911Z",
+  "updatedAt": "2026-11-18T16:04:44.300Z",
   "total": 593,
   "skus": [
     "BPP900451130",
@@ -2175,7 +2175,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 36,
-      "quantity": 6
+      "quantity": 4
     },
     "PMP483150000": {
       "id": 1707285888,
@@ -6395,7 +6395,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 159.6,
-      "quantity": 8
+      "quantity": 7
     },
     "BPC120713006": {
       "id": 1005897823,
@@ -6405,7 +6405,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 120,
-      "quantity": 5
+      "quantity": 4
     },
     "BPC240531064R": {
       "id": 1005518475,
@@ -6485,7 +6485,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 181.2,
-      "quantity": 14
+      "quantity": 13
     },
     "BPC240842002": {
       "id": 1004379174,
