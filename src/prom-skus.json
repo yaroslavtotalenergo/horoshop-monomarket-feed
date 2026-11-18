@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-18T09:04:46.558Z",
+  "updatedAt": "2026-11-18T09:33:40.661Z",
   "total": 593,
   "skus": [
     "BPP900451130",
@@ -1502,10 +1502,10 @@
       "name": "Батарейный монитор Smartshunt 300A/50mV SHU050130050 Victron Energy 300А 50мВ",
       "main_image": "https://images.prom.ua/6439538409_w200_h200_batarejnyj-monitor-smartshunt.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 91.2,
-      "quantity": 1
+      "quantity": 0
     },
     "REL200300100": {
       "id": 2442999482,
@@ -4235,7 +4235,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 222,
-      "quantity": 1
+      "quantity": 3
     },
     "BCD000802000": {
       "id": 1025539678,
