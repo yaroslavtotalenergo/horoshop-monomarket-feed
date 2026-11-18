@@ -1,5 +1,17 @@
 [
   {
+    "id": "SHU065130050_1795019612063_sktdr",
+    "timestamp": "2026-11-18T16:33:32.062Z",
+    "vendorCode": "SHU065130050",
+    "name": "Батарейний монітор Victron Energy SmartShunt 300A IP65",
+    "category": "Компоненти акумуляторних систем > Батарейні монітори",
+    "price": 4764,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  },
+  {
     "id": "ORI242417040_1795017873430_00eab",
     "timestamp": "2026-11-18T16:04:33.430Z",
     "vendorCode": "ORI242417040",

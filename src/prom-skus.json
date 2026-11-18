@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-18T16:04:44.300Z",
+  "updatedAt": "2026-11-18T16:33:42.192Z",
   "total": 593,
   "skus": [
     "BPP900451130",
@@ -1412,10 +1412,10 @@
       "name": "Зарядное устройство постоянного тока Orion XS 1400W ORI242417040 Victron Energy",
       "main_image": "https://images.prom.ua/6970126389_w200_h200_zaryadnoe-ustrojstvo-postoyannogo.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 456,
-      "quantity": 2
+      "quantity": 0
     },
     "EVC200300200": {
       "id": 2850370651,
@@ -4292,10 +4292,10 @@
       "name": "Батарейный сумматор Cyrix-ct 12/24V-120A intelligent combiner CYR010120011(R) Victron Energy 12-24В 120А",
       "main_image": "https://images.prom.ua/1934936848_w200_h200_batarejnyj-summator-cyrix-ct.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 62.4,
-      "quantity": 1
+      "quantity": 0
     },
     "ARG200301020 (R)": {
       "id": 1025539672,
@@ -4462,10 +4462,10 @@
       "name": "Защита аккумулятора от глубокого разряда Smart BatteryProtect 12/24В 220A BPR122022000 Victron Energy",
       "main_image": "https://images.prom.ua/1934937153_w200_h200_zaschita-akkumulyatora-ot.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 135.6,
-      "quantity": 1
+      "quantity": 0
     },
     "BPR110022000": {
       "id": 1025506322,
