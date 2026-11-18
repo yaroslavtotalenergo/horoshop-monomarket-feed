@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-18T13:04:44.175Z",
+  "updatedAt": "2026-11-18T13:33:38.895Z",
   "total": 593,
   "skus": [
     "BPP900451130",
@@ -2432,10 +2432,10 @@
       "name": "Батарейный монитор Smartshunt 300A/50mV IP65 SHU065130050 Victron Energy 300А 50мВ водонепроницаемый",
       "main_image": "https://images.prom.ua/4064355455_w200_h200_batarejnyj-monitor-smartshunt.jpg",
       "status": "on_display",
-      "presence": "order",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 91.2,
-      "quantity": 0
+      "quantity": 1
     },
     "BPP900455070": {
       "id": 1704074342,
