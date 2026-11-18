@@ -1,1 +1,38 @@
-[]
+[
+  {
+    "id": "BPC122531064_1794992674953_2mmqx",
+    "timestamp": "2026-11-18T09:04:34.953Z",
+    "vendorCode": "BPC122531064",
+    "name": "Зарядний пристрій Blue Smart IP65 Charger 12/25 + DC connector",
+    "category": "",
+    "price": "",
+    "oldQty": 2,
+    "newQty": 0,
+    "diff": -2,
+    "type": "became_zero"
+  },
+  {
+    "id": "SHU050130050_1794992674953_5vt0a",
+    "timestamp": "2026-11-18T09:04:34.953Z",
+    "vendorCode": "SHU050130050",
+    "name": "Батарейний монітор Victron SmartShunt 300A",
+    "category": "Компоненти акумуляторних систем > Батарейні монітори",
+    "price": 4764,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  },
+  {
+    "id": "BPC122535064_1794992674953_zoa7t",
+    "timestamp": "2026-11-18T09:04:34.953Z",
+    "vendorCode": "BPC122535064",
+    "name": "Зарядний пристрій Blue Smart IP65 Charger 12/25 + DC connector Victron Energy - BPC122535064",
+    "category": "Зарядні пристрої > Зарядні пристрої 12В",
+    "price": 11597,
+    "oldQty": 1,
+    "newQty": 3,
+    "diff": 2,
+    "type": "changed"
+  }
+]
