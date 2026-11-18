@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "id": "BPC241242002_1795016009341_fvyhf",
+    "timestamp": "2026-11-18T15:33:29.341Z",
+    "vendorCode": "BPC241242002",
+    "name": "Зарядний пристрій Blue Smart IP22 Charger 24/12 (1)",
+    "category": "Зарядні пристрої > Зарядні пристрої 24В",
+    "price": 8519,
+    "oldQty": 14,
+    "newQty": 13,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
+    "id": "BPC120713006_1795016009341_fkggg",
+    "timestamp": "2026-11-18T15:33:29.341Z",
+    "vendorCode": "BPC120713006",
+    "name": "Зарядний пристрій Blue Smart IP67 Charger 12/7 (1)",
+    "category": "Зарядні пристрої > Зарядні пристрої 12В",
+    "price": 6269,
+    "oldQty": 5,
+    "newQty": 4,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
+    "id": "BPC121313006_1795016009341_4kh52",
+    "timestamp": "2026-11-18T15:33:29.341Z",
+    "vendorCode": "BPC121313006",
+    "name": "Зарядний пристрій Blue Smart IP67 Charger 12/13 (1)",
+    "category": "Зарядні пристрої > Зарядні пристрої 12В",
+    "price": 7504,
+    "oldQty": 8,
+    "newQty": 7,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
+    "id": "ASS030530010_1795016009342_x3dm7",
+    "timestamp": "2026-11-18T15:33:29.341Z",
+    "vendorCode": "ASS030530010",
+    "name": "Адаптер Victron Energy VE.Direct to USB – ASS030530010",
+    "category": "Моніторинг та керування > Інформаційні кабелі",
+    "price": 1881,
+    "oldQty": 6,
+    "newQty": 4,
+    "diff": -2,
+    "type": "changed"
+  }
+]
