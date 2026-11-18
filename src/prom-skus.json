@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-18T06:33:41.792Z",
+  "updatedAt": "2026-11-18T07:04:46.392Z",
   "total": 593,
   "skus": [
     "BPP900451130",
@@ -4232,10 +4232,10 @@
       "name": "Зарядное устройство Victron Energy Blue Smart IP65 12/25 (12В, 25А, Bluetooth) BPC122535064",
       "main_image": "https://images.prom.ua/4931532534_w200_h200_zaryadnoe-ustrojstvo-victron.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "order",
+      "presenceTitle": "Немає в наявності",
       "price": 222,
-      "quantity": 1
+      "quantity": 0
     },
     "BCD000802000": {
       "id": 1025539678,
