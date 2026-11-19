@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-19T21:04:43.123Z",
+  "updatedAt": "2026-11-19T21:33:41.319Z",
   "total": 593,
   "skus": [
     "BPP900451130",
@@ -4022,10 +4022,10 @@
       "name": "Альтернатор – Зарядное устройство от генератора DC-DC Orion-Tr Smart 12/24-10A (240W) Isolated ORI122424120",
       "main_image": "https://images.prom.ua/2903601626_w200_h200_alternator---zaryadnoe.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 205.2,
-      "quantity": 1
+      "quantity": 0
     },
     "ORI121236120": {
       "id": 1348961290,
