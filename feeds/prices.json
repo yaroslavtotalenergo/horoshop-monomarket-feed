@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-19T09:33:50.082Z",
+  "updatedAt": "2026-11-19T10:04:47.146Z",
   "total": 343,
   "data": [
     {
@@ -241,14 +241,9 @@
       "code": "BPC121531064R",
       "price": 8004,
       "old_price": null,
-      "availability": true,
-      "stock": 6,
-      "warehouses": [
-        {
-          "id": "stock01te",
-          "stock": 6
-        }
-      ],
+      "availability": false,
+      "stock": 0,
+      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
