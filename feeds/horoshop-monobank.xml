@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<yml_catalog date="2026-11-19 10:04">
+<yml_catalog date="2026-11-19 10:33">
   <shop>
     <offers>
       <offer>
         <vendorCode>BPC123047002</vendorCode>
-        <param name="«Покупка частями» от monobank">6</param>
-        <param name="«Покупка частинами» від monobank">Так</param>
+        <param name="«Покупка частями» от monobank">Выкл</param>
+        <param name="«Покупка частинами» від monobank"></param>
       </offer>
       <offer>
         <vendorCode>BPC122042002</vendorCode>

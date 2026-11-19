@@ -1,5 +1,17 @@
 [
   {
+    "id": "BPC123047002_1795084412535_siw80",
+    "timestamp": "2026-11-19T10:33:32.534Z",
+    "vendorCode": "BPC123047002",
+    "name": "Зарядний пристрій Blue Smart IP22 Charger 12/30 (1)",
+    "category": "Зарядні пристрої > Зарядні пристрої 12В",
+    "price": 10672,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  },
+  {
     "id": "BPC121531064R_1795082674045_rfqta",
     "timestamp": "2026-11-19T10:04:34.045Z",
     "vendorCode": "BPC121531064R",
