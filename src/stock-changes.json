@@ -1,5 +1,17 @@
 [
   {
+    "id": "CIP138040020_1795088012167_jljwc",
+    "timestamp": "2026-11-19T11:33:32.166Z",
+    "vendorCode": "CIP138040020",
+    "name": "Запобіжник Victron Energy MEGA-fuse 40A/80V - CIP138040020",
+    "category": "Низьковольтне обладнання > Запобіжники",
+    "price": 465,
+    "oldQty": 6,
+    "newQty": 0,
+    "diff": -6,
+    "type": "became_zero"
+  },
+  {
     "id": "BPC123047002_1795084412535_siw80",
     "timestamp": "2026-11-19T10:33:32.534Z",
     "vendorCode": "BPC123047002",
