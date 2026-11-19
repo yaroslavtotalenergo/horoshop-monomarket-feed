@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-19T10:33:43.563Z",
+  "updatedAt": "2026-11-19T11:04:47.081Z",
   "total": 593,
   "skus": [
     "BPP900451130",
@@ -1915,7 +1915,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 232.8,
-      "quantity": 1
+      "quantity": 2
     },
     "BPC122044002": {
       "id": 2223844310,
@@ -6502,10 +6502,10 @@
       "name": "Зарядное устройство Victron Energy Blue Smart IP22 12/30 (12В, 30А, Bluetooth) BPC123047002",
       "main_image": "https://images.prom.ua/1880089852_w200_h200_zaryadnoe-ustrojstvo-victron.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 211.2,
-      "quantity": 1
+      "quantity": 0
     },
     "BPC122042002": {
       "id": 1004379168,
