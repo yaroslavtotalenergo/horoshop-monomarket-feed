@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "id": "ORI122424120_1795122273112_mgtrw",
+    "timestamp": "2026-11-19T21:04:33.111Z",
+    "vendorCode": "ORI122424120",
+    "name": "Зарядний пристрій Orion-Tr Smart 12/24-10A Isolated DC-DC",
+    "category": "Перетворювачі DC-DC > З зарядом акумулятора",
+    "price": 10369,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  },
+  {
+    "id": "CIP138225020_1795122273112_9zbfv",
+    "timestamp": "2026-11-19T21:04:33.111Z",
+    "vendorCode": "CIP138225020",
+    "name": "Запобіжник Victron Energy MEGA-fuse 225A/80V - CIP138225020",
+    "category": "Низьковольтне обладнання > Запобіжники",
+    "price": 465,
+    "oldQty": 27,
+    "newQty": 20,
+    "diff": -7,
+    "type": "changed"
+  },
+  {
+    "id": "CIP000100001_1795122273112_8ijpg",
+    "timestamp": "2026-11-19T21:04:33.111Z",
+    "vendorCode": "CIP000100001",
+    "name": "Тримач запобіжника Victron Energy Fuse holder for MEGA-fuse - CIP000100001",
+    "category": "Низьковольтне обладнання > Запобіжники",
+    "price": 728,
+    "oldQty": 10,
+    "newQty": 9,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
+    "id": "ASS030530218_1795122273112_xu3pn",
+    "timestamp": "2026-11-19T21:04:33.111Z",
+    "vendorCode": "ASS030530218",
+    "name": "Спеціалізований кабель Victron Energy VE.Direct Cable 1,8 м - ASS030530218",
+    "category": "Моніторинг та керування > Інформаційні кабелі",
+    "price": 910,
+    "oldQty": 12,
+    "newQty": 6,
+    "diff": -6,
+    "type": "changed"
+  }
+]
