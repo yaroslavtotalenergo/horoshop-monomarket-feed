@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-20T10:33:37.773Z",
+  "updatedAt": "2026-11-20T11:04:45.633Z",
   "total": 593,
   "skus": [
     "BPP900451130",
@@ -1202,10 +1202,10 @@
       "name": "Конвертор Victron DC-DC Orion 24/12-30 - ORI241230022",
       "main_image": "https://images.prom.ua/7257322212_w200_h200_konvertor-victron-dc-dc.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 87.6,
-      "quantity": 0
+      "quantity": 1
     },
     "PMR482602020": {
       "id": 2998507062,
@@ -3145,7 +3145,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 128.4,
-      "quantity": 2
+      "quantity": 4
     },
     "PMP482200000": {
       "id": 1559618577,
@@ -4512,10 +4512,10 @@
       "name": "Защита аккумулятора от глубокого разряда BatteryProtect 12/24В 100A BPR000100400 Victron Energy",
       "main_image": "https://images.prom.ua/1934937140_w200_h200_zaschita-akkumulyatora-ot.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 68.4,
-      "quantity": 0
+      "quantity": 2
     },
     "BPR000065400": {
       "id": 1025506317,
@@ -5532,10 +5532,10 @@
       "name": "Стабилизатор аккумулятора Battery Balancer BBA000100100 Victron Energy балансир акб 24, 36 та 48В",
       "main_image": "https://images.prom.ua/1928338902_w200_h200_stabilizator-akkumulyatora-battery.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 62.4,
-      "quantity": 0
+      "quantity": 1
     },
     "ARG080202000 (R)": {
       "id": 1021580153,
@@ -6372,20 +6372,20 @@
       "name": "Водонепроницаемое зарядное устройство Victron Energy Blue Smart IP67 12/25 (12В, 25А, Bluetooth) BPC122547006",
       "main_image": "https://images.prom.ua/1885631098_w200_h200_vodonepronitsaemoe-zaryadnoe-ustrojstvo.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 205.2,
-      "quantity": 0
+      "quantity": 10
     },
     "BPC121713006": {
       "id": 1006376117,
       "name": "Водонепроницаемое зарядное устройство Victron Energy Blue Smart IP67 12/17 (12В, 17А, Bluetooth) BPC121713006",
       "main_image": "https://images.prom.ua/1885631098_w200_h200_vodonepronitsaemoe-zaryadnoe-ustrojstvo.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 176.4,
-      "quantity": 0
+      "quantity": 10
     },
     "BPC121313006": {
       "id": 1006376116,
