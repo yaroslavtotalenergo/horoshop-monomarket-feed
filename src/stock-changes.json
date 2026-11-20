@@ -1,1 +1,74 @@
-[]
+[
+  {
+    "id": "BPC121713006_1795170808006_ae6ci",
+    "timestamp": "2026-11-20T10:33:28.005Z",
+    "vendorCode": "BPC121713006",
+    "name": "Зарядний пристрій Blue Smart IP67 Charger 12/17 (1)",
+    "category": "Зарядні пристрої > Зарядні пристрої 12В",
+    "price": 8913,
+    "oldQty": 0,
+    "newQty": 10,
+    "diff": 10,
+    "type": "became_available"
+  },
+  {
+    "id": "BPC122547006_1795170808006_z8ij3",
+    "timestamp": "2026-11-20T10:33:28.005Z",
+    "vendorCode": "BPC122547006",
+    "name": "Зарядний пристрій Blue Smart IP67 Charger 12/25 (1)",
+    "category": "Зарядні пристрої > Зарядні пристрої 12В",
+    "price": 10369,
+    "oldQty": 0,
+    "newQty": 10,
+    "diff": 10,
+    "type": "became_available"
+  },
+  {
+    "id": "ORI241230022_1795170808006_zdo07",
+    "timestamp": "2026-11-20T10:33:28.005Z",
+    "vendorCode": "ORI241230022",
+    "name": "Конвертор Victron Energy DC-DC Orion 24/12-30",
+    "category": "Перетворювачі DC-DC",
+    "price": 4426,
+    "oldQty": 0,
+    "newQty": 1,
+    "diff": 1,
+    "type": "became_available"
+  },
+  {
+    "id": "SHU050150050_1795170808006_qjmzf",
+    "timestamp": "2026-11-20T10:33:28.005Z",
+    "vendorCode": "SHU050150050",
+    "name": "Батарейний монітор Victron SmartShunt 500A ",
+    "category": "Компоненти акумуляторних систем > Батарейні монітори",
+    "price": 6488,
+    "oldQty": 2,
+    "newQty": 4,
+    "diff": 2,
+    "type": "changed"
+  },
+  {
+    "id": "BBA000100100_1795170808006_6pbpu",
+    "timestamp": "2026-11-20T10:33:28.005Z",
+    "vendorCode": "BBA000100100",
+    "name": "Балансир батарей Victron Energy Battery Balancer",
+    "category": "Компоненти акумуляторних систем > Балансир акумуляторів",
+    "price": 3153,
+    "oldQty": 0,
+    "newQty": 1,
+    "diff": 1,
+    "type": "became_available"
+  },
+  {
+    "id": "BPR000100400_1795170808006_ui60v",
+    "timestamp": "2026-11-20T10:33:28.005Z",
+    "vendorCode": "BPR000100400",
+    "name": "Захист акумулятора від глибокого розряда BatteryProtect 12/24V 100A Victron",
+    "category": "Компоненти акумуляторних систем > Захист акумуляторів",
+    "price": 3456,
+    "oldQty": 0,
+    "newQty": 2,
+    "diff": 2,
+    "type": "became_available"
+  }
+]

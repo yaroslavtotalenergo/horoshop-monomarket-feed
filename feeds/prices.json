@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-20T10:04:45.668Z",
+  "updatedAt": "2026-11-20T10:33:39.799Z",
   "total": 343,
   "data": [
     {
@@ -280,9 +280,14 @@
       "code": "BPC122547006",
       "price": 10369,
       "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
+      "availability": true,
+      "stock": 10,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 10
+        }
+      ],
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -329,9 +334,14 @@
       "code": "BPC121713006",
       "price": 8913,
       "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
+      "availability": true,
+      "stock": 10,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 10
+        }
+      ],
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -2383,11 +2393,11 @@
       "price": 6488,
       "old_price": null,
       "availability": true,
-      "stock": 2,
+      "stock": 4,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 2
+          "stock": 4
         }
       ],
       "warranty_type": "manufacturer",
@@ -3324,9 +3334,14 @@
       "code": "BBA000100100",
       "price": 3153,
       "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
+      "availability": true,
+      "stock": 1,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 1
+        }
+      ],
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -3412,9 +3427,14 @@
       "code": "BPR000100400",
       "price": 3456,
       "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
+      "availability": true,
+      "stock": 2,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 2
+        }
+      ],
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
@@ -4240,9 +4260,14 @@
       "code": "ORI241230022",
       "price": 4426,
       "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
+      "availability": true,
+      "stock": 1,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 1
+        }
+      ],
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
