@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-20T15:04:47.149Z",
+  "updatedAt": "2026-11-20T15:33:38.035Z",
   "total": 343,
   "data": [
     {
@@ -1687,11 +1687,11 @@
       "price": 10369,
       "old_price": null,
       "availability": true,
-      "stock": 2,
+      "stock": 1,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 2
+          "stock": 1
         }
       ],
       "warranty_type": "manufacturer",
