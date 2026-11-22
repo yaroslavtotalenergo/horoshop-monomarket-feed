@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-22T12:04:44.906Z",
+  "updatedAt": "2026-11-22T12:33:39.651Z",
   "total": 593,
   "skus": [
     "BPP900451130",
@@ -4942,10 +4942,10 @@
       "name": "Гибридный инвертор Victron Energy MultiPlus 12/1600/70-16 (12В, 1600ВА, 70А) чистая синусоида PMP122160000",
       "main_image": "https://images.prom.ua/1933313402_w200_h200_gibridnyj-invertor-victron.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 685.2,
-      "quantity": 1
+      "quantity": 0
     },
     "PMP482120000": {
       "id": 1024852171,

@@ -1,5 +1,65 @@
 [
   {
+    "id": "BPC120713006_1795350808686_wrx5g",
+    "timestamp": "2026-11-22T12:33:28.686Z",
+    "vendorCode": "BPC120713006",
+    "name": "Зарядний пристрій Blue Smart IP67 Charger 12/7 (1)",
+    "category": "Зарядні пристрої > Зарядні пристрої 12В",
+    "price": 6047,
+    "oldQty": 4,
+    "newQty": 1,
+    "diff": -3,
+    "type": "changed"
+  },
+  {
+    "id": "BPC121313006_1795350808686_4ns2y",
+    "timestamp": "2026-11-22T12:33:28.686Z",
+    "vendorCode": "BPC121313006",
+    "name": "Зарядний пристрій Blue Smart IP67 Charger 12/13 (1)",
+    "category": "Зарядні пристрої > Зарядні пристрої 12В",
+    "price": 8042,
+    "oldQty": 7,
+    "newQty": 4,
+    "diff": -3,
+    "type": "changed"
+  },
+  {
+    "id": "BPC121713006_1795350808686_zqhqj",
+    "timestamp": "2026-11-22T12:33:28.686Z",
+    "vendorCode": "BPC121713006",
+    "name": "Зарядний пристрій Blue Smart IP67 Charger 12/17 (1)",
+    "category": "Зарядні пристрої > Зарядні пристрої 12В",
+    "price": 8889,
+    "oldQty": 10,
+    "newQty": 5,
+    "diff": -5,
+    "type": "changed"
+  },
+  {
+    "id": "BPC122547006_1795350808686_v8wvx",
+    "timestamp": "2026-11-22T12:33:28.686Z",
+    "vendorCode": "BPC122547006",
+    "name": "Зарядний пристрій Blue Smart IP67 Charger 12/25 (1)",
+    "category": "Зарядні пристрої > Зарядні пристрої 12В",
+    "price": 10340,
+    "oldQty": 10,
+    "newQty": 6,
+    "diff": -4,
+    "type": "changed"
+  },
+  {
+    "id": "BPC241247006_1795350808686_izdln",
+    "timestamp": "2026-11-22T12:33:28.686Z",
+    "vendorCode": "BPC241247006",
+    "name": "Зарядний пристрій Blue Smart IP67 Charger 24/12 (1)",
+    "category": "Зарядні пристрої > Зарядні пристрої 24В",
+    "price": 10340,
+    "oldQty": 4,
+    "newQty": 0,
+    "diff": -4,
+    "type": "became_zero"
+  },
+  {
     "id": "PMP122160000_1795349072930_n9aa3",
     "timestamp": "2026-11-22T12:04:32.930Z",
     "vendorCode": "PMP122160000",

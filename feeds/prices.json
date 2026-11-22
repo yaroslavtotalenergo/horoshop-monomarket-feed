@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-22T12:04:47.573Z",
+  "updatedAt": "2026-11-22T12:33:42.214Z",
   "total": 343,
   "data": [
     {
@@ -276,11 +276,11 @@
       "price": 10340,
       "old_price": null,
       "availability": true,
-      "stock": 10,
+      "stock": 6,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 10
+          "stock": 6
         }
       ],
       "warranty_type": "manufacturer",
@@ -292,24 +292,6 @@
     {
       "code": "BPC121313006",
       "price": 8042,
-      "old_price": null,
-      "availability": true,
-      "stock": 7,
-      "warehouses": [
-        {
-          "id": "stock01te",
-          "stock": 7
-        }
-      ],
-      "warranty_type": "manufacturer",
-      "warranty_period": 60,
-      "max_pay_in_parts": 6,
-      "days_to_dispatch": 1,
-      "manufacture": null
-    },
-    {
-      "code": "BPC120713006",
-      "price": 6047,
       "old_price": null,
       "availability": true,
       "stock": 4,
@@ -326,15 +308,33 @@
       "manufacture": null
     },
     {
+      "code": "BPC120713006",
+      "price": 6047,
+      "old_price": null,
+      "availability": true,
+      "stock": 1,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 1
+        }
+      ],
+      "warranty_type": "manufacturer",
+      "warranty_period": 60,
+      "max_pay_in_parts": 6,
+      "days_to_dispatch": 1,
+      "manufacture": null
+    },
+    {
       "code": "BPC121713006",
       "price": 8889,
       "old_price": null,
       "availability": true,
-      "stock": 10,
+      "stock": 5,
       "warehouses": [
         {
           "id": "stock01te",
-          "stock": 10
+          "stock": 5
         }
       ],
       "warranty_type": "manufacturer",
@@ -396,14 +396,9 @@
       "code": "BPC241247006",
       "price": 10340,
       "old_price": null,
-      "availability": true,
-      "stock": 4,
-      "warehouses": [
-        {
-          "id": "stock01te",
-          "stock": 4
-        }
-      ],
+      "availability": false,
+      "stock": 0,
+      "warehouses": null,
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
