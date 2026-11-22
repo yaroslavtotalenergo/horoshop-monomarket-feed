@@ -1,5 +1,41 @@
 [
   {
+    "id": "PMP482406000_1795365205682_k33tb",
+    "timestamp": "2026-11-22T16:33:25.681Z",
+    "vendorCode": "PMP482406000",
+    "name": "Інвертор гібридний Victron MultiPlus-II 4кВт 48/4k5/55-32 GX 48/220В",
+    "category": "Інвертори DC-AC > Гібридні",
+    "price": 54724,
+    "oldQty": 0,
+    "newQty": 2,
+    "diff": 2,
+    "type": "became_available"
+  },
+  {
+    "id": "PMP482605012_1795365205682_8llgi",
+    "timestamp": "2026-11-22T16:33:25.681Z",
+    "vendorCode": "PMP482605012",
+    "name": "Інвертор гібридний Victron MultiPlus-II 48/6k5/100-50 6кВт 48/220В",
+    "category": "Інвертори DC-AC > Гібридні",
+    "price": 59077,
+    "oldQty": 11,
+    "newQty": 12,
+    "diff": 1,
+    "type": "changed"
+  },
+  {
+    "id": "PMP482606000_1795365205682_3z2va",
+    "timestamp": "2026-11-22T16:33:25.681Z",
+    "vendorCode": "PMP482606000",
+    "name": "Інвертор гібридний Victron MultiPlus-II 6кВт 48/6k5/100-50 GX 48/220В",
+    "category": "Інвертори DC-AC > Гібридні",
+    "price": 70264,
+    "oldQty": 21,
+    "newQty": 22,
+    "diff": 1,
+    "type": "changed"
+  },
+  {
     "id": "BPC120713006_1795350808686_wrx5g",
     "timestamp": "2026-11-22T12:33:28.686Z",
     "vendorCode": "BPC120713006",
