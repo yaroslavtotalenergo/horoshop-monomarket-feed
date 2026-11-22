@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-22T12:33:39.651Z",
+  "updatedAt": "2026-11-22T13:04:39.025Z",
   "total": 593,
   "skus": [
     "BPP900451130",
@@ -6332,10 +6332,10 @@
       "name": "Водонепроницаемое зарядное устройство Victron Energy Blue Smart IP67 24/12 (24В, 12А, Bluetooth) BPC241247006",
       "main_image": "https://images.prom.ua/1885631098_w200_h200_vodonepronitsaemoe-zaryadnoe-ustrojstvo.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 205.2,
-      "quantity": 4
+      "quantity": 0
     },
     "BPC240813006": {
       "id": 1006376121,
@@ -6375,7 +6375,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 205.2,
-      "quantity": 10
+      "quantity": 6
     },
     "BPC121713006": {
       "id": 1006376117,
@@ -6385,7 +6385,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 176.4,
-      "quantity": 10
+      "quantity": 5
     },
     "BPC121313006": {
       "id": 1006376116,
@@ -6395,7 +6395,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 159.6,
-      "quantity": 7
+      "quantity": 4
     },
     "BPC120713006": {
       "id": 1005897823,
@@ -6405,7 +6405,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 120,
-      "quantity": 4
+      "quantity": 1
     },
     "BPC240531064R": {
       "id": 1005518475,
