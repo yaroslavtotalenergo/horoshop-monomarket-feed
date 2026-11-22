@@ -1,1 +1,62 @@
-[]
+[
+  {
+    "id": "CIP138125020_1795347204674_ag721",
+    "timestamp": "2026-11-22T11:33:24.673Z",
+    "vendorCode": "CIP138125020",
+    "name": "Запобіжник Victron Energy MEGA-fuse 125A/80V - CIP138125020",
+    "category": "Низьковольтне обладнання > Запобіжники",
+    "price": 464,
+    "oldQty": 19,
+    "newQty": 17,
+    "diff": -2,
+    "type": "changed"
+  },
+  {
+    "id": "CIP138200020_1795347204674_dkku4",
+    "timestamp": "2026-11-22T11:33:24.673Z",
+    "vendorCode": "CIP138200020",
+    "name": "Запобіжник Victron Energy MEGA-fuse 200A/80V - CIP138200020",
+    "category": "Низьковольтне обладнання > Запобіжники",
+    "price": 464,
+    "oldQty": 10,
+    "newQty": 5,
+    "diff": -5,
+    "type": "changed"
+  },
+  {
+    "id": "CIP138400020_1795347204674_wxnjg",
+    "timestamp": "2026-11-22T11:33:24.673Z",
+    "vendorCode": "CIP138400020",
+    "name": "Запобіжник Victron Energy MEGA-fuse 400A/80V - CIP138400020",
+    "category": "Низьковольтне обладнання > Запобіжники",
+    "price": 464,
+    "oldQty": 10,
+    "newQty": 20,
+    "diff": 10,
+    "type": "changed"
+  },
+  {
+    "id": "CIP000100001_1795347204674_wo4q9",
+    "timestamp": "2026-11-22T11:33:24.673Z",
+    "vendorCode": "CIP000100001",
+    "name": "Тримач запобіжника Victron Energy Fuse holder for MEGA-fuse - CIP000100001",
+    "category": "Низьковольтне обладнання > Запобіжники",
+    "price": 726,
+    "oldQty": 9,
+    "newQty": 8,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
+    "id": "BAM010702000 (R)_1795347204674_rzllz",
+    "timestamp": "2026-11-22T11:33:24.673Z",
+    "vendorCode": "BAM010702000 (R)",
+    "name": "Батарейний монітор Victron BMV-702 (У комплекті Шунт Victron 500A/50mV)",
+    "category": "Компоненти акумуляторних систем > Батарейні монітори",
+    "price": 7982,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  }
+]
