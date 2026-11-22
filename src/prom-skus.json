@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-22T11:33:33.865Z",
+  "updatedAt": "2026-11-22T12:04:44.906Z",
   "total": 593,
   "skus": [
     "BPP900451130",
@@ -4432,10 +4432,10 @@
       "name": "Батарейный монитор Battery Monitor BMV-702 9 - 90В BAM010702000 (R) Victron Energy",
       "main_image": "https://images.prom.ua/1934937169_w200_h200_batarejnyj-monitor-battery.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 158.4,
-      "quantity": 1
+      "quantity": 0
     },
     "BAM010700000 (R)": {
       "id": 1025506325,
