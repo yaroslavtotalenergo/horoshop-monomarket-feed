@@ -1,5 +1,17 @@
 [
   {
+    "id": "LYN020102010_1795435476728_4i1pi",
+    "timestamp": "2026-11-23T12:04:36.728Z",
+    "vendorCode": "LYN020102010",
+    "name": "Розподільча модульна шина Lynx Power In 1000 (M10) ",
+    "category": "Низьковольтне обладнання > Розподільчі блоки",
+    "price": 9070,
+    "oldQty": 0,
+    "newQty": 5,
+    "diff": 5,
+    "type": "became_available"
+  },
+  {
     "id": "SBS050150200_1795431870242_4azih",
     "timestamp": "2026-11-23T11:04:30.242Z",
     "vendorCode": "SBS050150200",

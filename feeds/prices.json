@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-23T11:33:39.109Z",
+  "updatedAt": "2026-11-23T12:05:09.275Z",
   "total": 343,
   "data": [
     {
@@ -1934,9 +1934,14 @@
       "code": "LYN020102010",
       "price": 9070,
       "old_price": null,
-      "availability": false,
-      "stock": 0,
-      "warehouses": null,
+      "availability": true,
+      "stock": 5,
+      "warehouses": [
+        {
+          "id": "stock01te",
+          "stock": 5
+        }
+      ],
       "warranty_type": "manufacturer",
       "warranty_period": 60,
       "max_pay_in_parts": 6,
