@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-23T11:04:44.816Z",
+  "updatedAt": "2026-11-23T11:33:37.416Z",
   "total": 593,
   "skus": [
     "BPP900451130",
@@ -3212,10 +3212,10 @@
       "name": "Датчик Smart Battery Sense для зарядных устройств Blue Smart SBS050150200 Victron Energy",
       "main_image": "https://images.prom.ua/3400015122_w200_h200_datchik-smart-battery.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 50.4,
-      "quantity": 1
+      "quantity": 0
     },
     "VBS127010010": {
       "id": 1498858512,
