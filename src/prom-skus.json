@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-23T12:33:39.971Z",
+  "updatedAt": "2026-11-23T13:04:51.678Z",
   "total": 593,
   "skus": [
     "BPP900451130",
@@ -1852,10 +1852,10 @@
       "name": "Шина Lynx Power In M10 LYN020102010 Victron Energy",
       "main_image": "https://images.prom.ua/6011071760_w200_h200_shina-lynx-power.jpg",
       "status": "on_display",
-      "presence": "not_available",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 180,
-      "quantity": 0
+      "quantity": 5
     },
     "PMP122505012": {
       "id": 2263172401,
