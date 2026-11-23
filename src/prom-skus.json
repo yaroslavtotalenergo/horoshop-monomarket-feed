@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-23T09:04:50.826Z",
+  "updatedAt": "2026-11-23T09:33:40.894Z",
   "total": 593,
   "skus": [
     "BPP900451130",
@@ -6375,7 +6375,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 205.2,
-      "quantity": 6
+      "quantity": 7
     },
     "BPC121713006": {
       "id": 1006376117,
@@ -6385,7 +6385,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 176.4,
-      "quantity": 5
+      "quantity": 4
     },
     "BPC121313006": {
       "id": 1006376116,
