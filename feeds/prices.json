@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-11-24T01:33:36.342Z",
+  "updatedAt": "2026-11-24T02:04:43.719Z",
   "total": 343,
   "data": [
     {
       "code": "BPC123047002",
-      "price": 10642,
+      "price": 10655,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -17,7 +17,7 @@
     },
     {
       "code": "BPC122042002",
-      "price": 8828,
+      "price": 8839,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -30,7 +30,7 @@
     },
     {
       "code": "BPC121542002",
-      "price": 8163,
+      "price": 8173,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -43,7 +43,7 @@
     },
     {
       "code": "BPC123048002",
-      "price": 11368,
+      "price": 11382,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -56,7 +56,7 @@
     },
     {
       "code": "BPC121544002",
-      "price": 8526,
+      "price": 8536,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -69,7 +69,7 @@
     },
     {
       "code": "BPC122044002",
-      "price": 9977,
+      "price": 9989,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -82,7 +82,7 @@
     },
     {
       "code": "BPC240842002",
-      "price": 8163,
+      "price": 8173,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -95,8 +95,8 @@
     },
     {
       "code": "BPC241242002",
-      "price": 7761,
-      "old_price": 9131,
+      "price": 7770,
+      "old_price": 9142,
       "availability": true,
       "stock": 13,
       "warehouses": [
@@ -113,7 +113,7 @@
     },
     {
       "code": "BPC241647002",
-      "price": 10340,
+      "price": 10352,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -126,7 +126,7 @@
     },
     {
       "code": "BPC241648002",
-      "price": 11731,
+      "price": 11745,
       "old_price": null,
       "availability": true,
       "stock": 1,
@@ -144,7 +144,7 @@
     },
     {
       "code": "BPC120134034R",
-      "price": 3447,
+      "price": 3451,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -157,8 +157,8 @@
     },
     {
       "code": "BPC121031064R",
-      "price": 6528,
-      "old_price": 7679,
+      "price": 6535,
+      "old_price": 7689,
       "availability": true,
       "stock": 5,
       "warehouses": [
@@ -175,7 +175,7 @@
     },
     {
       "code": "BPC120435064R",
-      "price": 4898,
+      "price": 4904,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -188,8 +188,8 @@
     },
     {
       "code": "BPC120535064R",
-      "price": 4626,
-      "old_price": 5442,
+      "price": 4631,
+      "old_price": 5449,
       "availability": true,
       "stock": 3,
       "warehouses": [
@@ -206,8 +206,8 @@
     },
     {
       "code": "BPC120731064R",
-      "price": 5500,
-      "old_price": 6470,
+      "price": 5506,
+      "old_price": 6478,
       "availability": true,
       "stock": 2,
       "warehouses": [
@@ -224,7 +224,7 @@
     },
     {
       "code": "BPC121531064R",
-      "price": 7982,
+      "price": 7991,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -237,8 +237,8 @@
     },
     {
       "code": "BPC240531064R",
-      "price": 5500,
-      "old_price": 6470,
+      "price": 5506,
+      "old_price": 6478,
       "availability": true,
       "stock": 1,
       "warehouses": [
@@ -255,8 +255,8 @@
     },
     {
       "code": "BPC241331064",
-      "price": 9509,
-      "old_price": 11187,
+      "price": 9520,
+      "old_price": 11200,
       "availability": true,
       "stock": 1,
       "warehouses": [
@@ -273,8 +273,8 @@
     },
     {
       "code": "BPC122547006",
-      "price": 8789,
-      "old_price": 10340,
+      "price": 8799,
+      "old_price": 10352,
       "availability": true,
       "stock": 7,
       "warehouses": [
@@ -291,8 +291,8 @@
     },
     {
       "code": "BPC121313006",
-      "price": 6836,
-      "old_price": 8042,
+      "price": 6844,
+      "old_price": 8052,
       "availability": true,
       "stock": 4,
       "warehouses": [
@@ -309,8 +309,8 @@
     },
     {
       "code": "BPC120713006",
-      "price": 5140,
-      "old_price": 6047,
+      "price": 5146,
+      "old_price": 6054,
       "availability": true,
       "stock": 1,
       "warehouses": [
@@ -327,8 +327,8 @@
     },
     {
       "code": "BPC121713006",
-      "price": 7555,
-      "old_price": 8889,
+      "price": 7564,
+      "old_price": 8899,
       "availability": true,
       "stock": 4,
       "warehouses": [
@@ -345,7 +345,7 @@
     },
     {
       "code": "BPC122514006",
-      "price": 12094,
+      "price": 12108,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -358,8 +358,8 @@
     },
     {
       "code": "BPC240513006",
-      "price": 5757,
-      "old_price": 6772,
+      "price": 5763,
+      "old_price": 6780,
       "availability": true,
       "stock": 1,
       "warehouses": [
@@ -376,8 +376,8 @@
     },
     {
       "code": "BPC240813006",
-      "price": 7555,
-      "old_price": 8889,
+      "price": 7564,
+      "old_price": 8899,
       "availability": true,
       "stock": 1,
       "warehouses": [
@@ -394,7 +394,7 @@
     },
     {
       "code": "BPC241247006",
-      "price": 10340,
+      "price": 10352,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -407,7 +407,7 @@
     },
     {
       "code": "BPC241214006",
-      "price": 12094,
+      "price": 12108,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -420,7 +420,7 @@
     },
     {
       "code": "PSC123051095",
-      "price": 20559,
+      "price": 20584,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -433,7 +433,7 @@
     },
     {
       "code": "PSC123053095",
-      "price": 22071,
+      "price": 22097,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -446,7 +446,7 @@
     },
     {
       "code": "PSC125051095",
-      "price": 26183,
+      "price": 26214,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -459,7 +459,7 @@
     },
     {
       "code": "PSC125053095",
-      "price": 27694,
+      "price": 27727,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -472,7 +472,7 @@
     },
     {
       "code": "PSC241651095",
-      "price": 20559,
+      "price": 20584,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -485,7 +485,7 @@
     },
     {
       "code": "PSC242551095",
-      "price": 26183,
+      "price": 26214,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -498,7 +498,7 @@
     },
     {
       "code": "PSC242553095",
-      "price": 27694,
+      "price": 27727,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -511,7 +511,7 @@
     },
     {
       "code": "PIN483020000",
-      "price": 39123,
+      "price": 39169,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -524,7 +524,7 @@
     },
     {
       "code": "PIN245020000",
-      "price": 102130,
+      "price": 102252,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -537,7 +537,7 @@
     },
     {
       "code": "PIN485020000",
-      "price": 58049,
+      "price": 58118,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -550,7 +550,7 @@
     },
     {
       "code": "CIN122160000",
-      "price": 35555,
+      "price": 35598,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -563,7 +563,7 @@
     },
     {
       "code": "CIN122200000",
-      "price": 40816,
+      "price": 40865,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -576,7 +576,7 @@
     },
     {
       "code": "CIN242160000",
-      "price": 35555,
+      "price": 35598,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -589,7 +589,7 @@
     },
     {
       "code": "CIN242200000",
-      "price": 40816,
+      "price": 40865,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -602,7 +602,7 @@
     },
     {
       "code": "PIN121371200",
-      "price": 6833,
+      "price": 6841,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -615,7 +615,7 @@
     },
     {
       "code": "PIN121501200",
-      "price": 8586,
+      "price": 8597,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -628,7 +628,7 @@
     },
     {
       "code": "PIN122121210",
-      "price": 16447,
+      "price": 16467,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -641,7 +641,7 @@
     },
     {
       "code": "PIN241251200",
-      "price": 5926,
+      "price": 5933,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -654,7 +654,7 @@
     },
     {
       "code": "PIN241501200",
-      "price": 9070,
+      "price": 9081,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -667,8 +667,8 @@
     },
     {
       "code": "PIN241801200",
-      "price": 9887,
-      "old_price": 13182,
+      "price": 9898,
+      "old_price": 13198,
       "availability": true,
       "stock": 1,
       "warehouses": [
@@ -685,7 +685,7 @@
     },
     {
       "code": "PIN242121200",
-      "price": 17536,
+      "price": 17557,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -698,7 +698,7 @@
     },
     {
       "code": "PIN481251200",
-      "price": 6228,
+      "price": 6236,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -711,7 +711,7 @@
     },
     {
       "code": "PIN481371200",
-      "price": 7619,
+      "price": 7628,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -724,7 +724,7 @@
     },
     {
       "code": "PIN481501200",
-      "price": 9070,
+      "price": 9081,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -737,7 +737,7 @@
     },
     {
       "code": "PIN482121200",
-      "price": 17536,
+      "price": 17557,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -750,7 +750,7 @@
     },
     {
       "code": "PIN122161000",
-      "price": 34709,
+      "price": 34750,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -763,7 +763,7 @@
     },
     {
       "code": "PIN242161000",
-      "price": 34709,
+      "price": 34750,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -776,7 +776,7 @@
     },
     {
       "code": "PIN242201000",
-      "price": 39304,
+      "price": 39351,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -789,7 +789,7 @@
     },
     {
       "code": "PIN482201000",
-      "price": 30174,
+      "price": 30209,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -802,7 +802,7 @@
     },
     {
       "code": "PIN122300000",
-      "price": 50249,
+      "price": 50309,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -815,7 +815,7 @@
     },
     {
       "code": "PIN242300000",
-      "price": 55691,
+      "price": 55757,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -828,7 +828,7 @@
     },
     {
       "code": "PIN482300000",
-      "price": 38579,
+      "price": 38625,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -841,7 +841,7 @@
     },
     {
       "code": "PIN242501000",
-      "price": 97414,
+      "price": 97530,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -854,7 +854,7 @@
     },
     {
       "code": "PIN482500000",
-      "price": 57807,
+      "price": 57876,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -867,8 +867,8 @@
     },
     {
       "code": "PMP121500000",
-      "price": 14195,
-      "old_price": 18926,
+      "price": 14212,
+      "old_price": 18949,
       "availability": true,
       "stock": 1,
       "warehouses": [
@@ -885,7 +885,7 @@
     },
     {
       "code": "PIN482600000",
-      "price": 74557,
+      "price": 74646,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -898,7 +898,7 @@
     },
     {
       "code": "PMP241500000",
-      "price": 18926,
+      "price": 18949,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -911,7 +911,7 @@
     },
     {
       "code": "PMP481500000",
-      "price": 16689,
+      "price": 16709,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -924,7 +924,7 @@
     },
     {
       "code": "PMP121800000",
-      "price": 24429,
+      "price": 24458,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -937,7 +937,7 @@
     },
     {
       "code": "PMP241800000",
-      "price": 24429,
+      "price": 24458,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -950,7 +950,7 @@
     },
     {
       "code": "PMP481800000",
-      "price": 19652,
+      "price": 19676,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -963,7 +963,7 @@
     },
     {
       "code": "PMP122120000",
-      "price": 29871,
+      "price": 29907,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -976,7 +976,7 @@
     },
     {
       "code": "PMP242120000",
-      "price": 29871,
+      "price": 29907,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -989,7 +989,7 @@
     },
     {
       "code": "PMP482120000",
-      "price": 27452,
+      "price": 27485,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1002,7 +1002,7 @@
     },
     {
       "code": "PMP122160000",
-      "price": 34527,
+      "price": 34568,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1015,7 +1015,7 @@
     },
     {
       "code": "PMP242160000",
-      "price": 34527,
+      "price": 34568,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1028,7 +1028,7 @@
     },
     {
       "code": "PMP482160000",
-      "price": 31141,
+      "price": 31178,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1041,7 +1041,7 @@
     },
     {
       "code": "PMP122200000",
-      "price": 53817,
+      "price": 53881,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1054,7 +1054,7 @@
     },
     {
       "code": "PMP242200000",
-      "price": 50188,
+      "price": 50248,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1067,7 +1067,7 @@
     },
     {
       "code": "PMP482200000",
-      "price": 34709,
+      "price": 34750,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1080,7 +1080,7 @@
     },
     {
       "code": "SIN121251100",
-      "price": 6893,
+      "price": 6902,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1093,7 +1093,7 @@
     },
     {
       "code": "SIN241251100",
-      "price": 6893,
+      "price": 6902,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1106,7 +1106,7 @@
     },
     {
       "code": "PMP485021010",
-      "price": 74920,
+      "price": 75009,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1119,7 +1119,7 @@
     },
     {
       "code": "QUA483150000",
-      "price": 189446,
+      "price": 189672,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1132,7 +1132,7 @@
     },
     {
       "code": "QUA481030010",
-      "price": 144216,
+      "price": 144388,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1145,7 +1145,7 @@
     },
     {
       "code": "QUA488024000",
-      "price": 120694,
+      "price": 120838,
       "old_price": null,
       "availability": true,
       "stock": 5,
@@ -1163,7 +1163,7 @@
     },
     {
       "code": "QUA485021010",
-      "price": 106666,
+      "price": 106793,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1176,7 +1176,7 @@
     },
     {
       "code": "QUA248020010",
-      "price": 149175,
+      "price": 149352,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1189,7 +1189,7 @@
     },
     {
       "code": "QUA245021010",
-      "price": 118154,
+      "price": 118295,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1202,7 +1202,7 @@
     },
     {
       "code": "QUA243020010",
-      "price": 90762,
+      "price": 90871,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1215,7 +1215,7 @@
     },
     {
       "code": "QUA125020000",
-      "price": 147784,
+      "price": 147960,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1228,7 +1228,7 @@
     },
     {
       "code": "PMP245021010",
-      "price": 109084,
+      "price": 109214,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1241,7 +1241,7 @@
     },
     {
       "code": "QUA123020010",
-      "price": 100135,
+      "price": 100254,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1254,7 +1254,7 @@
     },
     {
       "code": "CMP122120000",
-      "price": 40876,
+      "price": 40925,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1267,7 +1267,7 @@
     },
     {
       "code": "CMP122160000",
-      "price": 45835,
+      "price": 45889,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1280,7 +1280,7 @@
     },
     {
       "code": "CMP242160000",
-      "price": 45835,
+      "price": 45889,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1293,7 +1293,7 @@
     },
     {
       "code": "CMP122200000",
-      "price": 55933,
+      "price": 56000,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1306,7 +1306,7 @@
     },
     {
       "code": "CMP242200000",
-      "price": 58714,
+      "price": 58784,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1319,7 +1319,7 @@
     },
     {
       "code": "PMP122300001",
-      "price": 72743,
+      "price": 72830,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1332,7 +1332,7 @@
     },
     {
       "code": "PMP123021010",
-      "price": 78548,
+      "price": 78641,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1345,7 +1345,7 @@
     },
     {
       "code": "PMP242300001",
-      "price": 72562,
+      "price": 72648,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1358,7 +1358,7 @@
     },
     {
       "code": "PMP242301011",
-      "price": 78306,
+      "price": 78399,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1371,7 +1371,7 @@
     },
     {
       "code": "PMP483020001",
-      "price": 52910,
+      "price": 52973,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1384,7 +1384,7 @@
     },
     {
       "code": "PMP483021010",
-      "price": 55268,
+      "price": 55334,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1397,7 +1397,7 @@
     },
     {
       "code": "PMP122305010",
-      "price": 67543,
+      "price": 67623,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1410,8 +1410,8 @@
     },
     {
       "code": "PMP482306000",
-      "price": 32245,
-      "old_price": 42993,
+      "price": 32283,
+      "old_price": 43044,
       "availability": true,
       "stock": 31,
       "warehouses": [
@@ -1428,7 +1428,7 @@
     },
     {
       "code": "PMP242305010",
-      "price": 51337,
+      "price": 51398,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1441,7 +1441,7 @@
     },
     {
       "code": "PMP242505010",
-      "price": 101647,
+      "price": 101768,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1454,7 +1454,7 @@
     },
     {
       "code": "PMP482805000",
-      "price": 93786,
+      "price": 93898,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1467,8 +1467,8 @@
     },
     {
       "code": "PMP483105000",
-      "price": 84035,
-      "old_price": 112047,
+      "price": 84135,
+      "old_price": 112181,
       "availability": true,
       "stock": 5,
       "warehouses": [
@@ -1485,7 +1485,7 @@
     },
     {
       "code": "PMP483150000",
-      "price": 156310,
+      "price": 156496,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1498,7 +1498,7 @@
     },
     {
       "code": "PIN482601000",
-      "price": 98200,
+      "price": 98317,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1511,7 +1511,7 @@
     },
     {
       "code": "PMR482602020",
-      "price": 98865,
+      "price": 98983,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1524,7 +1524,7 @@
     },
     {
       "code": "PMP242307010",
-      "price": 77278,
+      "price": 77370,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1537,7 +1537,7 @@
     },
     {
       "code": "QUA482504010",
-      "price": 68389,
+      "price": 68471,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1550,7 +1550,7 @@
     },
     {
       "code": "QUA242505010",
-      "price": 104610,
+      "price": 104734,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1563,7 +1563,7 @@
     },
     {
       "code": "PMP482307010",
-      "price": 77278,
+      "price": 77370,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1576,7 +1576,7 @@
     },
     {
       "code": "PMP482507010",
-      "price": 109024,
+      "price": 109154,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1589,7 +1589,7 @@
     },
     {
       "code": "EVC300400300",
-      "price": 32774,
+      "price": 32813,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1602,7 +1602,7 @@
     },
     {
       "code": "EVC200300200",
-      "price": 32774,
+      "price": 32813,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1615,8 +1615,8 @@
     },
     {
       "code": "ORI241240021",
-      "price": 5088,
-      "old_price": 5986,
+      "price": 5094,
+      "old_price": 5993,
       "availability": true,
       "stock": 1,
       "warehouses": [
@@ -1633,8 +1633,8 @@
     },
     {
       "code": "ORI122410020",
-      "price": 3392,
-      "old_price": 3991,
+      "price": 3396,
+      "old_price": 3996,
       "availability": true,
       "stock": 1,
       "warehouses": [
@@ -1651,8 +1651,8 @@
     },
     {
       "code": "ORI122420020",
-      "price": 6271,
-      "old_price": 7377,
+      "price": 6278,
+      "old_price": 7386,
       "availability": true,
       "stock": 1,
       "warehouses": [
@@ -1669,7 +1669,7 @@
     },
     {
       "code": "ORI121222120",
-      "price": 10340,
+      "price": 10352,
       "old_price": null,
       "availability": true,
       "stock": 1,
@@ -1687,7 +1687,7 @@
     },
     {
       "code": "ORI122424120",
-      "price": 10340,
+      "price": 10352,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1700,8 +1700,8 @@
     },
     {
       "code": "ORI241224120",
-      "price": 8789,
-      "old_price": 10340,
+      "price": 8799,
+      "old_price": 10352,
       "availability": true,
       "stock": 1,
       "warehouses": [
@@ -1718,8 +1718,8 @@
     },
     {
       "code": "ORI242428120",
-      "price": 8789,
-      "old_price": 10340,
+      "price": 8799,
+      "old_price": 10352,
       "availability": true,
       "stock": 1,
       "warehouses": [
@@ -1736,7 +1736,7 @@
     },
     {
       "code": "ORI121236120",
-      "price": 15782,
+      "price": 15801,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1749,8 +1749,8 @@
     },
     {
       "code": "ORI122436120",
-      "price": 13415,
-      "old_price": 15782,
+      "price": 13431,
+      "old_price": 15801,
       "availability": true,
       "stock": 3,
       "warehouses": [
@@ -1767,7 +1767,7 @@
     },
     {
       "code": "ORI241236120",
-      "price": 15782,
+      "price": 15801,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1780,8 +1780,8 @@
     },
     {
       "code": "ORI242440120",
-      "price": 13415,
-      "old_price": 15782,
+      "price": 13431,
+      "old_price": 15801,
       "availability": true,
       "stock": 1,
       "warehouses": [
@@ -1798,7 +1798,7 @@
     },
     {
       "code": "ORI124838120",
-      "price": 15782,
+      "price": 15801,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1811,7 +1811,7 @@
     },
     {
       "code": "ORI244840120",
-      "price": 15782,
+      "price": 15801,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1824,8 +1824,8 @@
     },
     {
       "code": "ORI121236140",
-      "price": 11821,
-      "old_price": 13908,
+      "price": 11836,
+      "old_price": 13924,
       "availability": true,
       "stock": 1,
       "warehouses": [
@@ -1842,8 +1842,8 @@
     },
     {
       "code": "ORI122436140",
-      "price": 11821,
-      "old_price": 13908,
+      "price": 11836,
+      "old_price": 13924,
       "availability": true,
       "stock": 1,
       "warehouses": [
@@ -1860,8 +1860,8 @@
     },
     {
       "code": "ORI241236140",
-      "price": 11821,
-      "old_price": 13908,
+      "price": 11836,
+      "old_price": 13924,
       "availability": true,
       "stock": 1,
       "warehouses": [
@@ -1878,8 +1878,8 @@
     },
     {
       "code": "ORI241210110(R)",
-      "price": 3495,
-      "old_price": 4112,
+      "price": 3499,
+      "old_price": 4117,
       "availability": true,
       "stock": 1,
       "warehouses": [
@@ -1896,8 +1896,8 @@
     },
     {
       "code": "ORI241224110",
-      "price": 6271,
-      "old_price": 7377,
+      "price": 6278,
+      "old_price": 7386,
       "availability": true,
       "stock": 1,
       "warehouses": [
@@ -1914,8 +1914,8 @@
     },
     {
       "code": "ORI242440140",
-      "price": 11821,
-      "old_price": 13908,
+      "price": 11836,
+      "old_price": 13924,
       "availability": true,
       "stock": 12,
       "warehouses": [
@@ -1932,7 +1932,7 @@
     },
     {
       "code": "LYN020102010",
-      "price": 9070,
+      "price": 9081,
       "old_price": null,
       "availability": true,
       "stock": 5,
@@ -1950,7 +1950,7 @@
     },
     {
       "code": "LYN060102010",
-      "price": 13001,
+      "price": 13016,
       "old_price": null,
       "availability": true,
       "stock": 2,
@@ -1968,7 +1968,7 @@
     },
     {
       "code": "VBS127010010",
-      "price": 2237,
+      "price": 2240,
       "old_price": null,
       "availability": true,
       "stock": 11,
@@ -1986,7 +1986,7 @@
     },
     {
       "code": "BPP900480100",
-      "price": 36402,
+      "price": 36445,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -1999,7 +1999,7 @@
     },
     {
       "code": "BPP900451100",
-      "price": 16024,
+      "price": 16043,
       "old_price": null,
       "availability": true,
       "stock": 51,
@@ -2017,7 +2017,7 @@
     },
     {
       "code": "BPP900455050",
-      "price": 14210,
+      "price": 14227,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2030,7 +2030,7 @@
     },
     {
       "code": "BPP900455150",
-      "price": 15843,
+      "price": 15861,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2043,7 +2043,7 @@
     },
     {
       "code": "BPP900455070",
-      "price": 20922,
+      "price": 20947,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2056,7 +2056,7 @@
     },
     {
       "code": "BPP900455170",
-      "price": 23341,
+      "price": 23368,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2069,7 +2069,7 @@
     },
     {
       "code": "REC000300010R",
-      "price": 8405,
+      "price": 8415,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2082,7 +2082,7 @@
     },
     {
       "code": "BPA000100010R",
-      "price": 3749,
+      "price": 3753,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2095,7 +2095,7 @@
     },
     {
       "code": "SDRPSKC",
-      "price": 10038,
+      "price": 10050,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2108,7 +2108,7 @@
     },
     {
       "code": "ASS030140000",
-      "price": 4414,
+      "price": 4419,
       "old_price": null,
       "availability": true,
       "stock": 5,
@@ -2126,7 +2126,7 @@
     },
     {
       "code": "ASS030140030",
-      "price": 3870,
+      "price": 3875,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2139,7 +2139,7 @@
     },
     {
       "code": "ASS030532010",
-      "price": 33016,
+      "price": 33055,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2152,7 +2152,7 @@
     },
     {
       "code": "ASS030520200",
-      "price": 4535,
+      "price": 4541,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2165,7 +2165,7 @@
     },
     {
       "code": "REL200200100",
-      "price": 6470,
+      "price": 6478,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2178,7 +2178,7 @@
     },
     {
       "code": "REL300100000",
-      "price": 12094,
+      "price": 12108,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2191,7 +2191,7 @@
     },
     {
       "code": "REL200100100",
-      "price": 6772,
+      "price": 6780,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2204,7 +2204,7 @@
     },
     {
       "code": "REL300300000",
-      "price": 5079,
+      "price": 5085,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2217,7 +2217,7 @@
     },
     {
       "code": "REL200300100",
-      "price": 11066,
+      "price": 11079,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2230,7 +2230,7 @@
     },
     {
       "code": "BAM010700000 (R)",
-      "price": 6410,
+      "price": 6417,
       "old_price": null,
       "availability": true,
       "stock": 1,
@@ -2248,7 +2248,7 @@
     },
     {
       "code": "BAM010702000 (R)",
-      "price": 7982,
+      "price": 7991,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2261,7 +2261,7 @@
     },
     {
       "code": "BAM010702200 (R)",
-      "price": 7982,
+      "price": 7991,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2274,7 +2274,7 @@
     },
     {
       "code": "BAM010700100",
-      "price": 32713,
+      "price": 32752,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2287,7 +2287,7 @@
     },
     {
       "code": "BAM030710100",
-      "price": 34225,
+      "price": 34266,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2300,7 +2300,7 @@
     },
     {
       "code": "BAM030712000 (R)",
-      "price": 9191,
+      "price": 9202,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2313,7 +2313,7 @@
     },
     {
       "code": "BAM030712200 (R)",
-      "price": 9191,
+      "price": 9202,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2326,7 +2326,7 @@
     },
     {
       "code": "ASS030536011",
-      "price": 2540,
+      "price": 2543,
       "old_price": null,
       "availability": true,
       "stock": 1,
@@ -2344,7 +2344,7 @@
     },
     {
       "code": "ASS030537010",
-      "price": 6047,
+      "price": 6054,
       "old_price": null,
       "availability": true,
       "stock": 1,
@@ -2362,7 +2362,7 @@
     },
     {
       "code": "SHU050130050",
-      "price": 4596,
+      "price": 4601,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2375,7 +2375,7 @@
     },
     {
       "code": "SHU050150050",
-      "price": 6470,
+      "price": 6478,
       "old_price": null,
       "availability": true,
       "stock": 4,
@@ -2393,7 +2393,7 @@
     },
     {
       "code": "SHU050210050",
-      "price": 10703,
+      "price": 10716,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2406,7 +2406,7 @@
     },
     {
       "code": "SHU050220050",
-      "price": 14573,
+      "price": 14590,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2419,7 +2419,7 @@
     },
     {
       "code": "SHU065130050",
-      "price": 4596,
+      "price": 4601,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2432,7 +2432,7 @@
     },
     {
       "code": "SHU065150050",
-      "price": 6470,
+      "price": 6478,
       "old_price": null,
       "availability": true,
       "stock": 2,
@@ -2450,7 +2450,7 @@
     },
     {
       "code": "SHU065210050",
-      "price": 10703,
+      "price": 10716,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2463,7 +2463,7 @@
     },
     {
       "code": "SHU065220050",
-      "price": 14573,
+      "price": 14590,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2476,7 +2476,7 @@
     },
     {
       "code": "SHU102050200",
-      "price": 4777,
+      "price": 4783,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2489,7 +2489,7 @@
     },
     {
       "code": "SHU202050200",
-      "price": 7498,
+      "price": 7507,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2502,7 +2502,7 @@
     },
     {
       "code": "SHU602050200",
-      "price": 13182,
+      "price": 13198,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2515,7 +2515,7 @@
     },
     {
       "code": "SCC110020170R",
-      "price": 4717,
+      "price": 4722,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2528,7 +2528,7 @@
     },
     {
       "code": "SCC010010050R",
-      "price": 2782,
+      "price": 2785,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2541,7 +2541,7 @@
     },
     {
       "code": "SCC010015050R",
-      "price": 3084,
+      "price": 3088,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2554,7 +2554,7 @@
     },
     {
       "code": "SCC010015200R",
-      "price": 3991,
+      "price": 3996,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2567,7 +2567,7 @@
     },
     {
       "code": "SCC020050200",
-      "price": 10824,
+      "price": 10837,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2580,7 +2580,7 @@
     },
     {
       "code": "SCC020030200",
-      "price": 7196,
+      "price": 7204,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2593,7 +2593,7 @@
     },
     {
       "code": "SCC115045222",
-      "price": 13001,
+      "price": 13016,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2606,7 +2606,7 @@
     },
     {
       "code": "BCD000402000",
-      "price": 2358,
+      "price": 2361,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2619,7 +2619,7 @@
     },
     {
       "code": "BCD000802000",
-      "price": 2902,
+      "price": 2906,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2632,7 +2632,7 @@
     },
     {
       "code": "ARG100201020 (R)",
-      "price": 6470,
+      "price": 6478,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2645,7 +2645,7 @@
     },
     {
       "code": "ARG100301020 (R)",
-      "price": 7438,
+      "price": 7446,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2658,7 +2658,7 @@
     },
     {
       "code": "ARG200201020 (R)",
-      "price": 7740,
+      "price": 7749,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2671,7 +2671,7 @@
     },
     {
       "code": "ARG200301020 (R)",
-      "price": 9070,
+      "price": 9081,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2684,7 +2684,7 @@
     },
     {
       "code": "ARG180301020",
-      "price": 7075,
+      "price": 7083,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2697,7 +2697,7 @@
     },
     {
       "code": "ARG160201020",
-      "price": 5805,
+      "price": 5812,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2710,7 +2710,7 @@
     },
     {
       "code": "ARG140301020R",
-      "price": 6168,
+      "price": 6175,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2723,7 +2723,7 @@
     },
     {
       "code": "ARG120201020R",
-      "price": 4898,
+      "price": 4904,
       "old_price": null,
       "availability": true,
       "stock": 1,
@@ -2741,7 +2741,7 @@
     },
     {
       "code": "ARG100301000R",
-      "price": 4354,
+      "price": 4359,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2754,7 +2754,7 @@
     },
     {
       "code": "ARG080201000 (R)",
-      "price": 3205,
+      "price": 3209,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2767,7 +2767,7 @@
     },
     {
       "code": "ARG080202000 (R)",
-      "price": 2540,
+      "price": 2543,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2780,7 +2780,7 @@
     },
     {
       "code": "SCC020035000",
-      "price": 10824,
+      "price": 10837,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2793,7 +2793,7 @@
     },
     {
       "code": "SCC010060200",
-      "price": 20559,
+      "price": 20584,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2806,7 +2806,7 @@
     },
     {
       "code": "SCC010060300",
-      "price": 20559,
+      "price": 20584,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2819,7 +2819,7 @@
     },
     {
       "code": "SCC010070200",
-      "price": 22676,
+      "price": 22703,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2832,7 +2832,7 @@
     },
     {
       "code": "SCC010070300",
-      "price": 22676,
+      "price": 22703,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2845,7 +2845,7 @@
     },
     {
       "code": "SCC125110441",
-      "price": 39365,
+      "price": 39412,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2858,7 +2858,7 @@
     },
     {
       "code": "SCC125070441",
-      "price": 32109,
+      "price": 32147,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2871,7 +2871,7 @@
     },
     {
       "code": "SCC115110420",
-      "price": 32109,
+      "price": 32147,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2884,7 +2884,7 @@
     },
     {
       "code": "SCC075010060R",
-      "price": 3809,
+      "price": 3814,
       "old_price": null,
       "availability": true,
       "stock": 1,
@@ -2902,7 +2902,7 @@
     },
     {
       "code": "SCC075015060R",
-      "price": 4112,
+      "price": 4117,
       "old_price": null,
       "availability": true,
       "stock": 2,
@@ -2920,7 +2920,7 @@
     },
     {
       "code": "SCC110015060R",
-      "price": 5079,
+      "price": 5085,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2933,7 +2933,7 @@
     },
     {
       "code": "SCC110020160R",
-      "price": 5805,
+      "price": 5812,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2946,7 +2946,7 @@
     },
     {
       "code": "SCC110030210",
-      "price": 8284,
+      "price": 8294,
       "old_price": null,
       "availability": true,
       "stock": 1,
@@ -2964,7 +2964,7 @@
     },
     {
       "code": "SCC110050210",
-      "price": 11912,
+      "price": 11926,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -2977,7 +2977,7 @@
     },
     {
       "code": "SCC115035210",
-      "price": 11912,
+      "price": 11926,
       "old_price": null,
       "availability": true,
       "stock": 4,
@@ -2995,7 +2995,7 @@
     },
     {
       "code": "SCC115045212",
-      "price": 14089,
+      "price": 14106,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3008,7 +3008,7 @@
     },
     {
       "code": "SCC125070221",
-      "price": 30899,
+      "price": 30936,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3021,7 +3021,7 @@
     },
     {
       "code": "SCC125060221",
-      "price": 26787,
+      "price": 26819,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3034,7 +3034,7 @@
     },
     {
       "code": "SCC125060321",
-      "price": 26787,
+      "price": 26819,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3047,7 +3047,7 @@
     },
     {
       "code": "SCC115060211",
-      "price": 22676,
+      "price": 22703,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3060,7 +3060,7 @@
     },
     {
       "code": "SCC115060311",
-      "price": 22676,
+      "price": 22703,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3073,7 +3073,7 @@
     },
     {
       "code": "SCC115070211",
-      "price": 24731,
+      "price": 24761,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3086,7 +3086,7 @@
     },
     {
       "code": "CYR010120011 (R)",
-      "price": 3144,
+      "price": 3148,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3099,7 +3099,7 @@
     },
     {
       "code": "CYR010230010 (R)",
-      "price": 7800,
+      "price": 7810,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3112,7 +3112,7 @@
     },
     {
       "code": "CYR010400000",
-      "price": 16629,
+      "price": 16649,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3125,7 +3125,7 @@
     },
     {
       "code": "CYR020400000",
-      "price": 16629,
+      "price": 16649,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3138,7 +3138,7 @@
     },
     {
       "code": "CYR010120110R",
-      "price": 6289,
+      "price": 6296,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3151,7 +3151,7 @@
     },
     {
       "code": "SCC125110412",
-      "price": 39546,
+      "price": 39593,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3164,7 +3164,7 @@
     },
     {
       "code": "SCC125110512",
-      "price": 40151,
+      "price": 40199,
       "old_price": null,
       "availability": true,
       "stock": 10,
@@ -3182,7 +3182,7 @@
     },
     {
       "code": "SCC125085511",
-      "price": 36039,
+      "price": 36082,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3195,7 +3195,7 @@
     },
     {
       "code": "SCC125085411",
-      "price": 35434,
+      "price": 35476,
       "old_price": null,
       "availability": true,
       "stock": 5,
@@ -3213,7 +3213,7 @@
     },
     {
       "code": "SCC125070421",
-      "price": 32955,
+      "price": 32994,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3226,7 +3226,7 @@
     },
     {
       "code": "SCC125070521",
-      "price": 32955,
+      "price": 32994,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3239,7 +3239,7 @@
     },
     {
       "code": "SCC115070411",
-      "price": 26787,
+      "price": 26819,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3252,7 +3252,7 @@
     },
     {
       "code": "SCC115070511",
-      "price": 26787,
+      "price": 26819,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3265,7 +3265,7 @@
     },
     {
       "code": "SCC115085411",
-      "price": 29206,
+      "price": 29241,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3278,7 +3278,7 @@
     },
     {
       "code": "SCC115085511",
-      "price": 29871,
+      "price": 29907,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3291,7 +3291,7 @@
     },
     {
       "code": "SCC115110411",
-      "price": 33378,
+      "price": 33418,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3304,7 +3304,7 @@
     },
     {
       "code": "SCC115110511",
-      "price": 33983,
+      "price": 34023,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3317,7 +3317,7 @@
     },
     {
       "code": "BBA000100100",
-      "price": 3144,
+      "price": 3148,
       "old_price": null,
       "availability": true,
       "stock": 1,
@@ -3335,7 +3335,7 @@
     },
     {
       "code": "BPR065022000",
-      "price": 3507,
+      "price": 3511,
       "old_price": null,
       "availability": true,
       "stock": 1,
@@ -3353,7 +3353,7 @@
     },
     {
       "code": "BPR110022000",
-      "price": 4596,
+      "price": 4601,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3366,7 +3366,7 @@
     },
     {
       "code": "BPR122022000",
-      "price": 6833,
+      "price": 6841,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3379,7 +3379,7 @@
     },
     {
       "code": "BPR110048000",
-      "price": 8889,
+      "price": 8899,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3392,7 +3392,7 @@
     },
     {
       "code": "BPR000065400",
-      "price": 2358,
+      "price": 2361,
       "old_price": null,
       "availability": true,
       "stock": 10,
@@ -3410,7 +3410,7 @@
     },
     {
       "code": "BPR000100400",
-      "price": 3447,
+      "price": 3451,
       "old_price": null,
       "availability": true,
       "stock": 2,
@@ -3428,7 +3428,7 @@
     },
     {
       "code": "BPR000220400",
-      "price": 5684,
+      "price": 5691,
       "old_price": null,
       "availability": true,
       "stock": 1,
@@ -3446,7 +3446,7 @@
     },
     {
       "code": "BPR048100400",
-      "price": 7740,
+      "price": 7749,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3459,7 +3459,7 @@
     },
     {
       "code": "BMS300200200",
-      "price": 10038,
+      "price": 10050,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3472,7 +3472,7 @@
     },
     {
       "code": "PYLUS5000TE",
-      "price": 59605,
+      "price": 59956,
       "old_price": null,
       "availability": true,
       "stock": 14,
@@ -3490,7 +3490,7 @@
     },
     {
       "code": "PYLUS3000CTE",
-      "price": 50435,
+      "price": 50732,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3503,7 +3503,7 @@
     },
     {
       "code": "PYLUS2000CTE",
-      "price": 43558,
+      "price": 43814,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3516,7 +3516,7 @@
     },
     {
       "code": "BMS400100300",
-      "price": 5200,
+      "price": 5206,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3529,7 +3529,7 @@
     },
     {
       "code": "BMS400100000",
-      "price": 3144,
+      "price": 3148,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3542,7 +3542,7 @@
     },
     {
       "code": "BMS110022000",
-      "price": 7861,
+      "price": 7870,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3555,7 +3555,7 @@
     },
     {
       "code": "BMS210055000",
-      "price": 13545,
+      "price": 13561,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3568,7 +3568,7 @@
     },
     {
       "code": "SCC900500000",
-      "price": 3265,
+      "price": 3269,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3581,7 +3581,7 @@
     },
     {
       "code": "SCC900650010",
-      "price": 2056,
+      "price": 2058,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3594,7 +3594,7 @@
     },
     {
       "code": "DMC000200010R",
-      "price": 7559,
+      "price": 7568,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3607,7 +3607,7 @@
     },
     {
       "code": "REC020005010",
-      "price": 8586,
+      "price": 8597,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3620,7 +3620,7 @@
     },
     {
       "code": "SCIFP1250",
-      "price": 9883,
+      "price": 9942,
       "old_price": null,
       "availability": true,
       "stock": 1,
@@ -3638,7 +3638,7 @@
     },
     {
       "code": "SLSIFP51100A",
-      "price": 51306,
+      "price": 51608,
       "old_price": null,
       "availability": true,
       "stock": 20,
@@ -3656,7 +3656,7 @@
     },
     {
       "code": "SCIFP48100",
-      "price": 45116,
+      "price": 45382,
       "old_price": null,
       "availability": true,
       "stock": 44,
@@ -3674,7 +3674,7 @@
     },
     {
       "code": "BPP920140100",
-      "price": 6349,
+      "price": 6357,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3687,7 +3687,7 @@
     },
     {
       "code": "VPN000200000",
-      "price": 11973,
+      "price": 11987,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3700,7 +3700,7 @@
     },
     {
       "code": "PIN122161200",
-      "price": 19168,
+      "price": 19191,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3713,7 +3713,7 @@
     },
     {
       "code": "PIN123020000",
-      "price": 61677,
+      "price": 61751,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3726,7 +3726,7 @@
     },
     {
       "code": "PIN243020000",
-      "price": 61677,
+      "price": 61751,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3739,7 +3739,7 @@
     },
     {
       "code": "CMP121800000",
-      "price": 30415,
+      "price": 30452,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3752,7 +3752,7 @@
     },
     {
       "code": "PMP122505012",
-      "price": 107573,
+      "price": 107701,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3765,7 +3765,7 @@
     },
     {
       "code": "PMP482405012",
-      "price": 46500,
+      "price": 46555,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3778,8 +3778,8 @@
     },
     {
       "code": "PMP482605012",
-      "price": 44308,
-      "old_price": 59077,
+      "price": 44361,
+      "old_price": 59148,
       "availability": true,
       "stock": 12,
       "warehouses": [
@@ -3796,7 +3796,7 @@
     },
     {
       "code": "ORI121217050",
-      "price": 20075,
+      "price": 20099,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3809,7 +3809,7 @@
     },
     {
       "code": "REC030001210",
-      "price": 5624,
+      "price": 5630,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3822,7 +3822,7 @@
     },
     {
       "code": "REC010001110",
-      "price": 4837,
+      "price": 4843,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3835,7 +3835,7 @@
     },
     {
       "code": "SCC010030020",
-      "price": 2479,
+      "price": 2482,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3848,7 +3848,7 @@
     },
     {
       "code": "SCC010020050",
-      "price": 2237,
+      "price": 2240,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3861,7 +3861,7 @@
     },
     {
       "code": "SCC010030050",
-      "price": 2902,
+      "price": 2906,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3874,7 +3874,7 @@
     },
     {
       "code": "SCC040020050",
-      "price": 2358,
+      "price": 2361,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3887,7 +3887,7 @@
     },
     {
       "code": "SCC040030050",
-      "price": 2661,
+      "price": 2664,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3900,7 +3900,7 @@
     },
     {
       "code": "SCC010020110",
-      "price": 3084,
+      "price": 3088,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3913,7 +3913,7 @@
     },
     {
       "code": "SCC010030010",
-      "price": 4898,
+      "price": 4904,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3926,7 +3926,7 @@
     },
     {
       "code": "SCC900300000",
-      "price": 2661,
+      "price": 2664,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3939,7 +3939,7 @@
     },
     {
       "code": "BMS300200000",
-      "price": 7559,
+      "price": 7568,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3952,7 +3952,7 @@
     },
     {
       "code": "BMS300200300",
-      "price": 9554,
+      "price": 9565,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3965,7 +3965,7 @@
     },
     {
       "code": "CYR010120450",
-      "price": 4233,
+      "price": 4238,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3978,7 +3978,7 @@
     },
     {
       "code": "CYR020120450",
-      "price": 4233,
+      "price": 4238,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -3991,7 +3991,7 @@
     },
     {
       "code": "CYR010120430",
-      "price": 4898,
+      "price": 4904,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4004,7 +4004,7 @@
     },
     {
       "code": "CYR020120430",
-      "price": 4898,
+      "price": 4904,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4017,7 +4017,7 @@
     },
     {
       "code": "CYR010120412",
-      "price": 4898,
+      "price": 4904,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4030,7 +4030,7 @@
     },
     {
       "code": "CYR010230450",
-      "price": 10461,
+      "price": 10473,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4043,7 +4043,7 @@
     },
     {
       "code": "CYR020230450",
-      "price": 10461,
+      "price": 10473,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4056,7 +4056,7 @@
     },
     {
       "code": "CYR020230430",
-      "price": 10461,
+      "price": 10473,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4069,7 +4069,7 @@
     },
     {
       "code": "CYR010230430",
-      "price": 10461,
+      "price": 10473,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4082,7 +4082,7 @@
     },
     {
       "code": "CYR010230412",
-      "price": 10461,
+      "price": 10473,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4095,7 +4095,7 @@
     },
     {
       "code": "SDFI0000000",
-      "price": 16689,
+      "price": 16709,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4108,7 +4108,7 @@
     },
     {
       "code": "ORI242417040",
-      "price": 22978,
+      "price": 23005,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4121,7 +4121,7 @@
     },
     {
       "code": "BPP900800150",
-      "price": 8042,
+      "price": 8052,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4134,7 +4134,7 @@
     },
     {
       "code": "CEP122160000",
-      "price": 52668,
+      "price": 52730,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4147,7 +4147,7 @@
     },
     {
       "code": "CEP122161000",
-      "price": 68934,
+      "price": 69016,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4160,7 +4160,7 @@
     },
     {
       "code": "CEP242161010",
-      "price": 68934,
+      "price": 69016,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4173,7 +4173,7 @@
     },
     {
       "code": "PIN481801200",
-      "price": 13182,
+      "price": 13198,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4186,8 +4186,8 @@
     },
     {
       "code": "PMP482406000",
-      "price": 41043,
-      "old_price": 54724,
+      "price": 41092,
+      "old_price": 54789,
       "availability": true,
       "stock": 2,
       "warehouses": [
@@ -4204,8 +4204,8 @@
     },
     {
       "code": "PMP482606000",
-      "price": 52698,
-      "old_price": 70264,
+      "price": 52761,
+      "old_price": 70347,
       "availability": true,
       "stock": 22,
       "warehouses": [
@@ -4222,7 +4222,7 @@
     },
     {
       "code": "SUNPOW51100",
-      "price": 55076,
+      "price": 55142,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4235,7 +4235,7 @@
     },
     {
       "code": "PMC483200400",
-      "price": 184306,
+      "price": 184526,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4248,8 +4248,8 @@
     },
     {
       "code": "ORI241230022",
-      "price": 3752,
-      "old_price": 4414,
+      "price": 3757,
+      "old_price": 4419,
       "availability": true,
       "stock": 1,
       "warehouses": [
@@ -4266,7 +4266,7 @@
     },
     {
       "code": "PMP122405010",
-      "price": 78790,
+      "price": 78884,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4279,7 +4279,7 @@
     },
     {
       "code": "SCC145110512",
-      "price": 67906,
+      "price": 67986,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4292,8 +4292,8 @@
     },
     {
       "code": "PMP482505012",
-      "price": 38276,
-      "old_price": 51035,
+      "price": 38322,
+      "old_price": 51096,
       "availability": true,
       "stock": 31,
       "warehouses": [
@@ -4310,7 +4310,7 @@
     },
     {
       "code": "SCIFP12100",
-      "price": 15436,
+      "price": 15527,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4323,7 +4323,7 @@
     },
     {
       "code": "SCIFP12150",
-      "price": 23384,
+      "price": 23521,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4336,7 +4336,7 @@
     },
     {
       "code": "SCIFP12200",
-      "price": 30108,
+      "price": 30286,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4349,7 +4349,7 @@
     },
     {
       "code": "SCIFP24100",
-      "price": 31025,
+      "price": 31208,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4362,7 +4362,7 @@
     },
     {
       "code": "SCIFP24200",
-      "price": 52167,
+      "price": 52474,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4375,7 +4375,7 @@
     },
     {
       "code": "SCIFP1225",
-      "price": 6623,
+      "price": 6662,
       "old_price": null,
       "availability": true,
       "stock": 1,
@@ -4393,7 +4393,7 @@
     },
     {
       "code": "SLSIFP51100AH",
-      "price": 52636,
+      "price": 52946,
       "old_price": null,
       "availability": true,
       "stock": 46,
@@ -4411,7 +4411,7 @@
     },
     {
       "code": "COS230502100",
-      "price": 19954,
+      "price": 19978,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4424,7 +4424,7 @@
     },
     {
       "code": "COS230103100",
-      "price": 24731,
+      "price": 24761,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4437,7 +4437,7 @@
     },
     {
       "code": "RCD000300200",
-      "price": 75283,
+      "price": 75372,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4450,7 +4450,7 @@
     },
     {
       "code": "SLSIFP51314A",
-      "price": 125721,
+      "price": 126461,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4463,7 +4463,7 @@
     },
     {
       "code": "PSC361550095",
-      "price": 30234,
+      "price": 30270,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4476,8 +4476,8 @@
     },
     {
       "code": "PSC481350095",
-      "price": 25699,
-      "old_price": 30234,
+      "price": 25730,
+      "old_price": 30270,
       "availability": true,
       "stock": 1,
       "warehouses": [
@@ -4494,7 +4494,7 @@
     },
     {
       "code": "ORI121221040",
-      "price": 24187,
+      "price": 24216,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4507,7 +4507,7 @@
     },
     {
       "code": "CIN122120000",
-      "price": 25276,
+      "price": 25306,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4520,7 +4520,7 @@
     },
     {
       "code": "SCC145120512",
-      "price": 118880,
+      "price": 119022,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4533,7 +4533,7 @@
     },
     {
       "code": "PMR482604000",
-      "price": 80302,
+      "price": 80397,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4546,7 +4546,7 @@
     },
     {
       "code": "PMP482457010",
-      "price": 79032,
+      "price": 79126,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4559,7 +4559,7 @@
     },
     {
       "code": "PMP482657010",
-      "price": 109447,
+      "price": 109577,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4572,7 +4572,7 @@
     },
     {
       "code": "PMR803150300",
-      "price": 302340,
+      "price": 302700,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4585,7 +4585,7 @@
     },
     {
       "code": "BPP900453100",
-      "price": 13242,
+      "price": 13258,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4598,7 +4598,7 @@
     },
     {
       "code": "SCC010020060",
-      "price": 3628,
+      "price": 3632,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4611,7 +4611,7 @@
     },
     {
       "code": "PMR482602030",
-      "price": 109870,
+      "price": 110001,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4624,7 +4624,7 @@
     },
     {
       "code": "PIN242161200",
-      "price": 20559,
+      "price": 20584,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4637,7 +4637,7 @@
     },
     {
       "code": "PIN482161200",
-      "price": 20559,
+      "price": 20584,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4650,7 +4650,7 @@
     },
     {
       "code": "REL200320100",
-      "price": 9796,
+      "price": 9807,
       "old_price": null,
       "availability": false,
       "stock": 0,
@@ -4663,8 +4663,8 @@
     },
     {
       "code": "VE482401512SS",
-      "price": 88996,
-      "old_price": 99744,
+      "price": 89102,
+      "old_price": 99863,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -4681,8 +4681,8 @@
     },
     {
       "code": "VE480401512SS",
-      "price": 103962,
-      "old_price": 119698,
+      "price": 104085,
+      "old_price": 119841,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -4699,8 +4699,8 @@
     },
     {
       "code": "VE480402512SS",
-      "price": 154352,
-      "old_price": 170088,
+      "price": 154535,
+      "old_price": 170291,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -4717,8 +4717,8 @@
     },
     {
       "code": "VE480602512SS",
-      "price": 159839,
-      "old_price": 177405,
+      "price": 160029,
+      "old_price": 177616,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -4735,8 +4735,8 @@
     },
     {
       "code": "VE48240148PT",
-      "price": 99477,
-      "old_price": 110225,
+      "price": 99595,
+      "old_price": 110356,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -4753,8 +4753,8 @@
     },
     {
       "code": "VE48040148PT",
-      "price": 114443,
-      "old_price": 130180,
+      "price": 114579,
+      "old_price": 130335,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -4771,8 +4771,8 @@
     },
     {
       "code": "VE48040248PT",
-      "price": 172895,
-      "old_price": 188632,
+      "price": 173101,
+      "old_price": 188857,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -4789,8 +4789,8 @@
     },
     {
       "code": "VE48060148PT",
-      "price": 178383,
-      "old_price": 195949,
+      "price": 178595,
+      "old_price": 196182,
       "availability": true,
       "stock": 10,
       "warehouses": [
@@ -4807,8 +4807,8 @@
     },
     {
       "code": "PIN121801210",
-      "price": 10476,
-      "old_price": 13968,
+      "price": 10489,
+      "old_price": 13985,
       "availability": true,
       "stock": 1,
       "warehouses": [
@@ -4825,8 +4825,8 @@
     },
     {
       "code": "PIN241371210",
-      "price": 5442,
-      "old_price": 7256,
+      "price": 5449,
+      "old_price": 7265,
       "availability": true,
       "stock": 1,
       "warehouses": [
