@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T10:04:44.783Z",
+  "updatedAt": "2026-11-25T10:33:35.242Z",
   "total": 593,
   "skus": [
     "BPP900451130",
@@ -1955,7 +1955,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 13.2,
-      "quantity": 5
+      "quantity": 4
     },
     "SCIFP48100": {
       "id": 1951616600,
@@ -3585,7 +3585,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 9.6,
-      "quantity": 9
+      "quantity": 7
     },
     "PMP122200000": {
       "id": 1409823735,
