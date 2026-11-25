@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": "BPC900200014_1795599211085_r2mjs",
+    "timestamp": "2026-11-25T09:33:31.085Z",
+    "vendorCode": "BPC900200014",
+    "name": "Подовжувач 2 Meter Extension Cable BPC900200014",
+    "category": "Зарядні пристрої",
+    "price": 515,
+    "oldQty": 1,
+    "newQty": 0,
+    "diff": -1,
+    "type": "became_zero"
+  }
+]
