@@ -1,5 +1,29 @@
 [
   {
+    "id": "BPC900100014_1795601073749_g6lj7",
+    "timestamp": "2026-11-25T10:04:33.749Z",
+    "vendorCode": "BPC900100014",
+    "name": "Конектор M6 Eyelet Connector (30A ATO fuse) - BPC900100014",
+    "category": "Зарядні пристрої",
+    "price": 412,
+    "oldQty": 9,
+    "newQty": 7,
+    "diff": -2,
+    "type": "changed"
+  },
+  {
+    "id": "BPC920100110_1795601073749_rp97w",
+    "timestamp": "2026-11-25T10:04:33.749Z",
+    "vendorCode": "BPC920100110",
+    "name": "Гумовий бампер Rubber Bumper for IP65 Charger 12/25, 24/13 BPC920100110",
+    "category": "Зарядні пристрої",
+    "price": 566,
+    "oldQty": 5,
+    "newQty": 4,
+    "diff": -1,
+    "type": "changed"
+  },
+  {
     "id": "BPC900200014_1795599211085_r2mjs",
     "timestamp": "2026-11-25T09:33:31.085Z",
     "vendorCode": "BPC900200014",

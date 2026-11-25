@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-25T09:33:42.617Z",
+  "updatedAt": "2026-11-25T10:04:44.783Z",
   "total": 593,
   "skus": [
     "BPP900451130",
@@ -3542,10 +3542,10 @@
       "name": "Кабель-удлинитель Victron Energy 2 м для зарядных устройств Blue Smart IP65 BPC900200014",
       "main_image": "https://images.prom.ua/3185156201_w200_h200_kabel-udlinitel-victron-energy.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 12,
-      "quantity": 1
+      "quantity": 0
     },
     "BPC900520014": {
       "id": 1435110064,
