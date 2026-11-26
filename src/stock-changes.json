@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": "BPC121713006_1795689208438_nhu00",
+    "timestamp": "2026-11-26T10:33:28.438Z",
+    "vendorCode": "BPC121713006",
+    "name": "Зарядний пристрій Blue Smart IP67 Charger 12/17 (1)",
+    "category": "Зарядні пристрої > Зарядні пристрої 12В",
+    "price": 7564,
+    "oldQty": 4,
+    "newQty": 3,
+    "diff": -1,
+    "type": "changed"
+  }
+]
