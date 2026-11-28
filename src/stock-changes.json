@@ -1,5 +1,29 @@
 [
   {
+    "id": "BPC120533064R_1795881871647_cwjhu",
+    "timestamp": "2026-11-28T16:04:31.646Z",
+    "vendorCode": "BPC120533064R",
+    "name": "Зарядний пристрій Blue Smart IP65s Charger 12/5 + DC connector",
+    "category": "",
+    "price": "",
+    "oldQty": 3,
+    "newQty": 1,
+    "diff": -2,
+    "type": "changed"
+  },
+  {
+    "id": "BPC120535064R_1795881871647_6p0nz",
+    "timestamp": "2026-11-28T16:04:31.646Z",
+    "vendorCode": "BPC120535064R",
+    "name": "Зарядний пристрій Blue Smart IP65s Charger 12/5 + DC connector Victron Energy - BPC120535064R",
+    "category": "Зарядні пристрої > Зарядні пристрої 12В",
+    "price": 5449,
+    "oldQty": 3,
+    "newQty": 1,
+    "diff": -2,
+    "type": "changed"
+  },
+  {
     "id": "ASS030536011_1795862006854_p3nkq",
     "timestamp": "2026-11-28T10:33:26.853Z",
     "vendorCode": "ASS030536011",
