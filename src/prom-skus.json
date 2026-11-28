@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-28T10:33:37.210Z",
+  "updatedAt": "2026-11-28T11:04:40.365Z",
   "total": 593,
   "skus": [
     "BPP900451130",
@@ -2332,10 +2332,10 @@
       "name": "Адаптер Bluetooth VE.Direct Smart dongle ASS030536011 Victron Energy",
       "main_image": "https://images.prom.ua/4070801167_w200_h200_adapter-bluetooth-vedirect.jpg",
       "status": "on_display",
-      "presence": "available",
-      "presenceTitle": "В наявності",
+      "presence": "not_available",
+      "presenceTitle": "Немає в наявності",
       "price": 50.4,
-      "quantity": 1
+      "quantity": 0
     },
     "BMS400100000": {
       "id": 1705897225,
@@ -4235,7 +4235,7 @@
       "presence": "available",
       "presenceTitle": "В наявності",
       "price": 222,
-      "quantity": 2
+      "quantity": 4
     },
     "BCD000802000": {
       "id": 1025539678,
@@ -6352,10 +6352,10 @@
       "name": "Водонепроницаемое зарядное устройство Victron Energy Blue Smart IP67 24/5 (24В, 5А, Bluetooth) BPC240513006",
       "main_image": "https://images.prom.ua/1885631098_w200_h200_vodonepronitsaemoe-zaryadnoe-ustrojstvo.jpg",
       "status": "on_display",
-      "presence": "order",
-      "presenceTitle": "Немає в наявності",
+      "presence": "available",
+      "presenceTitle": "В наявності",
       "price": 134.4,
-      "quantity": 0
+      "quantity": 2
     },
     "BPC122514006": {
       "id": 1006376119,
